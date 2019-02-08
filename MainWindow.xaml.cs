@@ -1808,9 +1808,9 @@ namespace VariabelBegreb
             ConstRadixSystemAndDelegatesList.Add(ConstRadixSystemAndDelegatesExtended_Object);
             SetupNumberSystemTextBoxes();
 
-            CalculateValueAndUpdateTextBoxes(Index_In_Number_System_List);
-            
             NumberDynamicRadixSystemsAdded++;
+
+            CalculateValueAndUpdateTextBoxes(Index_In_Number_System_List);
         }
 
         private int GetIndexNumberInList(string ComboBoxName)
@@ -1836,7 +1836,7 @@ namespace VariabelBegreb
                 {
                     Counter++;
                 }
-            } while (Counter < ConstRadixSystemAndDelegatesList.Count - 1);
+            } while (Counter < ConstRadixSystemAndDelegatesList.Count);
 
             return (-1);
         }
@@ -1847,22 +1847,15 @@ namespace VariabelBegreb
 
             if (IndexNumberInList > 0)
             {
-                //ConstRadixSystemAndDelegatesList[IndexNumberInList].ConstRadixSystemAndDelegates_Object.ComboBox_Object_RadixSpaceCharacter.SelectedValue =
-                //    ((ComboBox)((System.Windows.FrameworkElement)sender)).SelectedValue;
                 char OldRadixSpaceCharacter = ConstRadixSystemAndDelegatesList[IndexNumberInList].RadixNumber_Object.ConstRadixSystemAndDelegates_Object.ConstRadixSystem_Object.RadixSpaceCharacter;
                 ConstRadixSystemAndDelegatesList[IndexNumberInList].RadixNumber_Object.ConstRadixSystemAndDelegates_Object.ConstRadixSystem_Object.RadixSpaceCharacter =
                     (char)((ComboBox)((System.Windows.FrameworkElement)sender)).SelectedValue;
 
                 string WorkString = ConstRadixSystemAndDelegatesList[IndexNumberInList].RadixNumber_Object.ConstRadixSystemAndDelegates_Object.TextBox_Object.Text;
-                //WorkString = WorkString.Replace(ConstRadixSystemAndDelegatesList[IndexNumberInList].RadixNumber_Object.ConstRadixSystemAndDelegates_Object.ConstRadixSystem_Object.RadixSpaceCharacter,
-                //    (char)((ComboBox)((System.Windows.FrameworkElement)sender)).SelectedValue);
                 WorkString = WorkString.Replace(OldRadixSpaceCharacter,
                     (char)((ComboBox)((System.Windows.FrameworkElement)sender)).SelectedValue);
                 ConstRadixSystemAndDelegatesList[IndexNumberInList].RadixNumber_Object.ConstRadixSystemAndDelegates_Object.TextBox_Object.Text =
                     WorkString;
-                //ConstRadixSystemAndDelegatesList[IndexNumberInList].RadixNumber_Object.ConstRadixSystemAndDelegates_Object.ConstRadixSystem_Object.RadixSpaceCharacter =
-                //    (char)((ComboBox)((System.Windows.FrameworkElement)sender)).SelectedValue;
-                //CalculateValueAndUpdateTextBoxes(Index_In_Number_System_List);
             }
         }
 
@@ -1872,8 +1865,6 @@ namespace VariabelBegreb
 
             if (IndexNumberInList > 0)
             {
-                //ConstRadixSystemAndDelegatesList[IndexNumberInList].ConstRadixSystemAndDelegates_Object.ComboBox_Object_RadixSpaceCounter.SelectedValue =
-                //    ((ComboBox)((System.Windows.FrameworkElement)sender)).SelectedValue;
                 ConstRadixSystemAndDelegatesList[IndexNumberInList].RadixNumber_Object.ConstRadixSystemAndDelegates_Object.ConstRadixSystem_Object.RadixSpaceCounter =
                     (int)((ComboBox)((System.Windows.FrameworkElement)sender)).SelectedValue;
                 CalculateValueAndUpdateTextBoxes(Index_In_Number_System_List);
