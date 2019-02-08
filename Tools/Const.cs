@@ -20,6 +20,12 @@ namespace VariabelBegreb.Tools
         RADIX32_NUMBER,
         ROMER_NUMBER,
     }
+
+    public enum ComboBox_ENUM
+    {
+        SPACE_CHARACTER_COUNTER,
+        SPACE_CHARACTER
+    }
         
     public class ConstRadixSystem
     {
@@ -56,8 +62,14 @@ namespace VariabelBegreb.Tools
         public string Label_Object_Name { get; set; } 
         public string Label_Object_Text { get; set; }
 
+        public ComboBox ComboBox_Object_RadixSpaceCounter { get; set; }
+        public string ComboBox_Object_RadixSpaceCounter_Name { get; set; }
+        public ComboBox ComboBox_Object_RadixSpaceCharacter { get; set; }
+        public string ComboBox_Object_RadixSpaceCharacter_Name { get; set; }
+        public Button Button_Object_Delete { get; set; }
+        public string Button_Object_Delete_Name { get; set; }
+
         public ConstRadixSystemAndDelegates(ConstRadixSystem ConstRadixSystem_Object,
-                                            TextBox TextBox_Object,
                                             string TextBox_Object_Name,
                                             string Label_Object_Name,
                                             string Label_Object_Text,
@@ -65,12 +77,33 @@ namespace VariabelBegreb.Tools
                                             ConvertFromRadix10Int FunctionPointerFromRadix10)
         {
             this.ConstRadixSystem_Object = ConstRadixSystem_Object;
-            this.TextBox_Object = TextBox_Object;
             this.TextBox_Object_Name = TextBox_Object_Name;
             this.Label_Object_Name = Label_Object_Name;
             this.Label_Object_Text = Label_Object_Text;
             this.FunctionPointerToRadix10 = FunctionPointerToRadix10;
             this.FunctionPointerFromRadix10 = FunctionPointerFromRadix10;
+        }
+
+        public ConstRadixSystemAndDelegates(ConstRadixSystem ConstRadixSystem_Object,
+                                            string TextBox_Object_Name,
+                                            string Label_Object_Name,
+                                            string Label_Object_Text,
+                                            string ComboBox_Object_RadixSpaceCharacter_Name,
+                                            string ComboBox_Object_RadixSpaceCounter_Name,
+                                            string Button_Object_Delete_Name,
+                                            ConvertToRadix10Int FunctionPointerToRadix10,
+                                            ConvertFromRadix10Int FunctionPointerFromRadix10)
+        {
+            this.ConstRadixSystem_Object = ConstRadixSystem_Object;
+            this.TextBox_Object_Name = TextBox_Object_Name;
+            this.Label_Object_Name = Label_Object_Name;
+            this.Label_Object_Text = Label_Object_Text;
+            this.FunctionPointerToRadix10 = FunctionPointerToRadix10;
+            this.FunctionPointerFromRadix10 = FunctionPointerFromRadix10;
+
+            this.ComboBox_Object_RadixSpaceCharacter_Name = ComboBox_Object_RadixSpaceCharacter_Name;
+            this.ComboBox_Object_RadixSpaceCounter_Name = ComboBox_Object_RadixSpaceCounter_Name;
+            this.Button_Object_Delete_Name = Button_Object_Delete_Name;
         }
 
         public ConstRadixSystemAndDelegates()
@@ -123,6 +156,13 @@ namespace VariabelBegreb.Tools
         public static readonly int TextBoxWidth = 240;
         public static readonly int TextBoxHeight = 23;
 
+        public static readonly int ComboBoxRadixSpaceCounterColumn = 6;
+        public static readonly int ComboBoxRadixSpaceCharacterColumn = 8;
+
+
+        public static readonly int DynamicElementsRowHeight = 40;
+        public static readonly int ComboBoxRowHeight = 30; 
+
         public static readonly int MinRadixSystemValue = 2;
         public static readonly int MaxRadixSystemValue = 32;
         public static readonly int MinRadixSystemSpaces = 0;
@@ -168,7 +208,7 @@ namespace VariabelBegreb.Tools
         {
             new ConstRadixSystemAndDelegates(ConstRadixSystem_Object :
                                              RadixSystemArray[(int)RadixNumber_ENUM.BINARY_NUMBER],
-                                             TextBox_Object : null,
+                                             //TextBox_Object : null,
                                              TextBox_Object_Name : "txtBinaryNumber",
                                              Label_Object_Name : "lblBinaryNumber",
                                              Label_Object_Text : "Binært tal (2 tals system) : ",
@@ -176,7 +216,7 @@ namespace VariabelBegreb.Tools
                                              FunctionPointerFromRadix10 : null),
             new ConstRadixSystemAndDelegates(ConstRadixSystem_Object :
                                              RadixSystemArray[(int)RadixNumber_ENUM.OCTAL_NUMBER],
-                                             TextBox_Object : null,
+                                             //TextBox_Object : null,
                                              TextBox_Object_Name : "txtOctalNumber",
                                              Label_Object_Name : "lblOctalNumber",
                                              Label_Object_Text : "Oktalt tal (8 tals system) : ",
@@ -184,7 +224,7 @@ namespace VariabelBegreb.Tools
                                              FunctionPointerFromRadix10 : null),
             new ConstRadixSystemAndDelegates(ConstRadixSystem_Object :
                                              RadixSystemArray[(int)RadixNumber_ENUM.DECIMAL_NUMBER],
-                                             TextBox_Object : null,
+                                             //TextBox_Object : null,
                                              TextBox_Object_Name : "txtDecimalNumber",
                                              Label_Object_Name : "lblDecimalNumber",
                                              Label_Object_Text : "Decimaltal (10 tals system) : ",
@@ -192,7 +232,7 @@ namespace VariabelBegreb.Tools
                                              FunctionPointerFromRadix10 : MainWindow.ConvertFromRadix10IntToRadix10String),
             new ConstRadixSystemAndDelegates(ConstRadixSystem_Object :
                                              RadixSystemArray[(int)RadixNumber_ENUM.HEXADECIMAL_NUMBER],
-                                             TextBox_Object : null,
+                                             //TextBox_Object : null,
                                              TextBox_Object_Name : "txtHexadecimalNumber",
                                              Label_Object_Name : "lblHexadecimalNumber",
                                              Label_Object_Text : "Hexadecimalt tal (16 tals system) : ",
@@ -200,7 +240,7 @@ namespace VariabelBegreb.Tools
                                              FunctionPointerFromRadix10 : null),
             new ConstRadixSystemAndDelegates(ConstRadixSystem_Object :
                                              RadixSystemArray[(int)RadixNumber_ENUM.RADIX24_NUMBER],
-                                             TextBox_Object : null,
+                                             //TextBox_Object : null,
                                              TextBox_Object_Name : "txtRadix24Number",
                                              Label_Object_Name : "lblRadixNumber",
                                              Label_Object_Text : "Radix 24 tal (24 tals system) : ",
@@ -208,7 +248,7 @@ namespace VariabelBegreb.Tools
                                              FunctionPointerFromRadix10 : null),
             new ConstRadixSystemAndDelegates(ConstRadixSystem_Object :
                                              RadixSystemArray[(int)RadixNumber_ENUM.RADIX32_NUMBER],
-                                             TextBox_Object : null,
+                                             //TextBox_Object : null,
                                              TextBox_Object_Name : "txtRadix32Number",
                                              Label_Object_Name : "lblRadix32Number",
                                              Label_Object_Text : "Radix 32 tal (32 tals system) : ",

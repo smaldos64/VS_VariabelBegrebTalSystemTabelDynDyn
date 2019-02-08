@@ -12,8 +12,6 @@ namespace VariabelBegreb.Tools
 {
     public class ControlTools
     {
-        //private static List<KeyToCharConverter> KeyToCharConverterList = new List<KeyToCharConverter>();
-
         public static void SetComboBoxSelectedItem(ComboBox ThisComboBox, int SelectedValue)
         {
             int ComboBoxItemsCounter = 0;
@@ -120,6 +118,13 @@ namespace VariabelBegreb.Tools
             Grid_Object.RowDefinitions.Add(MyRow);
         }
 
+        public static void InsertRowInGrid(Grid Grid_Object, int RowHeight)
+        {
+            RowDefinition MyRow = new RowDefinition();
+            MyRow.Height = new GridLength(RowHeight);
+            Grid_Object.RowDefinitions.Add(MyRow);
+        }
+
         public static Label InsertLabelInGrid(Grid Grid_Object, string LabelName, string LabelText,
                                               int RowPosition, int ColumnPosition, int ColumnSpan)
         {
@@ -147,7 +152,7 @@ namespace VariabelBegreb.Tools
             TextBox_Object.SetValue(Grid.ColumnSpanProperty, ColumnSpan);
             TextBox_Object.Width = Width;
             TextBox_Object.Height = Height;
-
+         
             TextBox_Object.TextChanged += FunctionTextChanged;
             TextBox_Object.KeyDown += FunctionKeyDown;
 
@@ -158,10 +163,31 @@ namespace VariabelBegreb.Tools
             return (TextBox_Object);
         }
 
-        //public static void InitializeKeyToCharConverterList(Key[] HighestValidKeyArray)
-        //{
+        public static ComboBox InsertComboBoxInGrid(Grid Grid_Object, ComboBox ComboBox_Present_Object, 
+                                                    string ComboBoxName, int RowPosition,
+                                                    int ColumnPosition, int ColumnSpan, int Height,
+                                                    SelectionChangedEventHandler FunctionKeyDownSelectionChanged)
+        {
+            ComboBox ComboBox_Object = new ComboBox();
+            ComboBox_Object.Name = ComboBoxName;
+            ComboBox_Object.Height = Height;
+            ComboBox_Object.SetValue(Grid.ColumnSpanProperty, ColumnSpan);
+            ComboBox_Object.ItemsSource = ComboBox_Present_Object.Items.Cast<Object>().ToArray();
+            ComboBox_Object.SelectedIndex = ComboBox_Present_Object.SelectedIndex;
 
-        //}
+            ComboBox_Object.SelectionChanged += FunctionKeyDownSelectionChanged;
+
+            Grid_Object.Children.Add(ComboBox_Object);
+            Grid.SetColumn(ComboBox_Object, ColumnPosition);
+            Grid.SetRow(ComboBox_Object, RowPosition);
+
+            return (ComboBox_Object);
+        }
+
+        public static void InsertButtonInGrid()
+        {
+
+        }
 
         public static string GetStringFromInt(int KeyValue)
         {
