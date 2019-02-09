@@ -184,9 +184,26 @@ namespace VariabelBegreb.Tools
             return (ComboBox_Object);
         }
 
-        public static void InsertButtonInGrid()
+        public static Button InsertButtonInGrid(Grid Grid_Object, 
+                                                string ButtonName, string ButtonText, int RowPosition,
+                                                int ColumnPosition, int ColumnSpan, int width, int Height,
+                                                RoutedEventHandler FunctionButtonClicked)
         {
+            Button Button_Object = new Button();
 
+            Button_Object.Name = ButtonName;
+            Button_Object.Width = width;
+            Button_Object.Height = Height;
+            Button_Object.Content = ButtonText;
+            Button_Object.SetValue(Grid.ColumnSpanProperty, ColumnSpan);
+            
+            Button_Object.Click += FunctionButtonClicked;
+
+            Grid_Object.Children.Add(Button_Object);
+            Grid.SetColumn(Button_Object, ColumnPosition);
+            Grid.SetRow(Button_Object, RowPosition);
+
+            return (Button_Object);
         }
 
         public static string GetStringFromInt(int KeyValue)

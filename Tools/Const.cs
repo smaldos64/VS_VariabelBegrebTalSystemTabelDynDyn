@@ -69,6 +69,9 @@ namespace VariabelBegreb.Tools
         public Button Button_Object_Delete { get; set; }
         public string Button_Object_Delete_Name { get; set; }
 
+        public int FirstLabelInGridRowPosition { get; set; }
+        public int GridRowPosition { get; set; }
+
         public ConstRadixSystemAndDelegates(ConstRadixSystem ConstRadixSystem_Object,
                                             string TextBox_Object_Name,
                                             string Label_Object_Name,
@@ -159,7 +162,11 @@ namespace VariabelBegreb.Tools
         public static readonly int ComboBoxRadixSpaceCounterColumn = 6;
         public static readonly int ComboBoxRadixSpaceCharacterColumn = 8;
 
-
+        public static readonly int ButtonxRadixDeleteColumn = 9;
+        public static readonly int ButtonxRadixDeleteColumnSpan = 2;
+        public static readonly int ButtonxRadixDeleteHeight = 23;
+        public static readonly int ButtonxRadixDeleteWidth = 70;
+        
         public static readonly int DynamicElementsRowHeight = 40;
         public static readonly int ComboBoxRowHeight = 30; 
 
@@ -167,6 +174,8 @@ namespace VariabelBegreb.Tools
         public static readonly int MaxRadixSystemValue = 32;
         public static readonly int MinRadixSystemSpaces = 0;
         public static readonly int MaxRadixSystemSpaces = 5;
+
+        public static readonly int NumberOfControlsInGridRow = 5;
 
         public static readonly char[] RadixSystemSpaceCharacterArray =
         {

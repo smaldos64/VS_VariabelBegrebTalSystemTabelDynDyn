@@ -1749,7 +1749,7 @@ namespace VariabelBegreb
             ConstRadixSystemAndDelegates_Object.ComboBox_Object_RadixSpaceCharacter = null;
             ConstRadixSystemAndDelegates_Object.ComboBox_Object_RadixSpaceCounter_Name = "cmbRadixSpaceCounter_" + NumberDynamicRadixSystemsAdded.ToString();
             ConstRadixSystemAndDelegates_Object.ComboBox_Object_RadixSpaceCounter = null;
-            ConstRadixSystemAndDelegates_Object.Button_Object_Delete_Name = "btnRadixDelete" + NumberDynamicRadixSystemsAdded.ToString();
+            ConstRadixSystemAndDelegates_Object.Button_Object_Delete_Name = "btnRadixDelete_" + NumberDynamicRadixSystemsAdded.ToString();
             ConstRadixSystemAndDelegates_Object.Button_Object_Delete = null;
             ConstRadixSystemAndDelegates_Object.FunctionPointerFromRadix10 = null;
             ConstRadixSystemAndDelegates_Object.FunctionPointerToRadix10 = null;
@@ -1766,6 +1766,8 @@ namespace VariabelBegreb
                                            GridNumberSystem.RowDefinitions.Count - 1,
                                            Const.LabelColumnPosition,
                                            Const.LabelColumnSpan);
+
+            ConstRadixSystemAndDelegates_Object.FirstLabelInGridRowPosition = GridNumberSystem.Children.Count - 1;
 
             ConstRadixSystemAndDelegates_Object.TextBox_Object =
                 ControlTools.InsertTextBoxInGrid(GridNumberSystem,
@@ -1797,6 +1799,19 @@ namespace VariabelBegreb
                 1,
                 Const.ComboBoxRowHeight,
                 cmbNumberSystemSpaceCharacter_SelectionChanged);
+
+            ConstRadixSystemAndDelegates_Object.Button_Object_Delete =
+                ControlTools.InsertButtonInGrid(Grid_Object : GridNumberSystem,
+                ButtonName : "btnRadixDelete_" + NumberDynamicRadixSystemsAdded.ToString(),
+                ButtonText : "Slet System",
+                RowPosition : GridNumberSystem.RowDefinitions.Count - 1,
+                ColumnPosition : Const.ButtonxRadixDeleteColumn,
+                ColumnSpan : Const.ButtonxRadixDeleteColumnSpan,
+                Height : Const.ButtonxRadixDeleteHeight,
+                width : Const.ButtonxRadixDeleteWidth,
+                FunctionButtonClicked : btnClearNumberSystem_Click);
+
+            ConstRadixSystemAndDelegates_Object.GridRowPosition = GridNumberSystem.RowDefinitions.Count - 1;
 
             if (FirstIndexForDynamicRadixSystemsAdded < 0)
             {
@@ -1871,9 +1886,16 @@ namespace VariabelBegreb
             }
         }
 
-        private void btnClearDynamicNumberSystem_Click(object sender, RoutedEventArgs e)
+        private void btnClearNumberSystem_Click(object sender, RoutedEventArgs e)
         {
-            
+            int IndexNumberInList = GetIndexNumberInList(((System.Windows.FrameworkElement)sender).Name);
+
+            if (IndexNumberInList > 0)
+            {
+                GridNumberSystem.Children.RemoveRange(ConstRadixSystemAndDelegatesList[IndexNumberInList].ConstRadixSystemAndDelegates_Object.FirstLabelInGridRowPosition, Const.NumberOfControlsInGridRow);
+                GridNumberSystem.RowDefinitions.RemoveAt(ConstRadixSystemAndDelegatesList[IndexNumberInList].ConstRadixSystemAndDelegates_Object.GridRowPosition);
+                ConstRadixSystemAndDelegatesList.RemoveAt(IndexNumberInList);
+            }
         }
 
         #endregion
