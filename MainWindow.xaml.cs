@@ -1825,6 +1825,7 @@ namespace VariabelBegreb
 
             NumberDynamicRadixSystemsAdded++;
 
+            Index_In_Number_System_List = 0;
             CalculateValueAndUpdateTextBoxes(Index_In_Number_System_List);
         }
 
