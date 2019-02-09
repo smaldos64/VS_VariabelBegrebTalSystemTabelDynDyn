@@ -108,6 +108,14 @@
                             <RowDefinition Height="30"/>
                             <RowDefinition Height="30"/>
                             <RowDefinition Height="30"/>
+
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
                         <Label Content="lbl1" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblKoersel1"  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="10" />
                         <Label Content="lbl2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblKoersel2" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" />
@@ -131,6 +139,25 @@
                         <Label Content="lbl1" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblKoersel4"  Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="10" />
                         <Label Content="lbl2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblKoersel5" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="10" />
                         <Label Content="lbl3" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblKoersel6" Grid.Column="0" Grid.Row="12" Grid.ColumnSpan="10" />
+
+                        <Button Content="Beregn" VerticalAlignment="Top" Name="btnCalculateCarCalculateDistance" Grid.Column="6" Grid.Row="15" HorizontalAlignment="Left" Width="75" Click="btnCalculateCarCalculateDistance_Click" />
+                        <Button Content="Clear" VerticalAlignment="Top" Name="btnCalculateCarClearDistance" Grid.Column="6" Grid.Row="16" HorizontalAlignment="Left" Width="75"/>
+
+                        <Label Content="Indtast Fart. Vælg enhed til højre : " HorizontalAlignment="Left" Grid.Column="0" Grid.Row="15" Grid.ColumnSpan="3" Name="lblSpeed"/>
+                        <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="15" Name="txtSpeed" KeyDown="txtCheckForValidKeyPressed" />
+                        <TextBox Grid.ColumnSpan="1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" Grid.Column="2" Grid.Row="15" Name="txtSpeedHour" KeyDown="txtCheckForValidKeyPressed" Visibility="Hidden" />
+                        <Label Content=" T" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="15" Grid.ColumnSpan="1" Name="lblSpeedHour" Visibility="Hidden"/>
+                        <TextBox Grid.ColumnSpan="1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" Grid.Column="4" Grid.Row="15" Name="txtSpeedMinute" KeyDown="txtCheckForValidKeyPressed" Visibility="Hidden" />
+                        <Label Content=" M" HorizontalAlignment="Left" Grid.Column="4" Grid.Row="15" Grid.ColumnSpan="1" Name="lblSpeedMinute" Visibility="Hidden"/>
+                        <ComboBox Height="20" Name="cmbSpeed" Width="70" Grid.Row="15" Grid.Column="4" ap:MoreXAMLProps.MarginLeft="10" />
+
+                        <Label Content="Indtast Tid. Vælg enhed til højre : " HorizontalAlignment="Left" Grid.Column="0" Grid.Row="16" Grid.ColumnSpan="2" Name="lblTime"/>
+                        <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="16" Name="txtTime" KeyDown="txtCheckForValidKeyPressed" />
+                        <ComboBox Height="20" Name="cmbTime" Width="70" Grid.Row="16" Grid.Column="4" ap:MoreXAMLProps.MarginLeft="10" />
+
+                        <Label Content="Indtast Distance. Vælg enhed til h : " HorizontalAlignment="Left" Grid.Column="0" Grid.Row="17" Grid.ColumnSpan="2" Name="lblDistance_1"/>
+                        <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="17" Name="txtDistance_1" KeyDown="txtCheckForValidKeyPressed"/>
+                        <ComboBox Height="20" Name="cmbDistance" Width="70" Grid.Row="17" Grid.Column="4" ap:MoreXAMLProps.MarginLeft="10" />
                     </Grid>
                 </TabItem>
 

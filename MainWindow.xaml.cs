@@ -29,6 +29,8 @@ namespace VariabelBegreb
     public partial class MainWindow : Window
     {
         private static List<TextBox> TextBoxList = new List<TextBox>();
+        private static List<TextBox> TextBox1List = new List<TextBox>();
+        private static List<TextBox> TextBox2List = new List<TextBox>();
 
         private static List<ConstRadixSystemAndDelegatesExtended> ConstRadixSystemAndDelegatesList = new List<ConstRadixSystemAndDelegatesExtended>();
        
@@ -254,7 +256,7 @@ namespace VariabelBegreb
         #region DrivingCalculations
         private void InitializeDrivingCalculationLabels()
         {
-            lblKoersel1.Content = "På dette faneblad kan du lave beregninger om, 1) hvad det  ";
+            lblKoersel1.Content = "På dette faneblad kan du øverst lave beregninger om, 1) hvad det  ";
             lblKoersel1.Content += "koster at køre en distance i bil afhængig af 2) turens distance,";
 
             lblKoersel2.Content = "3) literpris i Benzin/Diesel og 4) brændstoføkonomi => hvor mange kilometer biler kører pr. liter.";
@@ -263,16 +265,27 @@ namespace VariabelBegreb
             lblKoersel3.Content = "og så vil programmet selv beregne den manglende størrelse. ";
             lblKoersel3.Content += "Grundformlen er : Pris (kr) = (Distance (km) x Benzinpris (kr/l) ) / Brændstoføkonomi (km/l)";
 
-            lblKoersel4.Content = "På dette faneblad kan du lave beregninger om, 1) hvad det  ";
-            lblKoersel4.Content += "koster at køre en distance i bil afhængig af 2) turens distance,";
+            lblKoersel4.Content = "På dette faneblad kan du nederst lave beregninger om, 1) en bil gennemsnitsfart  ";
+            lblKoersel4.Content += "i km/t og/eller ms/s 2) en bils distance i km og/eller m og 3) en bils tid";
 
-            lblKoersel5.Content = "3) literpris i Benzin/Diesel og 4) brændstoføkonomi => hvor mange kilometer biler kører pr. liter.";
-            lblKoersel5.Content += "Det er lavet sådan, at man skal indtaste 3 af de 4 felter nævnt herover ";
+            lblKoersel5.Content = "på vejen i t som decimal eller t og minutter eller minutter. Det er lavet sådan,";
+            lblKoersel5.Content += " at man skal indtaste 2 af de 3 felter nævnt herover.";
 
             lblKoersel6.Content = "og så vil programmet selv beregne den manglende størrelse. ";
-            lblKoersel6.Content += "Grundformlen er : Pris (kr) = (Distance (km) x Benzinpris (kr/l) ) / Brændstoføkonomi (km/l)";
+            lblKoersel6.Content += "Grundformlen er : Distance (km) = Fart (km/t) x Tid (t)";
 
+            cmbSpeed.Items.Add("km/t");
+            cmbSpeed.Items.Add("ms/s");
+            cmbSpeed.SelectedIndex = 0;
 
+            cmbTime.Items.Add("t,m");
+            cmbTime.Items.Add("t og m");
+            cmbTime.Items.Add("m");
+            cmbTime.SelectedIndex = 0;
+
+            cmbDistance.Items.Add("km");
+            cmbDistance.Items.Add("m");
+            cmbDistance.SelectedIndex = 0;
         }
 
         private void btnCalculateCarClear_Click(object sender, RoutedEventArgs e)
@@ -321,7 +334,6 @@ namespace VariabelBegreb
                     KrPrLitre = Convert.ToDouble(txtKrPrLitre.Text);
 
                     Price = (Distance * KrPrLitre) / KilometerPrLitre;
-                    //txtPrice.Text = string.Format("{0:0.00}", Price);
                     txtPrice.Text = PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(Price, 2);
                 }
 
@@ -332,7 +344,6 @@ namespace VariabelBegreb
                     KrPrLitre = Convert.ToDouble(txtKrPrLitre.Text);
 
                     Distance = (Price * KilometerPrLitre) / KrPrLitre;
-                    //txtDistance.Text = string.Format("{0:0.00}", Distance);
                     txtDistance.Text = PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(Distance, 2);
                 }
 
@@ -343,7 +354,6 @@ namespace VariabelBegreb
                     KrPrLitre = Convert.ToDouble(txtKrPrLitre.Text);
 
                     KilometerPrLitre = (Distance * KrPrLitre) / Price;
-                    //txtKilometerPrLitre.Text = string.Format("{0:0.00}", KilometerPrLitre);
                     txtKilometerPrLitre.Text = PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(KilometerPrLitre, 2);
                 }
 
@@ -354,9 +364,119 @@ namespace VariabelBegreb
                     KilometerPrLitre = Convert.ToDouble(txtKilometerPrLitre.Text);
 
                     KrPrLitre = (Price * KilometerPrLitre) / Distance;
-                    //txtKrPrLitre.Text = string.Format("{0:0.00}", KrPrLitre);
                     txtKrPrLitre.Text = PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(KrPrLitre, 2);
                 }
+            }
+        }
+
+        private void btnCalculateCarCalculateDistance_Click(object sender, RoutedEventArgs e)
+        {
+            bool ExtendedField = false;
+
+            TextBox1List.Clear();
+            TextBox1List.Add(txtDistance_1);
+            TextBox1List.Add(txtTime);
+            if ("t og m" == (string)cmbTime.SelectedValue)
+            {
+                TextBox1List.Add(txtSpeedHour);
+                TextBox1List.Add(txtSpeedMinute);
+                ExtendedField = true;
+                TextBox2List.Clear();
+                TextBox2List.Add(txtSpeedHour);
+                TextBox2List.Add(txtSpeedMinute);
+            }
+            else
+            {
+                TextBox1List.Add(txtSpeed);
+            }
+
+            if (true == ExtendedField)
+            {
+                if (1 == ControlTools.CheckTextBoxesForInformation(TextBox2List))
+                {
+                    MessageBox.Show("Der skal være info i enten 0 eller 2 af tekstboksene med tid !!!");
+                }
+                else
+                {
+                    if (0 == ControlTools.CheckTextBoxesForInformation(TextBox2List))
+                    {
+                        if (2 != ControlTools.CheckTextBoxesForInformation(TextBox1List))
+                        {
+                            MessageBox.Show("Der skal være info i både Fart og Distance tekstboksene !!!");
+                        }
+                        else
+                        {
+                            CalculateTime((string)cmbTime.SelectedValue);
+                        }
+                    }
+                }
+            }
+            
+        }
+
+        private double CalculateSpeedInKmPrHour(string SpeedString)
+        {
+            if ("km/t" == (string)cmbSpeed.SelectedValue)
+            {
+                return (Convert.ToDouble(SpeedString));
+            }
+            else
+            {
+                return (3.6 * Convert.ToDouble(SpeedString));
+            }
+        }
+
+        private double CalculateDistanceInKm(String DistanceString)
+        {
+            if ("km" == (string)cmbDistance.SelectedValue)
+            {
+                return (Convert.ToDouble(DistanceString));
+            }
+            else
+            {
+                return (Convert.ToDouble(DistanceString) / 1000);
+            }
+        }
+
+        private double CalculateTimeInHours(string TimeString, string MinuteString = "")
+        {
+            double TimeInHour = 0;
+
+            switch (cmbTime.SelectedValue)
+            {
+                case "t,m":
+                    TimeInHour = Convert.ToDouble(TimeString);
+                    break;
+
+                case "t og m":
+                    TimeInHour = Convert.ToDouble(TimeString) + Convert.ToDouble(MinuteString) / 60;
+                    break;
+
+                case "m":
+                    TimeInHour = Convert.ToDouble(TimeString) / 60;
+                    break;
+            }
+            return (TimeInHour);   
+        }
+
+        private void CalculateTime(string SelectedTimeUnit)
+        {
+            double Speed = CalculateSpeedInKmPrHour(txtSpeed.Text);
+            double Distance = 
+
+            switch (SelectedTimeUnit)
+            {
+                case "t og m":
+
+                    break;
+
+                case "t.m":
+
+                    break;
+
+                case "m":
+
+                    break;
             }
         }
         #endregion

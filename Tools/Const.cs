@@ -10,6 +10,8 @@ using System.Collections.ObjectModel;
 
 namespace VariabelBegreb.Tools
 {
+    //public class 
+
     public enum RadixNumber_ENUM
     {
         BINARY_NUMBER,
