@@ -272,10 +272,10 @@ namespace VariabelBegreb
             lblKoersel4.Content = "På dette faneblad kan du nederst lave beregninger om, 1) en bil gennemsnitsfart  ";
             lblKoersel4.Content += "i km/t og/eller ms/s 2) en bils distance i km og/eller m og 3) en bils tid";
 
-            lblKoersel5.Content = "på vejen i t som decimal eller t og minutter eller minutter. Det er lavet sådan,";
+            lblKoersel5.Content = "på vejen i timer som decimal eller timer og minutter eller minutter. Det er lavet sådan,";
             lblKoersel5.Content += " at man skal indtaste 2 af de 3 felter nævnt herover.";
 
-            lblKoersel6.Content = "og så vil programmet selv beregne den manglende størrelse. ";
+            lblKoersel6.Content = "Og så vil programmet selv beregne den manglende størrelse. ";
             lblKoersel6.Content += "Grundformlen er : Distance (km) = Fart (km/t) x Tid (t)";
 
             cmbSpeed.Items.Add("km/t");
@@ -415,7 +415,18 @@ namespace VariabelBegreb
                         }
                         else
                         {
-                            CalculateTime((string)cmbTime.SelectedValue);
+                            CalculateTime();
+                        }
+                    }
+                    else
+                    {
+                        if (0 == txtSpeed.Text.Length)
+                        {
+                            CalculateSpeed();
+                        }
+                        else
+                        {
+                            CalculateDistance();
                         }
                     }
                 }
@@ -430,11 +441,20 @@ namespace VariabelBegreb
                 {
                     if (0 == txtTime.Text.Length)
                     {
-                        CalculateTime((string)cmbTime.SelectedValue);
+                        CalculateTime();
+                    }
+
+                    if (0 == txtDistance_1.Text.Length)
+                    {
+                        CalculateDistance();
+                    }
+
+                    if (0 == txtSpeed.Text.Length)
+                    {
+                        CalculateSpeed();
                     }
                 }
             }
-            
         }
 
         private double CalculateSpeedInKmPrHour()
@@ -705,13 +725,34 @@ namespace VariabelBegreb
             }
         }
                 
-        private void CalculateTime(string SelectedTimeUnit)
+        private void CalculateTime()
         {
             double SpeedInHourPrKm = CalculateSpeedInKmPrHour();
             double DistanceInKm = CalculateDistanceInKm();
+
             double TimeInHour = DistanceInKm / SpeedInHourPrKm;
 
             ConvertTimeInHoursToString(TimeInHour);
+        }
+
+        private void CalculateSpeed()
+        {
+            double TimeInHours = CalculateTimeInHours();
+            double DistanceInKm = CalculateDistanceInKm();
+
+            double SpeedInHourPrKm = DistanceInKm / TimeInHours;
+
+            ConvertSpeedInKmPrHourToString(SpeedInHourPrKm);
+        }
+
+        private void CalculateDistance()
+        {
+            double TimeInHours = CalculateTimeInHours();
+            double SpeedInHourPrKm = CalculateSpeedInKmPrHour();
+            
+            double DistanceInKm = SpeedInHourPrKm * TimeInHours;
+
+            ConvertDistanceInKmToString(DistanceInKm);
         }
 
         private void ShowTimeAndHourTextBoxes(bool ShowExtendedHourAndMinutesTextBoxes)
@@ -786,7 +827,11 @@ namespace VariabelBegreb
 
         private void cmbDistance_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            double DistanceInKm;
 
+            DistanceInKm = CalculateDistanceInKm(cmbDistanceOldString);
+            ConvertDistanceInKmToString(DistanceInKm);
+            cmbDistanceOldString = (string)cmbDistance.SelectedValue;
         }
 
         private void btnClearField_Click(object sender, RoutedEventArgs e)
