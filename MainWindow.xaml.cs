@@ -46,6 +46,10 @@ namespace VariabelBegreb
         public static int Current_Number_Of_Decimals = 3;
         public static bool NumberOfDecimalsChanged = false;
 
+        private static string cmbSpeedOldString = "";
+        private static string cmbTimeOldString = "";
+        private static string cmbDistanceOldString = "";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -275,16 +279,19 @@ namespace VariabelBegreb
             lblKoersel6.Content += "Grundformlen er : Distance (km) = Fart (km/t) x Tid (t)";
 
             cmbSpeed.Items.Add("km/t");
-            cmbSpeed.Items.Add("ms/s");
+            cmbSpeed.Items.Add("m/s");
+            cmbSpeedOldString = "km/t";
             cmbSpeed.SelectedIndex = 0;
-
+  
             cmbTime.Items.Add("t,m");
             cmbTime.Items.Add("t og m");
             cmbTime.Items.Add("m");
+            cmbTimeOldString = "t,m";
             cmbTime.SelectedIndex = 0;
-
+            
             cmbDistance.Items.Add("km");
             cmbDistance.Items.Add("m");
+            cmbDistanceOldString = "km";
             cmbDistance.SelectedIndex = 0;
         }
 
@@ -369,25 +376,27 @@ namespace VariabelBegreb
             }
         }
 
-        private void btnCalculateCarCalculateDistance_Click(object sender, RoutedEventArgs e)
+        // Nedre blok ting herunder !!!
+
+        private void btnCalculateCarCalculateDistance_Time_Speed_Click(object sender, RoutedEventArgs e)
         {
             bool ExtendedField = false;
 
             TextBox1List.Clear();
             TextBox1List.Add(txtDistance_1);
-            TextBox1List.Add(txtTime);
+            TextBox1List.Add(txtSpeed);
             if ("t og m" == (string)cmbTime.SelectedValue)
             {
-                TextBox1List.Add(txtSpeedHour);
-                TextBox1List.Add(txtSpeedMinute);
+                TextBox1List.Add(txtTimeHour);
+                TextBox1List.Add(txtTimeMinute);
                 ExtendedField = true;
                 TextBox2List.Clear();
-                TextBox2List.Add(txtSpeedHour);
-                TextBox2List.Add(txtSpeedMinute);
+                TextBox2List.Add(txtTimeHour);
+                TextBox2List.Add(txtTimeMinute);
             }
             else
             {
-                TextBox1List.Add(txtSpeed);
+                TextBox1List.Add(txtTime);
             }
 
             if (true == ExtendedField)
@@ -411,30 +420,120 @@ namespace VariabelBegreb
                     }
                 }
             }
+            else
+            {
+                if (2 != ControlTools.CheckTextBoxesForInformation(TextBox1List))
+                {
+                    MessageBox.Show("Der skal være info i 2 af tekstboksene og kun 2 !!!");
+                }
+                else
+                {
+                    if (0 == txtTime.Text.Length)
+                    {
+                        CalculateTime((string)cmbTime.SelectedValue);
+                    }
+                }
+            }
             
         }
 
-        private double CalculateSpeedInKmPrHour(string SpeedString)
+        private double CalculateSpeedInKmPrHour()
         {
             if ("km/t" == (string)cmbSpeed.SelectedValue)
             {
-                return (Convert.ToDouble(SpeedString));
+                return (Convert.ToDouble(txtSpeed.Text));
             }
             else
             {
-                return (3.6 * Convert.ToDouble(SpeedString));
+                return (3.6 * Convert.ToDouble(txtSpeed.Text));
             }
         }
 
-        private double CalculateDistanceInKm(String DistanceString)
+        //private double CalculateSpeedInKmPrHour(string SpeedString)
+        //{
+        //    if ("km/t" == (string)cmbSpeed.SelectedValue)
+        //    {
+        //        return (Convert.ToDouble(SpeedString));
+        //    }
+        //    else
+        //    {
+        //        return (3.6 * Convert.ToDouble(SpeedString));
+        //    }
+        //}
+
+        private double CalculateSpeedInKmPrHour(string SelectedFormat)
         {
-            if ("km" == (string)cmbDistance.SelectedValue)
+            if ("km/t" == SelectedFormat)
             {
-                return (Convert.ToDouble(DistanceString));
+                try
+                {
+                    return (Convert.ToDouble(txtSpeed.Text));
+                }
+                catch (Exception Error)
+                {
+                    return (0);
+                }
             }
             else
             {
-                return (Convert.ToDouble(DistanceString) / 1000);
+                try
+                {
+                    return (3.6 * Convert.ToDouble(txtSpeed.Text));
+                }
+                catch (Exception Error)
+                {
+                    return (0);
+                }
+            }
+        }
+
+        //private double CalculateDistanceInKm(String DistanceString)
+        //{
+        //    if ("km" == (string)cmbDistance.SelectedValue)
+        //    {
+        //        return (Convert.ToDouble(DistanceString));
+        //    }
+        //    else
+        //    {
+        //        return (Convert.ToDouble(DistanceString) / 1000);
+        //    }
+        //}
+
+        private double CalculateDistanceInKm(String SelectedFormat)
+        {
+            if ("km" == SelectedFormat)
+            {
+                try
+                {
+                    return (Convert.ToDouble(txtDistance_1.Text));
+                }
+                catch (Exception Error)
+                {
+                    return (0);
+                }
+            }
+            else
+            {
+                try
+                {
+                    return (Convert.ToDouble(txtDistance_1.Text) / 1000);
+                }
+                catch (Exception Error)
+                {
+                    return (0);
+                }
+            }
+        }
+
+        private double CalculateDistanceInKm()
+        {
+            if ("km" == (string)cmbDistance.SelectedValue)
+            {
+                return (Convert.ToDouble(txtDistance_1.Text));
+            }
+            else
+            {
+                return (Convert.ToDouble(txtDistance_1.Text) / 1000);
             }
         }
 
@@ -459,25 +558,267 @@ namespace VariabelBegreb
             return (TimeInHour);   
         }
 
-        private void CalculateTime(string SelectedTimeUnit)
+        private double CalculateTimeInHours(string SelectedFormat)
         {
-            double Speed = CalculateSpeedInKmPrHour(txtSpeed.Text);
-            double Distance = 
+            double TimeInHour = 0;
 
-            switch (SelectedTimeUnit)
+            switch (SelectedFormat)
             {
-                case "t og m":
-
+                case "t,m":
+                    try
+                    {
+                        TimeInHour = Convert.ToDouble(txtTime.Text);
+                    }
+                    catch (Exception Error)
+                    {
+                        TimeInHour = 0;
+                    }
                     break;
 
-                case "t.m":
-
+                case "t og m":
+                    try
+                    {
+                        TimeInHour = Convert.ToDouble(txtTimeHour.Text) + Convert.ToDouble(txtTimeMinute.Text) / 60;
+                    }
+                    catch (Exception Error)
+                    {
+                        TimeInHour = 0;
+                    }
                     break;
 
                 case "m":
-
+                    try
+                    {
+                        TimeInHour = Convert.ToDouble(txtTime.Text) / 60;
+                    }
+                    catch (Exception Error)
+                    {
+                        TimeInHour = 0;
+                    }
                     break;
             }
+            return (TimeInHour);
+        }
+
+        private double CalculateTimeInHours()
+        {
+            double TimeInHour = 0;
+
+            switch (cmbTime.SelectedValue)
+            {
+                case "t,m":
+                    TimeInHour = Convert.ToDouble(txtTime.Text);
+                    break;
+
+                case "t og m":
+                    TimeInHour = Convert.ToDouble(txtTimeHour.Text) + Convert.ToDouble(txtTimeMinute.Text) / 60;
+                    break;
+
+                case "m":
+                    TimeInHour = Convert.ToDouble(txtTime.Text) / 60;
+                    break;
+            }
+            return (TimeInHour);
+        }
+
+        private void ConvertTimeInHoursToString(double TimeInHour)
+        {
+            switch (cmbTime.SelectedValue)
+            {
+                case "t,m":
+                    if (TimeInHour > 0)
+                    {
+                        txtTime.Text = PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(TimeInHour, 2);
+                    }
+                    else
+                    {
+                        txtTime.Text = "";
+                    }
+                    break;
+
+                case "t og m":
+                    if (TimeInHour > 0)
+                    {
+                        txtTimeHour.Text = Math.Floor(TimeInHour).ToString();
+                        txtTimeMinute.Text = PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals((TimeInHour - Math.Truncate(TimeInHour)) * 60, 2);
+                    }
+                    else
+                    {
+                        txtTimeHour.Text = "";
+                        txtTimeMinute.Text = "";
+                    }
+                    break;
+
+                case "m":
+                    if (TimeInHour > 0)
+                    {
+                        txtTime.Text = PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(TimeInHour * 60, 2);
+                    }
+                    else
+                    {
+                        txtTime.Text = "";
+                    }
+                    break;
+            }
+        }
+
+        private void ConvertDistanceInKmToString(double DistanceInKm)
+        {
+            txtDistance_1.Text = "";
+
+            switch (cmbDistance.SelectedValue)
+            {
+                case "km":
+                    if (DistanceInKm > 0)
+                    {
+                        txtDistance_1.Text = PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(DistanceInKm, 2);
+                    }
+                    break;
+
+                case "m":
+                    if (DistanceInKm > 0)
+                    {
+                        txtDistance_1.Text = PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(DistanceInKm * 1000, 2);
+                    }
+                    break;
+            }
+        }
+
+        private void ConvertSpeedInKmPrHourToString(double SpeedInKmPrHour)
+        {
+            txtSpeed.Text = "";
+            switch (cmbSpeed.SelectedValue)
+            {
+                case "km/t":
+                    if (SpeedInKmPrHour > 0)
+                    {
+                        txtSpeed.Text = PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(SpeedInKmPrHour, 2);
+                    }
+                    break;
+
+                case "m/s":
+                    if (SpeedInKmPrHour > 0)
+                    {
+                        txtSpeed.Text = PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(SpeedInKmPrHour / 3.6, 2);
+                    }
+                    break;
+            }
+        }
+                
+        private void CalculateTime(string SelectedTimeUnit)
+        {
+            double SpeedInHourPrKm = CalculateSpeedInKmPrHour();
+            double DistanceInKm = CalculateDistanceInKm();
+            double TimeInHour = DistanceInKm / SpeedInHourPrKm;
+
+            ConvertTimeInHoursToString(TimeInHour);
+        }
+
+        private void ShowTimeAndHourTextBoxes(bool ShowExtendedHourAndMinutesTextBoxes)
+        {
+            if (true == ShowExtendedHourAndMinutesTextBoxes)
+            {
+                txtTime.Visibility = Visibility.Hidden;
+                txtTimeHour.Visibility = Visibility.Visible;
+                txtTimeMinute.Visibility = Visibility.Visible;
+                lblTimeHour.Visibility = Visibility.Visible;
+                lblTimeMinute.Visibility = Visibility.Visible;
+
+                Grid.SetColumn(btnClearSpeedField, 6);
+                Grid.SetColumn(btnClearTimeField, 6);
+                Grid.SetColumn(btnClearDistanceField, 6);
+
+                Grid.SetColumn(cmbSpeed, 7);
+                Grid.SetColumn(cmbTime, 7);
+                Grid.SetColumn(cmbDistance, 7);
+
+                Grid.SetColumn(btnCalculateCarCalculateDistance_Time_Speed, 9);
+                Grid.SetColumn(btnCalculateCarClearDistance_Time_Speed, 9);
+
+            }
+            else
+            {
+                txtTime.Visibility = Visibility.Visible;
+                txtTimeHour.Visibility = Visibility.Hidden;
+                txtTimeMinute.Visibility = Visibility.Hidden;
+                lblTimeHour.Visibility = Visibility.Hidden;
+                lblTimeMinute.Visibility = Visibility.Hidden;
+
+                Grid.SetColumn(btnClearSpeedField, 4);
+                Grid.SetColumn(btnClearTimeField, 4);
+                Grid.SetColumn(btnClearDistanceField, 4);
+
+                Grid.SetColumn(cmbSpeed, 5);
+                Grid.SetColumn(cmbTime, 5);
+                Grid.SetColumn(cmbDistance, 5);
+
+                Grid.SetColumn(btnCalculateCarCalculateDistance_Time_Speed, 7);
+                Grid.SetColumn(btnCalculateCarClearDistance_Time_Speed, 7);
+            }
+        }
+
+        private void cmbTime_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            double TimeInHours;
+
+            if ("t og m" == (string)cmbTime.SelectedValue)
+            {
+                ShowTimeAndHourTextBoxes(true);
+            }
+            else
+            {
+                ShowTimeAndHourTextBoxes(false);
+            }
+
+            TimeInHours = CalculateTimeInHours(cmbTimeOldString);
+            ConvertTimeInHoursToString(TimeInHours);
+            cmbTimeOldString = (string)cmbTime.SelectedValue;
+        }
+
+        private void cmbSpeed_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            double SpeedInKmPrHour;
+
+            SpeedInKmPrHour = CalculateSpeedInKmPrHour(cmbSpeedOldString);
+            ConvertSpeedInKmPrHourToString(SpeedInKmPrHour);
+            cmbSpeedOldString = (string)cmbSpeed.SelectedValue;
+        }
+
+        private void cmbDistance_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void btnClearField_Click(object sender, RoutedEventArgs e)
+        {
+            switch (((System.Windows.FrameworkElement)sender).Name)
+            {
+                case "btnClearSpeedField":
+                    txtSpeed.Text = "";
+                    break;
+
+
+                case "btnClearTimeField":
+                    txtTime.Text = "";
+                    txtTimeHour.Text = "";
+                    txtTimeMinute.Text = "";
+                    break;
+
+                case "cmbDistance":
+                    txtDistance_1.Text = "";
+                    break;
+            }
+        }
+
+        private void btnCalculateCarClearDistance_Time_Speed_Click(object sender, RoutedEventArgs e)
+        {
+            txtSpeed.Text = "";
+
+            txtTime.Text = "";
+            txtTimeHour.Text = "";
+            txtTimeMinute.Text = "";
+
+            txtDistance_1.Text = "";
         }
         #endregion
 
