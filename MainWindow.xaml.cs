@@ -469,18 +469,6 @@ namespace VariabelBegreb
             }
         }
 
-        //private double CalculateSpeedInKmPrHour(string SpeedString)
-        //{
-        //    if ("km/t" == (string)cmbSpeed.SelectedValue)
-        //    {
-        //        return (Convert.ToDouble(SpeedString));
-        //    }
-        //    else
-        //    {
-        //        return (3.6 * Convert.ToDouble(SpeedString));
-        //    }
-        //}
-
         private double CalculateSpeedInKmPrHour(string SelectedFormat)
         {
             if ("km/t" == SelectedFormat)
@@ -506,18 +494,6 @@ namespace VariabelBegreb
                 }
             }
         }
-
-        //private double CalculateDistanceInKm(String DistanceString)
-        //{
-        //    if ("km" == (string)cmbDistance.SelectedValue)
-        //    {
-        //        return (Convert.ToDouble(DistanceString));
-        //    }
-        //    else
-        //    {
-        //        return (Convert.ToDouble(DistanceString) / 1000);
-        //    }
-        //}
 
         private double CalculateDistanceInKm(String SelectedFormat)
         {
@@ -2459,14 +2435,10 @@ namespace VariabelBegreb
 
                     case "NumberSystems":
                         SetupNumberSystemTextBoxes();
-                        //TextBoxList.Clear();
-                        //TextBoxList.Add(txtRomerNumber);
-                        //TextBoxList.Add(txtDecimalNumber);
-                        //TextBoxList.Add(txtBinaryNumber);
-                        //TextBoxList.Add(txtOctalNumber);
-                        //TextBoxList.Add(txtHexadecimalNumber);
-                        //TextBoxList.Add(txtRadix24Number);
-                        //TextBoxList.Add(txtRadix32Number);
+                        break;
+
+                    case "Length_Area_Volume_Weight_Liquid":
+
                         break;
                 }
             }

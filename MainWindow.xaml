@@ -494,7 +494,18 @@
                         <Label Content="Statisk Oprettetde Talsystemer herunder" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblTalsystemer7" Grid.Column="0" Grid.Row="12" Grid.ColumnSpan="10" />
                     </Grid>
                 </TabItem>
-            </TabControl>
+
+                    <TabItem Header="Længde-Areal-etc." x:Name="Length_Area_Volume_Weight_Liquid">
+                        <Grid Background="#FFE5E5E5" x:Name="Grid_Length_Area_Volume_Weight_Liquid">
+                            <Grid.ColumnDefinitions>
+                                
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                
+                            </Grid.RowDefinitions>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
         </Grid>
     </StackPanel>
     </ScrollViewer>
