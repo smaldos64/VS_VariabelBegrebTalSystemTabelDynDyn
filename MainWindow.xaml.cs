@@ -2386,7 +2386,16 @@ namespace VariabelBegreb
         #region Length_Area_Volume_Weight_Liquid
         private void Setup_Length_Area_Volume_Weight_Liquid_Controls()
         {
+            int NumberOfRows = Const.UnitsOverallConverterArray.Length;
+            int MaxNumberOfColumns = 0;
 
+            for (int Counter = 0; Counter < NumberOfRows; Counter++)
+            {
+                if (Const.UnitsOverallConverterArray[Counter].UnitsConverterArray.Length > MaxNumberOfColumns)
+                {
+                    MaxNumberOfColumns = Const.UnitsOverallConverterArray[Counter].UnitsConverterArray.Length;
+                }
+            }
         }
         #endregion
 
