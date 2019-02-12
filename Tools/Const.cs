@@ -16,6 +16,7 @@ namespace VariabelBegreb.Tools
         public double FactorToBaseUnit { get; set; }
         public string UnitShortName { get; set; }
         public string UnitLongName { get; set; }
+        public TextBox TextBox_Object { get; set; }
 
         public UnitsConverter(double FactorToBaseUnit, string UnitShortName, string UnitLongName)
         {
@@ -31,6 +32,7 @@ namespace VariabelBegreb.Tools
         public UnitsConverter[] UnitsConverterArray { get; set; }
         public string UnitsBelongTo { get; set; }
         public Units_ENUM This_Units_ENUM { get; set; }
+        public Button Button_Object { get; set; }
 
         //public UnitsOverallConverter(List<UnitsConverter> UnitsConverterList, string UnitsBelongTo, Units_ENUM This_Units_ENUM)
         public UnitsOverallConverter(UnitsConverter[] UnitsConverterArray, string UnitsBelongTo, Units_ENUM This_Units_ENUM)
@@ -214,6 +216,8 @@ namespace VariabelBegreb.Tools
         //        TestName : "Test")
         //};
 
+        public static readonly int NumberOFRowsPrUnitSystem = 5;
+
         public static readonly UnitsOverallConverter[] UnitsOverallConverterArray =
         {
             new UnitsOverallConverter
@@ -302,12 +306,15 @@ namespace VariabelBegreb.Tools
         };
         #endregion
 
-            #region NumberSystems
+        #region NumberSystems
         public static readonly int GridStartNumberSystemRow = 5;
         public static readonly int LabelColumnPosition = 0;
+        public static readonly int LabelColumnSpanShort = 1;
         public static readonly int LabelColumnSpan = 2;
         public static readonly int TextBoxColumnPosition = 2;
+        public static readonly int TextBoxColumnSpanShort = 1;
         public static readonly int TextBoxColumnSpan = 4;
+        public static readonly int TextBoxWidthShort = 100;
         public static readonly int TextBoxWidth = 240;
         public static readonly int TextBoxHeight = 23;
 

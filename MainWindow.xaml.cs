@@ -2380,7 +2380,6 @@ namespace VariabelBegreb
                 ConstRadixSystemAndDelegatesList.RemoveAt(IndexNumberInList);
             }
         }
-
         #endregion
 
         #region Length_Area_Volume_Weight_Liquid
@@ -2395,6 +2394,79 @@ namespace VariabelBegreb
                 {
                     MaxNumberOfColumns = Const.UnitsOverallConverterArray[Counter].UnitsConverterArray.Length;
                 }
+            }
+
+            ColumnDefinition ColumnDefinition_Object = new ColumnDefinition();
+            ColumnDefinition_Object.Width = GridLength.Auto;
+
+            for (int Counter = 0; Counter < MaxNumberOfColumns + 2; Counter++)
+            {
+                Grid_Length_Area_Volume_Weight_Liquid.ColumnDefinitions.Add(new ColumnDefinition());
+                //Grid_Length_Area_Volume_Weight_Liquid.ColumnDefinitions.Add(ColumnDefinition_Object);
+            }
+
+            for (int Counter = 0; Counter < NumberOfRows; Counter++)
+            {
+                ControlTools.InsertRowInGrid(Grid_Length_Area_Volume_Weight_Liquid, Const.DynamicElementsRowHeight);
+
+                ControlTools.InsertLabelInGrid(Grid_Length_Area_Volume_Weight_Liquid,
+                                               "lblUnitsOverallConverter_" + Counter.ToString(),
+                                               "Konverteringer i  " + Const.UnitsOverallConverterArray[Counter].UnitsBelongTo + " : ",
+                                               Grid_Length_Area_Volume_Weight_Liquid.RowDefinitions.Count - 1,
+                                               Const.LabelColumnPosition,
+                                               Const.LabelColumnSpan);
+
+                ControlTools.InsertRowInGrid(Grid_Length_Area_Volume_Weight_Liquid, Const.DynamicElementsRowHeight);
+                ControlTools.InsertLabelInGrid(Grid_Length_Area_Volume_Weight_Liquid,
+                                               "lblUnitsOverallConverterLongName_" + Counter.ToString(),
+                                               "Enhed Langt navn : ",
+                                               Grid_Length_Area_Volume_Weight_Liquid.RowDefinitions.Count - 1,
+                                               Const.LabelColumnPosition,
+                                               Const.LabelColumnSpan);
+                for (int Counter1 = 0; Counter1 < Const.UnitsOverallConverterArray[Counter].UnitsConverterArray.Length; Counter1++)
+                {
+                    ControlTools.InsertLabelInGrid(Grid_Length_Area_Volume_Weight_Liquid,
+                                               "lblUnitsLongName_" + Counter.ToString() + "_" + Counter1.ToString(),
+                                               Const.UnitsOverallConverterArray[Counter].UnitsConverterArray[Counter1].UnitLongName,
+                                               Grid_Length_Area_Volume_Weight_Liquid.RowDefinitions.Count - 1,
+                                               Const.LabelColumnPosition + Counter1 + 1,
+                                               Const.LabelColumnSpanShort);
+                }
+
+                ControlTools.InsertRowInGrid(Grid_Length_Area_Volume_Weight_Liquid, Const.DynamicElementsRowHeight);
+                ControlTools.InsertLabelInGrid(Grid_Length_Area_Volume_Weight_Liquid,
+                                               "lblUnitsOverallConverterLongName_" + Counter.ToString(),
+                                               "Enhed Kort navn : ",
+                                               Grid_Length_Area_Volume_Weight_Liquid.RowDefinitions.Count - 1,
+                                               Const.LabelColumnPosition,
+                                               Const.LabelColumnSpan);
+                for (int Counter1 = 0; Counter1 < Const.UnitsOverallConverterArray[Counter].UnitsConverterArray.Length; Counter1++)
+                {
+                    ControlTools.InsertLabelInGrid(Grid_Length_Area_Volume_Weight_Liquid,
+                                               "lblUnitsShortName_" + Counter.ToString() + "_" + Counter1.ToString(),
+                                               Const.UnitsOverallConverterArray[Counter].UnitsConverterArray[Counter1].UnitShortName,
+                                               Grid_Length_Area_Volume_Weight_Liquid.RowDefinitions.Count - 1,
+                                               Const.LabelColumnPosition + Counter1 + 1,
+                                               Const.LabelColumnSpanShort);
+                }
+
+                ControlTools.InsertRowInGrid(Grid_Length_Area_Volume_Weight_Liquid, Const.DynamicElementsRowHeight);
+                for (int Counter1 = 0; Counter1 < Const.UnitsOverallConverterArray[Counter].UnitsConverterArray.Length; Counter1++)
+                {
+                    Const.UnitsOverallConverterArray[Counter].UnitsConverterArray[Counter1].TextBox_Object =
+                    ControlTools.InsertTextBoxInGrid(Grid_Length_Area_Volume_Weight_Liquid,
+                    "txtUnitsShortName_" + Counter.ToString() + "_" + Counter1.ToString(),
+                    Grid_Length_Area_Volume_Weight_Liquid.RowDefinitions.Count - 1,
+                    Const.LabelColumnPosition + Counter1 + 1,
+                    Const.TextBoxColumnSpanShort,
+                    Const.TextBoxWidthShort,
+                    Const.TextBoxHeight,
+                    txtCheckForValidNumberSystemKeyPressed,
+                    txtNumberSystem_TextChanged);
+                    //Const.UnitsOverallConverterArray[Counter].UnitsConverterArray[Counter1].TextBox_Object.HorizontalAlignment = Alignment.
+                }
+
+                ControlTools.InsertRowInGrid(Grid_Length_Area_Volume_Weight_Liquid, Const.DynamicElementsRowHeight);
             }
         }
         #endregion
