@@ -1979,7 +1979,7 @@ namespace VariabelBegreb
 
 
         /* Code in region below belongs to "Talsystemer" Tab */
-        #region Talsystemer
+        #region NumberSystems
         private void InitializeRadixNumbersLabels()
         {
             int Counter;
@@ -2383,6 +2383,13 @@ namespace VariabelBegreb
 
         #endregion
 
+        #region Length_Area_Volume_Weight_Liquid
+        private void Setup_Length_Area_Volume_Weight_Liquid_Controls()
+        {
+
+        }
+        #endregion
+
         /* General code below. */
 
         #region General_Code
@@ -2429,8 +2436,6 @@ namespace VariabelBegreb
                         break;
 
                     case "PercentageCalculations":
-                        //TextBoxList.Add(txtAmount1);
-                        //TextBoxList.Add(txtAmount2);
                         break;
 
                     case "NumberSystems":
@@ -2438,7 +2443,7 @@ namespace VariabelBegreb
                         break;
 
                     case "Length_Area_Volume_Weight_Liquid":
-
+                        Setup_Length_Area_Volume_Weight_Liquid_Controls();
                         break;
                 }
             }

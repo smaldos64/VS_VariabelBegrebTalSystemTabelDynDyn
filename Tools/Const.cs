@@ -10,8 +10,38 @@ using System.Collections.ObjectModel;
 
 namespace VariabelBegreb.Tools
 {
-    //public class 
+    #region UnitsConverter
+    public class UnitsConverter
+    {
+        public double FactorToBaseUnit { get; set; }
+        public string UnitShortName { get; set; }
+        public string UnitLongName { get; set; }
 
+        public UnitsConverter(double FactorToBaseUnit, string UnitShortName, string UnitLongName)
+        {
+            this.FactorToBaseUnit = FactorToBaseUnit;
+            this.UnitShortName = UnitShortName;
+            this.UnitLongName = UnitLongName;
+        }
+    }
+
+    public enum Units_ENUM
+    {
+        LENGTH_ENUM,
+        AREA_ENUM,
+        VOLUME_ENUM,
+        WEIGHT_ENUM,
+        LIQUID_ENUM
+    }
+    #endregion
+
+    public enum ComboBox_ENUM
+    {
+        SPACE_CHARACTER_COUNTER,
+        SPACE_CHARACTER
+    }
+
+    #region NumberSystems
     public enum RadixNumber_ENUM
     {
         BINARY_NUMBER,
@@ -23,12 +53,6 @@ namespace VariabelBegreb.Tools
         ROMER_NUMBER,
     }
 
-    public enum ComboBox_ENUM
-    {
-        SPACE_CHARACTER_COUNTER,
-        SPACE_CHARACTER
-    }
-        
     public class ConstRadixSystem
     {
         public int RadixValue { get; set; }
@@ -149,10 +173,38 @@ namespace VariabelBegreb.Tools
             this.KeyChar = KeyChar;
         }
     }
+    #endregion
 
     public class Const
     {
-        #region TalSystemer
+        #region UnitsConverter
+        public static readonly UnitsConverter[][] UnitsConverterControlsArray =
+        {
+            new UnitsConverter[]
+            {
+                new UnitsConverter(FactorToBaseUnit : 1000, UnitShortName : "km", UnitLongName : "Kilometer"),
+                new UnitsConverter(FactorToBaseUnit : 100, UnitShortName : "hm", UnitLongName : "Hektometer"),
+                new UnitsConverter(FactorToBaseUnit : 10, UnitShortName : "dam", UnitLongName : "Dekameter"),
+                new UnitsConverter(FactorToBaseUnit : 1, UnitShortName : "m", UnitLongName : "Meter"),
+                new UnitsConverter(FactorToBaseUnit : 1/10, UnitShortName : "dm", UnitLongName : "Decimeter"),
+                new UnitsConverter(FactorToBaseUnit : 1/100, UnitShortName : "cm", UnitLongName : "Centimeter"),
+                new UnitsConverter(FactorToBaseUnit : 1/1000, UnitShortName : "mm", UnitLongName : "Milimeter")
+            },
+
+            new UnitsConverter[]
+            {
+                new UnitsConverter(FactorToBaseUnit : 1000 * 1000, UnitShortName : "km2", UnitLongName : "Kvadrat Kilometer"),
+                new UnitsConverter(FactorToBaseUnit : 100 * 100, UnitShortName : "hektar", UnitLongName : "Hektar"),
+                new UnitsConverter(FactorToBaseUnit : 10 * 10, UnitShortName : "ar", UnitLongName : "Ar"),
+                new UnitsConverter(FactorToBaseUnit : 1, UnitShortName : "m2", UnitLongName : "Kvadrat Meter"),
+                new UnitsConverter(FactorToBaseUnit : 1/10 * 1/10, UnitShortName : "dm2", UnitLongName : "Kvadrat Decimeter"),
+                new UnitsConverter(FactorToBaseUnit : 1/100 * 1/100, UnitShortName : "cm2", UnitLongName : "Kvadrat Centimeter"),
+                new UnitsConverter(FactorToBaseUnit : 1/1000 * 1/1000, UnitShortName : "mm2", UnitLongName : "Kvadrat Milimeter")
+            }
+        };
+        #endregion
+
+            #region NumberSystems
         public static readonly int GridStartNumberSystemRow = 5;
         public static readonly int LabelColumnPosition = 0;
         public static readonly int LabelColumnSpan = 2;
