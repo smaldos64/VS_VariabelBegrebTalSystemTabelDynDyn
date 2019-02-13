@@ -2461,7 +2461,7 @@ namespace VariabelBegreb
                     Const.TextBoxColumnSpanShort,
                     Const.TextBoxWidthShort,
                     Const.TextBoxHeight,
-                    txtCheckForValiUnitKeyPressed,
+                    txtCheckForValidKeyPressed,
                     txtUnitSystem_TextChanged);
                     Const.UnitsOverallConverterArray[Counter].UnitsConverterArray[Counter1].TextBox_Object.HorizontalAlignment = HorizontalAlignment.Left;
                 }
@@ -2470,48 +2470,96 @@ namespace VariabelBegreb
             }
         }
 
-        private int FindIndexInUnitSystemList(string TextBoxName)
+        private UnitInPlace FindIndexInUnitSystemList(string TextBoxName)
         {
-            int UnitSystemCounter = 0;
-            int UnitSystemCounter1 = 0;
+            int UnitSystemCounterRow = 0;
+            int UnitSystemCounterColumn = 0;
+            UnitInPlace UnitInPlace_Obbject = new UnitInPlace(UnitInPlaceRow: -1, UnitInPlaceColumn : -1);
 
             do
             {
-                UnitSystemCounter1 = 0;
+                UnitSystemCounterColumn = 0;
                 do
                 {
-                    if (TextBoxName == Const.UnitsOverallConverterArray[UnitSystemCounter].UnitsConverterArray[UnitSystemCounter1].TextBox_Object.Name)
+                    if (TextBoxName == Const.UnitsOverallConverterArray[UnitSystemCounterRow].UnitsConverterArray[UnitSystemCounterColumn].TextBox_Object.Name)
                     {
-                        return (UnitSystemCounter);
+                        UnitInPlace_Obbject.UnitInPlaceRow = UnitSystemCounterRow;
+                        UnitInPlace_Obbject.UnitInPlaceColumn = UnitSystemCounterColumn;
+                        return (UnitInPlace_Obbject);
                     }
                     else
                     {
-                        UnitSystemCounter1++;
+                        UnitSystemCounterColumn++;
                     }
-                } while (UnitSystemCounter1 < Const.UnitsOverallConverterArray[UnitSystemCounter].UnitsConverterArray.Length);
-            } while (UnitSystemCounter < Const.UnitsOverallConverterArray.Length);
+                } while (UnitSystemCounterColumn < Const.UnitsOverallConverterArray[UnitSystemCounterRow].UnitsConverterArray.Length);
+            } while (UnitSystemCounterRow < Const.UnitsOverallConverterArray.Length);
 
-            MessageBox.Show("Der er en fejl i din program konstruktion !!! Funktion : FindIndexInUnitSystemList (2)");
-            return (-1);
+            MessageBox.Show("Der er en fejl i din program konstruktion !!! Funktion : FindIndexInUnitSystemList");
+            return (UnitInPlace_Obbject);
         }
 
-        private void CalculateUnitValueAndUpdateTextBoxes(int UnitSystem)
+        private void CalculateUnitValueAndUpdateTextBoxes(UnitInPlace UnitInPlace_Obbject)
         {
+            TextBox TextBox_Object = new TextBox();
+            int UnitSystemCounterColumn = 0;
+            bool MainFactorToBaseUnitFound = false;
+            double MainFactorUnitValue = 0;
+
+            if (Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray[UnitInPlace_Obbject.UnitInPlaceColumn].TextBox_Object.Text.Length > 0)
+            {
+                do
+                {
+                    if (1 == Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray[UnitSystemCounterColumn].FactorToBaseUnit)
+                    {
+                        MainFactorToBaseUnitFound = true;
+                        MainFactorUnitValue = Convert.ToDouble(Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray[UnitInPlace_Obbject.UnitInPlaceColumn].TextBox_Object.Text) *
+                            Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray[UnitInPlace_Obbject.UnitInPlaceColumn].FactorToBaseUnit;
+                        //Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray[UnitSystemCounterColumn].
+                        //TextBox_Object = Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray[UnitSystemCounterColumn].TextBox_Object;
+                    }
+                    else
+                    {
+                        UnitSystemCounterColumn++;
+                    }
+                } while ((UnitSystemCounterColumn < Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray.Length) &&
+                         (false == MainFactorToBaseUnitFound));
+
+                if (false == MainFactorToBaseUnitFound)
+                {
+                    MessageBox.Show("Der er en fejl i din program konstruktion !!! Funktion : CalculateUnitValueAndUpdateTextBoxes");
+                }
+                else
+                {
+                    for (UnitSystemCounterColumn = 0; UnitSystemCounterColumn < Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray.Length; UnitSystemCounterColumn++)
+                    {
+                        Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray[UnitSystemCounterColumn].TextBox_Object.TextChanged -= txtUnitSystem_TextChanged;
+                        Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray[UnitSystemCounterColumn].TextBox_Object.Text =
+                            (MainFactorUnitValue / Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray[UnitSystemCounterColumn].FactorToBaseUnit).ToString();
+                    }
+
+                    for (UnitSystemCounterColumn = 0; UnitSystemCounterColumn < Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray.Length; UnitSystemCounterColumn++)
+                    {
+                        Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray[UnitSystemCounterColumn].TextBox_Object.TextChanged += txtUnitSystem_TextChanged;
+                    }
+                    }
+            }
 
         }
 
         private void txtUnitSystem_TextChanged(object sender, TextChangedEventArgs e)
         {
-            int Index_In_Unit_System_List = FindIndexInNumberSystemList(((System.Windows.FrameworkElement)sender).Name);
+            UnitInPlace UnitInPlace_Obbject = FindIndexInUnitSystemList(((System.Windows.FrameworkElement)sender).Name);
 
-            CalculateUnitValueAndUpdateTextBoxes(Index_In_Unit_System_List);
+            if ((UnitInPlace_Obbject.UnitInPlaceRow > -1) &&
+                 (UnitInPlace_Obbject.UnitInPlaceColumn > -1))
+            {
+                CalculateUnitValueAndUpdateTextBoxes(UnitInPlace_Obbject);
+            }
         }
 
         private void txtCheckForValiUnitKeyPressed(object sender, KeyEventArgs e)
         {
-            //Index_In_Number_System_List = FindIndexInUnitSystemList(((System.Windows.FrameworkElement)sender).Name);
-
-            if (KeyHelper.IsKeyPressedValicControlKey(e.Key))
+            if (!KeyHelper.IsKeyPressedValicControlKey(e.Key))
             {
                 SystemSounds.Beep.Play();
                 e.Handled = true;

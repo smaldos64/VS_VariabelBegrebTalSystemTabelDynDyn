@@ -11,6 +11,18 @@ using System.Collections.ObjectModel;
 namespace VariabelBegreb.Tools
 {
     #region UnitsConverter
+    public struct UnitInPlace
+    {
+        public int UnitInPlaceRow;
+        public int UnitInPlaceColumn;
+
+        public UnitInPlace(int UnitInPlaceRow, int UnitInPlaceColumn)
+        {
+            this.UnitInPlaceRow = UnitInPlaceRow;
+            this.UnitInPlaceColumn = UnitInPlaceColumn;
+        }
+    }
+
     public class UnitsConverter
     {
         public double FactorToBaseUnit { get; set; }
@@ -216,6 +228,7 @@ namespace VariabelBegreb.Tools
         //        TestName : "Test")
         //};
 
+        
         public static readonly int NumberOFRowsPrUnitSystem = 5;
 
         public static readonly UnitsOverallConverter[] UnitsOverallConverterArray =
