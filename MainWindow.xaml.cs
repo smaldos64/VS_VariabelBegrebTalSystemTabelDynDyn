@@ -2461,12 +2461,60 @@ namespace VariabelBegreb
                     Const.TextBoxColumnSpanShort,
                     Const.TextBoxWidthShort,
                     Const.TextBoxHeight,
-                    txtCheckForValidNumberSystemKeyPressed,
-                    txtNumberSystem_TextChanged);
-                    //Const.UnitsOverallConverterArray[Counter].UnitsConverterArray[Counter1].TextBox_Object.HorizontalAlignment = Alignment.
+                    txtCheckForValiUnitKeyPressed,
+                    txtUnitSystem_TextChanged);
+                    Const.UnitsOverallConverterArray[Counter].UnitsConverterArray[Counter1].TextBox_Object.HorizontalAlignment = HorizontalAlignment.Left;
                 }
 
                 ControlTools.InsertRowInGrid(Grid_Length_Area_Volume_Weight_Liquid, Const.DynamicElementsRowHeight);
+            }
+        }
+
+        private int FindIndexInUnitSystemList(string TextBoxName)
+        {
+            int UnitSystemCounter = 0;
+            int UnitSystemCounter1 = 0;
+
+            do
+            {
+                UnitSystemCounter1 = 0;
+                do
+                {
+                    if (TextBoxName == Const.UnitsOverallConverterArray[UnitSystemCounter].UnitsConverterArray[UnitSystemCounter1].TextBox_Object.Name)
+                    {
+                        return (UnitSystemCounter);
+                    }
+                    else
+                    {
+                        UnitSystemCounter1++;
+                    }
+                } while (UnitSystemCounter1 < Const.UnitsOverallConverterArray[UnitSystemCounter].UnitsConverterArray.Length);
+            } while (UnitSystemCounter < Const.UnitsOverallConverterArray.Length);
+
+            MessageBox.Show("Der er en fejl i din program konstruktion !!! Funktion : FindIndexInUnitSystemList (2)");
+            return (-1);
+        }
+
+        private void CalculateUnitValueAndUpdateTextBoxes(int UnitSystem)
+        {
+
+        }
+
+        private void txtUnitSystem_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int Index_In_Unit_System_List = FindIndexInNumberSystemList(((System.Windows.FrameworkElement)sender).Name);
+
+            CalculateUnitValueAndUpdateTextBoxes(Index_In_Unit_System_List);
+        }
+
+        private void txtCheckForValiUnitKeyPressed(object sender, KeyEventArgs e)
+        {
+            //Index_In_Number_System_List = FindIndexInUnitSystemList(((System.Windows.FrameworkElement)sender).Name);
+
+            if (KeyHelper.IsKeyPressedValicControlKey(e.Key))
+            {
+                SystemSounds.Beep.Play();
+                e.Handled = true;
             }
         }
         #endregion
