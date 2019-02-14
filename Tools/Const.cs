@@ -252,12 +252,27 @@ namespace VariabelBegreb.Tools
                     new UnitsConverter(FactorToBaseUnit : 1000 * 1000 * 1000, UnitShortName : "km3", UnitLongName : "Kubik Kilometer"),
                     new UnitsConverter(FactorToBaseUnit : 100 * 100 * 100, UnitShortName : "hm3", UnitLongName : "Kubik Hektometer"),
                     new UnitsConverter(FactorToBaseUnit : 10 * 10 * 10, UnitShortName : "dam3", UnitLongName : "Kubik Dekamater"),
-                    new UnitsConverter(FactorToBaseUnit : 1, UnitShortName : "m3", UnitLongName : "Kubik Meter"),
-                    new UnitsConverter(FactorToBaseUnit : 0.1 * 0.1 * 0.1, UnitShortName : "dm3/l", UnitLongName : "Kubik Decimeter / Liter"),
-                    new UnitsConverter(FactorToBaseUnit : 0.01 * 0.01 * 0.01, UnitShortName : "cm3", UnitLongName : "Kubik Centimeter"),
+                    new UnitsConverter(FactorToBaseUnit : 1, UnitShortName : "m3/kl", UnitLongName : "Kubik Meter"),
+                    new UnitsConverter(FactorToBaseUnit : 0.1 * 0.1 * 0.1, UnitShortName : "dm3/l", UnitLongName : "Kubik Decimeter"),
+                    new UnitsConverter(FactorToBaseUnit : 0.01 * 0.01 * 0.01, UnitShortName : "cm3/ml", UnitLongName : "Kubik Centimeter"),
                     new UnitsConverter(FactorToBaseUnit : 0.001 * 0.001 * 0.001, UnitShortName : "mm3", UnitLongName : "Kubik Milimeter")
                 },
                 UnitsBelongTo : "Rumfang/Volume",
+                This_Units_ENUM : Units_ENUM.VOLUME_ENUM
+            ),
+            new UnitsOverallConverter
+            (
+                UnitsConverterArray : new UnitsConverter[]
+                {
+                    new UnitsConverter(FactorToBaseUnit : 1000, UnitShortName : "kl", UnitLongName : "Kiloliter"),
+                    new UnitsConverter(FactorToBaseUnit : 100, UnitShortName : "hl", UnitLongName : "Hektoliter"),
+                    new UnitsConverter(FactorToBaseUnit : 10, UnitShortName : "dal", UnitLongName : "Dekaliter"),
+                    new UnitsConverter(FactorToBaseUnit : 1, UnitShortName : "l", UnitLongName : "Liter"),
+                    new UnitsConverter(FactorToBaseUnit : 0.1, UnitShortName : "dl", UnitLongName : "Deciliter"),
+                    new UnitsConverter(FactorToBaseUnit : 0.01, UnitShortName : "cl", UnitLongName : "Centiliter"),
+                    new UnitsConverter(FactorToBaseUnit : 0.001, UnitShortName : "ml", UnitLongName : "Mililiter")
+                },
+                UnitsBelongTo : "Væske",
                 This_Units_ENUM : Units_ENUM.VOLUME_ENUM
             )
         };
