@@ -33,7 +33,7 @@ namespace VariabelBegreb
         private static List<TextBox> TextBox2List = new List<TextBox>();
 
         private static List<ConstRadixSystemAndDelegatesExtended> ConstRadixSystemAndDelegatesList = new List<ConstRadixSystemAndDelegatesExtended>();
-       
+
         private DispatcherTimer RadixSystemTimer = new DispatcherTimer();
         private static int Index_In_Number_System_List = -1;
         private static int FirstIndexForDynamicRadixSystemsAdded = -1;
@@ -282,13 +282,13 @@ namespace VariabelBegreb
             cmbSpeed.Items.Add("m/s");
             cmbSpeedOldString = "km/t";
             cmbSpeed.SelectedIndex = 0;
-  
+
             cmbTime.Items.Add("t,m");
             cmbTime.Items.Add("t og m");
             cmbTime.Items.Add("m");
             cmbTimeOldString = "t,m";
             cmbTime.SelectedIndex = 0;
-            
+
             cmbDistance.Items.Add("km");
             cmbDistance.Items.Add("m");
             cmbDistanceOldString = "km";
@@ -551,7 +551,7 @@ namespace VariabelBegreb
                     TimeInHour = Convert.ToDouble(TimeString) / 60;
                     break;
             }
-            return (TimeInHour);   
+            return (TimeInHour);
         }
 
         private double CalculateTimeInHours(string SelectedFormat)
@@ -700,7 +700,7 @@ namespace VariabelBegreb
                     break;
             }
         }
-                
+
         private void CalculateTime()
         {
             double SpeedInHourPrKm = CalculateSpeedInKmPrHour();
@@ -725,7 +725,7 @@ namespace VariabelBegreb
         {
             double TimeInHours = CalculateTimeInHours();
             double SpeedInHourPrKm = CalculateSpeedInKmPrHour();
-            
+
             double DistanceInKm = SpeedInHourPrKm * TimeInHours;
 
             ConvertDistanceInKmToString(DistanceInKm);
@@ -1996,7 +1996,7 @@ namespace VariabelBegreb
             lblTalsystemer4.Content = "Oversigt over bogstavernes værdi";
 
             Key[] HighestValidKeyArray = Const.RadixSystemArray[Const.RadixSystemArray.Length - 1].ValidKeysArray;
-            
+
             NumberSystemString = string.Empty;
             for (Counter = (int)Key.D0; Counter <= (int)HighestValidKeyArray[HighestValidKeyArray.Length - 1]; Counter++)
             {
@@ -2053,14 +2053,14 @@ namespace VariabelBegreb
                 TextBoxList.Add(ConstRadixSystemAndDelegatesList[Counter].ConstRadixSystemAndDelegates_Object.TextBox_Object);
             }
         }
-        
+
         private void InitializeRadixNumbersList()
         {
             for (int Counter = 0; Counter < Const.RadixSystemDelegatesAndControlsExtendedArray.Length; Counter++)
             {
                 ConstRadixSystemAndDelegatesExtended ConstRadixSystemAndDelegatesExtended_Object =
                     Const.RadixSystemDelegatesAndControlsExtendedArray[Counter];
-               
+
                 ControlTools.InsertRowInGrid(GridNumberSystem);
 
                 ControlTools.InsertLabelInGrid(GridNumberSystem,
@@ -2093,7 +2093,7 @@ namespace VariabelBegreb
                                            Const.LabelColumnPosition,
                                            10);
         }
-      
+
         private int FindIndexInNumberSystemList(string TextBoxName)
         {
             int RadixSystemCounter = 0;
@@ -2132,12 +2132,12 @@ namespace VariabelBegreb
             return (Radix10Number);
         }
 
-        public static string ConvertFromRadix10IntToRadix10String(int Radix10Number, 
-                                                                  char CharacterToInsert, 
+        public static string ConvertFromRadix10IntToRadix10String(int Radix10Number,
+                                                                  char CharacterToInsert,
                                                                   int CharacterToInsertCouner)
         {
             string ReturnString = " ";
-                        
+
             ReturnString = Radix10Number.ToString();
             ReturnString = StringHelper.InsertCharacterInStringAtSpecifiedInterval(ReturnString,
                                                                                    CharacterToInsertCouner,
@@ -2239,7 +2239,7 @@ namespace VariabelBegreb
             ConstRadixSystemAndDelegates_Object.ConstRadixSystem_Object.RadixSpaceCharacter = (char)cmbNumberSystemSpaceCharacter.SelectedValue;
             ConstRadixSystemAndDelegates_Object.ConstRadixSystem_Object.RadixSpaceCounter = (int)cmbNumberSystemSpaceCounter.SelectedValue;
             ConstRadixSystemAndDelegates_Object.ConstRadixSystem_Object.RadixValue = (int)cmbNumberSystemRadix.SelectedValue;
-                                    
+
             ControlTools.InsertRowInGrid(GridNumberSystem, Const.DynamicElementsRowHeight);
 
             ControlTools.InsertLabelInGrid(GridNumberSystem,
@@ -2283,15 +2283,15 @@ namespace VariabelBegreb
                 cmbNumberSystemSpaceCharacter_SelectionChanged);
 
             ConstRadixSystemAndDelegates_Object.Button_Object_Delete =
-                ControlTools.InsertButtonInGrid(Grid_Object : GridNumberSystem,
-                ButtonName : "btnRadixDelete_" + NumberDynamicRadixSystemsAdded.ToString(),
-                ButtonText : "Slet System",
-                RowPosition : GridNumberSystem.RowDefinitions.Count - 1,
-                ColumnPosition : Const.ButtonxRadixDeleteColumn,
-                ColumnSpan : Const.ButtonxRadixDeleteColumnSpan,
-                Height : Const.ButtonxRadixDeleteHeight,
-                width : Const.ButtonxRadixDeleteWidth,
-                FunctionButtonClicked : btnClearNumberSystem_Click);
+                ControlTools.InsertButtonInGrid(Grid_Object: GridNumberSystem,
+                ButtonName: "btnRadixDelete_" + NumberDynamicRadixSystemsAdded.ToString(),
+                ButtonText: "Slet System",
+                RowPosition: GridNumberSystem.RowDefinitions.Count - 1,
+                ColumnPosition: Const.ButtonxRadixDeleteColumn,
+                ColumnSpan: Const.ButtonxRadixDeleteColumnSpan,
+                Height: Const.ButtonxRadixDeleteHeight,
+                width: Const.ButtonxRadixDeleteWidth,
+                FunctionButtonClicked: btnClearNumberSystem_Click);
 
             ConstRadixSystemAndDelegates_Object.GridRowPosition = GridNumberSystem.RowDefinitions.Count - 1;
 
@@ -2467,14 +2467,58 @@ namespace VariabelBegreb
                 }
 
                 ControlTools.InsertRowInGrid(Grid_Length_Area_Volume_Weight_Liquid, Const.DynamicElementsRowHeight);
+
+                Const.UnitsOverallConverterArray[Counter].Button_Object =
+                    ControlTools.InsertButtonInGrid(Grid_Length_Area_Volume_Weight_Liquid,
+                    "btnUnits_" + Counter.ToString(),
+                    "Clear All",
+                    Grid_Length_Area_Volume_Weight_Liquid.RowDefinitions.Count - 1,
+                    1,
+                    2,
+                    120,
+                    23,
+                    btnClearUnitSystem_Click);
+                Const.UnitsOverallConverterArray[Counter].Button_Object.HorizontalAlignment = HorizontalAlignment.Left;
+
+                ControlTools.InsertRowInGrid(Grid_Length_Area_Volume_Weight_Liquid, Const.DynamicElementsRowHeight);
             }
+        }
+
+        private void btnClearUnitSystem_Click(object sender, RoutedEventArgs e)
+        {
+            int IndexNumberInUnitsList = FindButtonIndexInUnitSystemList(((System.Windows.FrameworkElement)sender).Name);
+
+            if (IndexNumberInUnitsList >= 0)
+            {
+                ClearAllTextBoxesInUnitSystem(IndexNumberInUnitsList);
+            }
+        }
+
+        private int FindButtonIndexInUnitSystemList(string ButtonName)
+        {
+            int UnitSystemCounterRow = 0;
+
+            do
+            {
+                if (ButtonName == Const.UnitsOverallConverterArray[UnitSystemCounterRow].Button_Object.Name)
+                {
+                    return (UnitSystemCounterRow);
+                }
+                else
+                {
+                    UnitSystemCounterRow++;
+                }
+            } while (UnitSystemCounterRow < Const.UnitsOverallConverterArray.Length);
+
+            MessageBox.Show("Der er en fejl i din program konstruktion !!! Funktion : FindButtonIndexInUnitSystemList");
+            return (-1);
         }
 
         private UnitInPlace FindIndexInUnitSystemList(string TextBoxName)
         {
             int UnitSystemCounterRow = 0;
             int UnitSystemCounterColumn = 0;
-            UnitInPlace UnitInPlace_Obbject = new UnitInPlace(UnitInPlaceRow: -1, UnitInPlaceColumn : -1);
+            UnitInPlace UnitInPlace_Obbject = new UnitInPlace(UnitInPlaceRow: -1, UnitInPlaceColumn: -1);
 
             do
             {
@@ -2492,10 +2536,19 @@ namespace VariabelBegreb
                         UnitSystemCounterColumn++;
                     }
                 } while (UnitSystemCounterColumn < Const.UnitsOverallConverterArray[UnitSystemCounterRow].UnitsConverterArray.Length);
+                UnitSystemCounterRow++;
             } while (UnitSystemCounterRow < Const.UnitsOverallConverterArray.Length);
 
             MessageBox.Show("Der er en fejl i din program konstruktion !!! Funktion : FindIndexInUnitSystemList");
             return (UnitInPlace_Obbject);
+        }
+
+        private void ClearAllTextBoxesInUnitSystem(int UnitInPlaceRow)
+        {
+            for (int UnitSystemCounterColumn = 0; UnitSystemCounterColumn < Const.UnitsOverallConverterArray[UnitInPlaceRow].UnitsConverterArray.Length; UnitSystemCounterColumn++)
+            {
+                Const.UnitsOverallConverterArray[UnitInPlaceRow].UnitsConverterArray[UnitSystemCounterColumn].TextBox_Object.Text = "";
+            }
         }
 
         private void CalculateUnitValueAndUpdateTextBoxes(UnitInPlace UnitInPlace_Obbject)
@@ -2514,8 +2567,6 @@ namespace VariabelBegreb
                         MainFactorToBaseUnitFound = true;
                         MainFactorUnitValue = Convert.ToDouble(Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray[UnitInPlace_Obbject.UnitInPlaceColumn].TextBox_Object.Text) *
                             Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray[UnitInPlace_Obbject.UnitInPlaceColumn].FactorToBaseUnit;
-                        //Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray[UnitSystemCounterColumn].
-                        //TextBox_Object = Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray[UnitSystemCounterColumn].TextBox_Object;
                     }
                     else
                     {
@@ -2541,9 +2592,12 @@ namespace VariabelBegreb
                     {
                         Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray[UnitSystemCounterColumn].TextBox_Object.TextChanged += txtUnitSystem_TextChanged;
                     }
-                    }
+                }
             }
-
+            else
+            {
+                ClearAllTextBoxesInUnitSystem(UnitInPlace_Obbject.UnitInPlaceRow);
+            }
         }
 
         private void txtUnitSystem_TextChanged(object sender, TextChangedEventArgs e)

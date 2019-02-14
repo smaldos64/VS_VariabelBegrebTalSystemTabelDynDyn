@@ -205,30 +205,10 @@ namespace VariabelBegreb.Tools
     }
     #endregion
 
-    //public class TestIt
-    //{
-    //    public int []TestArray { get; set; }
-    //    public string TestName { get; set; }
-
-    //    public TestIt(int[] TestArray, string TestName)
-    //    {
-    //        this.TestArray = TestArray;
-    //        this.TestName = TestName;
-    //    }
-    //}
-
     public class Const
     {
         #region UnitsConverter
-
-        //public static readonly TestIt[] TestItArray =
-        //{
-        //    new TestIt(
-        //        TestArray : new int[] {1, 2, 3},
-        //        TestName : "Test")
-        //};
-
-        
+                      
         public static readonly int NumberOFRowsPrUnitSystem = 5;
 
         public static readonly UnitsOverallConverter[] UnitsOverallConverterArray =
@@ -241,9 +221,9 @@ namespace VariabelBegreb.Tools
                     new UnitsConverter(FactorToBaseUnit : 100, UnitShortName : "hm", UnitLongName : "Hektometer"),
                     new UnitsConverter(FactorToBaseUnit : 10, UnitShortName : "dam", UnitLongName : "Dekameter"),
                     new UnitsConverter(FactorToBaseUnit : 1, UnitShortName : "m", UnitLongName : "Meter"),
-                    new UnitsConverter(FactorToBaseUnit : 1/10, UnitShortName : "dm", UnitLongName : "Decimeter"),
-                    new UnitsConverter(FactorToBaseUnit : 1/100, UnitShortName : "cm", UnitLongName : "Centimeter"),
-                    new UnitsConverter(FactorToBaseUnit : 1/1000, UnitShortName : "mm", UnitLongName : "Milimeter")
+                    new UnitsConverter(FactorToBaseUnit : 0.1, UnitShortName : "dm", UnitLongName : "Decimeter"),
+                    new UnitsConverter(FactorToBaseUnit : 0.01, UnitShortName : "cm", UnitLongName : "Centimeter"),
+                    new UnitsConverter(FactorToBaseUnit : 0.001, UnitShortName : "mm", UnitLongName : "Milimeter")
                 },
                 UnitsBelongTo : "Længdemål",
                 This_Units_ENUM : Units_ENUM.LENGTH_ENUM
@@ -257,9 +237,9 @@ namespace VariabelBegreb.Tools
                     new UnitsConverter(FactorToBaseUnit : 100 * 100, UnitShortName : "hektar", UnitLongName : "Hektar"),
                     new UnitsConverter(FactorToBaseUnit : 10 * 10, UnitShortName : "ar", UnitLongName : "Ar"),
                     new UnitsConverter(FactorToBaseUnit : 1, UnitShortName : "m2", UnitLongName : "Kvadrat Meter"),
-                    new UnitsConverter(FactorToBaseUnit : 1/10 * 1/10, UnitShortName : "dm2", UnitLongName : "Kvadrat Decimeter"),
-                    new UnitsConverter(FactorToBaseUnit : 1/100 * 1/100, UnitShortName : "cm2", UnitLongName : "Kvadrat Centimeter"),
-                    new UnitsConverter(FactorToBaseUnit : 1/1000 * 1/1000, UnitShortName : "mm2", UnitLongName : "Kvadrat Milimeter")
+                    new UnitsConverter(FactorToBaseUnit : 0.1 * 0.1, UnitShortName : "dm2", UnitLongName : "Kvadrat Decimeter"),
+                    new UnitsConverter(FactorToBaseUnit : 0.01 * 0.01, UnitShortName : "cm2", UnitLongName : "Kvadrat Centimeter"),
+                    new UnitsConverter(FactorToBaseUnit : 0.001 * 0.001, UnitShortName : "mm2", UnitLongName : "Kvadrat Milimeter")
                 },
                 UnitsBelongTo : "Areal/Flade",
                 This_Units_ENUM : Units_ENUM.AREA_ENUM
@@ -273,9 +253,9 @@ namespace VariabelBegreb.Tools
                     new UnitsConverter(FactorToBaseUnit : 100 * 100 * 100, UnitShortName : "hm3", UnitLongName : "Kubik Hektometer"),
                     new UnitsConverter(FactorToBaseUnit : 10 * 10 * 10, UnitShortName : "dam3", UnitLongName : "Kubik Dekamater"),
                     new UnitsConverter(FactorToBaseUnit : 1, UnitShortName : "m3", UnitLongName : "Kubik Meter"),
-                    new UnitsConverter(FactorToBaseUnit : 1/10 * 1/10 * 1/10, UnitShortName : "dm3/l", UnitLongName : "Kubik Decimeter / Liter"),
-                    new UnitsConverter(FactorToBaseUnit : 1/100 * 1/100 * 1/100, UnitShortName : "cm3", UnitLongName : "Kubik Centimeter"),
-                    new UnitsConverter(FactorToBaseUnit : 1/1000 * 1/1000 * 1/1000, UnitShortName : "mm3", UnitLongName : "Kubik Milimeter")
+                    new UnitsConverter(FactorToBaseUnit : 0.1 * 0.1 * 0.1, UnitShortName : "dm3/l", UnitLongName : "Kubik Decimeter / Liter"),
+                    new UnitsConverter(FactorToBaseUnit : 0.01 * 0.01 * 0.01, UnitShortName : "cm3", UnitLongName : "Kubik Centimeter"),
+                    new UnitsConverter(FactorToBaseUnit : 0.001 * 0.001 * 0.001, UnitShortName : "mm3", UnitLongName : "Kubik Milimeter")
                 },
                 UnitsBelongTo : "Rumfang/Volume",
                 This_Units_ENUM : Units_ENUM.VOLUME_ENUM
