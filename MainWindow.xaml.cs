@@ -825,7 +825,7 @@ namespace VariabelBegreb
                     txtTimeMinute.Text = "";
                     break;
 
-                case "cmbDistance":
+                case "btnClearDistanceField":
                     txtDistance_1.Text = "";
                     break;
             }
@@ -2583,14 +2583,20 @@ namespace VariabelBegreb
                 {
                     for (UnitSystemCounterColumn = 0; UnitSystemCounterColumn < Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray.Length; UnitSystemCounterColumn++)
                     {
-                        Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray[UnitSystemCounterColumn].TextBox_Object.TextChanged -= txtUnitSystem_TextChanged;
-                        Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray[UnitSystemCounterColumn].TextBox_Object.Text =
-                            (MainFactorUnitValue / Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray[UnitSystemCounterColumn].FactorToBaseUnit).ToString();
+                        if (UnitSystemCounterColumn != UnitInPlace_Obbject.UnitInPlaceColumn)
+                        {
+                            Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray[UnitSystemCounterColumn].TextBox_Object.TextChanged -= txtUnitSystem_TextChanged;
+                            Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray[UnitSystemCounterColumn].TextBox_Object.Text =
+                                (MainFactorUnitValue / Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray[UnitSystemCounterColumn].FactorToBaseUnit).ToString();
+                        }
                     }
 
                     for (UnitSystemCounterColumn = 0; UnitSystemCounterColumn < Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray.Length; UnitSystemCounterColumn++)
                     {
-                        Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray[UnitSystemCounterColumn].TextBox_Object.TextChanged += txtUnitSystem_TextChanged;
+                        if (UnitSystemCounterColumn != UnitInPlace_Obbject.UnitInPlaceColumn)
+                        {
+                            Const.UnitsOverallConverterArray[UnitInPlace_Obbject.UnitInPlaceRow].UnitsConverterArray[UnitSystemCounterColumn].TextBox_Object.TextChanged += txtUnitSystem_TextChanged;
+                        }
                     }
                 }
             }
@@ -2617,6 +2623,10 @@ namespace VariabelBegreb
             {
                 SystemSounds.Beep.Play();
                 e.Handled = true;
+            }
+            else
+            {
+                int Test = 10;
             }
         }
         #endregion
@@ -2686,6 +2696,10 @@ namespace VariabelBegreb
             {
                 SystemSounds.Beep.Play();
                 e.Handled = true;
+            }
+            else
+            {
+                int Test = 10;
             }
         }
 

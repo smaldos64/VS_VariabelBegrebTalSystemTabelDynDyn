@@ -159,7 +159,6 @@
                         <TextBox Grid.ColumnSpan="1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100" Grid.Column="4" Grid.Row="16" Name="txtTimeMinute" KeyDown="txtCheckForValidKeyPressed" Visibility="Hidden" />
                         <Label Content=" M" HorizontalAlignment="Left" Grid.Column="5" Grid.Row="16" Grid.ColumnSpan="1" Name="lblTimeMinute" Visibility="Hidden"/>
                         
-
                         <Label Content="Indtast Distance. Vælg enhed til h : " HorizontalAlignment="Left" Grid.Column="0" Grid.Row="17" Grid.ColumnSpan="2" Name="lblDistance_1"/>
                         <TextBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="17" Name="txtDistance_1" KeyDown="txtCheckForValidKeyPressed"/>
                         <Button Content="Clear Felt" VerticalAlignment="Top" Name="btnClearDistanceField" Grid.Column="4" Grid.Row="17" HorizontalAlignment="Left" Width="75" Click="btnClearField_Click"/>
