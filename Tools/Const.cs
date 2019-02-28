@@ -274,44 +274,57 @@ namespace VariabelBegreb.Tools
                 },
                 UnitsBelongTo : "Væske",
                 This_Units_ENUM : Units_ENUM.VOLUME_ENUM
+            ),
+            new UnitsOverallConverter
+            (
+                UnitsConverterArray : new UnitsConverter[]
+                {
+                    new UnitsConverter(FactorToBaseUnit : 1000, UnitShortName : "t", UnitLongName : "Ton"),
+                    new UnitsConverter(FactorToBaseUnit : 1, UnitShortName : "kg", UnitLongName : "Kilo"),
+                    new UnitsConverter(FactorToBaseUnit : 0.1, UnitShortName : "h", UnitLongName : "Hektogram"),
+                    new UnitsConverter(FactorToBaseUnit : 0.01, UnitShortName : "dk", UnitLongName : "Dekagram"),
+                    new UnitsConverter(FactorToBaseUnit : 0.001, UnitShortName : "g", UnitLongName : "Gram")
+                },
+                UnitsBelongTo : "Vægt",
+                This_Units_ENUM : Units_ENUM.WEIGHT_ENUM
             )
         };
 
-        public static readonly UnitsConverter[][] UnitsConverterControlsArray =
-        {
-            new UnitsConverter[]
-            {
-                new UnitsConverter(FactorToBaseUnit : 1000, UnitShortName : "km", UnitLongName : "Kilometer"),
-                new UnitsConverter(FactorToBaseUnit : 100, UnitShortName : "hm", UnitLongName : "Hektometer"),
-                new UnitsConverter(FactorToBaseUnit : 10, UnitShortName : "dam", UnitLongName : "Dekameter"),
-                new UnitsConverter(FactorToBaseUnit : 1, UnitShortName : "m", UnitLongName : "Meter"),
-                new UnitsConverter(FactorToBaseUnit : 1/10, UnitShortName : "dm", UnitLongName : "Decimeter"),
-                new UnitsConverter(FactorToBaseUnit : 1/100, UnitShortName : "cm", UnitLongName : "Centimeter"),
-                new UnitsConverter(FactorToBaseUnit : 1/1000, UnitShortName : "mm", UnitLongName : "Milimeter")
-            },
+        //public static readonly UnitsConverter[][] UnitsConverterControlsArray =
+        //{
+        //    new UnitsConverter[]
+        //    {
+        //        new UnitsConverter(FactorToBaseUnit : 1000, UnitShortName : "km", UnitLongName : "Kilometer"),
+        //        new UnitsConverter(FactorToBaseUnit : 100, UnitShortName : "hm", UnitLongName : "Hektometer"),
+        //        new UnitsConverter(FactorToBaseUnit : 10, UnitShortName : "dam", UnitLongName : "Dekameter"),
+        //        new UnitsConverter(FactorToBaseUnit : 1, UnitShortName : "m", UnitLongName : "Meter"),
+        //        new UnitsConverter(FactorToBaseUnit : 1/10, UnitShortName : "dm", UnitLongName : "Decimeter"),
+        //        new UnitsConverter(FactorToBaseUnit : 1/100, UnitShortName : "cm", UnitLongName : "Centimeter"),
+        //        new UnitsConverter(FactorToBaseUnit : 1/1000, UnitShortName : "mm", UnitLongName : "Milimeter")
+        //    },
 
-            new UnitsConverter[]
-            {
-                new UnitsConverter(FactorToBaseUnit : 1000 * 1000, UnitShortName : "km2", UnitLongName : "Kvadrat Kilometer"),
-                new UnitsConverter(FactorToBaseUnit : 100 * 100, UnitShortName : "hektar", UnitLongName : "Hektar"),
-                new UnitsConverter(FactorToBaseUnit : 10 * 10, UnitShortName : "ar", UnitLongName : "Ar"),
-                new UnitsConverter(FactorToBaseUnit : 1, UnitShortName : "m2", UnitLongName : "Kvadrat Meter"),
-                new UnitsConverter(FactorToBaseUnit : 1/10 * 1/10, UnitShortName : "dm2", UnitLongName : "Kvadrat Decimeter"),
-                new UnitsConverter(FactorToBaseUnit : 1/100 * 1/100, UnitShortName : "cm2", UnitLongName : "Kvadrat Centimeter"),
-                new UnitsConverter(FactorToBaseUnit : 1/1000 * 1/1000, UnitShortName : "mm2", UnitLongName : "Kvadrat Milimeter")
-            },
+        //    new UnitsConverter[]
+        //    {
+        //        new UnitsConverter(FactorToBaseUnit : 1000 * 1000, UnitShortName : "km2", UnitLongName : "Kvadrat Kilometer"),
+        //        new UnitsConverter(FactorToBaseUnit : 100 * 100, UnitShortName : "hektar", UnitLongName : "Hektar"),
+        //        new UnitsConverter(FactorToBaseUnit : 10 * 10, UnitShortName : "ar", UnitLongName : "Ar"),
+        //        new UnitsConverter(FactorToBaseUnit : 1, UnitShortName : "m2", UnitLongName : "Kvadrat Meter"),
+        //        new UnitsConverter(FactorToBaseUnit : 1/10 * 1/10, UnitShortName : "dm2", UnitLongName : "Kvadrat Decimeter"),
+        //        new UnitsConverter(FactorToBaseUnit : 1/100 * 1/100, UnitShortName : "cm2", UnitLongName : "Kvadrat Centimeter"),
+        //        new UnitsConverter(FactorToBaseUnit : 1/1000 * 1/1000, UnitShortName : "mm2", UnitLongName : "Kvadrat Milimeter")
+        //    },
 
-            new UnitsConverter[]
-            {
-                new UnitsConverter(FactorToBaseUnit : 1000 * 1000 * 1000, UnitShortName : "km3", UnitLongName : "Kubik Kilometer"),
-                new UnitsConverter(FactorToBaseUnit : 100 * 100 * 100, UnitShortName : "hm3", UnitLongName : "Kubik Hektometer"),
-                new UnitsConverter(FactorToBaseUnit : 10 * 10 * 10, UnitShortName : "dam3", UnitLongName : "Kubik Dekamater"),
-                new UnitsConverter(FactorToBaseUnit : 1, UnitShortName : "m3", UnitLongName : "Kubik Meter"),
-                new UnitsConverter(FactorToBaseUnit : 1/10 * 1/10 * 1/10, UnitShortName : "dm3/l", UnitLongName : "Kubik Decimeter / Liter"),
-                new UnitsConverter(FactorToBaseUnit : 1/100 * 1/100 * 1/100, UnitShortName : "cm3", UnitLongName : "Kubik Centimeter"),
-                new UnitsConverter(FactorToBaseUnit : 1/1000 * 1/1000 * 1/1000, UnitShortName : "mm3", UnitLongName : "Kubik Milimeter")
-            }
-        };
+        //    new UnitsConverter[]
+        //    {
+        //        new UnitsConverter(FactorToBaseUnit : 1000 * 1000 * 1000, UnitShortName : "km3", UnitLongName : "Kubik Kilometer"),
+        //        new UnitsConverter(FactorToBaseUnit : 100 * 100 * 100, UnitShortName : "hm3", UnitLongName : "Kubik Hektometer"),
+        //        new UnitsConverter(FactorToBaseUnit : 10 * 10 * 10, UnitShortName : "dam3", UnitLongName : "Kubik Dekamater"),
+        //        new UnitsConverter(FactorToBaseUnit : 1, UnitShortName : "m3", UnitLongName : "Kubik Meter"),
+        //        new UnitsConverter(FactorToBaseUnit : 1/10 * 1/10 * 1/10, UnitShortName : "dm3/l", UnitLongName : "Kubik Decimeter / Liter"),
+        //        new UnitsConverter(FactorToBaseUnit : 1/100 * 1/100 * 1/100, UnitShortName : "cm3", UnitLongName : "Kubik Centimeter"),
+        //        new UnitsConverter(FactorToBaseUnit : 1/1000 * 1/1000 * 1/1000, UnitShortName : "mm3", UnitLongName : "Kubik Milimeter")
+        //    }
+        //};
         #endregion
 
         #region NumberSystems

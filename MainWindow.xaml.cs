@@ -2481,6 +2481,8 @@ namespace VariabelBegreb
                 Const.UnitsOverallConverterArray[Counter].Button_Object.HorizontalAlignment = HorizontalAlignment.Left;
 
                 ControlTools.InsertRowInGrid(Grid_Length_Area_Volume_Weight_Liquid, Const.DynamicElementsRowHeight);
+
+                //this.SizeToContent = SizeToContent.Height;
             }
         }
 

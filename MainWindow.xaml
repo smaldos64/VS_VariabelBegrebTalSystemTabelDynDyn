@@ -6,506 +6,528 @@
         xmlns:local="clr-namespace:VariabelBegreb"
         xmlns:ap="clr-namespace:VariabelBegreb.Models"
         mc:Ignorable="d"
-        Title="Matematik Program" Height="1024" Width="1280">
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-    <StackPanel Name="ThisStack">
-        <Grid>
-            <TabControl HorizontalAlignment="Left" Height="1020" VerticalAlignment="Top" Width="1276" Name="MainTabControl" SelectionChanged="MainTabControl_SelectionChanged">
-                <TabItem Header="Firkant" x:Name="Square">
-                    <Grid Background="#FFE5E5E5" Margin="0,0,0,-224">
-                        <Label Content="Længde : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblLengthSquare"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="81,4,0,0" Name="txtLengthSquare" KeyDown="txtCheckForValidKeyPressed" />
-                        <Label Content="Bredde : " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,44,0,0" Name="lblWidthSquare"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="81,44,0,0" Name="txtWidthSquare" KeyDown="txtCheckForValidKeyPressed" />
-                        <Label Content="Areal : " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,82,0,0" Name="lblAreaSquare"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="82,84,0,0" Name="txtAreaSquare" IsEnabled="False" FontWeight="Bold"/>
-                        <Button Content="Beregn" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="239,88,0,0" Name="btnCalculateAreaSquare" Click="btnCalculateAreaSquare_Click"/>
-                        <Button Content="Clear" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="329,88,0,0" Name="btnClearResult" Click="btnClearResult_Click" />
-                        <Label Content="Omkreds : " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,125,0,0" Name="lblPerimeterSquare"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="82,125,0,0" Name="txtPerimeterSquare" IsEnabled="False" FontWeight="Bold"/>
-                    </Grid>
-                </TabItem>
+        Title="Matematik Program" Height="Auto" Width="1280" SizeToContent="WidthAndHeight" MaxHeight="2000">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Height="Auto" >
+        <StackPanel Name="ThisStack">
+        <Grid Height="Auto">
+                <TabControl HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="1276" Name="MainTabControl" SelectionChanged="MainTabControl_SelectionChanged" MinHeight="1020">
+                    <TabItem Header="Firkant" x:Name="Square">
+                        <Grid Background="#FFE5E5E5" Margin="0,0,0,-224">
+                            <Label Content="Længde : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblLengthSquare"/>
+                            <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="81,4,0,0" Name="txtLengthSquare" KeyDown="txtCheckForValidKeyPressed" />
+                            <Label Content="Bredde : " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,44,0,0" Name="lblWidthSquare"/>
+                            <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="81,44,0,0" Name="txtWidthSquare" KeyDown="txtCheckForValidKeyPressed" />
+                            <Label Content="Areal : " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,82,0,0" Name="lblAreaSquare"/>
+                            <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="82,84,0,0" Name="txtAreaSquare" IsEnabled="False" FontWeight="Bold"/>
+                            <Button Content="Beregn" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="239,88,0,0" Name="btnCalculateAreaSquare" Click="btnCalculateAreaSquare_Click"/>
+                            <Button Content="Clear" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="329,88,0,0" Name="btnClearResult" Click="btnClearResult_Click" />
+                            <Label Content="Omkreds : " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,125,0,0" Name="lblPerimeterSquare"/>
+                            <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="82,125,0,0" Name="txtPerimeterSquare" IsEnabled="False" FontWeight="Bold"/>
+                        </Grid>
+                    </TabItem>
 
-                <TabItem Header="Cirkel" x:Name="Circle">
-                    <Grid Background="#FFE5E5E5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="16*"/>
-                            <ColumnDefinition Width="29*"/>
-                            <ColumnDefinition Width="475*"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Content="Radius Cirkel : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblRadiusCircle" Grid.ColumnSpan="3"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtRadiusCircle" Margin="94,4,0,0" Grid.Column="2" KeyDown="txtCheckForValidKeyPressed"/>
-                        <Label Content="Areal Cirkel :" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblAreaCircle" Margin="0,42,0,0" Grid.ColumnSpan="3"/>
-                        <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtAreaCircle" Margin="94,46,0,0" Grid.Column="2" IsEnabled="False" FontWeight="Bold"/>
-                        <Button Content="Beregn" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Name="btnCalculateCircleParameters" Margin="234,46,0,0" Grid.Column="2" Click="btnCalculateCircleParameters_Click"/>
-                        <Button Grid.ColumnSpan="3" Content="Clear" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="404,46,0,0" Name="btnClearCircleParameters" Click="btnClearCircleParameters_Click"/>
-                        <Label Content="Omkreds Cirkel :" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblPerimeterCircle" Margin="0,76,0,0" Grid.ColumnSpan="3"/>
-                        <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtPerimeterCircle" Margin="94,76,0,0" Grid.Column="2" IsEnabled="False" FontWeight="Bold"/>
-                    </Grid>
-                </TabItem>
-
-                <TabItem Header="Potens og Rod" x:Name="PowerAndRoot">
-                    <Grid Background="#FFE5E5E5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="16*"/>
-                            <ColumnDefinition Width="29*"/>
-                            <ColumnDefinition Width="475*"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Content="Indtast Grundtal : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblRadixNumber" Grid.ColumnSpan="3"/>
-                        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtRadixNumber" Margin="104,4,0,0" Grid.Column="2" KeyDown="txtCheckForValidKeyPressed"/>
-                        <Label Content="Indtast Potens/Rod tal : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblPowerRootNumber" Margin="0,42,0,0" Grid.ColumnSpan="3"/>
-                        <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtPowerRootNumber" Margin="104,46,0,0" Grid.Column="2" KeyDown="txtCheckForValidKeyPressed"/>
-                        <Button Content="Beregn" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Name="btnCalculatePowerAndRoot" Margin="234,46,0,0" Grid.Column="2" Click="btnCalculatePowerAndRoot_Click" />
-                        <Button Grid.ColumnSpan="3" Content="Clear" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="404,46,0,0" Name="btnClearPowerAndRootParameters" Click="btnClearPowerAndRootParameters_Click" />
-                        <Label Content="x opløftet i y potens : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblRadixNumberInPower" Margin="0,82,0,0" Grid.ColumnSpan="3"/>
-                        <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtRadixNumberInPower" Margin="104,82,0,0" Grid.Column="2" IsEnabled="False" FontWeight="Bold"/>
-                        <Label Content="x opløftet i 1/y potens : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblRadixNumberInDividedPower" Margin="0,122,0,0" Grid.ColumnSpan="3"/>
-                        <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtRadixNumberInDividedPower" Margin="104,122,0,0" Grid.Column="2" IsEnabled="False" FontWeight="Bold"/>
-                        <Label Content="x opløftet i -y potens : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblRadixNumberInMinusPower" Margin="0,152,0,0" Grid.ColumnSpan="3"/>
-                        <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtRadixNumberInMinusPower" Margin="104,152,0,0" Grid.Column="2" IsEnabled="False" FontWeight="Bold"/>
-                        <Label Content="x opløftet i -1/y potens : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblRadixNumberInMinusDividedPower" Margin="0,182,0,0" Grid.ColumnSpan="3"/>
-                        <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtRadixNumberInMinusDividedPower" Margin="104,182,0,0" Grid.Column="2" IsEnabled="False" FontWeight="Bold"/>
-
-                        <Label Content="y'rod af x : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblRadixNumberInRoot" Margin="0,232,0,0" Grid.ColumnSpan="3"/>
-                        <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtRadixNumberInRoot" Margin="104,232,0,0" Grid.Column="2" IsEnabled="False" FontWeight="Bold"/>
-                        <Label Content="1/y'rod af x : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblRadixNumberInDividedRoot" Margin="0,262,0,0" Grid.ColumnSpan="3"/>
-                        <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtRadixNumberInDividedRoot" Margin="104,262,0,0" Grid.Column="2" IsEnabled="False" FontWeight="Bold" />
-                        <Label Content="-y'rod af x : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblRadixNumberInMinusRoot" Margin="0,292,0,0" Grid.ColumnSpan="3"/>
-                        <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtRadixNumberInMinusRoot" Margin="104,292,0,0" Grid.Column="2" IsEnabled="False" FontWeight="Bold"/>
-                        <Label Content="-1/y'rod af x : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblRadixNumberInMinusDividedRoot" Margin="0,322,0,0" Grid.ColumnSpan="3"/>
-                        <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtRadixNumberInMinusDividedRoot" Margin="104,322,0,0" Grid.Column="2" IsEnabled="False" FontWeight="Bold"/>
-                    </Grid>
-                </TabItem>
-
-                <TabItem Header="Kørsel Beregning" x:Name="DrivingCalculations">
-                    <Grid Background="#FFE5E5E5" x:Name="GridDrivingCalculations">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                        </Grid.RowDefinitions>
-                        <Label Content="lbl1" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblKoersel1"  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="10" />
-                        <Label Content="lbl2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblKoersel2" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" />
-                        <Label Content="lbl3" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblKoersel3" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="10" />
-
-                        <Button Content="Beregn" VerticalAlignment="Top" Name="btnCalculateCarCalculate" Grid.Column="4" Grid.Row="5" HorizontalAlignment="Left" Width="75" Click="btnCalculateCarCalculate_Click"/>
-                        <Button Content="Clear" VerticalAlignment="Top" Name="btnCalculateCarClear" Grid.Column="4" Grid.Row="6" HorizontalAlignment="Left" Width="75" Click="btnCalculateCarClear_Click"/>
-
-                        <Label Content="Indtast Distance (km) : " HorizontalAlignment="Left" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Name="lblDistance"/>
-                        <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="5" Name="txtDistance" KeyDown="txtCheckForValidKeyPressed" />
-
-                        <Label Content="Indtast Benzin/Dieselpris (kr/l) : " HorizontalAlignment="Left" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Name="lblKrPrLitre"/>
-                        <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="6" Name="txtKrPrLitre" KeyDown="txtCheckForValidKeyPressed" />
-
-                        <Label Content="Indtast Brændstofsøkonomi (km/l) : " HorizontalAlignment="Left" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Name="lblKilometerPrLitre"/>
-                        <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="7" Name="txtKilometerPrLitre" KeyDown="txtCheckForValidKeyPressed"/>
-
-                        <Label Content="Indtast Pris (kr) : " HorizontalAlignment="Left" Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" Name="lblPrice"/>
-                        <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="8" Name="txtPrice" KeyDown="txtCheckForValidKeyPressed" />
-
-                        <Label Content="lbl1" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblKoersel4"  Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="10" />
-                        <Label Content="lbl2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblKoersel5" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="10" />
-                        <Label Content="lbl3" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblKoersel6" Grid.Column="0" Grid.Row="12" Grid.ColumnSpan="10" />
-
-                        <Button Content="Beregn" VerticalAlignment="Top" Name="btnCalculateCarCalculateDistance_Time_Speed" Grid.Column="7" Grid.Row="15" HorizontalAlignment="Left" Width="75" Click="btnCalculateCarCalculateDistance_Time_Speed_Click" />
-                        <Button Content="Clear All" VerticalAlignment="Top" Name="btnCalculateCarClearDistance_Time_Speed" Grid.Column="7" Grid.Row="16" HorizontalAlignment="Left" Width="75" Click="btnCalculateCarClearDistance_Time_Speed_Click"/>
-
-                        <Label Content="Indtast Fart. Vælg enhed til højre : " HorizontalAlignment="Left" Grid.Column="0" Grid.Row="15" Grid.ColumnSpan="2" Name="lblSpeed"/>
-                        <TextBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="15" Name="txtSpeed" KeyDown="txtCheckForValidKeyPressed" />
-                        <Button Content="Clear Felt" VerticalAlignment="Top" Name="btnClearSpeedField" Grid.Column="4" Grid.Row="15" HorizontalAlignment="Left" Width="75" Click="btnClearField_Click"/>
-                        <ComboBox Height="20" Name="cmbSpeed" Width="70" Grid.Row="15" Grid.Column="5" ap:MoreXAMLProps.MarginLeft="10" SelectionChanged="cmbSpeed_SelectionChanged" />
-
-
-                        <Label Content="Indtast Tid. Vælg enhed til højre : " HorizontalAlignment="Left" Grid.Column="0" Grid.Row="16" Grid.ColumnSpan="2" Name="lblTime"/>
-                        <TextBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="16" Name="txtTime" KeyDown="txtCheckForValidKeyPressed" />
-                        <Button Content="Clear Felt" VerticalAlignment="Top" Name="btnClearTimeField" Grid.Column="4" Grid.Row="16" HorizontalAlignment="Left" Width="75" Click="btnClearField_Click"/>
-                        <ComboBox Height="20" Name="cmbTime" Width="70" Grid.Row="16" Grid.Column="5" ap:MoreXAMLProps.MarginLeft="10" SelectionChanged="cmbTime_SelectionChanged" />
-                        
-                        <TextBox Grid.ColumnSpan="1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100" Grid.Column="2" Grid.Row="16" Name="txtTimeHour" KeyDown="txtCheckForValidKeyPressed" Visibility="Hidden" />
-                        <Label Content=" T" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="16" Grid.ColumnSpan="1" Name="lblTimeHour" Visibility="Hidden"/>
-                        <TextBox Grid.ColumnSpan="1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100" Grid.Column="4" Grid.Row="16" Name="txtTimeMinute" KeyDown="txtCheckForValidKeyPressed" Visibility="Hidden" />
-                        <Label Content=" M" HorizontalAlignment="Left" Grid.Column="5" Grid.Row="16" Grid.ColumnSpan="1" Name="lblTimeMinute" Visibility="Hidden"/>
-                        
-                        <Label Content="Indtast Distance. Vælg enhed til h : " HorizontalAlignment="Left" Grid.Column="0" Grid.Row="17" Grid.ColumnSpan="2" Name="lblDistance_1"/>
-                        <TextBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="17" Name="txtDistance_1" KeyDown="txtCheckForValidKeyPressed"/>
-                        <Button Content="Clear Felt" VerticalAlignment="Top" Name="btnClearDistanceField" Grid.Column="4" Grid.Row="17" HorizontalAlignment="Left" Width="75" Click="btnClearField_Click"/>
-                        <ComboBox Height="20" Name="cmbDistance" Width="70" Grid.Row="17" Grid.Column="5" ap:MoreXAMLProps.MarginLeft="10" SelectionChanged="cmbDistance_SelectionChanged" />
-                    </Grid>
-                </TabItem>
-
-                <TabItem Header="1 Grads Ligning" x:Name="FirstOrderEquation">
-                    <Grid Background="#FFE5E5E5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="16*"/>
-                            <ColumnDefinition Width="29*"/>
-                            <ColumnDefinition Width="475*"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Content="Beregninger på den rette linje (Som kan være en ligefrem proportionalitet)" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lbl1OrderLine"  Grid.ColumnSpan="3" RenderTransformOrigin="0.548,1.692" />
-
-                        <Button Content="Beregn" VerticalAlignment="Top" Name="btnCalculate1OrderLineEquation" Grid.Column="2" Margin="438,335,0,0" HorizontalAlignment="Left" Width="75" RenderTransformOrigin="0.48,3.85" Click="btnCalculate1OrderLineEquation_Click"  />
-                        <Button Content="Clear" VerticalAlignment="Top" Name="btnCalculate1OrderLineEquationClear" Grid.Column="2" Margin="538,335,0,0" HorizontalAlignment="Left" Width="75" RenderTransformOrigin="0.48,3.85" Click="btnCalculate1OrderLineEquationClear_Click" />
-                        <Label Content="X og Y koordinat for 1. Punkt : " HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" Name="lblXAndYCoordinatesPoint1" />
-                        <Label Content="X og Y koordinat for 2. Punkt : " HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.355,3.077" Grid.ColumnSpan="3" Name="lblXAndYCoordinatesPoint2"/>
-                        <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="119,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txt1OrderLineXCoordinatePoint1" KeyDown="txtCheckForValidKeyPressed"/>
-                        <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="269,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txt1OrderLineYCoordinatePoint1" KeyDown="txtCheckForValidKeyPressed"/>
-                        <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="119,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txt1OrderLineXCoordinatePoint2" KeyDown="txtCheckForValidKeyPressed"/>
-                        <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="269,80,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txt1OrderLineYCoordinatePoint2" KeyDown="txtCheckForValidKeyPressed"/>
-                        <Label Content="Karakteristika for den rette linje : " HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="lbl1OrderLineCharacteristics"  Grid.ColumnSpan="3" RenderTransformOrigin="0.548,1.692" Margin="0,135,0,0" />
-                        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,182,0,0" TextWrapping="Wrap" Text="Her kommer karakteristika for den rette linje beskrevet ved de 2 punkter herover" VerticalAlignment="Top" Grid.ColumnSpan="2" Name="txtParametersFor1OrderLine"/>
-                    </Grid>
-                </TabItem>
-
-                <TabItem Header="2 Grads Ligning" x:Name="SecondOrderEquation">
-                    <Grid Background="#FFE5E5E5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="16*"/>
-                            <ColumnDefinition Width="29*"/>
-                            <ColumnDefinition Width="475*"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Content="Beregninger på Parablen. 2 . Grads Polynomiet" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblParabel"  Grid.ColumnSpan="3" RenderTransformOrigin="0.548,1.692" />
-                        <Button Content="Beregn" VerticalAlignment="Top" Name="btnCalculateParabelEquation" Grid.Column="2" Margin="438,335,0,0" HorizontalAlignment="Left" Width="75" RenderTransformOrigin="0.48,3.85" Click="btnCalculateParabelEquation_Click" />
-                        <Button Content="Clear" VerticalAlignment="Top" Name="btnCalculateParabelEquationClear" Grid.Column="2" Margin="538,335,0,0" HorizontalAlignment="Left" Width="75" RenderTransformOrigin="0.48,3.85" Click="btnCalculateParabelEquationClear_Click" />
-                        <Label Content="X og Y koordinat for 1. Punkt : " HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" Name="lblXAndYCoordinatesPoint1Parabel" />
-                        <Label Content="X og Y koordinat for 2. Punkt : " HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.355,3.077" Grid.ColumnSpan="3" Name="lblXAndYCoordinatesPoint2Parabel"/>
-                        <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="119,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txtParabelXCoordinatePoint1" KeyDown="txtCheckForValidKeyPressed"/>
-                        <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="269,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txtParabelYCoordinatePoint1" KeyDown="txtCheckForValidKeyPressed"/>
-                        <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="119,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txtParabelXCoordinatePoint2" KeyDown="txtCheckForValidKeyPressed"/>
-                        <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="269,80,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txtParabelYCoordinatePoint2" KeyDown="txtCheckForValidKeyPressed"/>
-                        <Label Content="Karakteristika for Parablen : " HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="lblParabelCharacteristics"  Grid.ColumnSpan="3" RenderTransformOrigin="0.548,1.692" Margin="0,165,0,0" />
-                        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,215,0,0" TextWrapping="Wrap" Text="Her kommer karakteristika for parablen beskrevet ved de 3 punkter herover" VerticalAlignment="Top" Grid.ColumnSpan="2" Name="txtParametersForParabel"/>
-                        <Label Content="X og Y koordinat for 3. Punkt : " HorizontalAlignment="Left" Margin="10,121,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.355,3.077" Grid.ColumnSpan="3" x:Name="lblXAndYCoordinatesPoint3Parabel"/>
-                        <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="119,124,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" x:Name="txtParabelXCoordinatePoint3" KeyDown="txtCheckForValidKeyPressed"/>
-                        <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="269,121,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" x:Name="txtParabelYCoordinatePoint3" KeyDown="txtCheckForValidKeyPressed"/>
-                        <Label Content="Indtast A, B og C koefficienter for Parabel" Grid.Column="1" HorizontalAlignment="Left" Margin="10,408,0,0" VerticalAlignment="Top" Name="lblCoefficients" Grid.ColumnSpan="2"/>
-                        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,439,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="33" Name="txtACoefficientInParabel" KeyDown="txtCheckForValidKeyPressed"/>
-                        <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="45,439,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="33" Name="txtBCoefficientInParabel" KeyDown="txtCheckForValidKeyPressed"/>
-                        <Label Content="x^2 + " Grid.Column="1" HorizontalAlignment="Left" Margin="48,439,0,0" VerticalAlignment="Top" RenderTransformOrigin="-5.224,0.5" Name="lblACoefficientInParabel" Grid.ColumnSpan="2"/>
-                        <Label Content="x + " Grid.Column="2" HorizontalAlignment="Left" Margin="83,439,0,0" VerticalAlignment="Top" RenderTransformOrigin="-5.224,0.5" Name="lblBCoefficientInParabel" />
-                        <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="124,442,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="33" Name="txtCCoefficientInParabel" RenderTransformOrigin="2.045,0.63" KeyDown="txtCheckForValidKeyPressed"/>
-                        <Button Content="Beregn" Grid.Column="2" HorizontalAlignment="Left" Margin="438,484,0,0" VerticalAlignment="Top" Width="75" Name="btnCalculateParabelRoots" Click="btnCalculateParabelRoots_Click"/>
-                        <Button Content="Clear" Grid.Column="2" HorizontalAlignment="Left" Margin="538,484,0,0" VerticalAlignment="Top" Width="75" Name="btnCalculateParabelRootsClear" Click="btnCalculateParabelRootsClear_Click"/>
-                        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,484,0,0" TextWrapping="Wrap" Text="Her kommer rødder og toppunkt for parablen beskrevet herover" VerticalAlignment="Top" Grid.ColumnSpan="2" Name="txtParametersForParabelByCoefficients"/>
-                    </Grid>
-                </TabItem>
-
-                <TabItem Header="Ligningssystemer" x:Name="EquationSystem">
-                    <StackPanel Background="#FFE5E5E5">
-                        <Grid>
+                    <TabItem Header="Cirkel" x:Name="Circle">
+                        <Grid Background="#FFE5E5E5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="16*"/>
                                 <ColumnDefinition Width="29*"/>
                                 <ColumnDefinition Width="475*"/>
                             </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="25"/>
-                            </Grid.RowDefinitions>
-                            <Label Content="Beregninger på Ligningssystemer" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblEquationSystem_1"  Grid.ColumnSpan="6" Grid.Row="0" Grid.Column="0" />
-                            <Label Content="Beregninger på Ligningssystemer" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblEquationSystem_2"  Grid.ColumnSpan="6" Grid.Row="1" Grid.Column="0" />
-                            <Label Content="Beregninger på Ligningssystemer" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblEquationSystem_3"  Grid.ColumnSpan="6" Grid.Row="2" Grid.Column="0" />
-                            <Label Content="Beregninger på Ligningssystemer" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblEquationSystem_4"  Grid.ColumnSpan="6" Grid.Row="3" Grid.Column="0" />
-                            <Label Content="Beregninger på Ligningssystemer" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblEquationSystem_5"  Grid.ColumnSpan="6" Grid.Row="4" Grid.Column="0" />
-                            <Label Content="Beregninger på Ligningssystemer" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblEquationSystem_6"  Grid.ColumnSpan="6" Grid.Row="5" Grid.Column="0" />
-                            <Label Content="Beregninger på Ligningssystemer" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblEquationSystem_7"  Grid.ColumnSpan="6" Grid.Row="6" Grid.Column="0" />
+                            <Label Content="Radius Cirkel : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblRadiusCircle" Grid.ColumnSpan="3"/>
+                            <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtRadiusCircle" Margin="94,4,0,0" Grid.Column="2" KeyDown="txtCheckForValidKeyPressed"/>
+                            <Label Content="Areal Cirkel :" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblAreaCircle" Margin="0,42,0,0" Grid.ColumnSpan="3"/>
+                            <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtAreaCircle" Margin="94,46,0,0" Grid.Column="2" IsEnabled="False" FontWeight="Bold"/>
+                            <Button Content="Beregn" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Name="btnCalculateCircleParameters" Margin="234,46,0,0" Grid.Column="2" Click="btnCalculateCircleParameters_Click"/>
+                            <Button Grid.ColumnSpan="3" Content="Clear" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="404,46,0,0" Name="btnClearCircleParameters" Click="btnClearCircleParameters_Click"/>
+                            <Label Content="Omkreds Cirkel :" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblPerimeterCircle" Margin="0,76,0,0" Grid.ColumnSpan="3"/>
+                            <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtPerimeterCircle" Margin="94,76,0,0" Grid.Column="2" IsEnabled="False" FontWeight="Bold"/>
                         </Grid>
+                    </TabItem>
 
-                        <ItemsControl Name="lstEquationSystem">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition/>
-                                            </Grid.ColumnDefinitions>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition/>
-                                                <!--<RowDefinition/>-->
-                                            </Grid.RowDefinitions>
-                                            <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding txtEquationText}" Tag="{Binding txtEquationName}" IsEnabled="False" FontWeight="Bold" />
-                                        </Grid>
-
-                                        <ItemsControl ItemsSource="{Binding EquationSystemColumns}">
-                                            <ItemsControl.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Grid Margin="12,0,0,0">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition/>
-                                                            <ColumnDefinition/>
-                                                        </Grid.ColumnDefinitions>
-                                                        <Grid.RowDefinitions>
-                                                            <RowDefinition/>
-                                                            <RowDefinition/>
-                                                        </Grid.RowDefinitions>
-                                                        <TextBox Grid.Row="0" Grid.Column="0" Tag="{Binding txtEquationColumnName}" Text="{Binding txtEquationColumnName_Text, Mode=TwoWay}" KeyDown="txtCheckForValidKeyPressed" Width="60" TextChanged="TextBox_TextChanged" />
-                                                        <TextBox Grid.Row="0" Grid.Column="1" Tag="{Binding txtEquationColumnName_lbl}" Text="{Binding txtEquationColumnName_lblText}" IsEnabled="False"  FontWeight="Bold" />
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
-                                            <ItemsControl.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <StackPanel Orientation="Horizontal"/>
-                                                </ItemsPanelTemplate>
-                                            </ItemsControl.ItemsPanel>
-                                        </ItemsControl>
-
-                                        <ItemsControl ItemsSource="{Binding EquationSystemColumnConstants}">
-                                            <ItemsControl.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Grid Margin="6,0,0,0">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition/>
-                                                        </Grid.ColumnDefinitions>
-                                                        <Grid.RowDefinitions>
-                                                            <RowDefinition/>
-                                                            <RowDefinition/>
-                                                        </Grid.RowDefinitions>
-                                                        <TextBox Grid.Row="0" Grid.Column="0" Tag="{Binding txtEquationColumnConstantName}" Text="{Binding txtEquationColumnConstantName_Text, Mode=TwoWay}" KeyDown="txtCheckForValidKeyPressed" Width="60" TextChanged="TextBox_TextChanged" />
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
-                                            <ItemsControl.ItemsPanel>
-                                                <ItemsPanelTemplate>
-                                                    <StackPanel Orientation="Horizontal"/>
-                                                </ItemsPanelTemplate>
-                                            </ItemsControl.ItemsPanel>
-                                        </ItemsControl>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-
-                        <Grid>
+                    <TabItem Header="Potens og Rod" x:Name="PowerAndRoot">
+                        <Grid Background="#FFE5E5E5">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="16*"/>
+                                <ColumnDefinition Width="29*"/>
+                                <ColumnDefinition Width="475*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Indtast Grundtal : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblRadixNumber" Grid.ColumnSpan="3"/>
+                            <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtRadixNumber" Margin="104,4,0,0" Grid.Column="2" KeyDown="txtCheckForValidKeyPressed"/>
+                            <Label Content="Indtast Potens/Rod tal : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblPowerRootNumber" Margin="0,42,0,0" Grid.ColumnSpan="3"/>
+                            <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtPowerRootNumber" Margin="104,46,0,0" Grid.Column="2" KeyDown="txtCheckForValidKeyPressed"/>
+                            <Button Content="Beregn" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Name="btnCalculatePowerAndRoot" Margin="234,46,0,0" Grid.Column="2" Click="btnCalculatePowerAndRoot_Click" />
+                            <Button Grid.ColumnSpan="3" Content="Clear" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="404,46,0,0" Name="btnClearPowerAndRootParameters" Click="btnClearPowerAndRootParameters_Click" />
+                            <Label Content="x opløftet i y potens : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblRadixNumberInPower" Margin="0,82,0,0" Grid.ColumnSpan="3"/>
+                            <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtRadixNumberInPower" Margin="104,82,0,0" Grid.Column="2" IsEnabled="False" FontWeight="Bold"/>
+                            <Label Content="x opløftet i 1/y potens : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblRadixNumberInDividedPower" Margin="0,122,0,0" Grid.ColumnSpan="3"/>
+                            <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtRadixNumberInDividedPower" Margin="104,122,0,0" Grid.Column="2" IsEnabled="False" FontWeight="Bold"/>
+                            <Label Content="x opløftet i -y potens : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblRadixNumberInMinusPower" Margin="0,152,0,0" Grid.ColumnSpan="3"/>
+                            <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtRadixNumberInMinusPower" Margin="104,152,0,0" Grid.Column="2" IsEnabled="False" FontWeight="Bold"/>
+                            <Label Content="x opløftet i -1/y potens : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblRadixNumberInMinusDividedPower" Margin="0,182,0,0" Grid.ColumnSpan="3"/>
+                            <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtRadixNumberInMinusDividedPower" Margin="104,182,0,0" Grid.Column="2" IsEnabled="False" FontWeight="Bold"/>
+
+                            <Label Content="y'rod af x : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblRadixNumberInRoot" Margin="0,232,0,0" Grid.ColumnSpan="3"/>
+                            <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtRadixNumberInRoot" Margin="104,232,0,0" Grid.Column="2" IsEnabled="False" FontWeight="Bold"/>
+                            <Label Content="1/y'rod af x : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblRadixNumberInDividedRoot" Margin="0,262,0,0" Grid.ColumnSpan="3"/>
+                            <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtRadixNumberInDividedRoot" Margin="104,262,0,0" Grid.Column="2" IsEnabled="False" FontWeight="Bold" />
+                            <Label Content="-y'rod af x : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblRadixNumberInMinusRoot" Margin="0,292,0,0" Grid.ColumnSpan="3"/>
+                            <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtRadixNumberInMinusRoot" Margin="104,292,0,0" Grid.Column="2" IsEnabled="False" FontWeight="Bold"/>
+                            <Label Content="-1/y'rod af x : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblRadixNumberInMinusDividedRoot" Margin="0,322,0,0" Grid.ColumnSpan="3"/>
+                            <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtRadixNumberInMinusDividedRoot" Margin="104,322,0,0" Grid.Column="2" IsEnabled="False" FontWeight="Bold"/>
+                        </Grid>
+                    </TabItem>
+
+                    <TabItem Header="Kørsel Beregning" x:Name="DrivingCalculations">
+                        <Grid Background="#FFE5E5E5" x:Name="GridDrivingCalculations">
+                            <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="100"/>
                                 <ColumnDefinition Width="100"/>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="30"/>
                                 <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="lbl1" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblKoersel1"  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="10" />
+                            <Label Content="lbl2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblKoersel2" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" />
+                            <Label Content="lbl3" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblKoersel3" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="10" />
+
+                            <Button Content="Beregn" VerticalAlignment="Top" Name="btnCalculateCarCalculate" Grid.Column="4" Grid.Row="5" HorizontalAlignment="Left" Width="75" Click="btnCalculateCarCalculate_Click"/>
+                            <Button Content="Clear" VerticalAlignment="Top" Name="btnCalculateCarClear" Grid.Column="4" Grid.Row="6" HorizontalAlignment="Left" Width="75" Click="btnCalculateCarClear_Click"/>
+
+                            <Label Content="Indtast Distance (km) : " HorizontalAlignment="Left" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Name="lblDistance"/>
+                            <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="5" Name="txtDistance" KeyDown="txtCheckForValidKeyPressed" />
+
+                            <Label Content="Indtast Benzin/Dieselpris (kr/l) : " HorizontalAlignment="Left" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Name="lblKrPrLitre"/>
+                            <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="6" Name="txtKrPrLitre" KeyDown="txtCheckForValidKeyPressed" />
+
+                            <Label Content="Indtast Brændstofsøkonomi (km/l) : " HorizontalAlignment="Left" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Name="lblKilometerPrLitre"/>
+                            <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="7" Name="txtKilometerPrLitre" KeyDown="txtCheckForValidKeyPressed"/>
+
+                            <Label Content="Indtast Pris (kr) : " HorizontalAlignment="Left" Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" Name="lblPrice"/>
+                            <TextBox Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="8" Name="txtPrice" KeyDown="txtCheckForValidKeyPressed" />
+
+                            <Label Content="lbl1" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblKoersel4"  Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="10" />
+                            <Label Content="lbl2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblKoersel5" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="10" />
+                            <Label Content="lbl3" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblKoersel6" Grid.Column="0" Grid.Row="12" Grid.ColumnSpan="10" />
+
+                            <Button Content="Beregn" VerticalAlignment="Top" Name="btnCalculateCarCalculateDistance_Time_Speed" Grid.Column="7" Grid.Row="15" HorizontalAlignment="Left" Width="75" Click="btnCalculateCarCalculateDistance_Time_Speed_Click" />
+                            <Button Content="Clear All" VerticalAlignment="Top" Name="btnCalculateCarClearDistance_Time_Speed" Grid.Column="7" Grid.Row="16" HorizontalAlignment="Left" Width="75" Click="btnCalculateCarClearDistance_Time_Speed_Click"/>
+
+                            <Label Content="Indtast Fart. Vælg enhed til højre : " HorizontalAlignment="Left" Grid.Column="0" Grid.Row="15" Grid.ColumnSpan="2" Name="lblSpeed"/>
+                            <TextBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="15" Name="txtSpeed" KeyDown="txtCheckForValidKeyPressed" />
+                            <Button Content="Clear Felt" VerticalAlignment="Top" Name="btnClearSpeedField" Grid.Column="4" Grid.Row="15" HorizontalAlignment="Left" Width="75" Click="btnClearField_Click"/>
+                            <ComboBox Height="20" Name="cmbSpeed" Width="70" Grid.Row="15" Grid.Column="5" ap:MoreXAMLProps.MarginLeft="10" SelectionChanged="cmbSpeed_SelectionChanged" />
+
+
+                            <Label Content="Indtast Tid. Vælg enhed til højre : " HorizontalAlignment="Left" Grid.Column="0" Grid.Row="16" Grid.ColumnSpan="2" Name="lblTime"/>
+                            <TextBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="16" Name="txtTime" KeyDown="txtCheckForValidKeyPressed" />
+                            <Button Content="Clear Felt" VerticalAlignment="Top" Name="btnClearTimeField" Grid.Column="4" Grid.Row="16" HorizontalAlignment="Left" Width="75" Click="btnClearField_Click"/>
+                            <ComboBox Height="20" Name="cmbTime" Width="70" Grid.Row="16" Grid.Column="5" ap:MoreXAMLProps.MarginLeft="10" SelectionChanged="cmbTime_SelectionChanged" />
+
+                            <TextBox Grid.ColumnSpan="1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100" Grid.Column="2" Grid.Row="16" Name="txtTimeHour" KeyDown="txtCheckForValidKeyPressed" Visibility="Hidden" />
+                            <Label Content=" T" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="16" Grid.ColumnSpan="1" Name="lblTimeHour" Visibility="Hidden"/>
+                            <TextBox Grid.ColumnSpan="1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100" Grid.Column="4" Grid.Row="16" Name="txtTimeMinute" KeyDown="txtCheckForValidKeyPressed" Visibility="Hidden" />
+                            <Label Content=" M" HorizontalAlignment="Left" Grid.Column="5" Grid.Row="16" Grid.ColumnSpan="1" Name="lblTimeMinute" Visibility="Hidden"/>
+
+                            <Label Content="Indtast Distance. Vælg enhed til h : " HorizontalAlignment="Left" Grid.Column="0" Grid.Row="17" Grid.ColumnSpan="2" Name="lblDistance_1"/>
+                            <TextBox Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" Grid.Row="17" Name="txtDistance_1" KeyDown="txtCheckForValidKeyPressed"/>
+                            <Button Content="Clear Felt" VerticalAlignment="Top" Name="btnClearDistanceField" Grid.Column="4" Grid.Row="17" HorizontalAlignment="Left" Width="75" Click="btnClearField_Click"/>
+                            <ComboBox Height="20" Name="cmbDistance" Width="70" Grid.Row="17" Grid.Column="5" ap:MoreXAMLProps.MarginLeft="10" SelectionChanged="cmbDistance_SelectionChanged" />
+                        </Grid>
+                    </TabItem>
+
+                    <TabItem Header="1 Grads Ligning" x:Name="FirstOrderEquation">
+                        <Grid Background="#FFE5E5E5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="16*"/>
+                                <ColumnDefinition Width="29*"/>
+                                <ColumnDefinition Width="475*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Beregninger på den rette linje (Som kan være en ligefrem proportionalitet)" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lbl1OrderLine"  Grid.ColumnSpan="3" RenderTransformOrigin="0.548,1.692" />
+
+                            <Button Content="Beregn" VerticalAlignment="Top" Name="btnCalculate1OrderLineEquation" Grid.Column="2" Margin="438,335,0,0" HorizontalAlignment="Left" Width="75" RenderTransformOrigin="0.48,3.85" Click="btnCalculate1OrderLineEquation_Click"  />
+                            <Button Content="Clear" VerticalAlignment="Top" Name="btnCalculate1OrderLineEquationClear" Grid.Column="2" Margin="538,335,0,0" HorizontalAlignment="Left" Width="75" RenderTransformOrigin="0.48,3.85" Click="btnCalculate1OrderLineEquationClear_Click" />
+                            <Label Content="X og Y koordinat for 1. Punkt : " HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" Name="lblXAndYCoordinatesPoint1" />
+                            <Label Content="X og Y koordinat for 2. Punkt : " HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.355,3.077" Grid.ColumnSpan="3" Name="lblXAndYCoordinatesPoint2"/>
+                            <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="119,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txt1OrderLineXCoordinatePoint1" KeyDown="txtCheckForValidKeyPressed"/>
+                            <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="269,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txt1OrderLineYCoordinatePoint1" KeyDown="txtCheckForValidKeyPressed"/>
+                            <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="119,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txt1OrderLineXCoordinatePoint2" KeyDown="txtCheckForValidKeyPressed"/>
+                            <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="269,80,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txt1OrderLineYCoordinatePoint2" KeyDown="txtCheckForValidKeyPressed"/>
+                            <Label Content="Karakteristika for den rette linje : " HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="lbl1OrderLineCharacteristics"  Grid.ColumnSpan="3" RenderTransformOrigin="0.548,1.692" Margin="0,135,0,0" />
+                            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,182,0,0" TextWrapping="Wrap" Text="Her kommer karakteristika for den rette linje beskrevet ved de 2 punkter herover" VerticalAlignment="Top" Grid.ColumnSpan="2" Name="txtParametersFor1OrderLine"/>
+                        </Grid>
+                    </TabItem>
+
+                    <TabItem Header="2 Grads Ligning" x:Name="SecondOrderEquation">
+                        <Grid Background="#FFE5E5E5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="16*"/>
+                                <ColumnDefinition Width="29*"/>
+                                <ColumnDefinition Width="475*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Beregninger på Parablen. 2 . Grads Polynomiet" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblParabel"  Grid.ColumnSpan="3" RenderTransformOrigin="0.548,1.692" />
+                            <Button Content="Beregn" VerticalAlignment="Top" Name="btnCalculateParabelEquation" Grid.Column="2" Margin="438,335,0,0" HorizontalAlignment="Left" Width="75" RenderTransformOrigin="0.48,3.85" Click="btnCalculateParabelEquation_Click" />
+                            <Button Content="Clear" VerticalAlignment="Top" Name="btnCalculateParabelEquationClear" Grid.Column="2" Margin="538,335,0,0" HorizontalAlignment="Left" Width="75" RenderTransformOrigin="0.48,3.85" Click="btnCalculateParabelEquationClear_Click" />
+                            <Label Content="X og Y koordinat for 1. Punkt : " HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" Name="lblXAndYCoordinatesPoint1Parabel" />
+                            <Label Content="X og Y koordinat for 2. Punkt : " HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.355,3.077" Grid.ColumnSpan="3" Name="lblXAndYCoordinatesPoint2Parabel"/>
+                            <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="119,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txtParabelXCoordinatePoint1" KeyDown="txtCheckForValidKeyPressed"/>
+                            <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="269,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txtParabelYCoordinatePoint1" KeyDown="txtCheckForValidKeyPressed"/>
+                            <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="119,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txtParabelXCoordinatePoint2" KeyDown="txtCheckForValidKeyPressed"/>
+                            <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="269,80,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txtParabelYCoordinatePoint2" KeyDown="txtCheckForValidKeyPressed"/>
+                            <Label Content="Karakteristika for Parablen : " HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="lblParabelCharacteristics"  Grid.ColumnSpan="3" RenderTransformOrigin="0.548,1.692" Margin="0,165,0,0" />
+                            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,215,0,0" TextWrapping="Wrap" Text="Her kommer karakteristika for parablen beskrevet ved de 3 punkter herover" VerticalAlignment="Top" Grid.ColumnSpan="2" Name="txtParametersForParabel"/>
+                            <Label Content="X og Y koordinat for 3. Punkt : " HorizontalAlignment="Left" Margin="10,121,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.355,3.077" Grid.ColumnSpan="3" x:Name="lblXAndYCoordinatesPoint3Parabel"/>
+                            <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="119,124,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" x:Name="txtParabelXCoordinatePoint3" KeyDown="txtCheckForValidKeyPressed"/>
+                            <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="269,121,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" x:Name="txtParabelYCoordinatePoint3" KeyDown="txtCheckForValidKeyPressed"/>
+                            <Label Content="Indtast A, B og C koefficienter for Parabel" Grid.Column="1" HorizontalAlignment="Left" Margin="10,408,0,0" VerticalAlignment="Top" Name="lblCoefficients" Grid.ColumnSpan="2"/>
+                            <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,439,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="33" Name="txtACoefficientInParabel" KeyDown="txtCheckForValidKeyPressed"/>
+                            <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="45,439,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="33" Name="txtBCoefficientInParabel" KeyDown="txtCheckForValidKeyPressed"/>
+                            <Label Content="x^2 + " Grid.Column="1" HorizontalAlignment="Left" Margin="48,439,0,0" VerticalAlignment="Top" RenderTransformOrigin="-5.224,0.5" Name="lblACoefficientInParabel" Grid.ColumnSpan="2"/>
+                            <Label Content="x + " Grid.Column="2" HorizontalAlignment="Left" Margin="83,439,0,0" VerticalAlignment="Top" RenderTransformOrigin="-5.224,0.5" Name="lblBCoefficientInParabel" />
+                            <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="124,442,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="33" Name="txtCCoefficientInParabel" RenderTransformOrigin="2.045,0.63" KeyDown="txtCheckForValidKeyPressed"/>
+                            <Button Content="Beregn" Grid.Column="2" HorizontalAlignment="Left" Margin="438,484,0,0" VerticalAlignment="Top" Width="75" Name="btnCalculateParabelRoots" Click="btnCalculateParabelRoots_Click"/>
+                            <Button Content="Clear" Grid.Column="2" HorizontalAlignment="Left" Margin="538,484,0,0" VerticalAlignment="Top" Width="75" Name="btnCalculateParabelRootsClear" Click="btnCalculateParabelRootsClear_Click"/>
+                            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,484,0,0" TextWrapping="Wrap" Text="Her kommer rødder og toppunkt for parablen beskrevet herover" VerticalAlignment="Top" Grid.ColumnSpan="2" Name="txtParametersForParabelByCoefficients"/>
+                        </Grid>
+                    </TabItem>
+
+                    <TabItem Header="Ligningssystemer" x:Name="EquationSystem">
+                        <StackPanel Background="#FFE5E5E5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="16*"/>
+                                    <ColumnDefinition Width="29*"/>
+                                    <ColumnDefinition Width="475*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition Height="25"/>
+                                </Grid.RowDefinitions>
+                                <Label Content="Beregninger på Ligningssystemer" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblEquationSystem_1"  Grid.ColumnSpan="6" Grid.Row="0" Grid.Column="0" />
+                                <Label Content="Beregninger på Ligningssystemer" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblEquationSystem_2"  Grid.ColumnSpan="6" Grid.Row="1" Grid.Column="0" />
+                                <Label Content="Beregninger på Ligningssystemer" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblEquationSystem_3"  Grid.ColumnSpan="6" Grid.Row="2" Grid.Column="0" />
+                                <Label Content="Beregninger på Ligningssystemer" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblEquationSystem_4"  Grid.ColumnSpan="6" Grid.Row="3" Grid.Column="0" />
+                                <Label Content="Beregninger på Ligningssystemer" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblEquationSystem_5"  Grid.ColumnSpan="6" Grid.Row="4" Grid.Column="0" />
+                                <Label Content="Beregninger på Ligningssystemer" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblEquationSystem_6"  Grid.ColumnSpan="6" Grid.Row="5" Grid.Column="0" />
+                                <Label Content="Beregninger på Ligningssystemer" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblEquationSystem_7"  Grid.ColumnSpan="6" Grid.Row="6" Grid.Column="0" />
+                            </Grid>
+
+                            <ItemsControl Name="lstEquationSystem">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <!--<RowDefinition/>-->
+                                                </Grid.RowDefinitions>
+                                                <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding txtEquationText}" Tag="{Binding txtEquationName}" IsEnabled="False" FontWeight="Bold" />
+                                            </Grid>
+
+                                            <ItemsControl ItemsSource="{Binding EquationSystemColumns}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid Margin="12,0,0,0">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition/>
+                                                                <ColumnDefinition/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition/>
+                                                                <RowDefinition/>
+                                                            </Grid.RowDefinitions>
+                                                            <TextBox Grid.Row="0" Grid.Column="0" Tag="{Binding txtEquationColumnName}" Text="{Binding txtEquationColumnName_Text, Mode=TwoWay}" KeyDown="txtCheckForValidKeyPressed" Width="60" TextChanged="TextBox_TextChanged" />
+                                                            <TextBox Grid.Row="0" Grid.Column="1" Tag="{Binding txtEquationColumnName_lbl}" Text="{Binding txtEquationColumnName_lblText}" IsEnabled="False"  FontWeight="Bold" />
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel Orientation="Horizontal"/>
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                            </ItemsControl>
+
+                                            <ItemsControl ItemsSource="{Binding EquationSystemColumnConstants}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid Margin="6,0,0,0">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition/>
+                                                                <RowDefinition/>
+                                                            </Grid.RowDefinitions>
+                                                            <TextBox Grid.Row="0" Grid.Column="0" Tag="{Binding txtEquationColumnConstantName}" Text="{Binding txtEquationColumnConstantName_Text, Mode=TwoWay}" KeyDown="txtCheckForValidKeyPressed" Width="60" TextChanged="TextBox_TextChanged" />
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel Orientation="Horizontal"/>
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Label Content="Vælg Ligingssystem orden : " Grid.Row="1" Grid.Column="0" ap:MoreXAMLProps.MarginLeft="10"/>
+                                <ComboBox Height="20" Name="cmbEquationSystem" Width="50" SelectionChanged="cmbEquationSystem_SelectionChanged" Grid.Row="1" Grid.Column="1" ap:MoreXAMLProps.MarginLeft="10" />
+                                <Label Content="Vælg antal decimaler : " Grid.Row="1" Grid.Column="2" ap:MoreXAMLProps.MarginLeft="10"/>
+                                <ComboBox Height="20" Name="cmbNumberOfDecimals" Width="50" Grid.Row="1" Grid.Column="4" ap:MoreXAMLProps.MarginLeft="10" SelectionChanged="cmbNumberOfDecimals_SelectionChanged" />
+                                <Button Name="btnCalculateEquationSystem" Content="Beregn" Grid.Row="2" Grid.Column="0" Width="60" ap:MoreXAMLProps.MarginLeft="10" Click="btnCalculateEquationSystem_Click" Height="25" />
+                                <Button Name="btnClearEquationSystem" Content="Clear" Grid.Row="2" Grid.Column="1" ap:MoreXAMLProps.MarginLeft="10" Click="btnClearEquationSystem_Click" Height="25"/>
+                                <Button Name="btnGetEquationSystemFromFile" Content="Hent fra Fil" Grid.Row="3" Grid.Column="0" Width="70" ap:MoreXAMLProps.MarginLeft="10" Click="btnGetEquationSystemFromFile_Click" Height="25" />
+                                <Button Name="btnSaveEquationSystemToFile"  Content="Gem i Fil" Grid.Row="3" Grid.Column="1" IsEnabled="True" ap:MoreXAMLProps.MarginLeft="10" Height="25" HorizontalAlignment="Left" Width="50" Click="btnSaveEquationSystemToFile_Click"/>
+                                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Her kommer løsningen på ligningssystemet." VerticalAlignment="Top" IsEnabled="False" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4" Name="txtSolution" ap:MoreXAMLProps.MarginLeft="10"/>
+                            </Grid>
+                        </StackPanel>
+                    </TabItem>
+
+                    <TabItem Header="Brøkregning" x:Name="FractionCalculations">
+                        <Grid Background="#FFE5E5E5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
                                 <RowDefinition Height="30"/>
                                 <RowDefinition Height="30"/>
                                 <RowDefinition Height="20"/>
-                                <RowDefinition/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
                             </Grid.RowDefinitions>
 
-                            <Label Content="Vælg Ligingssystem orden : " Grid.Row="1" Grid.Column="0" ap:MoreXAMLProps.MarginLeft="10"/>
-                            <ComboBox Height="20" Name="cmbEquationSystem" Width="50" SelectionChanged="cmbEquationSystem_SelectionChanged" Grid.Row="1" Grid.Column="1" ap:MoreXAMLProps.MarginLeft="10" />
-                            <Label Content="Vælg antal decimaler : " Grid.Row="1" Grid.Column="2" ap:MoreXAMLProps.MarginLeft="10"/>
-                            <ComboBox Height="20" Name="cmbNumberOfDecimals" Width="50" Grid.Row="1" Grid.Column="4" ap:MoreXAMLProps.MarginLeft="10" SelectionChanged="cmbNumberOfDecimals_SelectionChanged" />
-                            <Button Name="btnCalculateEquationSystem" Content="Beregn" Grid.Row="2" Grid.Column="0" Width="60" ap:MoreXAMLProps.MarginLeft="10" Click="btnCalculateEquationSystem_Click" Height="25" />
-                            <Button Name="btnClearEquationSystem" Content="Clear" Grid.Row="2" Grid.Column="1" ap:MoreXAMLProps.MarginLeft="10" Click="btnClearEquationSystem_Click" Height="25"/>
-                            <Button Name="btnGetEquationSystemFromFile" Content="Hent fra Fil" Grid.Row="3" Grid.Column="0" Width="70" ap:MoreXAMLProps.MarginLeft="10" Click="btnGetEquationSystemFromFile_Click" Height="25" />
-                            <Button Name="btnSaveEquationSystemToFile"  Content="Gem i Fil" Grid.Row="3" Grid.Column="1" IsEnabled="True" ap:MoreXAMLProps.MarginLeft="10" Height="25" HorizontalAlignment="Left" Width="50" Click="btnSaveEquationSystemToFile_Click"/>
-                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Her kommer løsningen på ligningssystemet." VerticalAlignment="Top" IsEnabled="False" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4" Name="txtSolution" ap:MoreXAMLProps.MarginLeft="10"/>
+                            <Label Content="Beregninger på Brøker" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblFraction"  Grid.ColumnSpan="6" Grid.Row="0" Grid.Column="0" />
+
+                            <Label Content="Tæller for 1. brøk : " HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Name="lblNominatorFraction1" />
+                            <Label Content="Tæller for 2. brøk : " HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="6" Grid.Row="1" Name="lblNominatorFraction2" />
+                            <TextBox Grid.Column="3" Grid.Row="1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" Width="121" Name="txtNominatorFraction1" Grid.ColumnSpan="3" KeyDown="txtCheckForValidIntegerNumberPressed" TabIndex="1"/>
+                            <TextBox Grid.Column="7" Grid.Row="1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" Width="121" Name="txtNominatorFraction2" Grid.ColumnSpan="2" KeyDown="txtCheckForValidIntegerNumberPressed" TabIndex="3"/>
+
+                            <Label Content="-----------------------" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="3" Grid.Row="2" Name="lblFractionLine1" />
+                            <Label Content="-----------------------" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="7" Grid.Row="2" Name="lblFractionLine2" />
+
+                            <Label Content="Nævner for 1. brøk : " HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" Name="lblDenominatorFraction1"/>
+                            <Label Content="Nævner for 2. brøk : " HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="6" Grid.Row="3" Name="lblDenominatorFraction2" />
+                            <TextBox Grid.Column="3" Grid.Row="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txtDenominatorFraction1" Grid.ColumnSpan="3" KeyDown="txtCheckForValidIntegerNumberPressed" TabIndex="2"/>
+                            <TextBox Grid.Column="7" Grid.Row="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txtDenominatorFraction2" Grid.ColumnSpan="2" KeyDown="txtCheckForValidIntegerNumberPressed" TabIndex="4"/>
+
+                            <Label x:Name="lblPlusFractions" Grid.Column="0" Grid.Row="4" Content="Addition af Brøker : " HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="3"/>
+                            <Label x:Name="lblMinusFractions" Grid.Column="0" Grid.Row="5" Content="Subtraktion af Brøker : " HorizontalAlignment="Left"  VerticalAlignment="Top" Grid.ColumnSpan="3"/>
+                            <Label x:Name="lblMultiplyFractions" Grid.Column="0" Grid.Row="6" Content="Multiplikation af Brøker : " HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="3"/>
+                            <Label x:Name="lblDivideFractions" Grid.Column="0" Grid.Row="7" Content="Division af Brøker : " HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="3"/>
+                            <TextBox x:Name="txtFractionsAdditionResult" Grid.Column="3" Grid.Row="4" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="160" Grid.ColumnSpan="3" IsEnabled="False" FontWeight="Bold"/>
+                            <TextBox x:Name="txtFractionsSubtractionResult" Grid.Column="3" Grid.Row="5" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="160" Grid.ColumnSpan="3" IsEnabled="False" FontWeight="Bold"/>
+                            <TextBox x:Name="txtFractionsMultiplyResult" Grid.Column="3" Grid.Row="6" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="160" Grid.ColumnSpan="3" IsEnabled="False" FontWeight="Bold"/>
+                            <TextBox x:Name="txtFractionsDivisionResult" Grid.Column="3" Grid.Row="7" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="160" Grid.ColumnSpan="3" IsEnabled="False" FontWeight="Bold"/>
+                            <Button Content="Beregn" VerticalAlignment="Top" Name="btnCalculateFraction" Grid.Column="6" Grid.Row="8" HorizontalAlignment="Left" Width="75" Click="btnCalculateFraction_Click" />
+                            <Button Content="Clear" VerticalAlignment="Top" Name="btnCalculateFractionClear" Grid.Column="7" Grid.Row="8" HorizontalAlignment="Left" Width="75" Click="btnCalculateFractionClear_Click"  />
+
+                            <Label Content="Forkort Brøk : " HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="3" Name="lblShortenFraction" />
+                            <Label Content="Forkortet Brøk : " HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="6" Grid.Row="10" Grid.ColumnSpan="3" Name="lblShortenedFraction" />
+                            <Label Content="Tæller for brøk : " HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="3" Name="lblShortenNominatorFraction" />
+                            <TextBox Grid.Column="3" Grid.Row="11" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txtNominatorShortenFraction" Grid.ColumnSpan="3" KeyDown="txtCheckForValidIntegerNumberPressed" TabIndex="7"/>
+                            <TextBox Grid.Column="6" Grid.Row="11" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="251" Name="txtShortenedFraction" Grid.ColumnSpan="4" IsEnabled="False" FontWeight="Bold" />
+                            <Label Content="-----------------------" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="3" Grid.Row="12" Name="lblShortenFractionLine" />
+                            <Label Content="Nævner for brøk : " HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="13" Grid.ColumnSpan="3" Name="lblShortenDenominatorFraction" />
+                            <TextBox Grid.Column="3" Grid.Row="13" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txtDenominatorShortenFraction" Grid.ColumnSpan="3" KeyDown="txtCheckForValidIntegerNumberPressed" TabIndex="8"/>
+                            <!--<TextBox Grid.Column="6" Grid.Row="13" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txtDenominatorShortenedFraction" Grid.ColumnSpan="3" IsEnabled="False" FontWeight="Bold" />-->
+                            <Button Content="Forkort Brøk" VerticalAlignment="Top" Name="btnShortenFraction" Grid.Column="6" Grid.Row="14" HorizontalAlignment="Left" Width="75" Click="btnShortenFraction_Click" />
+                            <Button Content="Clear" VerticalAlignment="Top" Name="btnShortenFractionClear" Grid.Column="7" Grid.Row="14" HorizontalAlignment="Left" Width="75" Click="btnShortenFractionClear_Click" />
                         </Grid>
-                    </StackPanel>
-                </TabItem>
+                    </TabItem>
 
-                <TabItem Header="Brøkregning" x:Name="FractionCalculations">
-                    <Grid Background="#FFE5E5E5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="20"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                        </Grid.RowDefinitions>
-
-                        <Label Content="Beregninger på Brøker" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblFraction"  Grid.ColumnSpan="6" Grid.Row="0" Grid.Column="0" />
-
-                        <Label Content="Tæller for 1. brøk : " HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Name="lblNominatorFraction1" />
-                        <Label Content="Tæller for 2. brøk : " HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="6" Grid.Row="1" Name="lblNominatorFraction2" />
-                        <TextBox Grid.Column="3" Grid.Row="1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" Width="121" Name="txtNominatorFraction1" Grid.ColumnSpan="3" KeyDown="txtCheckForValidIntegerNumberPressed" TabIndex="1"/>
-                        <TextBox Grid.Column="7" Grid.Row="1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" Width="121" Name="txtNominatorFraction2" Grid.ColumnSpan="2" KeyDown="txtCheckForValidIntegerNumberPressed" TabIndex="3"/>
-
-                        <Label Content="-----------------------" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="3" Grid.Row="2" Name="lblFractionLine1" />
-                        <Label Content="-----------------------" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="7" Grid.Row="2" Name="lblFractionLine2" />
-
-                        <Label Content="Nævner for 1. brøk : " HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" Name="lblDenominatorFraction1"/>
-                        <Label Content="Nævner for 2. brøk : " HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="6" Grid.Row="3" Name="lblDenominatorFraction2" />
-                        <TextBox Grid.Column="3" Grid.Row="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txtDenominatorFraction1" Grid.ColumnSpan="3" KeyDown="txtCheckForValidIntegerNumberPressed" TabIndex="2"/>
-                        <TextBox Grid.Column="7" Grid.Row="3" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txtDenominatorFraction2" Grid.ColumnSpan="2" KeyDown="txtCheckForValidIntegerNumberPressed" TabIndex="4"/>
-
-                        <Label x:Name="lblPlusFractions" Grid.Column="0" Grid.Row="4" Content="Addition af Brøker : " HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="3"/>
-                        <Label x:Name="lblMinusFractions" Grid.Column="0" Grid.Row="5" Content="Subtraktion af Brøker : " HorizontalAlignment="Left"  VerticalAlignment="Top" Grid.ColumnSpan="3"/>
-                        <Label x:Name="lblMultiplyFractions" Grid.Column="0" Grid.Row="6" Content="Multiplikation af Brøker : " HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="3"/>
-                        <Label x:Name="lblDivideFractions" Grid.Column="0" Grid.Row="7" Content="Division af Brøker : " HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="3"/>
-                        <TextBox x:Name="txtFractionsAdditionResult" Grid.Column="3" Grid.Row="4" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="160" Grid.ColumnSpan="3" IsEnabled="False" FontWeight="Bold"/>
-                        <TextBox x:Name="txtFractionsSubtractionResult" Grid.Column="3" Grid.Row="5" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="160" Grid.ColumnSpan="3" IsEnabled="False" FontWeight="Bold"/>
-                        <TextBox x:Name="txtFractionsMultiplyResult" Grid.Column="3" Grid.Row="6" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="160" Grid.ColumnSpan="3" IsEnabled="False" FontWeight="Bold"/>
-                        <TextBox x:Name="txtFractionsDivisionResult" Grid.Column="3" Grid.Row="7" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="160" Grid.ColumnSpan="3" IsEnabled="False" FontWeight="Bold"/>
-                        <Button Content="Beregn" VerticalAlignment="Top" Name="btnCalculateFraction" Grid.Column="6" Grid.Row="8" HorizontalAlignment="Left" Width="75" Click="btnCalculateFraction_Click" />
-                        <Button Content="Clear" VerticalAlignment="Top" Name="btnCalculateFractionClear" Grid.Column="7" Grid.Row="8" HorizontalAlignment="Left" Width="75" Click="btnCalculateFractionClear_Click"  />
-
-                        <Label Content="Forkort Brøk : " HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="3" Name="lblShortenFraction" />
-                        <Label Content="Forkortet Brøk : " HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="6" Grid.Row="10" Grid.ColumnSpan="3" Name="lblShortenedFraction" />
-                        <Label Content="Tæller for brøk : " HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="11" Grid.ColumnSpan="3" Name="lblShortenNominatorFraction" />
-                        <TextBox Grid.Column="3" Grid.Row="11" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txtNominatorShortenFraction" Grid.ColumnSpan="3" KeyDown="txtCheckForValidIntegerNumberPressed" TabIndex="7"/>
-                        <TextBox Grid.Column="6" Grid.Row="11" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="251" Name="txtShortenedFraction" Grid.ColumnSpan="4" IsEnabled="False" FontWeight="Bold" />
-                        <Label Content="-----------------------" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="3" Grid.Row="12" Name="lblShortenFractionLine" />
-                        <Label Content="Nævner for brøk : " HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="13" Grid.ColumnSpan="3" Name="lblShortenDenominatorFraction" />
-                        <TextBox Grid.Column="3" Grid.Row="13" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txtDenominatorShortenFraction" Grid.ColumnSpan="3" KeyDown="txtCheckForValidIntegerNumberPressed" TabIndex="8"/>
-                        <!--<TextBox Grid.Column="6" Grid.Row="13" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txtDenominatorShortenedFraction" Grid.ColumnSpan="3" IsEnabled="False" FontWeight="Bold" />-->
-                        <Button Content="Forkort Brøk" VerticalAlignment="Top" Name="btnShortenFraction" Grid.Column="6" Grid.Row="14" HorizontalAlignment="Left" Width="75" Click="btnShortenFraction_Click" />
-                        <Button Content="Clear" VerticalAlignment="Top" Name="btnShortenFractionClear" Grid.Column="7" Grid.Row="14" HorizontalAlignment="Left" Width="75" Click="btnShortenFractionClear_Click" />
-                    </Grid>
-                </TabItem>
-
-                <TabItem Header="Procentregning" x:Name="PercentageCalculations">
-                    <Grid Background="#FFE5E5E5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="16*"/>
-                            <ColumnDefinition Width="29*"/>
-                            <ColumnDefinition Width="475*"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Content="Indtast Beløb : " Grid.Column="1" HorizontalAlignment="Left" Margin="5,24,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.211,-0.538" Name="lblBaseAmount" Grid.ColumnSpan="3"/>
-                        <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="68,24,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtBaseAmount" KeyDown="txtCheckForValidPositiveNumberPressed"/>
-                        <Label Content="Indtast Procentsats : " Grid.Column="1" HorizontalAlignment="Left" Margin="0,69,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.211,-0.538" Name="lblPercentageOfBase" Grid.ColumnSpan="3"/>
-                        <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="68,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtPercentageOfBase" KeyDown="txtCheckForValidPositiveNumberPressed"/>
-                        <Label Content="x % af y er : " Grid.Column="1" HorizontalAlignment="Left" Margin="0,114,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.211,-0.538" Name="lblPercentageOfBaseAmount" Grid.ColumnSpan="3"/>
-                        <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="68,114,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtPercentageOfBaseAmount" IsEnabled="False" FontWeight="Bold"/>
-                        <Button Content="Beregn" Grid.Column="2" HorizontalAlignment="Left" Margin="230,117,0,0" VerticalAlignment="Top" Width="75" Name="btnCalculatePercentageOfAmount" Click="btnCalculatePercentageOfAmount_Click"/>
-                        <Button Content="Clear" Grid.Column="2" HorizontalAlignment="Left" Margin="338,117,0,0" VerticalAlignment="Top" Width="76" Name="btnClearCalculatePercentageOfAmount" Click="btnClearCalculatePercentageOfAmount_Click" />
-                        <Label Content="Indtast højt Beløb  : " Grid.Column="1" HorizontalAlignment="Left" Margin="0,180,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.211,-0.538" Name="lblAmountBefore" Grid.ColumnSpan="2"/>
-                        <Label Content="Indtast lavt Beløb  : " Grid.Column="1" HorizontalAlignment="Left" Margin="0,228,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.211,-0.538" Name="lblAmountAfter" Grid.ColumnSpan="2"/>
-                        <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="68,183,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtAmount1" KeyDown="txtCheckForValidPositiveNumberPressed"/>
-                        <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="68,231,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtAmount2" KeyDown="txtCheckForValidPositiveNumberPressed"/>
-                        <Label Content="Procentvis fald : " Grid.Column="1" HorizontalAlignment="Left" Margin="0,276,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.211,-0.538" Name="lblPercentageDown" Grid.ColumnSpan="2"/>
-                        <Label Content="Procentvis stigning : " Grid.Column="1" HorizontalAlignment="Left" Margin="0,320,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.211,-0.538" Name="lblPercentageUp" Grid.ColumnSpan="2"/>
-                        <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="68,276,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtPercentageDown" IsEnabled="False" FontWeight="Bold"/>
-                        <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="67,320,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtPercentageUp" IsEnabled="False" FontWeight="Bold"/>
-                        <Button Content="Beregn" Grid.Column="2" HorizontalAlignment="Left" Margin="230,320,0,0" VerticalAlignment="Top" Width="75" Name="btnCalculatePercentageUpDown" Click="btnCalculatePercentageUpDown_Click" />
-                        <Button Content="Clear" Grid.Column="2" HorizontalAlignment="Left" Margin="338,320,0,0" VerticalAlignment="Top" Width="76" Name="btnClearCalculatePercentageUpDown" Click="btnClearCalculatePercentageUpDown_Click" />
-                    </Grid>
-                </TabItem>
-
-                <TabItem Header="Talsystemer" x:Name="NumberSystems">
-                    <Grid Background="#FFE5E5E5" x:Name="GridNumberSystem">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
-                            </Grid.RowDefinitions>
-                        <Label Content="lbl1" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblTalsystemer1"  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="10" />
-                        <Label Content="lbl2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblTalsystemer2" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" />
-                        <Label Content="lbl3" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblTalsystemer3" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="10" />
-                        <Label Content="lbl4" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblTalsystemer4"  Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="10" />
-                        <Label Content="lbl5" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblTalsystemer5" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="10" />
-                        <Label Content="lbl6" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblTalsystemer6" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="10" />
-
-                        <Label Content="Opret ny Talsystem" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblTalsystemer9" Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="10" />
-
-                        <Label Content="Talsystem Radix : " HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblNumberSystemRadix" Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="1" />
-                        <ComboBox Height="20" Name="cmbNumberSystemRadix" Width="50" Grid.Row="9" Grid.Column="1" ap:MoreXAMLProps.MarginLeft="10" />
-                        <Label Content="Talsystem Space Counter : " HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblNumberSystemSpaceCounter" Grid.Column="2" Grid.Row="9" Grid.ColumnSpan="2" />
-                        <ComboBox Height="20" Name="cmbNumberSystemSpaceCounter" Width="50" Grid.Row="9" Grid.Column="4" ap:MoreXAMLProps.MarginLeft="10" />
-                        <Label Content="Talsystem Space Karakter : " HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblNumberSystemSpaceCharacter" Grid.Column="5" Grid.Row="9" Grid.ColumnSpan="2" />
-                        <ComboBox Height="20" Name="cmbNumberSystemSpaceCharacter" Width="50" Grid.Row="9" Grid.Column="7" ap:MoreXAMLProps.MarginLeft="10" />
-                        <Button Content="Opret Nyt Talsystem" VerticalAlignment="Top" Name="btnMakeDynamicRadixSystem" Grid.Column="8" Grid.Row="9" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="150" Click="btnMakeDynamicRadixSystem_Click" />
-
-                        <Button Content="Clear" VerticalAlignment="Top" Name="btnCalculateNumberSystemsClear" Grid.Column="6" Grid.Row="11" HorizontalAlignment="Left" Width="75" Click="btnCalculateNumberSystemsClear_Click" />
-                        <Label Content="Statisk Oprettetde Talsystemer herunder" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblTalsystemer7" Grid.Column="0" Grid.Row="12" Grid.ColumnSpan="10" />
-                    </Grid>
-                </TabItem>
-
-                    <TabItem Header="Længde-Areal-etc." x:Name="Length_Area_Volume_Weight_Liquid">
-                        <Grid Background="#FFE5E5E5" x:Name="Grid_Length_Area_Volume_Weight_Liquid">
+                    <TabItem Header="Procentregning" x:Name="PercentageCalculations">
+                        <Grid Background="#FFE5E5E5">
                             <Grid.ColumnDefinitions>
-                                
+                                <ColumnDefinition Width="16*"/>
+                                <ColumnDefinition Width="29*"/>
+                                <ColumnDefinition Width="475*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Indtast Beløb : " Grid.Column="1" HorizontalAlignment="Left" Margin="5,24,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.211,-0.538" Name="lblBaseAmount" Grid.ColumnSpan="3"/>
+                            <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="68,24,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtBaseAmount" KeyDown="txtCheckForValidPositiveNumberPressed"/>
+                            <Label Content="Indtast Procentsats : " Grid.Column="1" HorizontalAlignment="Left" Margin="0,69,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.211,-0.538" Name="lblPercentageOfBase" Grid.ColumnSpan="3"/>
+                            <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="68,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtPercentageOfBase" KeyDown="txtCheckForValidPositiveNumberPressed"/>
+                            <Label Content="x % af y er : " Grid.Column="1" HorizontalAlignment="Left" Margin="0,114,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.211,-0.538" Name="lblPercentageOfBaseAmount" Grid.ColumnSpan="3"/>
+                            <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="68,114,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtPercentageOfBaseAmount" IsEnabled="False" FontWeight="Bold"/>
+                            <Button Content="Beregn" Grid.Column="2" HorizontalAlignment="Left" Margin="230,117,0,0" VerticalAlignment="Top" Width="75" Name="btnCalculatePercentageOfAmount" Click="btnCalculatePercentageOfAmount_Click"/>
+                            <Button Content="Clear" Grid.Column="2" HorizontalAlignment="Left" Margin="338,117,0,0" VerticalAlignment="Top" Width="76" Name="btnClearCalculatePercentageOfAmount" Click="btnClearCalculatePercentageOfAmount_Click" />
+                            <Label Content="Indtast højt Beløb  : " Grid.Column="1" HorizontalAlignment="Left" Margin="0,180,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.211,-0.538" Name="lblAmountBefore" Grid.ColumnSpan="2"/>
+                            <Label Content="Indtast lavt Beløb  : " Grid.Column="1" HorizontalAlignment="Left" Margin="0,228,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.211,-0.538" Name="lblAmountAfter" Grid.ColumnSpan="2"/>
+                            <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="68,183,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtAmount1" KeyDown="txtCheckForValidPositiveNumberPressed"/>
+                            <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="68,231,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtAmount2" KeyDown="txtCheckForValidPositiveNumberPressed"/>
+                            <Label Content="Procentvis fald : " Grid.Column="1" HorizontalAlignment="Left" Margin="0,276,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.211,-0.538" Name="lblPercentageDown" Grid.ColumnSpan="2"/>
+                            <Label Content="Procentvis stigning : " Grid.Column="1" HorizontalAlignment="Left" Margin="0,320,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.211,-0.538" Name="lblPercentageUp" Grid.ColumnSpan="2"/>
+                            <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="68,276,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtPercentageDown" IsEnabled="False" FontWeight="Bold"/>
+                            <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="67,320,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtPercentageUp" IsEnabled="False" FontWeight="Bold"/>
+                            <Button Content="Beregn" Grid.Column="2" HorizontalAlignment="Left" Margin="230,320,0,0" VerticalAlignment="Top" Width="75" Name="btnCalculatePercentageUpDown" Click="btnCalculatePercentageUpDown_Click" />
+                            <Button Content="Clear" Grid.Column="2" HorizontalAlignment="Left" Margin="338,320,0,0" VerticalAlignment="Top" Width="76" Name="btnClearCalculatePercentageUpDown" Click="btnClearCalculatePercentageUpDown_Click" />
+                        </Grid>
+                    </TabItem>
+
+                    <TabItem Header="Talsystemer" x:Name="NumberSystems">
+                        <Grid Background="#FFE5E5E5" x:Name="GridNumberSystem">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="lbl1" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblTalsystemer1"  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="10" />
+                            <Label Content="lbl2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblTalsystemer2" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" />
+                            <Label Content="lbl3" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblTalsystemer3" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="10" />
+                            <Label Content="lbl4" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblTalsystemer4"  Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="10" />
+                            <Label Content="lbl5" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblTalsystemer5" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="10" />
+                            <Label Content="lbl6" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblTalsystemer6" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="10" />
+
+                            <Label Content="Opret ny Talsystem" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblTalsystemer9" Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="10" />
+
+                            <Label Content="Talsystem Radix : " HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblNumberSystemRadix" Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="1" />
+                            <ComboBox Height="20" Name="cmbNumberSystemRadix" Width="50" Grid.Row="9" Grid.Column="1" ap:MoreXAMLProps.MarginLeft="10" />
+                            <Label Content="Talsystem Space Counter : " HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblNumberSystemSpaceCounter" Grid.Column="2" Grid.Row="9" Grid.ColumnSpan="2" />
+                            <ComboBox Height="20" Name="cmbNumberSystemSpaceCounter" Width="50" Grid.Row="9" Grid.Column="4" ap:MoreXAMLProps.MarginLeft="10" />
+                            <Label Content="Talsystem Space Karakter : " HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblNumberSystemSpaceCharacter" Grid.Column="5" Grid.Row="9" Grid.ColumnSpan="2" />
+                            <ComboBox Height="20" Name="cmbNumberSystemSpaceCharacter" Width="50" Grid.Row="9" Grid.Column="7" ap:MoreXAMLProps.MarginLeft="10" />
+                            <Button Content="Opret Nyt Talsystem" VerticalAlignment="Top" Name="btnMakeDynamicRadixSystem" Grid.Column="8" Grid.Row="9" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="150" Click="btnMakeDynamicRadixSystem_Click" />
+
+                            <Button Content="Clear" VerticalAlignment="Top" Name="btnCalculateNumberSystemsClear" Grid.Column="6" Grid.Row="11" HorizontalAlignment="Left" Width="75" Click="btnCalculateNumberSystemsClear_Click" />
+                            <Label Content="Statisk Oprettetde Talsystemer herunder" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblTalsystemer7" Grid.Column="0" Grid.Row="12" Grid.ColumnSpan="10" />
+                        </Grid>
+                    </TabItem>
+
+                    <TabItem Header="Længde-Areal-etc." x:Name="Length_Area_Volume_Weight_Liquid">
+                        <Grid Background="#FFE5E5E5" x:Name="Grid_Length_Area_Volume_Weight_Liquid" Height="Auto">
+                            <Grid.ColumnDefinitions>
+
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+
+                            </Grid.RowDefinitions>
+                        </Grid>
+                    </TabItem>
+
+                    <TabItem Header="Geometri" x:Name="Geometry">
+                        <Grid Background="#FFE5E5E5" x:Name="Grid_Geometry">
+                            <Grid.ColumnDefinitions>
+
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+
+                            </Grid.RowDefinitions>
+                        </Grid>
+                    </TabItem>
+
+                    <TabItem Header="Trignometri" x:Name="Trigonometry">
+                        <Grid Background="#FFE5E5E5" x:Name="Grid_Trigonometry">
+                            <Grid.ColumnDefinitions>
+
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+
                             </Grid.RowDefinitions>
                         </Grid>
                     </TabItem>
                 </TabControl>
-        </Grid>
+            </Grid>
     </StackPanel>
     </ScrollViewer>
 </Window>
