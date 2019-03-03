@@ -7,10 +7,162 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using VariabelBegreb.NumberSystems;
 using System.Collections.ObjectModel;
+using VariabelBegreb.Tools;
 
 namespace VariabelBegreb.Tools
 {
-    #region UnitsConverter
+    #region Geometry
+    public delegate double CalculateOnFigure(double[] NumberList);
+
+    public enum Dimension2_Figures_Enum
+    {
+        Rectangle_Enum,
+        Square_Enum
+    }
+
+    public enum Dimension3_Figures_Enum
+    {
+        Cylinder_Enum,
+        Ball_Enum
+    }
+
+    public enum Input_Output_Enum
+    {
+        Input_Enum,
+        Output_Enum,
+        Input_Output_Enum
+    }
+
+    public class MyLabel
+    {
+        public string MyLabelName { get; set; }
+        public string MyLabelContent { get; set; }
+        public Label MyLabelControl { get; set; }
+
+        public MyLabel(string MyLabelName, string MyLabelContent)
+        {
+            this.MyLabelName = MyLabelName;
+            this.MyLabelContent = MyLabelContent;
+        }
+    }
+
+    public class MyTextBox
+    {
+        public string MyTextBoxName { get; set; }
+        public Label MyTextBoxControl { get; set; }
+        public Input_Output_Enum Input_Output_Enum { get; set; }
+
+        public MyTextBox(string MyTextBoxName, Input_Output_Enum Input_Output_Enum)
+        {
+            this.MyTextBoxName = MyTextBoxName;
+            this.Input_Output_Enum = Input_Output_Enum;
+        }
+    }
+
+    public class ResultTextBoxToCalculation
+    {
+        public MyTextBox MyTestBox_Object { get; set; }
+        public CalculateOnFigure CalculateOnFigure_Delegate { get; set; }
+
+        public ResultTextBoxToCalculation(MyTextBox MyTestBox_Object, CalculateOnFigure CalculateOnFigure_Delegate)
+        {
+            this.MyTestBox_Object = MyTestBox_Object;
+            this.CalculateOnFigure_Delegate = CalculateOnFigure_Delegate;
+        }
+    }
+
+    public class FigureCalculator
+    {
+        public string FigureName { get; set; }
+        public string FigurePictureName { get; set; }
+
+        public MyLabel[] FigureLabels { get; set; }
+
+        public MyTextBox[] FigureTextBoxesInput { get; set; }
+
+        public ResultTextBoxToCalculation[] FigureTextBoxesOutput { get; set; }
+
+        public FigureCalculator(string FigureName, string FigurePictureName, MyLabel[] FigureLabels, MyTextBox[] FigureTextBoxesInput)
+        {
+            this.FigureName = FigureName;
+            this.FigurePictureName = FigurePictureName;
+            this.FigureLabels = FigureLabels;
+            this.FigureTextBoxesInput = FigureTextBoxesInput;
+        }
+    }
+
+    public class Figure2DimenCalculator : FigureCalculator
+    {
+        //public CalculateOnFigure CalculateOnFigure_Area { get; set; }
+        //public CalculateOnFigure CalculateOnFigure_Circumference { get; set; }
+
+        public ResultTextBoxToCalculation CalculateOnFigure_Area { get; set; }
+        public ResultTextBoxToCalculation CalculateOnFigure_Circumference { get; set; }
+
+        public Dimension2_Figures_Enum Dimension2_Figures_Enum { get; set; }
+
+        public Figure2DimenCalculator(string FigureName, string FigurePictureName, MyLabel[] FigureLabels, MyTextBox[] FigureTextBoxesInput,
+            ResultTextBoxToCalculation CalculateOnFigure_Area, ResultTextBoxToCalculation CalculateOnFigure_Circumference, Dimension2_Figures_Enum Dimension2_Figures_Enum) :
+            base(FigureName, FigurePictureName, FigureLabels, FigureTextBoxesInput)
+        {
+            this.CalculateOnFigure_Area = CalculateOnFigure_Area;
+            this.CalculateOnFigure_Circumference = CalculateOnFigure_Circumference;
+        }
+    }
+
+    public class Figure3DimensionCalculator : FigureCalculator
+    {
+        public CalculateOnFigure CalculateOnFigure_SurfaceArea { get; set; }
+        public CalculateOnFigure CalculateOnFigure_Volume { get; set; }
+
+        public Dimension3_Figures_Enum Dimension3_Figures_Enum { get; set; }
+
+        public Figure3DimensionCalculator(string FigureName, string FigurePictureName, MyLabel[] FigureLabels, MyTextBox[] FigureTextBoxes,
+            CalculateOnFigure CalculateOnFigure_SurfaceArea, CalculateOnFigure CalculateOnFigure_Volume, Dimension3_Figures_Enum Dimension3_Figures_Enum) :
+            base(FigureName, FigurePictureName, FigureLabels, FigureTextBoxes)
+        {
+            this.CalculateOnFigure_SurfaceArea = CalculateOnFigure_SurfaceArea;
+            this.CalculateOnFigure_Volume = CalculateOnFigure_Volume;
+        }
+    }
+
+    public static readonly Figure2DimenCalculator[] Figure2DimenCalculatorArray =
+        {
+            new Figure2DimenCalculator
+            (
+                FigureName : "kvadrat",
+                FigurePictureName : "kvadrat.jpg",
+                FigureLabels : new MyLabel[]
+                {
+                    new MyLabel(MyLabelName : "lblSideLength", MyLabelContent : "Indtast Sidelængde : ")
+                },
+                FigureTextBoxesInput: new MyTextBox[]
+                {
+                    new MyTextBox(MyTextBoxName : "txtSideLength", Input_Output_Enum: Input_Output_Enum.Input_Enum),
+                    new MyTextBox(MyTextBoxName : "txtArea", Input_Output_Enum: Input_Output_Enum.Output_Enum)
+                },
+                CalculateOnFigure_Area : new ResultTextBoxToCalculation(new MyTextBox(MyTextBoxName : "txtAreaSqueare", Input_Output_Enum : Input_Output_Enum.Output_Enum),
+                    MathTools.CalculateAreaOfSQueare),
+                CalculateOnFigure_Circumference : new ResultTextBoxToCalculation(new MyTextBox(MyTextBoxName : "txtCircumferenceSqueare", Input_Output_Enum : Input_Output_Enum.Output_Enum),
+                    MathTools.CalculateCircumferenceOfSQueare),
+
+                UnitsConverterArray : new UnitsConverter[]
+                {
+                    new UnitsConverter(FactorToBaseUnit : 1000, UnitShortName : "km", UnitLongName : "Kilometer"),
+                    new UnitsConverter(FactorToBaseUnit : 100, UnitShortName : "hm", UnitLongName : "Hektometer"),
+                    new UnitsConverter(FactorToBaseUnit : 10, UnitShortName : "dam", UnitLongName : "Dekameter"),
+                    new UnitsConverter(FactorToBaseUnit : 1, UnitShortName : "m", UnitLongName : "Meter"),
+                    new UnitsConverter(FactorToBaseUnit : 0.1, UnitShortName : "dm", UnitLongName : "Decimeter"),
+                    new UnitsConverter(FactorToBaseUnit : 0.01, UnitShortName : "cm", UnitLongName : "Centimeter"),
+                    new UnitsConverter(FactorToBaseUnit : 0.001, UnitShortName : "mm", UnitLongName : "Milimeter")
+                },
+                UnitsBelongTo : "Længdemål",
+                This_Units_ENUM : Units_ENUM.LENGTH_ENUM
+            )
+    }
+    #endregion
+
+        #region UnitsConverter
     public struct UnitInPlace
     {
         public int UnitInPlaceRow;
@@ -61,15 +213,16 @@ namespace VariabelBegreb.Tools
         AREA_ENUM,
         VOLUME_ENUM,
         WEIGHT_ENUM,
-        LIQUID_ENUM
+        LIQUID_ENUM,
+        TIME_ENUM
     }
     #endregion
 
-    public enum ComboBox_ENUM
-    {
-        SPACE_CHARACTER_COUNTER,
-        SPACE_CHARACTER
-    }
+    //public enum ComboBox_ENUM
+    //{
+    //    SPACE_CHARACTER_COUNTER,
+    //    SPACE_CHARACTER
+    //}
 
     #region NumberSystems
     public enum RadixNumber_ENUM
@@ -207,8 +360,12 @@ namespace VariabelBegreb.Tools
 
     public class Const
     {
+        #region Geometry
+
+        #endregion
+
         #region UnitsConverter
-                      
+
         public static readonly int NumberOFRowsPrUnitSystem = 5;
 
         public static readonly UnitsOverallConverter[] UnitsOverallConverterArray =
@@ -253,7 +410,7 @@ namespace VariabelBegreb.Tools
                     new UnitsConverter(FactorToBaseUnit : 100 * 100 * 100, UnitShortName : "hm3", UnitLongName : "Kubik Hektometer"),
                     new UnitsConverter(FactorToBaseUnit : 10 * 10 * 10, UnitShortName : "dam3", UnitLongName : "Kubik Dekamater"),
                     new UnitsConverter(FactorToBaseUnit : 1, UnitShortName : "m3/kl", UnitLongName : "Kubik Meter"),
-                    new UnitsConverter(FactorToBaseUnit : 0.1 * 0.1 * 0.1, UnitShortName : "dm3/l", UnitLongName : "Kubik Decimeter"),
+                    new UnitsConverter(FactorToBaseUnit : 0.1 * 0.1 * 0.1, UnitShortName : "dm3/l", UnitLongName : "Kubik Decimeter/liter"),
                     new UnitsConverter(FactorToBaseUnit : 0.01 * 0.01 * 0.01, UnitShortName : "cm3/ml", UnitLongName : "Kubik Centimeter"),
                     new UnitsConverter(FactorToBaseUnit : 0.001 * 0.001 * 0.001, UnitShortName : "mm3", UnitLongName : "Kubik Milimeter")
                 },
@@ -287,6 +444,19 @@ namespace VariabelBegreb.Tools
                 },
                 UnitsBelongTo : "Vægt",
                 This_Units_ENUM : Units_ENUM.WEIGHT_ENUM
+            ),
+            new UnitsOverallConverter
+            (
+                UnitsConverterArray : new UnitsConverter[]
+                {
+                    new UnitsConverter(FactorToBaseUnit : 24 * 60 * 60 * 365, UnitShortName : "År", UnitLongName : "År"),
+                    new UnitsConverter(FactorToBaseUnit : 24 * 60 * 60, UnitShortName : "Dage", UnitLongName : "Dage"),
+                    new UnitsConverter(FactorToBaseUnit : 60 * 60, UnitShortName : "t", UnitLongName : "Timer"),
+                    new UnitsConverter(FactorToBaseUnit : 60, UnitShortName : "m", UnitLongName : "Minutter"),
+                    new UnitsConverter(FactorToBaseUnit : 1, UnitShortName : "s", UnitLongName : "Sekunder")
+                },
+                UnitsBelongTo : "Tid",
+                This_Units_ENUM : Units_ENUM.TIME_ENUM
             )
         };
 

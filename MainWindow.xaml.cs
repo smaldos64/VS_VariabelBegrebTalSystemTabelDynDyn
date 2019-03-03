@@ -64,6 +64,8 @@ namespace VariabelBegreb
 
             InitializeRadixNumbersList();
 
+            InitializeGeometryLabels();
+
             //InitializeEquationSystemLabels();
 
             //lstEquationSystem.ItemsSource = EquationSystemRows = new ObservableCollection<EquationSystemRow>();
@@ -2520,7 +2522,7 @@ namespace VariabelBegreb
         {
             int UnitSystemCounterRow = 0;
             int UnitSystemCounterColumn = 0;
-            UnitInPlace UnitInPlace_Obbject = new UnitInPlace(UnitInPlaceRow: -1, UnitInPlaceColumn: -1);
+            UnitInPlace UnitInPlace_Object = new UnitInPlace(UnitInPlaceRow: -1, UnitInPlaceColumn: -1);
 
             do
             {
@@ -2529,9 +2531,9 @@ namespace VariabelBegreb
                 {
                     if (TextBoxName == Const.UnitsOverallConverterArray[UnitSystemCounterRow].UnitsConverterArray[UnitSystemCounterColumn].TextBox_Object.Name)
                     {
-                        UnitInPlace_Obbject.UnitInPlaceRow = UnitSystemCounterRow;
-                        UnitInPlace_Obbject.UnitInPlaceColumn = UnitSystemCounterColumn;
-                        return (UnitInPlace_Obbject);
+                        UnitInPlace_Object.UnitInPlaceRow = UnitSystemCounterRow;
+                        UnitInPlace_Object.UnitInPlaceColumn = UnitSystemCounterColumn;
+                        return (UnitInPlace_Object);
                     }
                     else
                     {
@@ -2542,7 +2544,7 @@ namespace VariabelBegreb
             } while (UnitSystemCounterRow < Const.UnitsOverallConverterArray.Length);
 
             MessageBox.Show("Der er en fejl i din program konstruktion !!! Funktion : FindIndexInUnitSystemList");
-            return (UnitInPlace_Obbject);
+            return (UnitInPlace_Object);
         }
 
         private void ClearAllTextBoxesInUnitSystem(int UnitInPlaceRow)
@@ -2633,6 +2635,17 @@ namespace VariabelBegreb
         }
         #endregion
 
+        #region Geometry
+        private void InitializeGeometryLabels()
+        {
+            lblGeometry1.Content = "På dette faneblad kan du lave Areal og Omkreds beregninger";
+            lblGeometry1.Content += " på valgte 2-dimensionelle figurer.";
+            lblGeometry2.Content = "Endvidere kan du lave Rumfang og samlet Overflade Areal";
+            lblGeometry2.Content += " på valgte 3-dimensionelle figurer";
+
+            lblGeometry3.Content = "2-dimensionelle figur beregninger";
+        }
+        #endregion
         /* General code below. */
 
         #region General_Code
