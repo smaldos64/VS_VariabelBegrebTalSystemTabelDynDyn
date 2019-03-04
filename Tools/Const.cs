@@ -63,11 +63,13 @@ namespace VariabelBegreb.Tools
     {
         public MyTextBox MyTestBox_Object { get; set; }
         public CalculateOnFigure CalculateOnFigure_Delegate { get; set; }
+        public string NumberOfDimensionsInCalculationString { get; set; }
 
-        public ResultTextBoxToCalculation(MyTextBox MyTestBox_Object, CalculateOnFigure CalculateOnFigure_Delegate)
+        public ResultTextBoxToCalculation(MyTextBox MyTestBox_Object, CalculateOnFigure CalculateOnFigure_Delegate, string NumberOfDimensionsInCalculationString)
         {
             this.MyTestBox_Object = MyTestBox_Object;
             this.CalculateOnFigure_Delegate = CalculateOnFigure_Delegate;
+            this.NumberOfDimensionsInCalculationString = NumberOfDimensionsInCalculationString;
         }
     }
 
@@ -124,41 +126,6 @@ namespace VariabelBegreb.Tools
             this.CalculateOnFigure_SurfaceArea = CalculateOnFigure_SurfaceArea;
             this.CalculateOnFigure_Volume = CalculateOnFigure_Volume;
         }
-    }
-
-    public static readonly Figure2DimenCalculator[] Figure2DimenCalculatorArray =
-        {
-            new Figure2DimenCalculator
-            (
-                FigureName : "kvadrat",
-                FigurePictureName : "kvadrat.jpg",
-                FigureLabels : new MyLabel[]
-                {
-                    new MyLabel(MyLabelName : "lblSideLength", MyLabelContent : "Indtast Sidelængde : ")
-                },
-                FigureTextBoxesInput: new MyTextBox[]
-                {
-                    new MyTextBox(MyTextBoxName : "txtSideLength", Input_Output_Enum: Input_Output_Enum.Input_Enum),
-                    new MyTextBox(MyTextBoxName : "txtArea", Input_Output_Enum: Input_Output_Enum.Output_Enum)
-                },
-                CalculateOnFigure_Area : new ResultTextBoxToCalculation(new MyTextBox(MyTextBoxName : "txtAreaSqueare", Input_Output_Enum : Input_Output_Enum.Output_Enum),
-                    MathTools.CalculateAreaOfSQueare),
-                CalculateOnFigure_Circumference : new ResultTextBoxToCalculation(new MyTextBox(MyTextBoxName : "txtCircumferenceSqueare", Input_Output_Enum : Input_Output_Enum.Output_Enum),
-                    MathTools.CalculateCircumferenceOfSQueare),
-
-                UnitsConverterArray : new UnitsConverter[]
-                {
-                    new UnitsConverter(FactorToBaseUnit : 1000, UnitShortName : "km", UnitLongName : "Kilometer"),
-                    new UnitsConverter(FactorToBaseUnit : 100, UnitShortName : "hm", UnitLongName : "Hektometer"),
-                    new UnitsConverter(FactorToBaseUnit : 10, UnitShortName : "dam", UnitLongName : "Dekameter"),
-                    new UnitsConverter(FactorToBaseUnit : 1, UnitShortName : "m", UnitLongName : "Meter"),
-                    new UnitsConverter(FactorToBaseUnit : 0.1, UnitShortName : "dm", UnitLongName : "Decimeter"),
-                    new UnitsConverter(FactorToBaseUnit : 0.01, UnitShortName : "cm", UnitLongName : "Centimeter"),
-                    new UnitsConverter(FactorToBaseUnit : 0.001, UnitShortName : "mm", UnitLongName : "Milimeter")
-                },
-                UnitsBelongTo : "Længdemål",
-                This_Units_ENUM : Units_ENUM.LENGTH_ENUM
-            )
     }
     #endregion
 
@@ -360,8 +327,55 @@ namespace VariabelBegreb.Tools
 
     public class Const
     {
-        #region Geometry
+        private const string Image2DimensionelPath = "\\Images\\Geometry2Dimensionel\\";
+        private const string Image3DimensionelPath = "\\Images\\Geometry3Dimensionel\\";
 
+        private const string Dimension1InCalculationString = "";
+        private const string Dimension2InCalculationString = "2";
+        private const string Dimension3InCalculationString = "3";
+
+        #region Geometry
+        public static readonly Figure2DimenCalculator[] Figure2DimenCalculatorArray =
+        {
+                new Figure2DimenCalculator
+                (
+                    FigureName : "Kvadrat",
+                    FigurePictureName : Image2DimensionelPath + "kvadrat.png",
+                    FigureLabels : new MyLabel[]
+                    {
+                        new MyLabel(MyLabelName : "lblSideLength", MyLabelContent : "Indtast Sidelængde : ")
+                    },
+                    FigureTextBoxesInput: new MyTextBox[]
+                    {
+                        new MyTextBox(MyTextBoxName : "txtSideLength", Input_Output_Enum: Input_Output_Enum.Input_Enum)
+                    },
+                    CalculateOnFigure_Area : new ResultTextBoxToCalculation(new MyTextBox(MyTextBoxName : "txtAreaSqueare", Input_Output_Enum : Input_Output_Enum.Output_Enum),
+                        MathGeometry.CalculateAreaOfSQueare, NumberOfDimensionsInCalculationString : Dimension1InCalculationString),
+                    CalculateOnFigure_Circumference : new ResultTextBoxToCalculation(new MyTextBox(MyTextBoxName : "txtCircumferenceSqueare", Input_Output_Enum : Input_Output_Enum.Output_Enum),
+                        MathGeometry.CalculateCircumferenceOfSQueare, NumberOfDimensionsInCalculationString : Dimension1InCalculationString),
+                    Dimension2_Figures_Enum : Dimension2_Figures_Enum.Square_Enum
+                ),
+                new Figure2DimenCalculator
+                (
+                    FigureName : "Rekatangel",
+                    FigurePictureName : Image2DimensionelPath + "rektangel.png",
+                    FigureLabels : new MyLabel[]
+                    {
+                        new MyLabel(MyLabelName : "lblLength", MyLabelContent : "Indtast Længde : "),
+                        new MyLabel(MyLabelName : "lblWidth", MyLabelContent : "Indtast bredde : ")
+                    },
+                    FigureTextBoxesInput: new MyTextBox[]
+                    {
+                        new MyTextBox(MyTextBoxName : "txtLength", Input_Output_Enum: Input_Output_Enum.Input_Enum),
+                        new MyTextBox(MyTextBoxName : "txtWidth", Input_Output_Enum: Input_Output_Enum.Input_Enum)
+                    },
+                    CalculateOnFigure_Area : new ResultTextBoxToCalculation(new MyTextBox(MyTextBoxName : "txtAreaRectangle", Input_Output_Enum : Input_Output_Enum.Output_Enum),
+                        MathGeometry.CalculateAreaOfRectangle, NumberOfDimensionsInCalculationString : Dimension2InCalculationString),
+                    CalculateOnFigure_Circumference : new ResultTextBoxToCalculation(new MyTextBox(MyTextBoxName : "txtCircumferenceRectangle", Input_Output_Enum : Input_Output_Enum.Output_Enum),
+                        MathGeometry.CalculateCircumferenceOfRectangle, NumberOfDimensionsInCalculationString : Dimension1InCalculationString),
+                    Dimension2_Figures_Enum : Dimension2_Figures_Enum.Rectangle_Enum
+                )
+        };
         #endregion
 
         #region UnitsConverter

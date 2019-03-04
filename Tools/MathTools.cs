@@ -27,16 +27,6 @@ namespace VariabelBegreb
             return m;
         }
 
-        public static double CalculateAreaOfSQueare(double[] NumberList)
-        {
-            return (Math.Pow(NumberList[0], 2));
-        }
-
-        public static double CalculateCircumferenceOfSQueare(double[] NumberList)
-        {
-            return (NumberList[0] * 4);
-        }
-
     }
 }
 

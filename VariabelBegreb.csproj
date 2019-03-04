@@ -68,6 +68,7 @@
     <Compile Include="Tools\Extension.cs" />
     <Compile Include="Tools\FileTools.cs" />
     <Compile Include="Tools\KeyHelper.cs" />
+    <Compile Include="Tools\MathGeometry.cs" />
     <Compile Include="Tools\PrintOutTools.cs" />
     <Compile Include="Tools\StringHelper.cs" />
     <Compile Include="Tools\StringTools.cs" />
@@ -110,6 +111,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\Geometry2Dimensionel\" />
+    <Folder Include="Images\Geometry3Dimensionel\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

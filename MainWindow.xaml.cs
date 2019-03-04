@@ -50,6 +50,12 @@ namespace VariabelBegreb
         private static string cmbTimeOldString = "";
         private static string cmbDistanceOldString = "";
 
+        private static ComboBox ComboBox2DimensionelFiguresGeometry;
+        private static ComboBox ComboBox3DimensionelFiguresGeometry;
+        private static ComboBox ComboBox2DimensionelFiguresUnitGeometry;
+        private static ComboBox ComboBox3DimensionelFiguresUnitGeometry;
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -65,6 +71,8 @@ namespace VariabelBegreb
             InitializeRadixNumbersList();
 
             InitializeGeometryLabels();
+
+            InitializeGeometryControls();
 
             //InitializeEquationSystemLabels();
 
@@ -2644,6 +2652,27 @@ namespace VariabelBegreb
             lblGeometry2.Content += " på valgte 3-dimensionelle figurer";
 
             lblGeometry3.Content = "2-dimensionelle figur beregninger";
+        }
+
+        private void InitializeGeometryControls()
+        {
+            ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
+            ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
+
+            //ConstRadixSystemAndDelegates_Object.ComboBox_Object_RadixSpaceCharacter =
+                ControlTools.InsertComboBoxInGrid(Grid_Geometry,
+                cmbNumberSystemSpaceCharacter,
+                "cmbRadixDynamicSpaceCharacter_" + NumberDynamicRadixSystemsAdded.ToString(),
+                GridNumberSystem.RowDefinitions.Count - 1,
+                Const.ComboBoxRadixSpaceCharacterColumn,
+                1,
+                Const.ComboBoxRowHeight,
+                cmbNumberSystemSpaceCharacter_SelectionChanged);
+
+            //private static ComboBox ComboBox2DimensionelFiguresGeometry;
+            //private static ComboBox ComboBox3DimensionelFiguresGeometry;
+            //private static ComboBox ComboBox2DimensionelFiguresUnitGeometry;
+            //private static ComboBox ComboBox3DimensionelFiguresUnitGeometry;
         }
         #endregion
         /* General code below. */
