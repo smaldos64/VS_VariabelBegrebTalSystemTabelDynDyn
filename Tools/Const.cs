@@ -59,6 +59,42 @@ namespace VariabelBegreb.Tools
         }
     }
 
+    public class MyButton
+    {
+        public string MyButtonName { get; set; }
+        public string MyButtonText { get; set; }
+        public Button MyButtonControl { get; set; }
+
+        public MyButton(string MyButtonName, string MyButtonText)
+        {
+            this.MyButtonName = MyButtonName;
+            this.MyButtonText = MyButtonText;
+        }
+    }
+
+    public class MyComboBox
+    {
+        public string MyComboBoxName { get; set; }
+        public ComboBox ComboBox_Object { get; set; }
+
+        public MyComboBox(string MyComboBoxName)
+        {
+            this.MyComboBoxName = MyComboBoxName;
+        }
+    }
+
+    public class MyImage
+    {
+        public string MyImageName { get; set; }
+        public Image Image_Object { get; set; }
+    }
+
+    public class MySimpleControl<T>
+    {
+        public string SimpleControlName { get; set; }
+        public T SimpleControl {get; set;}
+    }
+
     public class ResultTextBoxToCalculation
     {
         public MyTextBox MyTestBox_Object { get; set; }
@@ -95,9 +131,6 @@ namespace VariabelBegreb.Tools
 
     public class Figure2DimenCalculator : FigureCalculator
     {
-        //public CalculateOnFigure CalculateOnFigure_Area { get; set; }
-        //public CalculateOnFigure CalculateOnFigure_Circumference { get; set; }
-
         public ResultTextBoxToCalculation CalculateOnFigure_Area { get; set; }
         public ResultTextBoxToCalculation CalculateOnFigure_Circumference { get; set; }
 
@@ -110,6 +143,73 @@ namespace VariabelBegreb.Tools
             this.CalculateOnFigure_Area = CalculateOnFigure_Area;
             this.CalculateOnFigure_Circumference = CalculateOnFigure_Circumference;
         }
+    }
+
+    //--------------------------------------------------------------------------------------------
+
+    public enum Figures_Enum
+    {
+        Rectangle_Enum,
+        Square_Enum,
+        Cylinder_Enum,
+        Ball_Enum
+    }
+
+    public class MyControl<T>
+    {
+        public T XamlControl { get; set; }
+        public string[] XamlControlStringArray { get; set; }
+
+        public MyControl(string[] XamlControlStringArray)
+        {
+            this.XamlControlStringArray = XamlControlStringArray;
+        }
+    }
+
+    public class MyTextBoxInputOutput : MyControl<TextBox>
+    {
+        public Input_Output_Enum Input_Output_Enum { get; set; }
+
+        public MyTextBoxInputOutput(Input_Output_Enum Input_Output_Enum, string[] XamlControlStringArray) : base(XamlControlStringArray)
+        {
+           this.Input_Output_Enum = Input_Output_Enum;
+        }
+    }
+
+    public class FigureCalculation
+    {
+        public MyControl<Button> Button_Result_Object { get; set; }
+        public MyControl<ComboBox> ComboBox_Unit_Object { get; set; }
+        public MyControl<ComboBox> ComboBox_Figure_Object { get; set; }
+    }
+
+
+    public class ResultTextBoxToCalculationNew
+    {
+        public MyTextBox MyTestBox_Object { get; set; }
+        public CalculateOnFigure CalculateOnFigure_Delegate { get; set; }
+        public string NumberOfDimensionsInCalculationString { get; set; }
+
+        public ResultTextBoxToCalculationNew(MyTextBox MyTestBox_Object, CalculateOnFigure CalculateOnFigure_Delegate, string NumberOfDimensionsInCalculationString)
+        {
+            this.MyTestBox_Object = MyTestBox_Object;
+            this.CalculateOnFigure_Delegate = CalculateOnFigure_Delegate;
+            this.NumberOfDimensionsInCalculationString = NumberOfDimensionsInCalculationString;
+        }
+    }
+
+    //-----------------------------------------------
+
+    public class Figure2DimenCalculatorOverall
+    {
+        public Figure2DimenCalculator[] Figure2DimenCalculatorArray { get; set; }
+        //public MyButton MyButton_Object { get; set; }
+        //public ComboBox ComboBox_Unit_Object { get; set; }
+        //public ComboBox ComboBox_Figure_Object { get; set; }
+
+        public MyControl<Button> MyButton_Object { get; set; }
+        public MyControl<ComboBox> ComboBox_Unit_Object { get; set; }
+        public MyControl<ComboBox> ComboBox_Figure_Object { get; set; }
     }
 
     public class Figure3DimensionCalculator : FigureCalculator
