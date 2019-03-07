@@ -176,23 +176,73 @@ namespace VariabelBegreb.Tools
         }
     }
 
+    public class MyLabelTextBoxRow
+    {
+        public MyControl<Label>[] LabelsArray { get; set; }
+        public MyTextBoxInputOutput TextBox_Object { get; set; }
+
+        public MyLabelTextBoxRow(MyControl<Label>[] LabelsArray, MyTextBoxInputOutput TextBox_Object)
+        {
+            this.LabelsArray = LabelsArray;
+            this.TextBox_Object = TextBox_Object;
+        }
+    }
+
+    public class CurrentFigureCalculation
+    {
+        public MyControl<Image> Image_Figure_Object { get; set; }
+
+        public MyLabelTextBoxRow[] MyLabelTextBoxRowArray { get; set; }
+        public ResultTextBoxToCalculationNew[] ResultTextBoxToCalculationNewArray { get; set; }
+
+        public int FigureDimensions { get; set; }
+
+        public CurrentFigureCalculation(MyControl<Image> Image_Figure_Object, MyLabelTextBoxRow[] MyLabelTextBoxRowArray,
+                                        ResultTextBoxToCalculationNew[] ResultTextBoxToCalculationNewArray, int FigureDimensions)
+        {
+            this.Image_Figure_Object = Image_Figure_Object;
+            this.MyLabelTextBoxRowArray = MyLabelTextBoxRowArray;
+            this.ResultTextBoxToCalculationNewArray = ResultTextBoxToCalculationNewArray;
+            this.FigureDimensions = FigureDimensions;
+        }
+    }
+
     public class FigureCalculation
     {
         public MyControl<Button> Button_Result_Object { get; set; }
         public MyControl<ComboBox> ComboBox_Unit_Object { get; set; }
         public MyControl<ComboBox> ComboBox_Figure_Object { get; set; }
-    }
+        //public MyControl<Image>[] Image_Figure_Array { get; set; }
 
+        //public MyLabelTextBoxRow[] MyLabelTextBoxRowArray { get; set; }
+        //public ResultTextBoxToCalculationNew[] ResultTextBoxToCalculationNewArray { get; set; }
+
+        //public int NumberOfFigureDimensions { get; set; }
+
+        public CurrentFigureCalculation[] CurrentFigureCalculationArray { get; set; }
+
+        public FigureCalculation(MyControl<Button> Button_Result_Object, MyControl<ComboBox> ComboBox_Unit_Object, MyControl<ComboBox> ComboBox_Figure_Object,
+                                 CurrentFigureCalculation[] CurrentFigureCalculationArray)
+        {
+            this.Button_Result_Object = Button_Result_Object;
+            this.ComboBox_Unit_Object = ComboBox_Unit_Object;
+            this.ComboBox_Figure_Object = ComboBox_Figure_Object;
+            this.CurrentFigureCalculationArray = CurrentFigureCalculationArray;
+            //this.Image_Figure_Object = Image_Figure_Object;
+            //this.MyLabelTextBoxRowArray = MyLabelTextBoxRowArray;
+            //this.ResultTextBoxToCalculationNewArray = ResultTextBoxToCalculationNewArray;
+        }
+    }
 
     public class ResultTextBoxToCalculationNew
     {
-        public MyTextBox MyTestBox_Object { get; set; }
+        public MyLabelTextBoxRow MyLabelTextBoxRow_Object { get; set; }
         public CalculateOnFigure CalculateOnFigure_Delegate { get; set; }
         public string NumberOfDimensionsInCalculationString { get; set; }
 
-        public ResultTextBoxToCalculationNew(MyTextBox MyTestBox_Object, CalculateOnFigure CalculateOnFigure_Delegate, string NumberOfDimensionsInCalculationString)
+        public ResultTextBoxToCalculationNew(MyLabelTextBoxRow MyLabelTextBoxRow_Object, CalculateOnFigure CalculateOnFigure_Delegate, string NumberOfDimensionsInCalculationString)
         {
-            this.MyTestBox_Object = MyTestBox_Object;
+            this.MyLabelTextBoxRow_Object = MyLabelTextBoxRow_Object;
             this.CalculateOnFigure_Delegate = CalculateOnFigure_Delegate;
             this.NumberOfDimensionsInCalculationString = NumberOfDimensionsInCalculationString;
         }
@@ -229,7 +279,7 @@ namespace VariabelBegreb.Tools
     }
     #endregion
 
-        #region UnitsConverter
+    #region UnitsConverter
     public struct UnitInPlace
     {
         public int UnitInPlaceRow;
@@ -429,12 +479,59 @@ namespace VariabelBegreb.Tools
     {
         private const string Image2DimensionelPath = "\\Images\\Geometry2Dimensionel\\";
         private const string Image3DimensionelPath = "\\Images\\Geometry3Dimensionel\\";
+        private const string GeometryImages = "\\Images\\GeometryFigures\\";
 
         private const string Dimension1InCalculationString = "";
         private const string Dimension2InCalculationString = "2";
         private const string Dimension3InCalculationString = "3";
 
         #region Geometry
+        public static readonly FigureCalculation FigureCalculation_Object =
+            new FigureCalculation
+            (
+                Button_Result_Object: new MyControl<Button>(XamlControlStringArray: new string[] { "btnCalculateResults", "Beregn" }),
+                ComboBox_Unit_Object: new MyControl<ComboBox>(XamlControlStringArray: new string[] { "cmbUnits" }),
+                ComboBox_Figure_Object: new MyControl<ComboBox>(XamlControlStringArray: new string[] { "cmbGeometryFigures" }),
+                CurrentFigureCalculationArray: new CurrentFigureCalculation[]
+                {
+                    new CurrentFigureCalculation(Image_Figure_Object : new MyControl<Image>(XamlControlStringArray: new string[] 
+                    {"imgGeometryFigure", GeometryImages + "kvadrat.png", "kvadrat"}),
+                        MyLabelTextBoxRowArray : new MyLabelTextBoxRow[]
+                        {
+                            new MyLabelTextBoxRow(LabelsArray :  new MyControl<Label>[]
+                                { })
+                        }
+                }
+            );
+        //public class MyLabelTextBoxRow
+        //{
+        //    public MyControl<Label>[] LabelsArray { get; set; }
+        //    public MyTextBoxInputOutput TextBox_Object { get; set; }
+
+        //    public MyLabelTextBoxRow(MyControl<Label>[] LabelsArray, MyTextBoxInputOutput TextBox_Object)
+        //    {
+        //        this.LabelsArray = LabelsArray;
+        //        this.TextBox_Object = TextBox_Object;
+        //    }
+        //}
+
+
+        //public MyControl<Image> Image_Figure_Object { get; set; }
+
+        //public MyLabelTextBoxRow[] MyLabelTextBoxRowArray { get; set; }
+        //public ResultTextBoxToCalculationNew[] ResultTextBoxToCalculationNewArray { get; set; }
+
+        //public int FigureDimensions { get; set; }
+
+        //public CurrentFigureCalculation(MyControl<Image> Image_Figure_Object, MyLabelTextBoxRow[] MyLabelTextBoxRowArray,
+        //                                ResultTextBoxToCalculationNew[] ResultTextBoxToCalculationNewArray, int FigureDimensions)
+        //{
+        //    this.Image_Figure_Object = Image_Figure_Object;
+        //    this.MyLabelTextBoxRowArray = MyLabelTextBoxRowArray;
+        //    this.ResultTextBoxToCalculationNewArray = ResultTextBoxToCalculationNewArray;
+        //    this.FigureDimensions = FigureDimensions;
+        //}
+
         public static readonly Figure2DimenCalculator[] Figure2DimenCalculatorArray =
         {
                 new Figure2DimenCalculator

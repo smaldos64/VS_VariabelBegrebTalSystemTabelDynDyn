@@ -115,6 +115,7 @@
   <ItemGroup>
     <Folder Include="Images\Geometry2Dimensionel\" />
     <Folder Include="Images\Geometry3Dimensionel\" />
+    <Folder Include="Images\GeometryFigures\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
