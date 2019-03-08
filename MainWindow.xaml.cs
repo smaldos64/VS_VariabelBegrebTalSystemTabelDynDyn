@@ -2300,7 +2300,7 @@ namespace VariabelBegreb
                 ColumnPosition: Const.ButtonxRadixDeleteColumn,
                 ColumnSpan: Const.ButtonxRadixDeleteColumnSpan,
                 Height: Const.ButtonxRadixDeleteHeight,
-                width: Const.ButtonxRadixDeleteWidth,
+                Width: Const.ButtonxRadixDeleteWidth,
                 FunctionButtonClicked: btnClearNumberSystem_Click);
 
             ConstRadixSystemAndDelegates_Object.GridRowPosition = GridNumberSystem.RowDefinitions.Count - 1;
@@ -2661,7 +2661,7 @@ namespace VariabelBegreb
             
             //ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
             //ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
-
+            
             Const.FigureCalculation_Object.ComboBox_Unit_Object.XamlControl =
                 ControlTools.InsertComboBoxInGrid(Grid_Geometry,
                 Const.FigureCalculation_Object.ComboBox_Unit_Object.XamlControlStringArray[Const.ControlNamePositionInArray],
@@ -2713,6 +2713,9 @@ namespace VariabelBegreb
                 }
             }
 
+            ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
+            ControlTools.InsertRowInGrid(Grid_Geometry, Const.ImageHeight);
+            SetupGeometryLabels_TextBoxes_Buttons(0);
         }
 
         private void cmbGeometryUnit_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -2741,6 +2744,21 @@ namespace VariabelBegreb
 
         private void SetupGeometryLabels_TextBoxes_Buttons(int IndexNumberInGeometryArray)
         {
+            //if (IndexNumberInList > 0)
+            //{
+            //    GridNumberSystem.Children.RemoveRange(ConstRadixSystemAndDelegatesList[IndexNumberInList].ConstRadixSystemAndDelegates_Object.FirstLabelInGridRowPosition, Const.NumberOfControlsInGridRow);
+            //    GridNumberSystem.RowDefinitions.RemoveAt(ConstRadixSystemAndDelegatesList[IndexNumberInList].ConstRadixSystemAndDelegates_Object.GridRowPosition);
+            //    ConstRadixSystemAndDelegatesList.RemoveAt(IndexNumberInList);
+            //}
+            Const.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInGeometryArray].Image_Figure_Object.XamlControl =
+                ControlTools.InsertImageInGrid(
+                  Grid_Object : Grid_Geometry,
+                  ImageFileName : Const.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInGeometryArray].Image_Figure_Object.XamlControlStringArray[Const.ImageFileNamePositionInArray],
+                  RowPosition : Grid_Geometry.RowDefinitions.Count - 1,
+                  ColumnPosition : Const.GeometryLabelStartColumn,
+                  ColumnSpan : 5,
+                  Width : 200,
+                  Height : Const.ImageHeight);
 
         }
 

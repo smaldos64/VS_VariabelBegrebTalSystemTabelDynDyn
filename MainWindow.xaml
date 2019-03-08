@@ -536,11 +536,27 @@
                     <TabItem Header="Trignometri" x:Name="Trigonometry">
                         <Grid Background="#FFE5E5E5" x:Name="Grid_Trigonometry">
                             <Grid.ColumnDefinitions>
-
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
                             </Grid.RowDefinitions>
+                            <Image Source="d:/Teide1.jpg" Stretch="UniformToFill"></Image>
+                            <Button Name="Test" Content="Test"></Button>
                         </Grid>
                     </TabItem>
                 </TabControl>

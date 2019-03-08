@@ -479,7 +479,8 @@ namespace VariabelBegreb.Tools
     {
         //private const string Image2DimensionelPath = "\\Images\\Geometry2Dimensionel\\";
         //private const string Image3DimensionelPath = "\\Images\\Geometry3Dimensionel\\";
-        private const string GeometryImages = "\\Images\\GeometryFigures\\";
+        //private const string GeometryImages = "/Images/GeometryFigures/";
+        private const string GeometryImages = "d:\\lars\\WpfMathGeometryImages\\";
 
         private const string Dimension1InCalculationString = "";
         private const string Dimension2InCalculationString = "2";
@@ -488,8 +489,11 @@ namespace VariabelBegreb.Tools
         private const string DefaultTextBoxValue = "0";
 
         public const int ControlNamePositionInArray = 0;
+        public const int ImageFileNamePositionInArray = 1;
         public const int GeometryLabelStartColumn = 1;
         public const int GeometryLabelDefaultColumnSpan = 1;
+
+        public const int ImageHeight = 200;
 
         #region Geometry
         public static readonly FigureCalculation FigureCalculation_Object =

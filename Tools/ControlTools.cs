@@ -7,6 +7,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Documents;
 using System.Windows;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
 
 namespace VariabelBegreb.Tools
 {
@@ -204,13 +206,13 @@ namespace VariabelBegreb.Tools
 
         public static Button InsertButtonInGrid(Grid Grid_Object, 
                                                 string ButtonName, string ButtonText, int RowPosition,
-                                                int ColumnPosition, int ColumnSpan, int width, int Height,
+                                                int ColumnPosition, int ColumnSpan, int Width, int Height,
                                                 RoutedEventHandler FunctionButtonClicked)
         {
             Button Button_Object = new Button();
 
             Button_Object.Name = ButtonName;
-            Button_Object.Width = width;
+            Button_Object.Width = Width;
             Button_Object.Height = Height;
             Button_Object.Content = ButtonText;
             Button_Object.SetValue(Grid.ColumnSpanProperty, ColumnSpan);
@@ -222,6 +224,37 @@ namespace VariabelBegreb.Tools
             Grid.SetRow(Button_Object, RowPosition);
 
             return (Button_Object);
+        }
+
+        public static Image InsertImageInGrid(Grid Grid_Object, string ImageFileName, int RowPosition,
+            int ColumnPosition, int ColumnSpan, int Width, int Height)
+        {
+            Image Image_Object = new Image();
+            Image_Object.Width = Width;
+            Image_Object.SetValue(Grid.ColumnSpanProperty, ColumnSpan);
+
+            BitmapImage BitmapImage_Object = new BitmapImage();
+
+            BitmapImage_Object.BeginInit();
+            BitmapImage_Object.UriSource = new Uri(@ImageFileName);
+            BitmapImage_Object.DecodePixelWidth = Width;
+            BitmapImage_Object.EndInit();
+
+            Image_Object.Source = BitmapImage_Object;
+            Image_Object.Stretch = Stretch.UniformToFill;
+
+            ////Image_Object.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + ImageFileName, UriKind.Absolute));
+            //Image_Object.Source = new BitmapImage(new Uri(ImageFileName, UriKind.Relative));
+            ////Image_Object.Source = new BitmapImage(new Uri("pack://application:,,,ImageFileName"));
+            //Image_Object.Width = Width;
+            //Image_Object.Height = height;
+            //Image_Object.SetValue(Grid.ColumnSpanProperty, ColumnSpan);
+
+            Grid_Object.Children.Add(Image_Object);
+            Grid.SetColumn(Image_Object, ColumnPosition);
+            Grid.SetRow(Image_Object, RowPosition);
+
+            return (Image_Object);
         }
 
         public static string GetStringFromInt(int KeyValue)
