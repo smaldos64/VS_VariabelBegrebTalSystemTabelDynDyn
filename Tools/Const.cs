@@ -186,6 +186,12 @@ namespace VariabelBegreb.Tools
             this.LabelsArray = LabelsArray;
             this.TextBox_Object = TextBox_Object;
         }
+
+        // Konstruktoren herunder skal fjernes igen !!!
+        public MyLabelTextBoxRow(MyTextBoxInputOutput TextBox_Object)
+        {
+            this.TextBox_Object = TextBox_Object;
+        }
     }
 
     public class CurrentFigureCalculation
@@ -212,13 +218,6 @@ namespace VariabelBegreb.Tools
         public MyControl<Button> Button_Result_Object { get; set; }
         public MyControl<ComboBox> ComboBox_Unit_Object { get; set; }
         public MyControl<ComboBox> ComboBox_Figure_Object { get; set; }
-        //public MyControl<Image>[] Image_Figure_Array { get; set; }
-
-        //public MyLabelTextBoxRow[] MyLabelTextBoxRowArray { get; set; }
-        //public ResultTextBoxToCalculationNew[] ResultTextBoxToCalculationNewArray { get; set; }
-
-        //public int NumberOfFigureDimensions { get; set; }
-
         public CurrentFigureCalculation[] CurrentFigureCalculationArray { get; set; }
 
         public FigureCalculation(MyControl<Button> Button_Result_Object, MyControl<ComboBox> ComboBox_Unit_Object, MyControl<ComboBox> ComboBox_Figure_Object,
@@ -228,9 +227,6 @@ namespace VariabelBegreb.Tools
             this.ComboBox_Unit_Object = ComboBox_Unit_Object;
             this.ComboBox_Figure_Object = ComboBox_Figure_Object;
             this.CurrentFigureCalculationArray = CurrentFigureCalculationArray;
-            //this.Image_Figure_Object = Image_Figure_Object;
-            //this.MyLabelTextBoxRowArray = MyLabelTextBoxRowArray;
-            //this.ResultTextBoxToCalculationNewArray = ResultTextBoxToCalculationNewArray;
         }
     }
 
@@ -485,6 +481,8 @@ namespace VariabelBegreb.Tools
         private const string Dimension2InCalculationString = "2";
         private const string Dimension3InCalculationString = "3";
 
+        private const string DefaultTextBoxValue = "0";
+
         #region Geometry
         public static readonly FigureCalculation FigureCalculation_Object =
             new FigureCalculation
@@ -494,44 +492,31 @@ namespace VariabelBegreb.Tools
                 ComboBox_Figure_Object: new MyControl<ComboBox>(XamlControlStringArray: new string[] { "cmbGeometryFigures" }),
                 CurrentFigureCalculationArray: new CurrentFigureCalculation[]
                 {
-                    new CurrentFigureCalculation(Image_Figure_Object : new MyControl<Image>(XamlControlStringArray: new string[] 
-                    {"imgGeometryFigure", GeometryImages + "kvadrat.png", "kvadrat"}),
+                    new CurrentFigureCalculation(
+                        Image_Figure_Object : new MyControl<Image>(XamlControlStringArray: new string[]
+                                              {"imgGeometryFigure", GeometryImages + "kvadrat.png", "kvadrat"}),
                         MyLabelTextBoxRowArray : new MyLabelTextBoxRow[]
                         {
-                            new MyLabelTextBoxRow(LabelsArray :  new MyControl<Label>[]
-                                { })
-                        }
-                }
+                            new MyLabelTextBoxRow(
+                                LabelsArray : new MyControl<Label>[]
+                                {
+                                    new MyControl<Label>(XamlControlStringArray: new string[] {"lblQuadratLength", "Længde af kvadrat : " }),
+                                    new MyControl<Label>(XamlControlStringArray: new string[] {"lblQuadratLengthUnit", "m" })
+                                },
+                                TextBox_Object : new MyTextBoxInputOutput(Input_Output_Enum : Input_Output_Enum.Input_Enum,
+                                    XamlControlStringArray: new string[] {"txtQuadratLength", DefaultTextBoxValue }))
+                        },
+                        ResultTextBoxToCalculationNewArray : new ResultTextBoxToCalculationNew[]
+                        {
+                            new ResultTextBoxToCalculationNew(MyLabelTextBoxRow_Object : new MyLabelTextBoxRow(TextBox_Object : new MyTextBoxInputOutput(
+                                Input_Output_Enum : Input_Output_Enum.Output_Enum, XamlControlStringArray: new string[] {"txtQuadratArea", DefaultTextBoxValue })),
+                                CalculateOnFigure_Delegate : MathGeometry.CalculateAreaOfSQueare,
+                                NumberOfDimensionsInCalculationString : Dimension2InCalculationString)
+                        },
+                        FigureDimensions : 2)
+                }                
             );
-        //public class MyLabelTextBoxRow
-        //{
-        //    public MyControl<Label>[] LabelsArray { get; set; }
-        //    public MyTextBoxInputOutput TextBox_Object { get; set; }
-
-        //    public MyLabelTextBoxRow(MyControl<Label>[] LabelsArray, MyTextBoxInputOutput TextBox_Object)
-        //    {
-        //        this.LabelsArray = LabelsArray;
-        //        this.TextBox_Object = TextBox_Object;
-        //    }
-        //}
-
-
-        //public MyControl<Image> Image_Figure_Object { get; set; }
-
-        //public MyLabelTextBoxRow[] MyLabelTextBoxRowArray { get; set; }
-        //public ResultTextBoxToCalculationNew[] ResultTextBoxToCalculationNewArray { get; set; }
-
-        //public int FigureDimensions { get; set; }
-
-        //public CurrentFigureCalculation(MyControl<Image> Image_Figure_Object, MyLabelTextBoxRow[] MyLabelTextBoxRowArray,
-        //                                ResultTextBoxToCalculationNew[] ResultTextBoxToCalculationNewArray, int FigureDimensions)
-        //{
-        //    this.Image_Figure_Object = Image_Figure_Object;
-        //    this.MyLabelTextBoxRowArray = MyLabelTextBoxRowArray;
-        //    this.ResultTextBoxToCalculationNewArray = ResultTextBoxToCalculationNewArray;
-        //    this.FigureDimensions = FigureDimensions;
-        //}
-
+        
         public static readonly Figure2DimenCalculator[] Figure2DimenCalculatorArray =
         {
                 new Figure2DimenCalculator
