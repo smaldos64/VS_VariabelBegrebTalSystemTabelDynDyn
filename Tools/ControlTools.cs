@@ -184,6 +184,24 @@ namespace VariabelBegreb.Tools
             return (ComboBox_Object);
         }
 
+        public static ComboBox InsertComboBoxInGrid(Grid Grid_Object, string ComboBoxName, int RowPosition,
+                                                    int ColumnPosition, int ColumnSpan, int Height,
+                                                    SelectionChangedEventHandler FunctionKeyDownSelectionChanged)
+        {
+            ComboBox ComboBox_Object = new ComboBox();
+            ComboBox_Object.Name = ComboBoxName;
+            ComboBox_Object.Height = Height;
+            ComboBox_Object.SetValue(Grid.ColumnSpanProperty, ColumnSpan);
+            
+            ComboBox_Object.SelectionChanged += FunctionKeyDownSelectionChanged;
+
+            Grid_Object.Children.Add(ComboBox_Object);
+            Grid.SetColumn(ComboBox_Object, ColumnPosition);
+            Grid.SetRow(ComboBox_Object, RowPosition);
+
+            return (ComboBox_Object);
+        }
+
         public static Button InsertButtonInGrid(Grid Grid_Object, 
                                                 string ButtonName, string ButtonText, int RowPosition,
                                                 int ColumnPosition, int ColumnSpan, int width, int Height,

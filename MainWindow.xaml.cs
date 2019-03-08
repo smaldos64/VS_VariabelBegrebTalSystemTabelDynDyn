@@ -2651,28 +2651,107 @@ namespace VariabelBegreb
             lblGeometry2.Content = "Endvidere kan du lave Rumfang og samlet Overflade Areal";
             lblGeometry2.Content += " på valgte 3-dimensionelle figurer";
 
-            lblGeometry3.Content = "2-dimensionelle figur beregninger";
+            lblGeometry3.Content = "x-dimensionelle figur beregninger";
         }
 
         private void InitializeGeometryControls()
         {
-            ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
-            ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
+            int Counter = 0;
+            int Index = 0;
+            
+            //ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
+            //ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
 
-            //ConstRadixSystemAndDelegates_Object.ComboBox_Object_RadixSpaceCharacter =
+            Const.FigureCalculation_Object.ComboBox_Unit_Object.XamlControl =
                 ControlTools.InsertComboBoxInGrid(Grid_Geometry,
-                cmbNumberSystemSpaceCharacter,
-                "cmbRadixDynamicSpaceCharacter_" + NumberDynamicRadixSystemsAdded.ToString(),
-                GridNumberSystem.RowDefinitions.Count - 1,
-                Const.ComboBoxRadixSpaceCharacterColumn,
-                1,
+                Const.FigureCalculation_Object.ComboBox_Unit_Object.XamlControlStringArray[Const.ControlNamePositionInArray],
+                Grid_Geometry.RowDefinitions.Count - 1,
+                Const.GeometryLabelStartColumn,
+                Const.GeometryLabelDefaultColumnSpan,
                 Const.ComboBoxRowHeight,
-                cmbNumberSystemSpaceCharacter_SelectionChanged);
+                cmbGeometryUnit_SelectionChanged);
 
-            //private static ComboBox ComboBox2DimensionelFiguresGeometry;
-            //private static ComboBox ComboBox3DimensionelFiguresGeometry;
-            //private static ComboBox ComboBox2DimensionelFiguresUnitGeometry;
-            //private static ComboBox ComboBox3DimensionelFiguresUnitGeometry;
+            do
+            {
+                if ("Længdemål" == Const.UnitsOverallConverterArray[Counter].UnitsBelongTo)
+                {
+                    break;
+                }
+                else
+                {
+                    Index++;
+                }
+            } while (Index < Const.UnitsOverallConverterArray.Length);
+
+            if (Index < Const.UnitsOverallConverterArray.Length)
+            {
+                for (Counter = 0; Counter < Const.UnitsOverallConverterArray[Index].UnitsConverterArray.Length; Counter++)
+                {
+                    Const.FigureCalculation_Object.ComboBox_Unit_Object.XamlControl.Items.Add(Const.UnitsOverallConverterArray[Index].UnitsConverterArray[Counter].UnitShortName);
+                    if ("m" == Const.UnitsOverallConverterArray[Index].UnitsConverterArray[Counter].UnitShortName)
+                    {
+                        Const.FigureCalculation_Object.ComboBox_Unit_Object.XamlControl.SelectedValue = "m";
+                    }
+                }
+            }
+
+            Const.FigureCalculation_Object.ComboBox_Figure_Object.XamlControl =
+                ControlTools.InsertComboBoxInGrid(Grid_Geometry,
+                Const.FigureCalculation_Object.ComboBox_Figure_Object.XamlControlStringArray[Const.ControlNamePositionInArray],
+                Grid_Geometry.RowDefinitions.Count - 1,
+                Const.GeometryLabelStartColumn + 2,
+                Const.GeometryLabelDefaultColumnSpan,
+                Const.ComboBoxRowHeight,
+                cmbGeometryFigure_SelectionChanged);
+
+            for (Counter = 0; Counter < Const.FigureCalculation_Object.CurrentFigureCalculationArray.Length; Counter++)
+            {
+                Const.FigureCalculation_Object.ComboBox_Figure_Object.XamlControl.Items.Add(Const.FigureCalculation_Object.CurrentFigureCalculationArray[Counter].FigureName);
+                if (0 == Counter)
+                {
+                    Const.FigureCalculation_Object.ComboBox_Figure_Object.XamlControl.SelectedValue = Const.FigureCalculation_Object.CurrentFigureCalculationArray[Counter].FigureName;
+                }
+            }
+
+        }
+
+        private void cmbGeometryUnit_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+
+        private int GetIndexNumberInGeometryArray(string GeometryFigureName)
+        {
+            int Counter = 0;
+
+            do
+            {
+                if (GeometryFigureName == Const.FigureCalculation_Object.CurrentFigureCalculationArray[Counter].FigureName)
+                {
+                    return (Counter);
+                }
+                else
+                {
+                    Counter++;
+                }
+            } while (Counter < Const.FigureCalculation_Object.CurrentFigureCalculationArray.Length);
+
+            return (-1);
+        }
+
+        private void SetupGeometryLabels_TextBoxes_Buttons(int IndexNumberInGeometryArray)
+        {
+
+        }
+
+        private void cmbGeometryFigure_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int IndexNumberInGeometryArray = GetIndexNumberInGeometryArray(((System.Windows.FrameworkElement)sender).Name);
+
+            if (IndexNumberInGeometryArray >= 0)
+            {
+                SetupGeometryLabels_TextBoxes_Buttons(IndexNumberInGeometryArray);
+            }
         }
         #endregion
         /* General code below. */

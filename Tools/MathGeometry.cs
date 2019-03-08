@@ -13,7 +13,7 @@ namespace VariabelBegreb.Tools
             return (Math.Pow(NumberList[0], 2));
         }
 
-        public static double CalculateCircumferenceOfSQueare(double[] NumberList)
+        public static double CalculateCircumferenceOfSquare(double[] NumberList)
         {
             return (NumberList[0] * 4);
         }
