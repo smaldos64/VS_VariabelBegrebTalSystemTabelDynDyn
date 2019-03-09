@@ -490,7 +490,9 @@ namespace VariabelBegreb.Tools
 
         public const int ControlNamePositionInArray = 0;
         public const int ImageFileNamePositionInArray = 1;
-        public const int GeometryLabelStartColumn = 1;
+        public const int LabelTextPositionInArray = 1;
+        public const int TextBoxTextPositionInArray = 1;
+        public const int GeometryLabelStartColumn = 0;
         public const int GeometryLabelDefaultColumnSpan = 1;
 
         public const int ImageHeight = 200;

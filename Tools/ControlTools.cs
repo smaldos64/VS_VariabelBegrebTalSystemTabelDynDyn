@@ -146,7 +146,8 @@ namespace VariabelBegreb.Tools
         public static TextBox InsertTextBoxInGrid(Grid Grid_Object, string TextBoxName, int RowPosition, 
                                                   int ColumnPosition, int ColumnSpan, int Width, int Height,
                                                   KeyEventHandler FunctionKeyDown,
-                                                  TextChangedEventHandler FunctionTextChanged)
+                                                  TextChangedEventHandler FunctionTextChanged,
+                                                  string TextBox_Text = "")
         {
             TextBox TextBox_Object = new TextBox();
 
@@ -157,6 +158,11 @@ namespace VariabelBegreb.Tools
          
             TextBox_Object.TextChanged += FunctionTextChanged;
             TextBox_Object.KeyDown += FunctionKeyDown;
+
+            if ("" != TextBox_Text)
+            {
+                TextBox_Object.Text = TextBox_Text;
+            }
 
             Grid_Object.Children.Add(TextBox_Object);
             Grid.SetColumn(TextBox_Object, ColumnPosition);
