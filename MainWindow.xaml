@@ -529,7 +529,7 @@
                             </Grid.RowDefinitions>
                             <Label Content="lbl1" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblGeometry1"  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="10" />
                             <Label Content="lbl2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblGeometry2" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" />
-                            <Label Content="lbl2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblGeometry3" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="10" />
+                            <Label Content="lbl3" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblGeometry3" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="10" FontWeight="Bold" />
                         </Grid>
                     </TabItem>
 

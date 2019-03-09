@@ -155,9 +155,16 @@ namespace VariabelBegreb.Tools
             TextBox_Object.SetValue(Grid.ColumnSpanProperty, ColumnSpan);
             TextBox_Object.Width = Width;
             TextBox_Object.Height = Height;
-         
-            TextBox_Object.TextChanged += FunctionTextChanged;
-            TextBox_Object.KeyDown += FunctionKeyDown;
+
+            if (null != FunctionTextChanged)
+            {
+                TextBox_Object.TextChanged += FunctionTextChanged;
+            }
+
+            if (null != FunctionKeyDown)
+            {
+                TextBox_Object.KeyDown += FunctionKeyDown;
+            }
 
             if ("" != TextBox_Text)
             {

@@ -2649,17 +2649,14 @@ namespace VariabelBegreb
             lblGeometry2.Content = "Endvidere kan du lave Rumfang og samlet Overflade Areal";
             lblGeometry2.Content += " på valgte 3-dimensionelle figurer";
 
-            lblGeometry3.Content = "x-dimensionelle figur beregninger";
+            lblGeometry3.Content = "x-dimensionel figur beregninger";
         }
 
         private void InitializeGeometryControls()
         {
             int Counter = 0;
             int Index = 0;
-            
-            //ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
-            //ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
-            
+                      
             Const.FigureCalculation_Object.ComboBox_Unit_Object.XamlControl =
                 ControlTools.InsertComboBoxInGrid(Grid_Geometry,
                 Const.FigureCalculation_Object.ComboBox_Unit_Object.XamlControlStringArray[Const.ControlNamePositionInArray],
@@ -2710,6 +2707,18 @@ namespace VariabelBegreb
                     Const.FigureCalculation_Object.ComboBox_Figure_Object.XamlControl.SelectedValue = Const.FigureCalculation_Object.CurrentFigureCalculationArray[Counter].FigureName;
                 }
             }
+
+            Const.FigureCalculation_Object.Button_Result_Object.XamlControl =
+                ControlTools.InsertButtonInGrid(
+                    Grid_Object: Grid_Geometry,
+                    ButtonName: Const.FigureCalculation_Object.Button_Result_Object.XamlControlStringArray[Const.ControlNamePositionInArray],
+                    ButtonText: Const.FigureCalculation_Object.Button_Result_Object.XamlControlStringArray[Const.ButtonTextPositionInArray],
+                    RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
+                    ColumnPosition: 6,
+                    ColumnSpan: 2,
+                    Height: Const.ButtonxRadixDeleteHeight,
+                    Width: Const.ButtonxRadixDeleteWidth,
+                    FunctionButtonClicked: btnClearNumberSystem_Click);
 
             ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
             ControlTools.InsertRowInGrid(Grid_Geometry, Const.ImageHeight);
@@ -2767,7 +2776,9 @@ namespace VariabelBegreb
                        
             RemoveOldRowsInGeometryGrid();
 
-           CurrentFigureCalculation_Object.Image_Figure_Object.XamlControl =
+            lblGeometry3.Content = CurrentFigureCalculation_Object.FigureDimensions.ToString() + "-dimensionel figur beregninger";
+
+            CurrentFigureCalculation_Object.Image_Figure_Object.XamlControl =
                 ControlTools.InsertImageInGrid(
                   Grid_Object: Grid_Geometry,
                   ImageFileName: CurrentFigureCalculation_Object.Image_Figure_Object.XamlControlStringArray[Const.ImageFileNamePositionInArray],
@@ -2789,19 +2800,19 @@ namespace VariabelBegreb
                         LabelText: CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControlStringArray[Const.LabelTextPositionInArray],
                         RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
                         ColumnPosition: Const.GeometryLabelStartColumn,
-                        ColumnSpan: 2);
+                        ColumnSpan: 3);
 
                 CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControl =
                     ControlTools.InsertTextBoxInGrid(
                         Grid_Object: Grid_Geometry,
                         TextBoxName: CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControlStringArray[Const.ControlNamePositionInArray],
                         RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
-                        ColumnPosition: Const.GeometryLabelStartColumn + Const.GeometryLabelDefaultColumnSpan,
-                        ColumnSpan: 1,
+                        ColumnPosition: Const.GeometryLabelStartColumn + 3,
+                        ColumnSpan: 2,
                         Width: Const.TextBoxWidth,
                         Height: Const.TextBoxHeight,
-                        FunctionKeyDown: txtCheckForValidNumberSystemKeyPressed,
-                        FunctionTextChanged: txtNumberSystem_TextChanged,
+                        FunctionKeyDown: txtCheckForValidPositiveNumberPressed,
+                        FunctionTextChanged: null,
                         TextBox_Text: CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControlStringArray[Const.TextBoxTextPositionInArray]);
 
                 for (ControlCounter = 1; ControlCounter < CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray.Length; ControlCounter++)
@@ -2821,7 +2832,7 @@ namespace VariabelBegreb
                         LabelName: CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControlStringArray[Const.ControlNamePositionInArray],
                         LabelText: LabelText,
                         RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
-                        ColumnPosition: ControlCounter + 3,
+                        ColumnPosition: ControlCounter + 4,
                         ColumnSpan: Const.GeometryLabelDefaultColumnSpan);
                 }
                 ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
