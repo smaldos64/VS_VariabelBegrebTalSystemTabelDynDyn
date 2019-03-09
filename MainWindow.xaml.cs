@@ -50,10 +50,9 @@ namespace VariabelBegreb
         private static string cmbTimeOldString = "";
         private static string cmbDistanceOldString = "";
 
-        private static ComboBox ComboBox2DimensionelFiguresGeometry;
-        private static ComboBox ComboBox3DimensionelFiguresGeometry;
-        private static ComboBox ComboBox2DimensionelFiguresUnitGeometry;
-        private static ComboBox ComboBox3DimensionelFiguresUnitGeometry;
+        private static int IndexNumberInGeometryArray = 0;
+        private static int RowDeleteNumberInGeometryGrid;
+        private static int FirstControlToBeDeletedInGeometryGridCount;
 
 
         public MainWindow()
@@ -2326,7 +2325,6 @@ namespace VariabelBegreb
             ComboBoxName = ComboBoxName.Trim();
             int SearchPosition = ComboBoxName.LastIndexOf('_');
             string ComboBoxNameNumber = ComboBoxName.Substring(SearchPosition);
-            //int Counter = 0;
             int Counter = FirstIndexForDynamicRadixSystemsAdded;
 
             do
@@ -2715,7 +2713,10 @@ namespace VariabelBegreb
 
             ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
             ControlTools.InsertRowInGrid(Grid_Geometry, Const.ImageHeight);
-            SetupGeometryLabels_TextBoxes_Buttons(0);
+
+            FirstControlToBeDeletedInGeometryGridCount = Grid_Geometry.Children.Count - 1;
+            RowDeleteNumberInGeometryGrid = Grid_Geometry.RowDefinitions.Count;
+            SetupGeometryLabels_TextBoxes_Buttons(IndexNumberInGeometryArray);
         }
 
         private void cmbGeometryUnit_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -2742,6 +2743,21 @@ namespace VariabelBegreb
             return (-1);
         }
 
+        private void RemoveOldRowsInGeometryGrid()
+        {
+            int RowCounter;
+
+            //Grid_Geometry.Children.RemoveRange(FirstControlToBeDeletedInGeometryGridCount,
+            //    (Grid_Geometry.Children.Count - 1) - FirstControlToBeDeletedInGeometryGridCount);
+            Grid_Geometry.Children.RemoveRange(FirstControlToBeDeletedInGeometryGridCount + 1,
+                (Grid_Geometry.Children.Count - 1) - FirstControlToBeDeletedInGeometryGridCount);
+
+            for (RowCounter = RowDeleteNumberInGeometryGrid; RowCounter < Grid_Geometry.RowDefinitions.Count; RowCounter++)
+            {
+                Grid_Geometry.RowDefinitions.RemoveAt(RowCounter);
+            }
+        }
+
         private void SetupGeometryLabels_TextBoxes_Buttons(int IndexNumberInGeometryArray)
         {
             //if (IndexNumberInList > 0)
@@ -2750,6 +2766,9 @@ namespace VariabelBegreb
             //    GridNumberSystem.RowDefinitions.RemoveAt(ConstRadixSystemAndDelegatesList[IndexNumberInList].ConstRadixSystemAndDelegates_Object.GridRowPosition);
             //    ConstRadixSystemAndDelegatesList.RemoveAt(IndexNumberInList);
             //}
+
+            RemoveOldRowsInGeometryGrid();
+
             Const.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInGeometryArray].Image_Figure_Object.XamlControl =
                 ControlTools.InsertImageInGrid(
                   Grid_Object : Grid_Geometry,
@@ -2764,7 +2783,10 @@ namespace VariabelBegreb
 
         private void cmbGeometryFigure_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int IndexNumberInGeometryArray = GetIndexNumberInGeometryArray(((System.Windows.FrameworkElement)sender).Name);
+            string ComboBoxName = ((System.Windows.FrameworkElement)sender).Name;
+            string SelectedValue = (string)((ComboBox)(System.Windows.FrameworkElement)sender).SelectedValue;
+            //int IndexNumberInGeometryArray = GetIndexNumberInGeometryArray(((System.Windows.FrameworkElement)sender).Name);
+            int IndexNumberInGeometryArray = GetIndexNumberInGeometryArray(SelectedValue);
 
             if (IndexNumberInGeometryArray >= 0)
             {
