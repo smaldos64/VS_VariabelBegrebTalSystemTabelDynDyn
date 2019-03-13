@@ -147,7 +147,8 @@ namespace VariabelBegreb.Tools
                                                   int ColumnPosition, int ColumnSpan, int Width, int Height,
                                                   KeyEventHandler FunctionKeyDown,
                                                   TextChangedEventHandler FunctionTextChanged,
-                                                  string TextBox_Text = "")
+                                                  string TextBox_Text = "",
+                                                  bool DisableTextBox = false)
         {
             TextBox TextBox_Object = new TextBox();
 
@@ -169,6 +170,11 @@ namespace VariabelBegreb.Tools
             if ("" != TextBox_Text)
             {
                 TextBox_Object.Text = TextBox_Text;
+            }
+
+            if (true == DisableTextBox)
+            {
+                TextBox_Object.IsReadOnly = true;
             }
 
             Grid_Object.Children.Add(TextBox_Object);

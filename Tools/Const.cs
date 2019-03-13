@@ -176,22 +176,34 @@ namespace VariabelBegreb.Tools
         }
     }
 
+    public class MyLabelWithUnit : MyControl<Label>
+    {
+        public bool IsCurrentLabelAnUnitLabel { get; set; }
+        public string UnitDimensionString { get; set; }
+
+        public MyLabelWithUnit(bool IsCurrentLabelAnUnitLabel, string[] XamlControlStringArray, string UnitDimensionString = "") : base(XamlControlStringArray)
+        {
+            this.UnitDimensionString = UnitDimensionString;
+            this.IsCurrentLabelAnUnitLabel = IsCurrentLabelAnUnitLabel;
+        }
+    }
+
     public class MyLabelTextBoxRow
     {
-        public MyControl<Label>[] LabelsArray { get; set; }
+        public MyLabelWithUnit[] LabelsArray { get; set; }
         public MyTextBoxInputOutput TextBox_Object { get; set; }
 
-        public MyLabelTextBoxRow(MyControl<Label>[] LabelsArray, MyTextBoxInputOutput TextBox_Object)
+        public MyLabelTextBoxRow(MyLabelWithUnit[] LabelsArray, MyTextBoxInputOutput TextBox_Object)
         {
             this.LabelsArray = LabelsArray;
             this.TextBox_Object = TextBox_Object;
         }
 
         // Konstruktoren herunder skal fjernes igen !!!
-        public MyLabelTextBoxRow(MyTextBoxInputOutput TextBox_Object)
-        {
-            this.TextBox_Object = TextBox_Object;
-        }
+        //public MyLabelTextBoxRow(MyTextBoxInputOutput TextBox_Object)
+        //{
+        //    this.TextBox_Object = TextBox_Object;
+        //}
     }
 
     public class CurrentFigureCalculation
@@ -219,14 +231,16 @@ namespace VariabelBegreb.Tools
 
     public class FigureCalculation
     {
+        public MyControl<Button> Button_Clear_Object { get; set; }
         public MyControl<Button> Button_Result_Object { get; set; }
         public MyControl<ComboBox> ComboBox_Unit_Object { get; set; }
         public MyControl<ComboBox> ComboBox_Figure_Object { get; set; }
         public CurrentFigureCalculation[] CurrentFigureCalculationArray { get; set; }
 
-        public FigureCalculation(MyControl<Button> Button_Result_Object, MyControl<ComboBox> ComboBox_Unit_Object, MyControl<ComboBox> ComboBox_Figure_Object,
+        public FigureCalculation(MyControl<Button> Button_Clear_Object, MyControl<Button> Button_Result_Object, MyControl<ComboBox> ComboBox_Unit_Object, MyControl<ComboBox> ComboBox_Figure_Object,
                                  CurrentFigureCalculation[] CurrentFigureCalculationArray)
         {
+            this.Button_Clear_Object = Button_Clear_Object;
             this.Button_Result_Object = Button_Result_Object;
             this.ComboBox_Unit_Object = ComboBox_Unit_Object;
             this.ComboBox_Figure_Object = ComboBox_Figure_Object;
@@ -502,6 +516,7 @@ namespace VariabelBegreb.Tools
         public static readonly FigureCalculation FigureCalculation_Object =
             new FigureCalculation
             (
+                Button_Clear_Object: new MyControl<Button>(XamlControlStringArray: new string[] { "btnClearAll", "Clear" }),
                 Button_Result_Object: new MyControl<Button>(XamlControlStringArray: new string[] { "btnCalculateResults", "Beregn" }),
                 ComboBox_Unit_Object: new MyControl<ComboBox>(XamlControlStringArray: new string[] { "cmbUnits" }),
                 ComboBox_Figure_Object: new MyControl<ComboBox>(XamlControlStringArray: new string[] { "cmbGeometryFigures" }),
@@ -513,10 +528,10 @@ namespace VariabelBegreb.Tools
                         MyLabelTextBoxRowArray : new MyLabelTextBoxRow[]
                         {
                             new MyLabelTextBoxRow(
-                                LabelsArray : new MyControl<Label>[]
+                                LabelsArray : new MyLabelWithUnit[]
                                 {
-                                    new MyControl<Label>(XamlControlStringArray: new string[] {"lblQuadratLength", "Længde af kvadrat : " }),
-                                    new MyControl<Label>(XamlControlStringArray: new string[] {"lblQuadratLengthUnit", "m" })
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] {"lblQuadratLength", "Længde af kvadrat : " }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel : true, XamlControlStringArray: new string[] {"lblQuadratLengthUnit", "m" })
                                 },
                                 TextBox_Object : new MyTextBoxInputOutput(Input_Output_Enum : Input_Output_Enum.Input_Enum,
                                     XamlControlStringArray: new string[] {"txtQuadratLength", DefaultTextBoxValue }))
@@ -524,11 +539,11 @@ namespace VariabelBegreb.Tools
                         ResultTextBoxToCalculationNewArray : new ResultTextBoxToCalculationNew[]
                         {
                             new ResultTextBoxToCalculationNew(MyLabelTextBoxRow_Object : new MyLabelTextBoxRow(
-                                LabelsArray : new MyControl<Label>[]
+                                LabelsArray : new MyLabelWithUnit[]
                                 {
-                                    new MyControl<Label>(XamlControlStringArray: new string[] {"lblQuadratCircumference", "Omkreds af kvadrat : " }),
-                                    new MyControl<Label>(XamlControlStringArray: new string[] { "lblQuadratCircumferenceUnit", "m" }),
-                                    new MyControl<Label>(XamlControlStringArray: new string[] { "lblQuadratCircumferenceFormula", "Omkreds = 4 * længde" }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] {"lblQuadratCircumference", "Omkreds af kvadrat : " }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  true, XamlControlStringArray: new string[] { "lblQuadratCircumferenceUnit", "m" }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblQuadratCircumferenceFormula", "Omkreds = 4 * længde" }),
                                 },
                                 TextBox_Object : new MyTextBoxInputOutput(
                                 Input_Output_Enum : Input_Output_Enum.Output_Enum, XamlControlStringArray: new string[] { "txtQuadratCircumference", DefaultTextBoxValue })),
@@ -536,11 +551,11 @@ namespace VariabelBegreb.Tools
                                 NumberOfDimensionsInCalculationString : Dimension1InCalculationString),
 
                             new ResultTextBoxToCalculationNew(MyLabelTextBoxRow_Object : new MyLabelTextBoxRow(
-                                LabelsArray : new MyControl<Label>[]
+                                LabelsArray : new MyLabelWithUnit[]
                                 {
-                                    new MyControl<Label>(XamlControlStringArray: new string[] {"lblQuadratArea", "Areal af kvadrat : " }),
-                                    new MyControl<Label>(XamlControlStringArray: new string[] {"lblQuadratAreaUnit", "m" }),
-                                    new MyControl<Label>(XamlControlStringArray: new string[] {"lblQuadratAreaFormula", "Areal = længde X længde" }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] {"lblQuadratArea", "Areal af kvadrat : " }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  true, UnitDimensionString : Dimension2InCalculationString, XamlControlStringArray: new string[] {"lblQuadratAreaUnit", "m2" }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] {"lblQuadratAreaFormula", "Areal = længde X længde" }),
                                 },
                                 TextBox_Object : new MyTextBoxInputOutput(
                                 Input_Output_Enum : Input_Output_Enum.Output_Enum, XamlControlStringArray: new string[] {"txtQuadratArea", DefaultTextBoxValue })),
@@ -556,10 +571,10 @@ namespace VariabelBegreb.Tools
                         MyLabelTextBoxRowArray : new MyLabelTextBoxRow[]
                         {
                             new MyLabelTextBoxRow(
-                                LabelsArray : new MyControl<Label>[]
+                                LabelsArray : new MyLabelWithUnit[]
                                 {
-                                    new MyControl<Label>(XamlControlStringArray: new string[] {"lblBallRadius", "Radius af bold : " }),
-                                    new MyControl<Label>(XamlControlStringArray: new string[] {"lblBallRadiusUnit", "m" })
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] {"lblBallRadius", "Radius af bold : " }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  true, XamlControlStringArray: new string[] {"lblBallRadiusUnit", "m" })
                                 },
                                 TextBox_Object : new MyTextBoxInputOutput(Input_Output_Enum : Input_Output_Enum.Input_Enum,
                                     XamlControlStringArray: new string[] { "txtBallRadiusUnit", DefaultTextBoxValue }))
@@ -567,11 +582,11 @@ namespace VariabelBegreb.Tools
                         ResultTextBoxToCalculationNewArray : new ResultTextBoxToCalculationNew[]
                         {
                             new ResultTextBoxToCalculationNew(MyLabelTextBoxRow_Object : new MyLabelTextBoxRow(
-                                LabelsArray : new MyControl<Label>[]
+                                LabelsArray : new MyLabelWithUnit[]
                                 {
-                                    new MyControl<Label>(XamlControlStringArray: new string[] {"lblBallDiameter", "Diameter af bold : " }),
-                                    new MyControl<Label>(XamlControlStringArray: new string[] { "lblBallDiameterUnit", "m" }),
-                                    new MyControl<Label>(XamlControlStringArray: new string[] { "lblBallDiameterFormula", "Diameter = 2 * r" }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] {"lblBallDiameter", "Diameter af bold : " }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  true, XamlControlStringArray: new string[] { "lblBallDiameterUnit", "m" }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblBallDiameterFormula", "Diameter = 2 * r" }),
                                 },
                                 TextBox_Object : new MyTextBoxInputOutput(
                                 Input_Output_Enum : Input_Output_Enum.Output_Enum, XamlControlStringArray: new string[] { "txtBallDiameter", DefaultTextBoxValue })),
@@ -579,11 +594,11 @@ namespace VariabelBegreb.Tools
                                 NumberOfDimensionsInCalculationString : Dimension1InCalculationString),
 
                             new ResultTextBoxToCalculationNew(MyLabelTextBoxRow_Object : new MyLabelTextBoxRow(
-                                LabelsArray : new MyControl<Label>[]
+                                LabelsArray : new MyLabelWithUnit[]
                                 {
-                                    new MyControl<Label>(XamlControlStringArray: new string[] {"lblBallSurfaceArea", "Samlet overfladeareal af bold : " }),
-                                    new MyControl<Label>(XamlControlStringArray: new string[] { "llblBallSurfaceAreaUnit", "m" }),
-                                    new MyControl<Label>(XamlControlStringArray: new string[] { "lblBallSurfaceAreaFormula", "Overfladeareal = 4 * pi * r?3" }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] {"lblBallSurfaceArea", "Samlet overfladeareal af bold : " }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  true, UnitDimensionString : Dimension2InCalculationString, XamlControlStringArray: new string[] { "llblBallSurfaceAreaUnit", "m2" }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblBallSurfaceAreaFormula", "Overfladeareal = 4 * pi * r?3" }),
                                 },
                                 TextBox_Object : new MyTextBoxInputOutput(
                                 Input_Output_Enum : Input_Output_Enum.Output_Enum, XamlControlStringArray: new string[] { "txtBallSurfaceArea", DefaultTextBoxValue })),
@@ -591,11 +606,11 @@ namespace VariabelBegreb.Tools
                                 NumberOfDimensionsInCalculationString : Dimension2InCalculationString),
 
                             new ResultTextBoxToCalculationNew(MyLabelTextBoxRow_Object : new MyLabelTextBoxRow(
-                                LabelsArray : new MyControl<Label>[]
+                                LabelsArray : new MyLabelWithUnit[]
                                 {
-                                    new MyControl<Label>(XamlControlStringArray: new string[] { "lblBallVolume", "Rumfang af bold : " }),
-                                    new MyControl<Label>(XamlControlStringArray: new string[] { "lblBallVolumeUnit", "m" }),
-                                    new MyControl<Label>(XamlControlStringArray: new string[] { "lblBallVolumeFormula", "Rumfang = 4/3 * pi * r?3" }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblBallVolume", "Rumfang af bold : " }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  true, UnitDimensionString : Dimension3InCalculationString, XamlControlStringArray: new string[] { "lblBallVolumeUnit", "m3" }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblBallVolumeFormula", "Rumfang = 4/3 * pi * r?3" }),
                                 },
                                 TextBox_Object : new MyTextBoxInputOutput(
                                 Input_Output_Enum : Input_Output_Enum.Output_Enum, XamlControlStringArray: new string[] { "txtBallVolume", DefaultTextBoxValue })),
