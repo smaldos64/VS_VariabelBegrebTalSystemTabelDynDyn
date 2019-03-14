@@ -64,6 +64,7 @@
     <Compile Include="NumberSystems\RadixNumber.cs" />
     <Compile Include="NumberSystems\RomerNumber.cs" />
     <Compile Include="Tools\Const.cs" />
+    <Compile Include="Tools\ConstGeometry.cs" />
     <Compile Include="Tools\ControlTools.cs" />
     <Compile Include="Tools\Extension.cs" />
     <Compile Include="Tools\FileTools.cs" />

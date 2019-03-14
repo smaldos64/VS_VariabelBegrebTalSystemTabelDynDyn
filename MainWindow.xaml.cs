@@ -2839,7 +2839,8 @@ namespace VariabelBegreb
             TextBoxListGeometryInput.Clear();
             TextBoxListGeometryOutput.Clear();
 
-            lblGeometry3.Content = CurrentFigureCalculation_Object.FigureDimensions.ToString() + "-dimensionel figur beregninger";
+            lblGeometry3.Content = CurrentFigureCalculation_Object.FigureDimensions.ToString() + "-dimensionel figur beregninger på " +
+                CurrentFigureCalculation_Object.FigureName;
 
             CurrentFigureCalculation_Object.Image_Figure_Object.XamlControl =
                 ControlTools.InsertImageInGrid(
