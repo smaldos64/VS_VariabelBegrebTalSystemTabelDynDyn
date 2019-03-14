@@ -86,13 +86,13 @@ namespace VariabelBegreb.Tools
             return (true);
         }
 
-        public static void ClearTextBoxes(List<TextBox> TextBoxes)
+        public static void ClearTextBoxes(List<TextBox> TextBoxes, string ClearString = "")
         {
             int Counter;
 
             for (Counter = 0; Counter < TextBoxes.Count; Counter++)
             {
-                TextBoxes[Counter].Text = "";
+                TextBoxes[Counter].Text = ClearString;
             }
         }
 

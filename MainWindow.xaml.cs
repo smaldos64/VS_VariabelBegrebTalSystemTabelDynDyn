@@ -54,7 +54,8 @@ namespace VariabelBegreb
         private static int RowDeleteNumberInGeometryGrid;
         private static int FirstControlToBeDeletedInGeometryGridCount;
 
-        private static List<TextBox> TextBoxListGeometry = new List<TextBox>();
+        private static List<TextBox> TextBoxListGeometryInput = new List<TextBox>();
+        private static List<TextBox> TextBoxListGeometryOutput = new List<TextBox>();
 
 
         public MainWindow()
@@ -2720,7 +2721,7 @@ namespace VariabelBegreb
                     ColumnSpan: 2,
                     Height: Const.ButtonxRadixDeleteHeight,
                     Width: Const.ButtonxRadixDeleteWidth,
-                    FunctionButtonClicked: btnClearNumberSystem_Click);
+                    FunctionButtonClicked: btnCalculateGeometry);
 
             Const.FigureCalculation_Object.Button_Clear_Object.XamlControl =
                 ControlTools.InsertButtonInGrid(
@@ -2740,17 +2741,55 @@ namespace VariabelBegreb
 
             FirstControlToBeDeletedInGeometryGridCount = Grid_Geometry.Children.Count - 1;
             RowDeleteNumberInGeometryGrid = Grid_Geometry.RowDefinitions.Count;
+            IndexNumberInGeometryArray = 0;
             SetupGeometryLabels_TextBoxes_Buttons(IndexNumberInGeometryArray);
         }
 
         private void btnClearAllGeometryTextBoxes(object sender, RoutedEventArgs e)
         {
-
+            ControlTools.ClearTextBoxes(TextBoxListGeometryInput, Const.DefaultTextBoxValue);
+            ControlTools.ClearTextBoxes(TextBoxListGeometryOutput, Const.DefaultTextBoxValue);
         }
 
         private void cmbGeometryUnit_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            int RowCounter;
+            int ControlCounter;
+            CurrentFigureCalculation CurrentFigureCalculation_Object = Const.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInGeometryArray];
+            string UnitToUse = (string)Const.FigureCalculation_Object.ComboBox_Unit_Object.XamlControl.SelectedValue;
+            string LabelText;
 
+            for (RowCounter = 0; RowCounter < CurrentFigureCalculation_Object.MyLabelTextBoxRowArray.Length; RowCounter++)
+            {
+                for (ControlCounter = 1; ControlCounter < CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray.Length; ControlCounter++)
+                {
+                    if (true == CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].IsCurrentLabelAnUnitLabel)
+                    {
+                        LabelText = UnitToUse + CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].UnitDimensionString;
+
+                        if (null != CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControl)
+                        {
+                            CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControl.Content = LabelText;
+                        }
+                    }
+                }
+            }
+
+            for (RowCounter = 0; RowCounter < CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray.Length; RowCounter++)
+            {
+                for (ControlCounter = 1; ControlCounter < CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray.Length; ControlCounter++)
+                {
+                    if (true == CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].IsCurrentLabelAnUnitLabel)
+                    {
+                        LabelText = UnitToUse + CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].UnitDimensionString;
+
+                        if (null != CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].XamlControl)
+                        {
+                            CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].XamlControl.Content = LabelText;
+                        }
+                    }
+                }
+            }
         }
 
         private int GetIndexNumberInGeometryArray(string GeometryFigureName)
@@ -2788,17 +2827,18 @@ namespace VariabelBegreb
             }
         }
 
-        private void SetupGeometryLabels_TextBoxes_Buttons(int IndexNumberInGeometryArray)
+        private void SetupGeometryLabels_TextBoxes_Buttons(int IndexNumberInGeometryArrayFunc)
         {
             int RowCounter;
-            CurrentFigureCalculation CurrentFigureCalculation_Object = Const.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInGeometryArray];
-            string UnitToUse = (string)Const.FigureCalculation_Object.ComboBox_Unit_Object.XamlControl.SelectedValue;
             string LabelText;
             string TextBoxText;
-
-            RemoveOldRowsInGeometryGrid();
-            TextBoxListGeometry.Clear();
+            CurrentFigureCalculation CurrentFigureCalculation_Object = Const.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInGeometryArrayFunc];
+            string UnitToUse = (string)Const.FigureCalculation_Object.ComboBox_Unit_Object.XamlControl.SelectedValue;
             
+            RemoveOldRowsInGeometryGrid();
+            TextBoxListGeometryInput.Clear();
+            TextBoxListGeometryOutput.Clear();
+
             lblGeometry3.Content = CurrentFigureCalculation_Object.FigureDimensions.ToString() + "-dimensionel figur beregninger";
 
             CurrentFigureCalculation_Object.Image_Figure_Object.XamlControl =
@@ -2840,7 +2880,7 @@ namespace VariabelBegreb
                         TextBoxName: CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControlStringArray[Const.ControlNamePositionInArray],
                         RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
                         ColumnPosition: Const.GeometryLabelStartColumn + 3,
-                        ColumnSpan: 2,
+                        ColumnSpan: 1,
                         Width: Const.TextBoxWidth,
                         Height: Const.TextBoxHeight,
                         FunctionKeyDown: txtCheckForValidPositiveNumberPressed,
@@ -2848,7 +2888,7 @@ namespace VariabelBegreb
                         TextBox_Text: TextBoxText,
                         DisableTextBox: CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.Input_Output_Enum == Input_Output_Enum.Output_Enum);
 
-                TextBoxListGeometry.Add(CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControl);
+                TextBoxListGeometryInput.Add(CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControl);
 
                 for (ControlCounter = 1; ControlCounter < CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray.Length; ControlCounter++)
                 {
@@ -2901,13 +2941,15 @@ namespace VariabelBegreb
                         TextBoxName: CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControlStringArray[Const.ControlNamePositionInArray],
                         RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
                         ColumnPosition: Const.GeometryLabelStartColumn + 3,
-                        ColumnSpan: 2,
+                        ColumnSpan: 1,
                         Width: Const.TextBoxWidth,
                         Height: Const.TextBoxHeight,
                         FunctionKeyDown: null,
                         FunctionTextChanged: null,
                         TextBox_Text: TextBoxText,
                         DisableTextBox: CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.Input_Output_Enum == Input_Output_Enum.Output_Enum);
+
+                TextBoxListGeometryOutput.Add(CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControl);
 
                 for (ControlCounter = 1; ControlCounter < CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray.Length; ControlCounter++)
                 {
@@ -2937,12 +2979,34 @@ namespace VariabelBegreb
         {
             string ComboBoxName = ((System.Windows.FrameworkElement)sender).Name;
             string SelectedValue = (string)((ComboBox)(System.Windows.FrameworkElement)sender).SelectedValue;
-            //int IndexNumberInGeometryArray = GetIndexNumberInGeometryArray(((System.Windows.FrameworkElement)sender).Name);
-            int IndexNumberInGeometryArray = GetIndexNumberInGeometryArray(SelectedValue);
+            IndexNumberInGeometryArray = GetIndexNumberInGeometryArray(SelectedValue);
 
             if (IndexNumberInGeometryArray >= 0)
             {
                 SetupGeometryLabels_TextBoxes_Buttons(IndexNumberInGeometryArray);
+            }
+        }
+
+        private void btnCalculateGeometry(object sender, RoutedEventArgs e)
+        {
+            int RowCounter;
+            CurrentFigureCalculation CurrentFigureCalculation_Object = Const.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInGeometryArray];
+
+            if (ControlTools.CheckTextBoxesForInformation(TextBoxListGeometryInput, Const.DefaultTextBoxValue))
+            {
+                List<double> NumberList = TextBoxListGeometryInput.Select(val => double.Parse(val.Text)).ToList();
+
+                for (RowCounter = 0; RowCounter < CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray.Length; RowCounter++)
+                {
+                    CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControl.Text =
+                        PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(
+                        CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].CalculateOnFigure_Delegate(NumberList),
+                        Const.DefaultNumberOfDecimals);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Husk at alle input felter skal have en værdi !!!");
             }
         }
         #endregion

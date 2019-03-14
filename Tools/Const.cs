@@ -12,7 +12,7 @@ using VariabelBegreb.Tools;
 namespace VariabelBegreb.Tools
 {
     #region Geometry
-    public delegate double CalculateOnFigure(double[] NumberList);
+    public delegate double CalculateOnFigure(List<double> NumberList);
 
     public enum Dimension2_Figures_Enum
     {
@@ -500,7 +500,7 @@ namespace VariabelBegreb.Tools
         private const string Dimension2InCalculationString = "2";
         private const string Dimension3InCalculationString = "3";
 
-        private const string DefaultTextBoxValue = "0";
+        public const string DefaultTextBoxValue = "0";
 
         public const int ControlNamePositionInArray = 0;
         public const int ImageFileNamePositionInArray = 1;
@@ -590,7 +590,7 @@ namespace VariabelBegreb.Tools
                                 },
                                 TextBox_Object : new MyTextBoxInputOutput(
                                 Input_Output_Enum : Input_Output_Enum.Output_Enum, XamlControlStringArray: new string[] { "txtBallDiameter", DefaultTextBoxValue })),
-                                CalculateOnFigure_Delegate : MathGeometry.CalculateCircumferenceOfSquare,
+                                CalculateOnFigure_Delegate : MathGeometry.CalculateDiameterFromRadius,
                                 NumberOfDimensionsInCalculationString : Dimension1InCalculationString),
 
                             new ResultTextBoxToCalculationNew(MyLabelTextBoxRow_Object : new MyLabelTextBoxRow(
@@ -598,11 +598,11 @@ namespace VariabelBegreb.Tools
                                 {
                                     new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] {"lblBallSurfaceArea", "Samlet overfladeareal af bold : " }),
                                     new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  true, UnitDimensionString : Dimension2InCalculationString, XamlControlStringArray: new string[] { "llblBallSurfaceAreaUnit", "m2" }),
-                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblBallSurfaceAreaFormula", "Overfladeareal = 4 * pi * r?3" }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblBallSurfaceAreaFormula", "Overfladeareal = 4 * pi * r?2" }),
                                 },
                                 TextBox_Object : new MyTextBoxInputOutput(
                                 Input_Output_Enum : Input_Output_Enum.Output_Enum, XamlControlStringArray: new string[] { "txtBallSurfaceArea", DefaultTextBoxValue })),
-                                CalculateOnFigure_Delegate : MathGeometry.CalculateCircumferenceOfSquare,
+                                CalculateOnFigure_Delegate : MathGeometry.CalculateBallSurfaceArea,
                                 NumberOfDimensionsInCalculationString : Dimension2InCalculationString),
 
                             new ResultTextBoxToCalculationNew(MyLabelTextBoxRow_Object : new MyLabelTextBoxRow(
@@ -614,7 +614,7 @@ namespace VariabelBegreb.Tools
                                 },
                                 TextBox_Object : new MyTextBoxInputOutput(
                                 Input_Output_Enum : Input_Output_Enum.Output_Enum, XamlControlStringArray: new string[] { "txtBallVolume", DefaultTextBoxValue })),
-                                CalculateOnFigure_Delegate : MathGeometry.CalculateAreaOfSQueare,
+                                CalculateOnFigure_Delegate : MathGeometry.CalculateBallVolume,
                                 NumberOfDimensionsInCalculationString : Dimension3InCalculationString)
                         },
                         FigureDimensions : 3,
