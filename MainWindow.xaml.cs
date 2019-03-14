@@ -2886,6 +2886,15 @@ namespace VariabelBegreb
                         ColumnPosition: Const.GeometryLabelStartColumn,
                         ColumnSpan: 3);
 
+                if (null != CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControl)
+                {
+                    TextBoxText = CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControl.Text;
+                }
+                else
+                {
+                    TextBoxText = CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControlStringArray[Const.TextBoxTextPositionInArray];
+                }
+
                 CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControl =
                     ControlTools.InsertTextBoxInGrid(
                         Grid_Object: Grid_Geometry,
@@ -2897,7 +2906,7 @@ namespace VariabelBegreb
                         Height: Const.TextBoxHeight,
                         FunctionKeyDown: null,
                         FunctionTextChanged: null,
-                        TextBox_Text: CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControlStringArray[Const.TextBoxTextPositionInArray],
+                        TextBox_Text: TextBoxText,
                         DisableTextBox: CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.Input_Output_Enum == Input_Output_Enum.Output_Enum);
 
                 for (ControlCounter = 1; ControlCounter < CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray.Length; ControlCounter++)
