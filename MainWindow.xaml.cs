@@ -54,7 +54,7 @@ namespace VariabelBegreb
         private static int RowDeleteNumberInGeometryGrid;
         private static int FirstControlToBeDeletedInGeometryGridCount;
 
-        private static bool GeometryTestCode = false;
+        private static List<TextBox> TextBoxListGeometry = new List<TextBox>();
 
 
         public MainWindow()
@@ -2736,6 +2736,7 @@ namespace VariabelBegreb
 
             ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
             ControlTools.InsertRowInGrid(Grid_Geometry, Const.ImageHeight);
+            ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
 
             FirstControlToBeDeletedInGeometryGridCount = Grid_Geometry.Children.Count - 1;
             RowDeleteNumberInGeometryGrid = Grid_Geometry.RowDefinitions.Count;
@@ -2793,16 +2794,18 @@ namespace VariabelBegreb
             CurrentFigureCalculation CurrentFigureCalculation_Object = Const.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInGeometryArray];
             string UnitToUse = (string)Const.FigureCalculation_Object.ComboBox_Unit_Object.XamlControl.SelectedValue;
             string LabelText;
+            string TextBoxText;
 
             RemoveOldRowsInGeometryGrid();
-
+            TextBoxListGeometry.Clear();
+            
             lblGeometry3.Content = CurrentFigureCalculation_Object.FigureDimensions.ToString() + "-dimensionel figur beregninger";
 
             CurrentFigureCalculation_Object.Image_Figure_Object.XamlControl =
                 ControlTools.InsertImageInGrid(
                   Grid_Object: Grid_Geometry,
                   ImageFileName: CurrentFigureCalculation_Object.Image_Figure_Object.XamlControlStringArray[Const.ImageFileNamePositionInArray],
-                  RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
+                  RowPosition: Grid_Geometry.RowDefinitions.Count - 2,
                   ColumnPosition: Const.GeometryLabelStartColumn,
                   ColumnSpan: 5,
                   Width: 200,
@@ -2822,6 +2825,15 @@ namespace VariabelBegreb
                         ColumnPosition: Const.GeometryLabelStartColumn,
                         ColumnSpan: 3);
 
+                if (null != CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControl)
+                {
+                    TextBoxText = CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControl.Text;
+                }
+                else
+                {
+                    TextBoxText = CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControlStringArray[Const.TextBoxTextPositionInArray];
+                }
+                    
                 CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControl =
                     ControlTools.InsertTextBoxInGrid(
                         Grid_Object: Grid_Geometry,
@@ -2833,8 +2845,10 @@ namespace VariabelBegreb
                         Height: Const.TextBoxHeight,
                         FunctionKeyDown: txtCheckForValidPositiveNumberPressed,
                         FunctionTextChanged: null,
-                        TextBox_Text: CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControlStringArray[Const.TextBoxTextPositionInArray],
+                        TextBox_Text: TextBoxText,
                         DisableTextBox: CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.Input_Output_Enum == Input_Output_Enum.Output_Enum);
+
+                TextBoxListGeometry.Add(CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControl);
 
                 for (ControlCounter = 1; ControlCounter < CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray.Length; ControlCounter++)
                 {

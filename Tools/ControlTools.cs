@@ -70,6 +70,22 @@ namespace VariabelBegreb.Tools
             return (NumberOfTextBoxesWithInfo);
         }
 
+        public static bool CheckTextBoxesForInformation(List<TextBox> TextBoxes, string EmptyString)
+        {
+            int Counter;
+           
+            for (Counter = 0; Counter < TextBoxes.Count; Counter++)
+            {
+                if ( !((TextBoxes[Counter].Text.Length > 0) && 
+                      (TextBoxes[Counter].Text != EmptyString)) )
+                {
+                    return (false);
+                }
+            }
+
+            return (true);
+        }
+
         public static void ClearTextBoxes(List<TextBox> TextBoxes)
         {
             int Counter;
@@ -175,6 +191,8 @@ namespace VariabelBegreb.Tools
             if (true == DisableTextBox)
             {
                 TextBox_Object.IsReadOnly = true;
+                TextBox_Object.Background = Brushes.Yellow;
+                TextBox_Object.Foreground = Brushes.Blue;
             }
 
             Grid_Object.Children.Add(TextBox_Object);
