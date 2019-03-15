@@ -199,6 +199,58 @@ namespace VariabelBegreb.Tools
 
                     new CurrentFigureCalculation(
                         Image_Figure_Object : new MyControl<Image>(XamlControlStringArray: new string[]
+                                              {"imgGeometryFigureQuadrat", GeometryImages + "rektangel.png", "rektangel"}),
+                        MyLabelTextBoxRowArray : new MyLabelTextBoxRow[]
+                        {
+                            new MyLabelTextBoxRow(
+                                LabelsArray : new MyLabelWithUnit[]
+                                {
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] {"lblRectangleLength", "Længde af rektangel : " }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel : true, XamlControlStringArray: new string[] { "lblRectangleLengthUnit", "m" })
+                                },
+                                TextBox_Object : new MyTextBoxInputOutput(Input_Output_Enum : Input_Output_Enum.Input_Enum,
+                                    XamlControlStringArray: new string[] { "txtRectangleLength", DefaultTextBoxValue })),
+
+                            new MyLabelTextBoxRow(
+                                LabelsArray : new MyLabelWithUnit[]
+                                {
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] {"lblRectangleWidth", "Bredde af rektangel : " }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel : true, XamlControlStringArray: new string[] { "lblRectangleWidthUnit", "m" })
+                                },
+                                TextBox_Object : new MyTextBoxInputOutput(Input_Output_Enum : Input_Output_Enum.Input_Enum,
+                                    XamlControlStringArray: new string[] { "txtRectangleWidth", DefaultTextBoxValue }))
+                        },
+                        ResultTextBoxToCalculationNewArray : new ResultTextBoxToCalculationNew[]
+                        {
+                            new ResultTextBoxToCalculationNew(MyLabelTextBoxRow_Object : new MyLabelTextBoxRow(
+                                LabelsArray : new MyLabelWithUnit[]
+                                {
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblRectangleCircumference", "Omkreds af rektangel : " }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  true, XamlControlStringArray: new string[] { "lblRectangleCircumferenceUnit", "m" }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblRectangleCircumferenceFormula", "Omkreds = 2 * længde + 2 * bredde" }),
+                                },
+                                TextBox_Object : new MyTextBoxInputOutput(
+                                Input_Output_Enum : Input_Output_Enum.Output_Enum, XamlControlStringArray: new string[] { "txtRectangleCircumference", DefaultTextBoxValue })),
+                                CalculateOnFigure_Delegate : MathGeometry.CalculateCircumferenceOfRectangle,
+                                NumberOfDimensionsInCalculationString : Dimension1InCalculationString),
+
+                            new ResultTextBoxToCalculationNew(MyLabelTextBoxRow_Object : new MyLabelTextBoxRow(
+                                LabelsArray : new MyLabelWithUnit[]
+                                {
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblRectangleArea", "Areal af rektangel : " }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  true, UnitDimensionString : Dimension2InCalculationString, XamlControlStringArray: new string[] { "lblRectangleAreaUnit", "m2" }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblRectangleAreaFormula", "Areal = længde X bredde" }),
+                                },
+                                TextBox_Object : new MyTextBoxInputOutput(
+                                Input_Output_Enum : Input_Output_Enum.Output_Enum, XamlControlStringArray: new string[] { "txtRectangleArea", DefaultTextBoxValue })),
+                                CalculateOnFigure_Delegate : MathGeometry.CalculateAreaOfRectangle,
+                                NumberOfDimensionsInCalculationString : Dimension2InCalculationString)
+                        },
+                        FigureDimensions : 2,
+                        FigureName : "Rektangel"),
+
+                    new CurrentFigureCalculation(
+                        Image_Figure_Object : new MyControl<Image>(XamlControlStringArray: new string[]
                                               {"imgGeometryFigureBall", GeometryImages + "kugle.png", "bold"}),
                         MyLabelTextBoxRowArray : new MyLabelTextBoxRow[]
                         {

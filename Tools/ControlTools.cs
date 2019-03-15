@@ -280,12 +280,7 @@ namespace VariabelBegreb.Tools
             Image_Object.Source = BitmapImage_Object;
             Image_Object.Stretch = Stretch.UniformToFill;
 
-            ////Image_Object.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + ImageFileName, UriKind.Absolute));
-            //Image_Object.Source = new BitmapImage(new Uri(ImageFileName, UriKind.Relative));
-            ////Image_Object.Source = new BitmapImage(new Uri("pack://application:,,,ImageFileName"));
-            //Image_Object.Width = Width;
-            //Image_Object.Height = height;
-            //Image_Object.SetValue(Grid.ColumnSpanProperty, ColumnSpan);
+            Image_Object.Stretch = Stretch.Fill;
 
             Grid_Object.Children.Add(Image_Object);
             Grid.SetColumn(Image_Object, ColumnPosition);
@@ -300,15 +295,15 @@ namespace VariabelBegreb.Tools
 
             do
             {
-                if (KeyValue == Const.KeyToCharConverterArray[KeyValueCounter].KeyValue)
+                if (KeyValue == ConstNumberSystems.KeyToCharConverterArray[KeyValueCounter].KeyValue)
                 {
-                    return ((Const.KeyToCharConverterArray[KeyValueCounter].KeyChar).ToString());
+                    return ((ConstNumberSystems.KeyToCharConverterArray[KeyValueCounter].KeyChar).ToString());
                 }
                 else
                 {
                     KeyValueCounter++;
                 }
-            } while (KeyValueCounter < Const.KeyToCharConverterArray[Const.KeyToCharConverterArray.Length - 1].KeyValue);
+            } while (KeyValueCounter < ConstNumberSystems.KeyToCharConverterArray[ConstNumberSystems.KeyToCharConverterArray.Length - 1].KeyValue);
 
             return (' '.ToString());
         }
@@ -319,15 +314,15 @@ namespace VariabelBegreb.Tools
             
             do
             {
-                if (KeyValue == Const.KeyToCharConverterArray[KeyValueCounter].KeyValue)
+                if (KeyValue == ConstNumberSystems.KeyToCharConverterArray[KeyValueCounter].KeyValue)
                 {
-                    return ((Const.KeyToCharConverterArray[KeyValueCounter].Value).ToString());
+                    return ((ConstNumberSystems.KeyToCharConverterArray[KeyValueCounter].Value).ToString());
                 }
                 else
                 {
                     KeyValueCounter++;
                 }
-            } while (KeyValueCounter < Const.KeyToCharConverterArray.Length - 1);
+            } while (KeyValueCounter < ConstNumberSystems.KeyToCharConverterArray.Length - 1);
 
             return (' '.ToString());
         }

@@ -2007,7 +2007,7 @@ namespace VariabelBegreb
 
             lblTalsystemer4.Content = "Oversigt over bogstavernes værdi";
 
-            Key[] HighestValidKeyArray = Const.RadixSystemArray[Const.RadixSystemArray.Length - 1].ValidKeysArray;
+            Key[] HighestValidKeyArray = ConstNumberSystems.RadixSystemArray[ConstNumberSystems.RadixSystemArray.Length - 1].ValidKeysArray;
 
             NumberSystemString = string.Empty;
             for (Counter = (int)Key.D0; Counter <= (int)HighestValidKeyArray[HighestValidKeyArray.Length - 1]; Counter++)
@@ -2034,26 +2034,26 @@ namespace VariabelBegreb
             lblTalsystemer5.Content = NumberSystemString.Substring(0, StringLength);
             lblTalsystemer6.Content = NumberSystemString.Substring(StringLength + 1).Trim();
 
-            for (Counter = Const.MinRadixSystemValue; Counter <= Const.MaxRadixSystemValue; Counter++)
+            for (Counter = ConstNumberSystems.MinRadixSystemValue; Counter <= ConstNumberSystems.MaxRadixSystemValue; Counter++)
             {
                 if (10 != Counter)
                 {
                     cmbNumberSystemRadix.Items.Add(Counter);
                 }
             }
-            ControlTools.SetComboBoxSelectedItem(cmbNumberSystemRadix, Const.MinRadixSystemValue);
+            ControlTools.SetComboBoxSelectedItem(cmbNumberSystemRadix, ConstNumberSystems.MinRadixSystemValue);
 
-            for (Counter = Const.MinRadixSystemSpaces; Counter <= Const.MaxRadixSystemSpaces; Counter++)
+            for (Counter = ConstNumberSystems.MinRadixSystemSpaces; Counter <= ConstNumberSystems.MaxRadixSystemSpaces; Counter++)
             {
                 cmbNumberSystemSpaceCounter.Items.Add(Counter);
             }
-            ControlTools.SetComboBoxSelectedItem(cmbNumberSystemSpaceCounter, Const.MinRadixSystemSpaces);
+            ControlTools.SetComboBoxSelectedItem(cmbNumberSystemSpaceCounter, ConstNumberSystems.MinRadixSystemSpaces);
 
-            for (Counter = 0; Counter <= Const.RadixSystemSpaceCharacterArray.Length - 1; Counter++)
+            for (Counter = 0; Counter <= ConstNumberSystems.RadixSystemSpaceCharacterArray.Length - 1; Counter++)
             {
-                cmbNumberSystemSpaceCharacter.Items.Add(Const.RadixSystemSpaceCharacterArray[Counter]);
+                cmbNumberSystemSpaceCharacter.Items.Add(ConstNumberSystems.RadixSystemSpaceCharacterArray[Counter]);
             }
-            ControlTools.SetComboBoxSelectedItem(cmbNumberSystemSpaceCharacter, Const.RadixSystemSpaceCharacterArray[0]);
+            ControlTools.SetComboBoxSelectedItem(cmbNumberSystemSpaceCharacter, ConstNumberSystems.RadixSystemSpaceCharacterArray[0]);
         }
 
         private void SetupNumberSystemTextBoxes()
@@ -2068,23 +2068,23 @@ namespace VariabelBegreb
 
         private void InitializeRadixNumbersList()
         {
-            for (int Counter = 0; Counter < Const.RadixSystemDelegatesAndControlsExtendedArray.Length; Counter++)
+            for (int Counter = 0; Counter < ConstNumberSystems.RadixSystemDelegatesAndControlsExtendedArray.Length; Counter++)
             {
                 ConstRadixSystemAndDelegatesExtended ConstRadixSystemAndDelegatesExtended_Object =
-                    Const.RadixSystemDelegatesAndControlsExtendedArray[Counter];
+                    ConstNumberSystems.RadixSystemDelegatesAndControlsExtendedArray[Counter];
 
                 ControlTools.InsertRowInGrid(GridNumberSystem);
 
                 ControlTools.InsertLabelInGrid(GridNumberSystem,
-                                               Const.RadixSystemDelegatesAndControlsExtendedArray[Counter].ConstRadixSystemAndDelegates_Object.Label_Object_Name,
-                                               Const.RadixSystemDelegatesAndControlsExtendedArray[Counter].ConstRadixSystemAndDelegates_Object.Label_Object_Text,
+                                               ConstNumberSystems.RadixSystemDelegatesAndControlsExtendedArray[Counter].ConstRadixSystemAndDelegates_Object.Label_Object_Name,
+                                               ConstNumberSystems.RadixSystemDelegatesAndControlsExtendedArray[Counter].ConstRadixSystemAndDelegates_Object.Label_Object_Text,
                                                GridNumberSystem.RowDefinitions.Count - 1,
                                                Const.LabelColumnPosition,
                                                Const.LabelColumnSpan);
 
                 ConstRadixSystemAndDelegatesExtended_Object.ConstRadixSystemAndDelegates_Object.TextBox_Object =
                     ControlTools.InsertTextBoxInGrid(GridNumberSystem,
-                    Const.RadixSystemDelegatesAndControlsExtendedArray[Counter].ConstRadixSystemAndDelegates_Object.TextBox_Object_Name,
+                    ConstNumberSystems.RadixSystemDelegatesAndControlsExtendedArray[Counter].ConstRadixSystemAndDelegates_Object.TextBox_Object_Name,
                     GridNumberSystem.RowDefinitions.Count - 1,
                     Const.TextBoxColumnPosition,
                     Const.TextBoxColumnSpan,
@@ -2247,7 +2247,7 @@ namespace VariabelBegreb
             ConstRadixSystemAndDelegates_Object.Button_Object_Delete = null;
             ConstRadixSystemAndDelegates_Object.FunctionPointerFromRadix10 = null;
             ConstRadixSystemAndDelegates_Object.FunctionPointerToRadix10 = null;
-            ConstRadixSystemAndDelegates_Object.ConstRadixSystem_Object.ValidKeysArray = Const.MakeKeyArrayToRadixSystem((int)cmbNumberSystemRadix.SelectedValue).ToArray();
+            ConstRadixSystemAndDelegates_Object.ConstRadixSystem_Object.ValidKeysArray = ConstNumberSystems.MakeKeyArrayToRadixSystem((int)cmbNumberSystemRadix.SelectedValue).ToArray();
             ConstRadixSystemAndDelegates_Object.ConstRadixSystem_Object.RadixSpaceCharacter = (char)cmbNumberSystemSpaceCharacter.SelectedValue;
             ConstRadixSystemAndDelegates_Object.ConstRadixSystem_Object.RadixSpaceCounter = (int)cmbNumberSystemSpaceCounter.SelectedValue;
             ConstRadixSystemAndDelegates_Object.ConstRadixSystem_Object.RadixValue = (int)cmbNumberSystemRadix.SelectedValue;
@@ -2279,7 +2279,7 @@ namespace VariabelBegreb
                 cmbNumberSystemSpaceCounter,
                 "cmbRadixDynamicSpaceCounter_" + NumberDynamicRadixSystemsAdded.ToString(),
                 GridNumberSystem.RowDefinitions.Count - 1,
-                Const.ComboBoxRadixSpaceCounterColumn,
+                ConstNumberSystems.ComboBoxRadixSpaceCounterColumn,
                 1,
                 Const.ComboBoxRowHeight,
                 cmbNumberSystemSpaceCharacterCounter_SelectionChanged);
@@ -2289,7 +2289,7 @@ namespace VariabelBegreb
                 cmbNumberSystemSpaceCharacter,
                 "cmbRadixDynamicSpaceCharacter_" + NumberDynamicRadixSystemsAdded.ToString(),
                 GridNumberSystem.RowDefinitions.Count - 1,
-                Const.ComboBoxRadixSpaceCharacterColumn,
+                ConstNumberSystems.ComboBoxRadixSpaceCharacterColumn,
                 1,
                 Const.ComboBoxRowHeight,
                 cmbNumberSystemSpaceCharacter_SelectionChanged);
@@ -2299,10 +2299,10 @@ namespace VariabelBegreb
                 ButtonName: "btnRadixDelete_" + NumberDynamicRadixSystemsAdded.ToString(),
                 ButtonText: "Slet System",
                 RowPosition: GridNumberSystem.RowDefinitions.Count - 1,
-                ColumnPosition: Const.ButtonxRadixDeleteColumn,
-                ColumnSpan: Const.ButtonxRadixDeleteColumnSpan,
-                Height: Const.ButtonxRadixDeleteHeight,
-                Width: Const.ButtonxRadixDeleteWidth,
+                ColumnPosition: ConstNumberSystems.ButtonxRadixDeleteColumn,
+                ColumnSpan: ConstNumberSystems.ButtonxRadixDeleteColumnSpan,
+                Height: ConstNumberSystems.ButtonxRadixDeleteHeight,
+                Width: ConstNumberSystems.ButtonxRadixDeleteWidth,
                 FunctionButtonClicked: btnClearNumberSystem_Click);
 
             ConstRadixSystemAndDelegates_Object.GridRowPosition = GridNumberSystem.RowDefinitions.Count - 1;
@@ -2386,7 +2386,7 @@ namespace VariabelBegreb
 
             if (IndexNumberInList > 0)
             {
-                GridNumberSystem.Children.RemoveRange(ConstRadixSystemAndDelegatesList[IndexNumberInList].ConstRadixSystemAndDelegates_Object.FirstLabelInGridRowPosition, Const.NumberOfControlsInGridRow);
+                GridNumberSystem.Children.RemoveRange(ConstRadixSystemAndDelegatesList[IndexNumberInList].ConstRadixSystemAndDelegates_Object.FirstLabelInGridRowPosition, ConstNumberSystems.NumberOfControlsInGridRow);
                 GridNumberSystem.RowDefinitions.RemoveAt(ConstRadixSystemAndDelegatesList[IndexNumberInList].ConstRadixSystemAndDelegates_Object.GridRowPosition);
                 ConstRadixSystemAndDelegatesList.RemoveAt(IndexNumberInList);
             }
@@ -2718,8 +2718,8 @@ namespace VariabelBegreb
                     RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
                     ColumnPosition: 6,
                     ColumnSpan: 2,
-                    Height: Const.ButtonxRadixDeleteHeight,
-                    Width: Const.ButtonxRadixDeleteWidth,
+                    Height: ConstNumberSystems.ButtonxRadixDeleteHeight,
+                    Width: ConstNumberSystems.ButtonxRadixDeleteWidth,
                     FunctionButtonClicked: btnCalculateGeometry);
 
             ConstGeometry.FigureCalculation_Object.Button_Clear_Object.XamlControl =
@@ -2730,8 +2730,8 @@ namespace VariabelBegreb
                     RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
                     ColumnPosition: 8,
                     ColumnSpan: 2,
-                    Height: Const.ButtonxRadixDeleteHeight,
-                    Width: Const.ButtonxRadixDeleteWidth,
+                    Height: ConstNumberSystems.ButtonxRadixDeleteHeight,
+                    Width: ConstNumberSystems.ButtonxRadixDeleteWidth,
                     FunctionButtonClicked: btnClearAllGeometryTextBoxes);
 
             ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);

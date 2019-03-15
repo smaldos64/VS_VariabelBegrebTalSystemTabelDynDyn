@@ -65,6 +65,7 @@
     <Compile Include="NumberSystems\RomerNumber.cs" />
     <Compile Include="Tools\Const.cs" />
     <Compile Include="Tools\ConstGeometry.cs" />
+    <Compile Include="Tools\ConstNumberSystems.cs" />
     <Compile Include="Tools\ConstUnitsConverter.cs" />
     <Compile Include="Tools\ControlTools.cs" />
     <Compile Include="Tools\Extension.cs" />
