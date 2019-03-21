@@ -508,16 +508,6 @@
                     <TabItem Header="Geometri" x:Name="Geometry">
                         <Grid Background="#FFE5E5E5" x:Name="Grid_Geometry">
                             <Grid.ColumnDefinitions>
-                                <!--<ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>-->
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="auto"/>
@@ -545,11 +535,14 @@
 
                     <TabItem Header="Trignometri" x:Name="Trigonometry">
                         <Grid Background="#FFE5E5E5" x:Name="Grid_Trigonometry">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="100"/>
+                            <!--<Polyline Stroke="#48F" StrokeThickness="1.5" 
+                                      Points="{Binding Output, Converter={StaticResource PointConverter}}" 
+                                Canvas.Top ="50"></Polyline>-->
+                            <!--<Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="100"/>
                                 <ColumnDefinition Width="100"/>
                                 <ColumnDefinition Width="100"/>
@@ -566,7 +559,7 @@
                                 <RowDefinition Height="30"/>
                             </Grid.RowDefinitions>
                             <Image Source="d:/Teide1.jpg" Stretch="UniformToFill"></Image>
-                            <Button Name="Test" Content="Test"></Button>
+                            <Button Name="Test" Content="Test"></Button>-->
                         </Grid>
                     </TabItem>
                 </TabControl>
