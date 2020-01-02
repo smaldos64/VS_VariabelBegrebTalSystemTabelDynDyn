@@ -8,6 +8,7 @@ using System.Windows.Controls;
 namespace VariabelBegreb.Tools
 {
     public delegate double CalculateOnFigure(List<double> NumberList);
+    //public delegate void Unit_SelectionChanged(object sender, SelectionChangedEventArgs e);
 
     public enum Figures_Enum
     {
@@ -32,6 +33,7 @@ namespace VariabelBegreb.Tools
         public MyControl(string[] XamlControlStringArray)
         {
             this.XamlControlStringArray = XamlControlStringArray;
+            this.XamlControl = default(T);
         }
     }
 

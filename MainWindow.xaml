@@ -535,7 +535,32 @@
 
                     <TabItem Header="Trignometri" x:Name="Trigonometry">
                         <Grid Background="#FFE5E5E5" x:Name="Grid_Trigonometry">
-                            <!--<Polyline Stroke="#48F" StrokeThickness="1.5" 
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="lbl1" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblTrigonometry1"  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="10" />
+                            <Label Content="lbl2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblTrigonometry2" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="10" />
+                            <Label Content="lbl3" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblTrigonometry3" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="10" />
+                        </Grid>
+                        <!--<Grid Background="#FFE5E5E5" x:Name="Grid_Trigonometry">
+                            --><!--<Polyline Stroke="#48F" StrokeThickness="1.5" 
                                       Points="{Binding Output, Converter={StaticResource PointConverter}}" 
                                 Canvas.Top ="50"></Polyline>-->
                             <!--<Grid.ColumnDefinitions>
@@ -559,8 +584,8 @@
                                 <RowDefinition Height="30"/>
                             </Grid.RowDefinitions>
                             <Image Source="d:/Teide1.jpg" Stretch="UniformToFill"></Image>
-                            <Button Name="Test" Content="Test"></Button>-->
-                        </Grid>
+                            <Button Name="Test" Content="Test"></Button>--><!--
+                        </Grid>-->
                     </TabItem>
                 </TabControl>
             </Grid>
