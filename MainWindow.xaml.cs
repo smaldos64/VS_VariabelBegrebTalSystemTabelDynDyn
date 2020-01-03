@@ -57,6 +57,8 @@ namespace VariabelBegreb
         private static List<TextBox> TextBoxListGeometryInput = new List<TextBox>();
         private static List<TextBox> TextBoxListGeometryOutput = new List<TextBox>();
 
+        private static string UnitToUse = "";
+
 
         public MainWindow()
         {
@@ -2676,9 +2678,7 @@ namespace VariabelBegreb
             Button MyResultButton;
 
             MyUnitComboBox = 
-            //ConstGeometry.FigureCalculation_Object.ComboBox_Unit_Object.XamlControl =
                 ControlTools.InsertComboBoxInGrid(CurrentGrid,
-                //ConstGeometry.FigureCalculation_Object.ComboBox_Unit_Object.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
                 UnitComboBox.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
                 CurrentGrid.RowDefinitions.Count - 1,
                 ConstGeometry.GeometryLabelStartColumn,
@@ -2704,21 +2704,18 @@ namespace VariabelBegreb
                 for (Counter = 0; Counter < ConstUnitsConverter.UnitsOverallConverterArray[Index].UnitsConverterArray.Length; Counter++)
                 {
                     MyUnitComboBox.Items.Add(ConstUnitsConverter.UnitsOverallConverterArray[Index].UnitsConverterArray[Counter].UnitShortName);
-                    //ConstGeometry.FigureCalculation_Object.ComboBox_Unit_Object.XamlControl.Items.Add(ConstUnitsConverter.UnitsOverallConverterArray[Index].UnitsConverterArray[Counter].UnitShortName);
                     if ("m" == ConstUnitsConverter.UnitsOverallConverterArray[Index].UnitsConverterArray[Counter].UnitShortName)
                     {
                         MyUnitComboBox.SelectedValue = "m";
-                        //ConstGeometry.FigureCalculation_Object.ComboBox_Unit_Object.XamlControl.SelectedValue = "m";
+                        UnitToUse = "m";
                     }
                 }
                 MyUnitComboBox.SelectionChanged += FunctionToBeExecutedOnUnitChange;
             }
 
-            //ConstGeometry.FigureCalculation_Object.ComboBox_Figure_Object.XamlControl =
             MyFigureComboBox = 
                 ControlTools.InsertComboBoxInGrid(CurrentGrid,
                 FigureComboBox.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
-                //ConstGeometry.FigureCalculation_Object.ComboBox_Figure_Object.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
                 CurrentGrid.RowDefinitions.Count - 1,
                 ConstGeometry.GeometryLabelStartColumn + 2,
                 ConstGeometry.GeometryLabelDefaultColumnSpan,
@@ -2726,28 +2723,21 @@ namespace VariabelBegreb
                 FunctionToBeExecutedOnFigureChange);
 
             for (Counter = 0; Counter < CurrentFigureCalculationArray.Length; Counter++)
-            //for (Counter = 0; Counter < ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray.Length; Counter++)
             {
                 MyFigureComboBox.Items.Add(CurrentFigureCalculationArray[Counter].FigureName);
-                //MyFigureComboBox.XamlControl.Items.Add(ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray[Counter].FigureName);
-                //ConstGeometry.FigureCalculation_Object.ComboBox_Figure_Object.XamlControl.Items.Add(ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray[Counter].FigureName);
                 if (0 == Counter)
                 {
                     MyFigureComboBox.SelectionChanged -= FunctionToBeExecutedOnFigureChange;
                     MyFigureComboBox.SelectedValue = CurrentFigureCalculationArray[Counter].FigureName;
-                    //ConstGeometry.FigureCalculation_Object.ComboBox_Figure_Object.XamlControl.SelectedValue = ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray[Counter].FigureName;
                     MyFigureComboBox.SelectionChanged += FunctionToBeExecutedOnFigureChange;
                 }
             }
 
             MyResultButton = 
-            //ConstGeometry.FigureCalculation_Object.Button_Result_Object.XamlControl =
-                ControlTools.InsertButtonInGrid(
+                    ControlTools.InsertButtonInGrid(
                     Grid_Object: CurrentGrid,
                     ButtonName: ResultButton.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
-                    //ButtonName: ConstGeometry.FigureCalculation_Object.Button_Result_Object.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
                     ButtonText: ResultButton.XamlControlStringArray[ConstGeometry.ButtonTextPositionInArray],
-                    //ButtonText: ConstGeometry.FigureCalculation_Object.Button_Result_Object.XamlControlStringArray[ConstGeometry.ButtonTextPositionInArray],
                     RowPosition: CurrentGrid.RowDefinitions.Count - 1,
                     ColumnPosition: 6,
                     ColumnSpan: 2,
@@ -2756,13 +2746,10 @@ namespace VariabelBegreb
                     FunctionButtonClicked: FunctionToBeExecutedOnResultButtonPress);
 
             MyClearButton = 
-            //ConstGeometry.FigureCalculation_Object.Button_Clear_Object.XamlControl =
-                ControlTools.InsertButtonInGrid(
+                    ControlTools.InsertButtonInGrid(
                     Grid_Object: CurrentGrid,
                     ButtonName: ClearButton.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
-                    //ButtonName: ConstGeometry.FigureCalculation_Object.Button_Clear_Object.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
                     ButtonText: ClearButton.XamlControlStringArray[ConstGeometry.ButtonTextPositionInArray],
-                    //ButtonText: ConstGeometry.FigureCalculation_Object.Button_Clear_Object.XamlControlStringArray[ConstGeometry.ButtonTextPositionInArray],
                     RowPosition: CurrentGrid.RowDefinitions.Count - 1,
                     ColumnPosition: 8,
                     ColumnSpan: 2,
@@ -2787,90 +2774,6 @@ namespace VariabelBegreb
 
         private void InitializeGeometryControls()
         {
-            //int Counter = 0;
-            //int Index = 0;
-
-            //ConstGeometry.FigureCalculation_Object.ComboBox_Unit_Object.XamlControl =
-            //    ControlTools.InsertComboBoxInGrid(Grid_Geometry,
-            //    ConstGeometry.FigureCalculation_Object.ComboBox_Unit_Object.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
-            //    Grid_Geometry.RowDefinitions.Count - 1,
-            //    ConstGeometry.GeometryLabelStartColumn,
-            //    ConstGeometry.GeometryLabelDefaultColumnSpan,
-            //    Const.ComboBoxRowHeight,
-            //    cmbGeometryUnit_SelectionChanged);
-
-            //do
-            //{
-            //    if ("Længdemål" == ConstUnitsConverter.UnitsOverallConverterArray[Counter].UnitsBelongTo)
-            //    {
-            //        break;
-            //    }
-            //    else
-            //    {
-            //        Index++;
-            //    }
-            //} while (Index < ConstUnitsConverter.UnitsOverallConverterArray.Length);
-
-            //if (Index < ConstUnitsConverter.UnitsOverallConverterArray.Length)
-            //{
-            //    for (Counter = 0; Counter < ConstUnitsConverter.UnitsOverallConverterArray[Index].UnitsConverterArray.Length; Counter++)
-            //    {
-            //        ConstGeometry.FigureCalculation_Object.ComboBox_Unit_Object.XamlControl.Items.Add(ConstUnitsConverter.UnitsOverallConverterArray[Index].UnitsConverterArray[Counter].UnitShortName);
-            //        if ("m" == ConstUnitsConverter.UnitsOverallConverterArray[Index].UnitsConverterArray[Counter].UnitShortName)
-            //        {
-            //            ConstGeometry.FigureCalculation_Object.ComboBox_Unit_Object.XamlControl.SelectedValue = "m";
-            //        }
-            //    }
-            //}
-
-            //ConstGeometry.FigureCalculation_Object.ComboBox_Figure_Object.XamlControl =
-            //    ControlTools.InsertComboBoxInGrid(Grid_Geometry,
-            //    ConstGeometry.FigureCalculation_Object.ComboBox_Figure_Object.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
-            //    Grid_Geometry.RowDefinitions.Count - 1,
-            //    ConstGeometry.GeometryLabelStartColumn + 2,
-            //    ConstGeometry.GeometryLabelDefaultColumnSpan,
-            //    Const.ComboBoxRowHeight,
-            //    cmbGeometryFigure_SelectionChanged);
-
-            //for (Counter = 0; Counter < ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray.Length; Counter++)
-            //{
-            //    ConstGeometry.FigureCalculation_Object.ComboBox_Figure_Object.XamlControl.Items.Add(ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray[Counter].FigureName);
-            //    if (0 == Counter)
-            //    {
-            //        ConstGeometry.FigureCalculation_Object.ComboBox_Figure_Object.XamlControl.SelectedValue = ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray[Counter].FigureName;
-            //    }
-            //}
-
-            //ConstGeometry.FigureCalculation_Object.Button_Result_Object.XamlControl =
-            //    ControlTools.InsertButtonInGrid(
-            //        Grid_Object: Grid_Geometry,
-            //        ButtonName: ConstGeometry.FigureCalculation_Object.Button_Result_Object.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
-            //        ButtonText: ConstGeometry.FigureCalculation_Object.Button_Result_Object.XamlControlStringArray[ConstGeometry.ButtonTextPositionInArray],
-            //        RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
-            //        ColumnPosition: 6,
-            //        ColumnSpan: 2,
-            //        Height: ConstNumberSystems.ButtonxRadixDeleteHeight,
-            //        Width: ConstNumberSystems.ButtonxRadixDeleteWidth,
-            //        FunctionButtonClicked: btnCalculateGeometry);
-
-            //ConstGeometry.FigureCalculation_Object.Button_Clear_Object.XamlControl =
-            //    ControlTools.InsertButtonInGrid(
-            //        Grid_Object: Grid_Geometry,
-            //        ButtonName: ConstGeometry.FigureCalculation_Object.Button_Clear_Object.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
-            //        ButtonText: ConstGeometry.FigureCalculation_Object.Button_Clear_Object.XamlControlStringArray[ConstGeometry.ButtonTextPositionInArray],
-            //        RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
-            //        ColumnPosition: 8,
-            //        ColumnSpan: 2,
-            //        Height: ConstNumberSystems.ButtonxRadixDeleteHeight,
-            //        Width: ConstNumberSystems.ButtonxRadixDeleteWidth,
-            //        FunctionButtonClicked: btnClearAllGeometryTextBoxes);
-
-            //ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
-            //ControlTools.InsertRowInGrid(Grid_Geometry, ConstGeometry.ImageHeight);
-            //ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
-
-            //FirstControlToBeDeletedInGeometryGridCount = Grid_Geometry.Children.Count - 1;
-            //RowDeleteNumberInGeometryGrid = Grid_Geometry.RowDefinitions.Count;
             IndexNumberInGeometryArray = 0;
             InitializeComboBoxesAndCalculateDeleteButtons(ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray,
                                                           Grid_Geometry,
@@ -2882,7 +2785,13 @@ namespace VariabelBegreb
                                                           btnClearAllGeometryTextBoxes,
                                                           ConstGeometry.FigureCalculation_Object.Button_Result_Object,
                                                           btnCalculateGeometry);
-            SetupGeometryLabels_TextBoxes_Buttons(IndexNumberInGeometryArray);
+
+            lblGeometry3.Content = ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInGeometryArray].FigureDimensions.ToString() + "-dimensionel figur beregninger på " +
+                ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInGeometryArray].FigureName;
+            
+            SetupGeometryLabels_TextBoxes_Buttons(IndexNumberInGeometryArray,
+                                                  ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray,
+                                                  Grid_Geometry);
         }
 
         private void btnClearAllGeometryTextBoxes(object sender, RoutedEventArgs e)
@@ -2967,42 +2876,50 @@ namespace VariabelBegreb
             }
         }
 
-        private void SetupGeometryLabels_TextBoxes_Buttons(int IndexNumberInGeometryArrayFunc)
+        private void SetupGeometryLabels_TextBoxes_Buttons(int IndexNumberInGeometryArrayFunc,
+                                                           CurrentFigureCalculation[] CurrentFigureCalculationArray,
+                                                           Grid CurrentGrid)
         {
             int RowCounter;
             string LabelText;
             string TextBoxText;
-            CurrentFigureCalculation CurrentFigureCalculation_Object = ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInGeometryArrayFunc];
-            string UnitToUse = (string)ConstGeometry.FigureCalculation_Object.ComboBox_Unit_Object.XamlControl.SelectedValue;
-            
+            //CurrentFigureCalculation CurrentFigureCalculation_Object = ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInGeometryArrayFunc];
+            CurrentFigureCalculation CurrentFigureCalculation_Object = CurrentFigureCalculationArray[IndexNumberInGeometryArrayFunc];
+            //string UnitToUse = (string)ConstGeometry.FigureCalculation_Object.ComboBox_Unit_Object.XamlControl.SelectedValue;
+
             RemoveOldRowsInGeometryGrid();
             TextBoxListGeometryInput.Clear();
             TextBoxListGeometryOutput.Clear();
 
-            lblGeometry3.Content = CurrentFigureCalculation_Object.FigureDimensions.ToString() + "-dimensionel figur beregninger på " +
-                CurrentFigureCalculation_Object.FigureName;
+            //lblGeometry3.Content = CurrentFigureCalculation_Object.FigureDimensions.ToString() + "-dimensionel figur beregninger på " +
+            //    CurrentFigureCalculation_Object.FigureName;
 
             CurrentFigureCalculation_Object.Image_Figure_Object.XamlControl =
                 ControlTools.InsertImageInGrid(
-                  Grid_Object: Grid_Geometry,
+                  //Grid_Object: Grid_Geometry,
+                  Grid_Object: CurrentGrid,
                   ImageFileName: CurrentFigureCalculation_Object.Image_Figure_Object.XamlControlStringArray[ConstGeometry.ImageFileNamePositionInArray],
-                  RowPosition: Grid_Geometry.RowDefinitions.Count - 2,
+                  //RowPosition: Grid_Geometry.RowDefinitions.Count - 2,
+                  RowPosition: CurrentGrid.RowDefinitions.Count - 2,
                   ColumnPosition: ConstGeometry.GeometryLabelStartColumn,
                   ColumnSpan: 5,
                   Width: 200,
                   Height: ConstGeometry.ImageHeight);
 
-            ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
+            //ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
+            ControlTools.InsertRowInGrid(CurrentGrid, Const.DynamicElementsRowHeight);
 
             for (RowCounter = 0; RowCounter < CurrentFigureCalculation_Object.MyLabelTextBoxRowArray.Length; RowCounter++)
             {
                 int ControlCounter = 0;
                 CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControl =
                     ControlTools.InsertLabelInGrid(
-                        Grid_Object: Grid_Geometry,
+                        //Grid_Object: Grid_Geometry,
+                        Grid_Object: CurrentGrid,
                         LabelName: CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
                         LabelText: CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControlStringArray[ConstGeometry.LabelTextPositionInArray],
-                        RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
+                        //RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
+                        RowPosition: CurrentGrid.RowDefinitions.Count - 1,
                         ColumnPosition: ConstGeometry.GeometryLabelStartColumn,
                         ColumnSpan: 3);
 
@@ -3017,9 +2934,11 @@ namespace VariabelBegreb
                     
                 CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControl =
                     ControlTools.InsertTextBoxInGrid(
-                        Grid_Object: Grid_Geometry,
+                        //Grid_Object: Grid_Geometry,
+                        Grid_Object: CurrentGrid,
                         TextBoxName: CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
-                        RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
+                        //RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
+                        RowPosition: CurrentGrid.RowDefinitions.Count - 1,
                         ColumnPosition: ConstGeometry.GeometryLabelStartColumn + 3,
                         ColumnSpan: 1,
                         Width: Const.TextBoxWidth,
@@ -3044,14 +2963,17 @@ namespace VariabelBegreb
 
                     CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControl =
                     ControlTools.InsertLabelInGrid(
-                        Grid_Object: Grid_Geometry,
+                        //Grid_Object: Grid_Geometry,
+                        Grid_Object: CurrentGrid,
                         LabelName: CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
                         LabelText: LabelText,
-                        RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
+                        //RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
+                        RowPosition: CurrentGrid.RowDefinitions.Count - 1,
                         ColumnPosition: ControlCounter + 4,
                         ColumnSpan: ConstGeometry.GeometryLabelDefaultColumnSpan);
                 }
-                ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
+                //ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
+                ControlTools.InsertRowInGrid(CurrentGrid, Const.DynamicElementsRowHeight);
             }
 
 
@@ -3060,10 +2982,12 @@ namespace VariabelBegreb
                 int ControlCounter = 0;
                 CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].XamlControl =
                     ControlTools.InsertLabelInGrid(
-                        Grid_Object: Grid_Geometry,
+                        //Grid_Object: Grid_Geometry,
+                        Grid_Object: CurrentGrid,
                         LabelName: CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
                         LabelText: CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].XamlControlStringArray[ConstGeometry.LabelTextPositionInArray],
-                        RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
+                        //RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
+                        RowPosition: CurrentGrid.RowDefinitions.Count - 1,
                         ColumnPosition: ConstGeometry.GeometryLabelStartColumn,
                         ColumnSpan: 3);
 
@@ -3078,9 +3002,11 @@ namespace VariabelBegreb
 
                 CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControl =
                     ControlTools.InsertTextBoxInGrid(
-                        Grid_Object: Grid_Geometry,
+                        //Grid_Object: Grid_Geometry,
+                        Grid_Object: CurrentGrid,
                         TextBoxName: CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
-                        RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
+                        //RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
+                        RowPosition: CurrentGrid.RowDefinitions.Count - 1,
                         ColumnPosition: ConstGeometry.GeometryLabelStartColumn + 3,
                         ColumnSpan: 1,
                         Width: Const.TextBoxWidth,
@@ -3105,14 +3031,17 @@ namespace VariabelBegreb
 
                     CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].XamlControl =
                     ControlTools.InsertLabelInGrid(
-                        Grid_Object: Grid_Geometry,
+                        //Grid_Object: Grid_Geometry,
+                        Grid_Object: CurrentGrid,
                         LabelName: CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
                         LabelText: LabelText,
-                        RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
+                        //RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
+                        RowPosition: CurrentGrid.RowDefinitions.Count - 1,
                         ColumnPosition: ControlCounter + 4,
                         ColumnSpan: ConstGeometry.GeometryLabelDefaultColumnSpan);
                 }
-                ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
+                //ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
+                ControlTools.InsertRowInGrid(CurrentGrid, Const.DynamicElementsRowHeight);
             }
         }
 
@@ -3124,7 +3053,11 @@ namespace VariabelBegreb
 
             if (IndexNumberInGeometryArray >= 0)
             {
-                SetupGeometryLabels_TextBoxes_Buttons(IndexNumberInGeometryArray);
+                lblGeometry3.Content = ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInGeometryArray].FigureDimensions.ToString() + "-dimensionel figur beregninger på " +
+                ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInGeometryArray].FigureName;
+                SetupGeometryLabels_TextBoxes_Buttons(IndexNumberInGeometryArray,
+                                                      ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray,
+                                                      Grid_Geometry);
             }
         }
 
