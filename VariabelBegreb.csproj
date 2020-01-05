@@ -73,6 +73,7 @@
     <Compile Include="Tools\FileTools.cs" />
     <Compile Include="Tools\KeyHelper.cs" />
     <Compile Include="Tools\MathGeometry.cs" />
+    <Compile Include="Tools\MathTrigonometry.cs" />
     <Compile Include="Tools\PrintOutTools.cs" />
     <Compile Include="Tools\StringHelper.cs" />
     <Compile Include="Tools\StringTools.cs" />

@@ -59,6 +59,10 @@ namespace VariabelBegreb
 
         private static string UnitToUse = "";
 
+        private static int IndexNumberInTrigonometryArray = 0;
+        private static int RowDeleteNumberInTrigonometryGrid;
+        private static int FirstControlToBeDeletedInTrigonometryGridCount;
+
 
         public MainWindow()
         {
@@ -76,9 +80,13 @@ namespace VariabelBegreb
 
             InitializeGeometryLabels();
 
-            InitializeGeometryControls();
+            //InitializeGeometryControls();
 
             InitializeTrigonometryLabels();
+
+            InitializeTrigonometryControls();
+
+            InitializeGeometryControls();
 
             //InitializeEquationSystemLabels();
 
@@ -2658,119 +2666,118 @@ namespace VariabelBegreb
             lblGeometry3.Content = "x-dimensionel figur beregninger";
         }
 
-        private void InitializeComboBoxesAndCalculateDeleteButtons(CurrentFigureCalculation[] CurrentFigureCalculationArray,
-                                                                   Grid CurrentGrid,
-                                                                   MyControl<ComboBox> UnitComboBox,
-                                                                   SelectionChangedEventHandler FunctionToBeExecutedOnUnitChange,
-                                                                   MyControl<ComboBox> FigureComboBox,
-                                                                   SelectionChangedEventHandler FunctionToBeExecutedOnFigureChange,
-                                                                   MyControl<Button> ClearButton,
-                                                                   RoutedEventHandler FunctionToBeExecutedOnClearButtonPress,
-                                                                   MyControl<Button> ResultButton,
-                                                                   RoutedEventHandler FunctionToBeExecutedOnResultButtonPress)
-        {
-            int Counter = 0;
-            int Index = 0;
+        //private void InitializeComboBoxesAndCalculateDeleteButtons(CurrentFigureCalculation[] CurrentFigureCalculationArray,
+        //                                                           Grid CurrentGrid,
+        //                                                           MyControl<ComboBox> UnitComboBox,
+        //                                                           SelectionChangedEventHandler FunctionToBeExecutedOnUnitChange,
+        //                                                           MyControl<ComboBox> FigureComboBox,
+        //                                                           SelectionChangedEventHandler FunctionToBeExecutedOnFigureChange,
+        //                                                           MyControl<Button> ClearButton,
+        //                                                           RoutedEventHandler FunctionToBeExecutedOnClearButtonPress,
+        //                                                           MyControl<Button> ResultButton,
+        //                                                           RoutedEventHandler FunctionToBeExecutedOnResultButtonPress)
+        //{
+        //    int Counter = 0;
+        //    int Index = 0;
 
-            ComboBox MyUnitComboBox;
-            ComboBox MyFigureComboBox;
-            Button MyClearButton;
-            Button MyResultButton;
+        //    ComboBox MyUnitComboBox;
+        //    ComboBox MyFigureComboBox;
+        //    Button MyClearButton;
+        //    Button MyResultButton;
 
-            MyUnitComboBox = 
-                ControlTools.InsertComboBoxInGrid(CurrentGrid,
-                UnitComboBox.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
-                CurrentGrid.RowDefinitions.Count - 1,
-                ConstGeometry.GeometryLabelStartColumn,
-                ConstGeometry.GeometryLabelDefaultColumnSpan,
-                Const.ComboBoxRowHeight,
-                FunctionToBeExecutedOnUnitChange);
+        //    MyUnitComboBox = 
+        //        ControlTools.InsertComboBoxInGrid(CurrentGrid,
+        //        UnitComboBox.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
+        //        CurrentGrid.RowDefinitions.Count - 1,
+        //        ConstGeometry.GeometryLabelStartColumn,
+        //        ConstGeometry.GeometryLabelDefaultColumnSpan,
+        //        Const.ComboBoxRowHeight,
+        //        FunctionToBeExecutedOnUnitChange);
 
-            do
-            {
-                if ("Længdemål" == ConstUnitsConverter.UnitsOverallConverterArray[Counter].UnitsBelongTo)
-                {
-                    break;
-                }
-                else
-                {
-                    Index++;
-                }
-            } while (Index < ConstUnitsConverter.UnitsOverallConverterArray.Length);
+        //    do
+        //    {
+        //        if ("Længdemål" == ConstUnitsConverter.UnitsOverallConverterArray[Counter].UnitsBelongTo)
+        //        {
+        //            break;
+        //        }
+        //        else
+        //        {
+        //            Index++;
+        //        }
+        //    } while (Index < ConstUnitsConverter.UnitsOverallConverterArray.Length);
 
-            if (Index < ConstUnitsConverter.UnitsOverallConverterArray.Length)
-            {
-                MyUnitComboBox.SelectionChanged -= FunctionToBeExecutedOnUnitChange;
-                for (Counter = 0; Counter < ConstUnitsConverter.UnitsOverallConverterArray[Index].UnitsConverterArray.Length; Counter++)
-                {
-                    MyUnitComboBox.Items.Add(ConstUnitsConverter.UnitsOverallConverterArray[Index].UnitsConverterArray[Counter].UnitShortName);
-                    if ("m" == ConstUnitsConverter.UnitsOverallConverterArray[Index].UnitsConverterArray[Counter].UnitShortName)
-                    {
-                        MyUnitComboBox.SelectedValue = "m";
-                        UnitToUse = "m";
-                    }
-                }
-                MyUnitComboBox.SelectionChanged += FunctionToBeExecutedOnUnitChange;
-            }
+        //    if (Index < ConstUnitsConverter.UnitsOverallConverterArray.Length)
+        //    {
+        //        MyUnitComboBox.SelectionChanged -= FunctionToBeExecutedOnUnitChange;
+        //        for (Counter = 0; Counter < ConstUnitsConverter.UnitsOverallConverterArray[Index].UnitsConverterArray.Length; Counter++)
+        //        {
+        //            MyUnitComboBox.Items.Add(ConstUnitsConverter.UnitsOverallConverterArray[Index].UnitsConverterArray[Counter].UnitShortName);
+        //            if ("m" == ConstUnitsConverter.UnitsOverallConverterArray[Index].UnitsConverterArray[Counter].UnitShortName)
+        //            {
+        //                MyUnitComboBox.SelectedValue = "m";
+        //                UnitToUse = "m";
+        //            }
+        //        }
+        //        MyUnitComboBox.SelectionChanged += FunctionToBeExecutedOnUnitChange;
+        //    }
 
-            MyFigureComboBox = 
-                ControlTools.InsertComboBoxInGrid(CurrentGrid,
-                FigureComboBox.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
-                CurrentGrid.RowDefinitions.Count - 1,
-                ConstGeometry.GeometryLabelStartColumn + 2,
-                ConstGeometry.GeometryLabelDefaultColumnSpan,
-                Const.ComboBoxRowHeight,
-                FunctionToBeExecutedOnFigureChange);
+        //    MyFigureComboBox = 
+        //        ControlTools.InsertComboBoxInGrid(CurrentGrid,
+        //        FigureComboBox.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
+        //        CurrentGrid.RowDefinitions.Count - 1,
+        //        ConstGeometry.GeometryLabelStartColumn + 2,
+        //        ConstGeometry.GeometryLabelDefaultColumnSpan,
+        //        Const.ComboBoxRowHeight,
+        //        FunctionToBeExecutedOnFigureChange);
 
-            for (Counter = 0; Counter < CurrentFigureCalculationArray.Length; Counter++)
-            {
-                MyFigureComboBox.Items.Add(CurrentFigureCalculationArray[Counter].FigureName);
-                if (0 == Counter)
-                {
-                    MyFigureComboBox.SelectionChanged -= FunctionToBeExecutedOnFigureChange;
-                    MyFigureComboBox.SelectedValue = CurrentFigureCalculationArray[Counter].FigureName;
-                    MyFigureComboBox.SelectionChanged += FunctionToBeExecutedOnFigureChange;
-                }
-            }
+        //    for (Counter = 0; Counter < CurrentFigureCalculationArray.Length; Counter++)
+        //    {
+        //        MyFigureComboBox.Items.Add(CurrentFigureCalculationArray[Counter].FigureName);
+        //        if (0 == Counter)
+        //        {
+        //            MyFigureComboBox.SelectionChanged -= FunctionToBeExecutedOnFigureChange;
+        //            MyFigureComboBox.SelectedValue = CurrentFigureCalculationArray[Counter].FigureName;
+        //            MyFigureComboBox.SelectionChanged += FunctionToBeExecutedOnFigureChange;
+        //        }
+        //    }
 
-            MyResultButton = 
-                    ControlTools.InsertButtonInGrid(
-                    Grid_Object: CurrentGrid,
-                    ButtonName: ResultButton.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
-                    ButtonText: ResultButton.XamlControlStringArray[ConstGeometry.ButtonTextPositionInArray],
-                    RowPosition: CurrentGrid.RowDefinitions.Count - 1,
-                    ColumnPosition: 6,
-                    ColumnSpan: 2,
-                    Height: ConstNumberSystems.ButtonxRadixDeleteHeight,
-                    Width: ConstNumberSystems.ButtonxRadixDeleteWidth,
-                    FunctionButtonClicked: FunctionToBeExecutedOnResultButtonPress);
+        //    MyResultButton = 
+        //            ControlTools.InsertButtonInGrid(
+        //            Grid_Object: CurrentGrid,
+        //            ButtonName: ResultButton.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
+        //            ButtonText: ResultButton.XamlControlStringArray[ConstGeometry.ButtonTextPositionInArray],
+        //            RowPosition: CurrentGrid.RowDefinitions.Count - 1,
+        //            ColumnPosition: 6,
+        //            ColumnSpan: 2,
+        //            Height: ConstNumberSystems.ButtonxRadixDeleteHeight,
+        //            Width: ConstNumberSystems.ButtonxRadixDeleteWidth,
+        //            FunctionButtonClicked: FunctionToBeExecutedOnResultButtonPress);
 
-            MyClearButton = 
-                    ControlTools.InsertButtonInGrid(
-                    Grid_Object: CurrentGrid,
-                    ButtonName: ClearButton.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
-                    ButtonText: ClearButton.XamlControlStringArray[ConstGeometry.ButtonTextPositionInArray],
-                    RowPosition: CurrentGrid.RowDefinitions.Count - 1,
-                    ColumnPosition: 8,
-                    ColumnSpan: 2,
-                    Height: ConstNumberSystems.ButtonxRadixDeleteHeight,
-                    Width: ConstNumberSystems.ButtonxRadixDeleteWidth,
-                    FunctionButtonClicked: FunctionToBeExecutedOnClearButtonPress);
+        //    MyClearButton = 
+        //            ControlTools.InsertButtonInGrid(
+        //            Grid_Object: CurrentGrid,
+        //            ButtonName: ClearButton.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
+        //            ButtonText: ClearButton.XamlControlStringArray[ConstGeometry.ButtonTextPositionInArray],
+        //            RowPosition: CurrentGrid.RowDefinitions.Count - 1,
+        //            ColumnPosition: 8,
+        //            ColumnSpan: 2,
+        //            Height: ConstNumberSystems.ButtonxRadixDeleteHeight,
+        //            Width: ConstNumberSystems.ButtonxRadixDeleteWidth,
+        //            FunctionButtonClicked: FunctionToBeExecutedOnClearButtonPress);
 
-            ControlTools.InsertRowInGrid(CurrentGrid, Const.DynamicElementsRowHeight);
-            ControlTools.InsertRowInGrid(CurrentGrid, ConstGeometry.ImageHeight);
-            ControlTools.InsertRowInGrid(CurrentGrid, Const.DynamicElementsRowHeight);
+        //    ControlTools.InsertRowInGrid(CurrentGrid, Const.DynamicElementsRowHeight);
+        //    ControlTools.InsertRowInGrid(CurrentGrid, ConstGeometry.ImageHeight);
+        //    ControlTools.InsertRowInGrid(CurrentGrid, Const.DynamicElementsRowHeight);
 
-            FirstControlToBeDeletedInGeometryGridCount = CurrentGrid.Children.Count - 1;
-            RowDeleteNumberInGeometryGrid = CurrentGrid.RowDefinitions.Count;
-            IndexNumberInGeometryArray = 0;
+        //    FirstControlToBeDeletedInGeometryGridCount = CurrentGrid.Children.Count - 1;
+        //    RowDeleteNumberInGeometryGrid = CurrentGrid.RowDefinitions.Count;
+            
+        //    UnitComboBox.XamlControl = MyUnitComboBox;
+        //    FigureComboBox.XamlControl = MyFigureComboBox;
 
-            UnitComboBox.XamlControl = MyUnitComboBox;
-            FigureComboBox.XamlControl = MyFigureComboBox;
-
-            ClearButton.XamlControl = MyClearButton;
-            ResultButton.XamlControl = MyResultButton;
-        }
+        //    ClearButton.XamlControl = MyClearButton;
+        //    ResultButton.XamlControl = MyResultButton;
+        //}
 
         private void InitializeGeometryControls()
         {
@@ -2782,282 +2789,56 @@ namespace VariabelBegreb
                                                           ConstGeometry.FigureCalculation_Object.ComboBox_Figure_Object,
                                                           cmbGeometryFigure_SelectionChanged,
                                                           ConstGeometry.FigureCalculation_Object.Button_Clear_Object,
-                                                          btnClearAllGeometryTextBoxes,
+                                                          btnClearAllFigureTextBoxes,
                                                           ConstGeometry.FigureCalculation_Object.Button_Result_Object,
                                                           btnCalculateGeometry);
 
             lblGeometry3.Content = ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInGeometryArray].FigureDimensions.ToString() + "-dimensionel figur beregninger på " +
                 ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInGeometryArray].FigureName;
-            
-            SetupGeometryLabels_TextBoxes_Buttons(IndexNumberInGeometryArray,
+
+            SetupFigureLabels_TextBoxes_Buttons(IndexNumberInGeometryArray,
                                                   ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray,
                                                   Grid_Geometry);
         }
-
-        private void btnClearAllGeometryTextBoxes(object sender, RoutedEventArgs e)
-        {
-            ControlTools.ClearTextBoxes(TextBoxListGeometryInput, ConstGeometry.DefaultTextBoxValue);
-            ControlTools.ClearTextBoxes(TextBoxListGeometryOutput, ConstGeometry.DefaultTextBoxValue);
-        }
-
+        
         private void cmbGeometryUnit_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            int RowCounter;
-            int ControlCounter;
             CurrentFigureCalculation CurrentFigureCalculation_Object = ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInGeometryArray];
             string UnitToUse = (string)ConstGeometry.FigureCalculation_Object.ComboBox_Unit_Object.XamlControl.SelectedValue;
-            string LabelText;
-
-            for (RowCounter = 0; RowCounter < CurrentFigureCalculation_Object.MyLabelTextBoxRowArray.Length; RowCounter++)
-            {
-                for (ControlCounter = 1; ControlCounter < CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray.Length; ControlCounter++)
-                {
-                    if (true == CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].IsCurrentLabelAnUnitLabel)
-                    {
-                        LabelText = UnitToUse + CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].UnitDimensionString;
-
-                        if (null != CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControl)
-                        {
-                            CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControl.Content = LabelText;
-                        }
-                    }
-                }
-            }
-
-            for (RowCounter = 0; RowCounter < CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray.Length; RowCounter++)
-            {
-                for (ControlCounter = 1; ControlCounter < CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray.Length; ControlCounter++)
-                {
-                    if (true == CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].IsCurrentLabelAnUnitLabel)
-                    {
-                        LabelText = UnitToUse + CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].UnitDimensionString;
-
-                        if (null != CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].XamlControl)
-                        {
-                            CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].XamlControl.Content = LabelText;
-                        }
-                    }
-                }
-            }
+           
+            HandleUnitChanged(CurrentFigureCalculation_Object, UnitToUse);
         }
 
-        private int GetIndexNumberInGeometryArray(string GeometryFigureName)
-        {
-            int Counter = 0;
-
-            do
-            {
-                if (GeometryFigureName == ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray[Counter].FigureName)
-                {
-                    return (Counter);
-                }
-                else
-                {
-                    Counter++;
-                }
-            } while (Counter < ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray.Length);
-
-            return (-1);
-        }
-
-        private void RemoveOldRowsInGeometryGrid()
-        {
-            int RowCounter;
-            int StopRowNumber;
+        //private void RemoveOldRowsInGeometryGrid()
+        //{
+        //    int RowCounter;
+        //    int StopRowNumber;
             
-            Grid_Geometry.Children.RemoveRange(FirstControlToBeDeletedInGeometryGridCount + 1,
-                (Grid_Geometry.Children.Count - 1) - FirstControlToBeDeletedInGeometryGridCount);
+        //    Grid_Geometry.Children.RemoveRange(FirstControlToBeDeletedInGeometryGridCount + 1,
+        //        (Grid_Geometry.Children.Count - 1) - FirstControlToBeDeletedInGeometryGridCount);
 
-            StopRowNumber = Grid_Geometry.RowDefinitions.Count;
+        //    StopRowNumber = Grid_Geometry.RowDefinitions.Count;
 
-            for (RowCounter = RowDeleteNumberInGeometryGrid; RowCounter < StopRowNumber; RowCounter++)
-            {
-                Grid_Geometry.RowDefinitions.RemoveAt(RowDeleteNumberInGeometryGrid);
-            }
-        }
-
-        private void SetupGeometryLabels_TextBoxes_Buttons(int IndexNumberInGeometryArrayFunc,
-                                                           CurrentFigureCalculation[] CurrentFigureCalculationArray,
-                                                           Grid CurrentGrid)
-        {
-            int RowCounter;
-            string LabelText;
-            string TextBoxText;
-            //CurrentFigureCalculation CurrentFigureCalculation_Object = ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInGeometryArrayFunc];
-            CurrentFigureCalculation CurrentFigureCalculation_Object = CurrentFigureCalculationArray[IndexNumberInGeometryArrayFunc];
-            //string UnitToUse = (string)ConstGeometry.FigureCalculation_Object.ComboBox_Unit_Object.XamlControl.SelectedValue;
-
-            RemoveOldRowsInGeometryGrid();
-            TextBoxListGeometryInput.Clear();
-            TextBoxListGeometryOutput.Clear();
-
-            //lblGeometry3.Content = CurrentFigureCalculation_Object.FigureDimensions.ToString() + "-dimensionel figur beregninger på " +
-            //    CurrentFigureCalculation_Object.FigureName;
-
-            CurrentFigureCalculation_Object.Image_Figure_Object.XamlControl =
-                ControlTools.InsertImageInGrid(
-                  //Grid_Object: Grid_Geometry,
-                  Grid_Object: CurrentGrid,
-                  ImageFileName: CurrentFigureCalculation_Object.Image_Figure_Object.XamlControlStringArray[ConstGeometry.ImageFileNamePositionInArray],
-                  //RowPosition: Grid_Geometry.RowDefinitions.Count - 2,
-                  RowPosition: CurrentGrid.RowDefinitions.Count - 2,
-                  ColumnPosition: ConstGeometry.GeometryLabelStartColumn,
-                  ColumnSpan: 5,
-                  Width: 200,
-                  Height: ConstGeometry.ImageHeight);
-
-            //ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
-            ControlTools.InsertRowInGrid(CurrentGrid, Const.DynamicElementsRowHeight);
-
-            for (RowCounter = 0; RowCounter < CurrentFigureCalculation_Object.MyLabelTextBoxRowArray.Length; RowCounter++)
-            {
-                int ControlCounter = 0;
-                CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControl =
-                    ControlTools.InsertLabelInGrid(
-                        //Grid_Object: Grid_Geometry,
-                        Grid_Object: CurrentGrid,
-                        LabelName: CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
-                        LabelText: CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControlStringArray[ConstGeometry.LabelTextPositionInArray],
-                        //RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
-                        RowPosition: CurrentGrid.RowDefinitions.Count - 1,
-                        ColumnPosition: ConstGeometry.GeometryLabelStartColumn,
-                        ColumnSpan: 3);
-
-                if (null != CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControl)
-                {
-                    TextBoxText = CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControl.Text;
-                }
-                else
-                {
-                    TextBoxText = CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControlStringArray[ConstGeometry.TextBoxTextPositionInArray];
-                }
-                    
-                CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControl =
-                    ControlTools.InsertTextBoxInGrid(
-                        //Grid_Object: Grid_Geometry,
-                        Grid_Object: CurrentGrid,
-                        TextBoxName: CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
-                        //RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
-                        RowPosition: CurrentGrid.RowDefinitions.Count - 1,
-                        ColumnPosition: ConstGeometry.GeometryLabelStartColumn + 3,
-                        ColumnSpan: 1,
-                        Width: Const.TextBoxWidth,
-                        Height: Const.TextBoxHeight,
-                        FunctionKeyDown: txtCheckForValidPositiveNumberPressed,
-                        FunctionTextChanged: null,
-                        TextBox_Text: TextBoxText,
-                        DisableTextBox: CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.Input_Output_Enum == Input_Output_Enum.Output_Enum);
-
-                TextBoxListGeometryInput.Add(CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControl);
-
-                for (ControlCounter = 1; ControlCounter < CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray.Length; ControlCounter++)
-                {
-                    if (true == CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].IsCurrentLabelAnUnitLabel)
-                    {
-                        LabelText = UnitToUse + CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].UnitDimensionString;
-                    }
-                    else
-                    {
-                        LabelText = CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControlStringArray[ConstGeometry.LabelTextPositionInArray];
-                    }
-
-                    CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControl =
-                    ControlTools.InsertLabelInGrid(
-                        //Grid_Object: Grid_Geometry,
-                        Grid_Object: CurrentGrid,
-                        LabelName: CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
-                        LabelText: LabelText,
-                        //RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
-                        RowPosition: CurrentGrid.RowDefinitions.Count - 1,
-                        ColumnPosition: ControlCounter + 4,
-                        ColumnSpan: ConstGeometry.GeometryLabelDefaultColumnSpan);
-                }
-                //ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
-                ControlTools.InsertRowInGrid(CurrentGrid, Const.DynamicElementsRowHeight);
-            }
-
-
-            for (RowCounter = 0; RowCounter < CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray.Length; RowCounter++)
-            {
-                int ControlCounter = 0;
-                CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].XamlControl =
-                    ControlTools.InsertLabelInGrid(
-                        //Grid_Object: Grid_Geometry,
-                        Grid_Object: CurrentGrid,
-                        LabelName: CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
-                        LabelText: CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].XamlControlStringArray[ConstGeometry.LabelTextPositionInArray],
-                        //RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
-                        RowPosition: CurrentGrid.RowDefinitions.Count - 1,
-                        ColumnPosition: ConstGeometry.GeometryLabelStartColumn,
-                        ColumnSpan: 3);
-
-                if (null != CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControl)
-                {
-                    TextBoxText = CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControl.Text;
-                }
-                else
-                {
-                    TextBoxText = CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControlStringArray[ConstGeometry.TextBoxTextPositionInArray];
-                }
-
-                CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControl =
-                    ControlTools.InsertTextBoxInGrid(
-                        //Grid_Object: Grid_Geometry,
-                        Grid_Object: CurrentGrid,
-                        TextBoxName: CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
-                        //RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
-                        RowPosition: CurrentGrid.RowDefinitions.Count - 1,
-                        ColumnPosition: ConstGeometry.GeometryLabelStartColumn + 3,
-                        ColumnSpan: 1,
-                        Width: Const.TextBoxWidth,
-                        Height: Const.TextBoxHeight,
-                        FunctionKeyDown: null,
-                        FunctionTextChanged: null,
-                        TextBox_Text: TextBoxText,
-                        DisableTextBox: CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.Input_Output_Enum == Input_Output_Enum.Output_Enum);
-
-                TextBoxListGeometryOutput.Add(CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControl);
-
-                for (ControlCounter = 1; ControlCounter < CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray.Length; ControlCounter++)
-                {
-                    if (true == CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].IsCurrentLabelAnUnitLabel)
-                    {
-                        LabelText = UnitToUse + CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].UnitDimensionString;
-                    }
-                    else
-                    {
-                        LabelText = CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].XamlControlStringArray[ConstGeometry.LabelTextPositionInArray];
-                    }
-
-                    CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].XamlControl =
-                    ControlTools.InsertLabelInGrid(
-                        //Grid_Object: Grid_Geometry,
-                        Grid_Object: CurrentGrid,
-                        LabelName: CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
-                        LabelText: LabelText,
-                        //RowPosition: Grid_Geometry.RowDefinitions.Count - 1,
-                        RowPosition: CurrentGrid.RowDefinitions.Count - 1,
-                        ColumnPosition: ControlCounter + 4,
-                        ColumnSpan: ConstGeometry.GeometryLabelDefaultColumnSpan);
-                }
-                //ControlTools.InsertRowInGrid(Grid_Geometry, Const.DynamicElementsRowHeight);
-                ControlTools.InsertRowInGrid(CurrentGrid, Const.DynamicElementsRowHeight);
-            }
-        }
+        //    for (RowCounter = RowDeleteNumberInGeometryGrid; RowCounter < StopRowNumber; RowCounter++)
+        //    {
+        //        Grid_Geometry.RowDefinitions.RemoveAt(RowDeleteNumberInGeometryGrid);
+        //    }
+        //}
 
         private void cmbGeometryFigure_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string ComboBoxName = ((System.Windows.FrameworkElement)sender).Name;
             string SelectedValue = (string)((ComboBox)(System.Windows.FrameworkElement)sender).SelectedValue;
-            IndexNumberInGeometryArray = GetIndexNumberInGeometryArray(SelectedValue);
+            IndexNumberInGeometryArray = GetIndexNumberInFigureArray(ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray,
+                                                                     SelectedValue);
 
             if (IndexNumberInGeometryArray >= 0)
             {
                 lblGeometry3.Content = ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInGeometryArray].FigureDimensions.ToString() + "-dimensionel figur beregninger på " +
                 ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInGeometryArray].FigureName;
-                SetupGeometryLabels_TextBoxes_Buttons(IndexNumberInGeometryArray,
-                                                      ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray,
-                                                      Grid_Geometry);
+                SetupFigureLabels_TextBoxes_Buttons(IndexNumberInGeometryArray,
+                                                    ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray,
+                                                    Grid_Geometry);
             }
         }
 
@@ -3095,8 +2876,378 @@ namespace VariabelBegreb
             lblTrigonometry3.Content = "Udover vinkler og længder vil der også blive beregnet Omkreds og Areal af trekanten. ";
             lblTrigonometry3.Content += "Samt Omkreds og Areal af trekantens indskrevne - og omskrevne cirkel";
         }
+
+        private void InitializeTrigonometryControls()
+        {
+            IndexNumberInTrigonometryArray = 0;
+            InitializeComboBoxesAndCalculateDeleteButtons(ConstTrigonometry.FigureCalculation_Object.CurrentFigureCalculationArray,
+                                                          Grid_Trigonometry,
+                                                          ConstTrigonometry.FigureCalculation_Object.ComboBox_Unit_Object,
+                                                          cmbTrigonometryUnit_SelectionChanged,
+                                                          ConstTrigonometry.FigureCalculation_Object.ComboBox_Figure_Object,
+                                                          cmbTrigonometryUnit_SelectionChanged,
+                                                          ConstTrigonometry.FigureCalculation_Object.Button_Clear_Object,
+                                                          btnClearAllFigureTextBoxes,
+                                                          ConstTrigonometry.FigureCalculation_Object.Button_Result_Object,
+                                                          btnCalculateGeometry);
+
+            SetupFigureLabels_TextBoxes_Buttons(IndexNumberInTrigonometryArray,
+                                                ConstTrigonometry.FigureCalculation_Object.CurrentFigureCalculationArray,
+                                                Grid_Trigonometry);
+        }
+
+        private void cmbTrigonometryUnit_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CurrentFigureCalculation CurrentFigureCalculation_Object = ConstTrigonometry.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInGeometryArray];
+            string UnitToUse = (string)ConstTrigonometry.FigureCalculation_Object.ComboBox_Unit_Object.XamlControl.SelectedValue;
+
+            HandleUnitChanged(CurrentFigureCalculation_Object, UnitToUse);
+        }
         #endregion
         /* General code below. */
+
+        #region Figures
+        private void SetupFigureLabels_TextBoxes_Buttons(int IndexNumberInGeometryArrayFunc,
+                                                         CurrentFigureCalculation[] CurrentFigureCalculationArray,
+                                                         Grid CurrentGrid)
+        {
+            int RowCounter;
+            string LabelText;
+            string TextBoxText;
+            CurrentFigureCalculation CurrentFigureCalculation_Object = CurrentFigureCalculationArray[IndexNumberInGeometryArrayFunc];
+
+            RemoveOldRowsInFigureGrid();
+            TextBoxListGeometryInput.Clear();
+            TextBoxListGeometryOutput.Clear();
+
+            CurrentFigureCalculation_Object.Image_Figure_Object.XamlControl =
+                ControlTools.InsertImageInGrid(
+                  Grid_Object: CurrentGrid,
+                  ImageFileName: CurrentFigureCalculation_Object.Image_Figure_Object.XamlControlStringArray[ConstGeometry.ImageFileNamePositionInArray],
+                  RowPosition: CurrentGrid.RowDefinitions.Count - 2,
+                  ColumnPosition: ConstGeometry.GeometryLabelStartColumn,
+                  ColumnSpan: 5,
+                  Width: 200,
+                  Height: ConstGeometry.ImageHeight);
+
+            ControlTools.InsertRowInGrid(CurrentGrid, Const.DynamicElementsRowHeight);
+
+            for (RowCounter = 0; RowCounter < CurrentFigureCalculation_Object.MyLabelTextBoxRowArray.Length; RowCounter++)
+            {
+                int ControlCounter = 0;
+                CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControl =
+                    ControlTools.InsertLabelInGrid(
+                        Grid_Object: CurrentGrid,
+                        LabelName: CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
+                        LabelText: CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControlStringArray[ConstGeometry.LabelTextPositionInArray],
+                        RowPosition: CurrentGrid.RowDefinitions.Count - 1,
+                        ColumnPosition: ConstGeometry.GeometryLabelStartColumn,
+                        ColumnSpan: 3);
+
+                if (null != CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControl)
+                {
+                    TextBoxText = CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControl.Text;
+                }
+                else
+                {
+                    TextBoxText = CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControlStringArray[ConstGeometry.TextBoxTextPositionInArray];
+                }
+
+                CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControl =
+                    ControlTools.InsertTextBoxInGrid(
+                        Grid_Object: CurrentGrid,
+                        TextBoxName: CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
+                        RowPosition: CurrentGrid.RowDefinitions.Count - 1,
+                        ColumnPosition: ConstGeometry.GeometryLabelStartColumn + 3,
+                        ColumnSpan: 1,
+                        Width: Const.TextBoxWidth,
+                        Height: Const.TextBoxHeight,
+                        FunctionKeyDown: txtCheckForValidPositiveNumberPressed,
+                        FunctionTextChanged: null,
+                        TextBox_Text: TextBoxText,
+                        DisableTextBox: CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.Input_Output_Enum == Input_Output_Enum.Output_Enum);
+
+                TextBoxListGeometryInput.Add(CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControl);
+
+                for (ControlCounter = 1; ControlCounter < CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray.Length; ControlCounter++)
+                {
+                    if (true == CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].IsCurrentLabelAnUnitLabel)
+                    {
+                        LabelText = UnitToUse + CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].UnitDimensionString;
+                    }
+                    else
+                    {
+                        LabelText = CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControlStringArray[ConstGeometry.LabelTextPositionInArray];
+                    }
+
+                    CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControl =
+                    ControlTools.InsertLabelInGrid(
+                        Grid_Object: CurrentGrid,
+                        LabelName: CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
+                        LabelText: LabelText,
+                        RowPosition: CurrentGrid.RowDefinitions.Count - 1,
+                        ColumnPosition: ControlCounter + 4,
+                        ColumnSpan: ConstGeometry.GeometryLabelDefaultColumnSpan);
+                }
+                ControlTools.InsertRowInGrid(CurrentGrid, Const.DynamicElementsRowHeight);
+            }
+
+
+            for (RowCounter = 0; RowCounter < CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray.Length; RowCounter++)
+            {
+                int ControlCounter = 0;
+                CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].XamlControl =
+                    ControlTools.InsertLabelInGrid(
+                        Grid_Object: CurrentGrid,
+                        LabelName: CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
+                        LabelText: CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].XamlControlStringArray[ConstGeometry.LabelTextPositionInArray],
+                        RowPosition: CurrentGrid.RowDefinitions.Count - 1,
+                        ColumnPosition: ConstGeometry.GeometryLabelStartColumn,
+                        ColumnSpan: 3);
+
+                if (null != CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControl)
+                {
+                    TextBoxText = CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControl.Text;
+                }
+                else
+                {
+                    TextBoxText = CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControlStringArray[ConstGeometry.TextBoxTextPositionInArray];
+                }
+
+                CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControl =
+                    ControlTools.InsertTextBoxInGrid(
+                        Grid_Object: CurrentGrid,
+                        TextBoxName: CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
+                        RowPosition: CurrentGrid.RowDefinitions.Count - 1,
+                        ColumnPosition: ConstGeometry.GeometryLabelStartColumn + 3,
+                        ColumnSpan: 1,
+                        Width: Const.TextBoxWidth,
+                        Height: Const.TextBoxHeight,
+                        FunctionKeyDown: null,
+                        FunctionTextChanged: null,
+                        TextBox_Text: TextBoxText,
+                        DisableTextBox: CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.Input_Output_Enum == Input_Output_Enum.Output_Enum);
+
+                TextBoxListGeometryOutput.Add(CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControl);
+
+                for (ControlCounter = 1; ControlCounter < CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray.Length; ControlCounter++)
+                {
+                    if (true == CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].IsCurrentLabelAnUnitLabel)
+                    {
+                        LabelText = UnitToUse + CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].UnitDimensionString;
+                    }
+                    else
+                    {
+                        LabelText = CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].XamlControlStringArray[ConstGeometry.LabelTextPositionInArray];
+                    }
+
+                    CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].XamlControl =
+                    ControlTools.InsertLabelInGrid(
+                        Grid_Object: CurrentGrid,
+                        LabelName: CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
+                        LabelText: LabelText,
+                        RowPosition: CurrentGrid.RowDefinitions.Count - 1,
+                        ColumnPosition: ControlCounter + 4,
+                        ColumnSpan: ConstGeometry.GeometryLabelDefaultColumnSpan);
+                }
+                ControlTools.InsertRowInGrid(CurrentGrid, Const.DynamicElementsRowHeight);
+            }
+        }
+
+        private void InitializeComboBoxesAndCalculateDeleteButtons(CurrentFigureCalculation[] CurrentFigureCalculationArray,
+                                                                   Grid CurrentGrid,
+                                                                   MyControl<ComboBox> UnitComboBox,
+                                                                   SelectionChangedEventHandler FunctionToBeExecutedOnUnitChange,
+                                                                   MyControl<ComboBox> FigureComboBox,
+                                                                   SelectionChangedEventHandler FunctionToBeExecutedOnFigureChange,
+                                                                   MyControl<Button> ClearButton,
+                                                                   RoutedEventHandler FunctionToBeExecutedOnClearButtonPress,
+                                                                   MyControl<Button> ResultButton,
+                                                                   RoutedEventHandler FunctionToBeExecutedOnResultButtonPress)
+        {
+            int Counter = 0;
+            int Index = 0;
+
+            ComboBox MyUnitComboBox;
+            ComboBox MyFigureComboBox;
+            Button MyClearButton;
+            Button MyResultButton;
+
+            MyUnitComboBox =
+                ControlTools.InsertComboBoxInGrid(CurrentGrid,
+                UnitComboBox.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
+                CurrentGrid.RowDefinitions.Count - 1,
+                ConstGeometry.GeometryLabelStartColumn,
+                ConstGeometry.GeometryLabelDefaultColumnSpan,
+                Const.ComboBoxRowHeight,
+                FunctionToBeExecutedOnUnitChange);
+
+            do
+            {
+                if ("Længdemål" == ConstUnitsConverter.UnitsOverallConverterArray[Counter].UnitsBelongTo)
+                {
+                    break;
+                }
+                else
+                {
+                    Index++;
+                }
+            } while (Index < ConstUnitsConverter.UnitsOverallConverterArray.Length);
+
+            if (Index < ConstUnitsConverter.UnitsOverallConverterArray.Length)
+            {
+                MyUnitComboBox.SelectionChanged -= FunctionToBeExecutedOnUnitChange;
+                for (Counter = 0; Counter < ConstUnitsConverter.UnitsOverallConverterArray[Index].UnitsConverterArray.Length; Counter++)
+                {
+                    MyUnitComboBox.Items.Add(ConstUnitsConverter.UnitsOverallConverterArray[Index].UnitsConverterArray[Counter].UnitShortName);
+                    if ("m" == ConstUnitsConverter.UnitsOverallConverterArray[Index].UnitsConverterArray[Counter].UnitShortName)
+                    {
+                        MyUnitComboBox.SelectedValue = "m";
+                        UnitToUse = "m";
+                    }
+                }
+                MyUnitComboBox.SelectionChanged += FunctionToBeExecutedOnUnitChange;
+            }
+
+            MyFigureComboBox =
+                ControlTools.InsertComboBoxInGrid(CurrentGrid,
+                FigureComboBox.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
+                CurrentGrid.RowDefinitions.Count - 1,
+                ConstGeometry.GeometryLabelStartColumn + 2,
+                ConstGeometry.GeometryLabelDefaultColumnSpan,
+                Const.ComboBoxRowHeight,
+                FunctionToBeExecutedOnFigureChange);
+
+            for (Counter = 0; Counter < CurrentFigureCalculationArray.Length; Counter++)
+            {
+                MyFigureComboBox.Items.Add(CurrentFigureCalculationArray[Counter].FigureName);
+                if (0 == Counter)
+                {
+                    MyFigureComboBox.SelectionChanged -= FunctionToBeExecutedOnFigureChange;
+                    MyFigureComboBox.SelectedValue = CurrentFigureCalculationArray[Counter].FigureName;
+                    MyFigureComboBox.SelectionChanged += FunctionToBeExecutedOnFigureChange;
+                }
+            }
+
+            MyResultButton =
+                    ControlTools.InsertButtonInGrid(
+                    Grid_Object: CurrentGrid,
+                    ButtonName: ResultButton.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
+                    ButtonText: ResultButton.XamlControlStringArray[ConstGeometry.ButtonTextPositionInArray],
+                    RowPosition: CurrentGrid.RowDefinitions.Count - 1,
+                    ColumnPosition: 6,
+                    ColumnSpan: 2,
+                    Height: ConstNumberSystems.ButtonxRadixDeleteHeight,
+                    Width: ConstNumberSystems.ButtonxRadixDeleteWidth,
+                    FunctionButtonClicked: FunctionToBeExecutedOnResultButtonPress);
+
+            MyClearButton =
+                    ControlTools.InsertButtonInGrid(
+                    Grid_Object: CurrentGrid,
+                    ButtonName: ClearButton.XamlControlStringArray[ConstGeometry.ControlNamePositionInArray],
+                    ButtonText: ClearButton.XamlControlStringArray[ConstGeometry.ButtonTextPositionInArray],
+                    RowPosition: CurrentGrid.RowDefinitions.Count - 1,
+                    ColumnPosition: 8,
+                    ColumnSpan: 2,
+                    Height: ConstNumberSystems.ButtonxRadixDeleteHeight,
+                    Width: ConstNumberSystems.ButtonxRadixDeleteWidth,
+                    FunctionButtonClicked: FunctionToBeExecutedOnClearButtonPress);
+
+            ControlTools.InsertRowInGrid(CurrentGrid, Const.DynamicElementsRowHeight);
+            ControlTools.InsertRowInGrid(CurrentGrid, ConstGeometry.ImageHeight);
+            ControlTools.InsertRowInGrid(CurrentGrid, Const.DynamicElementsRowHeight);
+
+            FirstControlToBeDeletedInGeometryGridCount = CurrentGrid.Children.Count - 1;
+            RowDeleteNumberInGeometryGrid = CurrentGrid.RowDefinitions.Count;
+
+            UnitComboBox.XamlControl = MyUnitComboBox;
+            FigureComboBox.XamlControl = MyFigureComboBox;
+
+            ClearButton.XamlControl = MyClearButton;
+            ResultButton.XamlControl = MyResultButton;
+        }
+
+        private void btnClearAllFigureTextBoxes(object sender, RoutedEventArgs e)
+        {
+            ControlTools.ClearTextBoxes(TextBoxListGeometryInput, ConstGeometry.DefaultTextBoxValue);
+            ControlTools.ClearTextBoxes(TextBoxListGeometryOutput, ConstGeometry.DefaultTextBoxValue);
+        }
+
+        private void HandleUnitChanged(CurrentFigureCalculation CurrentFigureCalculation_Object, string UnitToUse)
+        {
+            int RowCounter;
+            int ControlCounter;
+            string LabelText;
+
+            for (RowCounter = 0; RowCounter < CurrentFigureCalculation_Object.MyLabelTextBoxRowArray.Length; RowCounter++)
+            {
+                for (ControlCounter = 1; ControlCounter < CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray.Length; ControlCounter++)
+                {
+                    if (true == CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].IsCurrentLabelAnUnitLabel)
+                    {
+                        LabelText = UnitToUse + CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].UnitDimensionString;
+
+                        if (null != CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControl)
+                        {
+                            CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].LabelsArray[ControlCounter].XamlControl.Content = LabelText;
+                        }
+                    }
+                }
+            }
+
+            for (RowCounter = 0; RowCounter < CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray.Length; RowCounter++)
+            {
+                for (ControlCounter = 1; ControlCounter < CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray.Length; ControlCounter++)
+                {
+                    if (true == CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].IsCurrentLabelAnUnitLabel)
+                    {
+                        LabelText = UnitToUse + CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].UnitDimensionString;
+
+                        if (null != CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].XamlControl)
+                        {
+                            CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.LabelsArray[ControlCounter].XamlControl.Content = LabelText;
+                        }
+                    }
+                }
+            }
+        }
+
+        private int GetIndexNumberInFigureArray(CurrentFigureCalculation[] CurrentFigureCalculationArray, 
+                                                string GeometryFigureName)
+        {
+            int Counter = 0;
+
+            do
+            {
+                if (GeometryFigureName == CurrentFigureCalculationArray[Counter].FigureName)
+                {
+                    return (Counter);
+                }
+                else
+                {
+                    Counter++;
+                }
+            } while (Counter < CurrentFigureCalculationArray.Length);
+
+            return (-1);
+        }
+
+        private void RemoveOldRowsInFigureGrid()
+        {
+            int RowCounter;
+            int StopRowNumber;
+
+            Grid_Geometry.Children.RemoveRange(FirstControlToBeDeletedInGeometryGridCount + 1,
+                (Grid_Geometry.Children.Count - 1) - FirstControlToBeDeletedInGeometryGridCount);
+
+            StopRowNumber = Grid_Geometry.RowDefinitions.Count;
+
+            for (RowCounter = RowDeleteNumberInGeometryGrid; RowCounter < StopRowNumber; RowCounter++)
+            {
+                Grid_Geometry.RowDefinitions.RemoveAt(RowDeleteNumberInGeometryGrid);
+            }
+        }
+        #endregion
 
         #region General_Code
         private void MainTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)

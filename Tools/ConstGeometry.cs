@@ -131,9 +131,9 @@ namespace VariabelBegreb.Tools
     {
         private const string GeometryImages = "d:\\lars\\WpfMathGeometryImages\\";
 
-        private const string Dimension1InCalculationString = "";
-        private const string Dimension2InCalculationString = "2";
-        private const string Dimension3InCalculationString = "3";
+        public const string Dimension1InCalculationString = "";
+        public const string Dimension2InCalculationString = "2";
+        public const string Dimension3InCalculationString = "3";
 
         public const string DefaultTextBoxValue = "0";
 
