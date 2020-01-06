@@ -59,7 +59,7 @@ namespace VariabelBegreb.Tools
                                 LabelsArray : new MyLabelWithUnit[]
                                 {
                                     new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblTriangleRightAngle_AngleA", "Vinkel A : " }),
-                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel : true, XamlControlStringArray: new string[] { "lblTriangleRightAngle_AngleAUnit", "°" })
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel : false, XamlControlStringArray: new string[] { "lblTriangleRightAngle_AngleAUnit", "°" })
                                 },
                                 TextBox_Object : new MyTextBoxInputOutput(Input_Output_Enum : Input_Output_Enum.Input_Enum,
                                     XamlControlStringArray: new string[] { "txtTriangleRightAngle_AngleA", ConstGeometry.DefaultTextBoxValue })),
@@ -68,7 +68,7 @@ namespace VariabelBegreb.Tools
                                 LabelsArray : new MyLabelWithUnit[]
                                 {
                                     new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblTriangleRightAngle_AngleB", "Vinkel B : " }),
-                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel : true, XamlControlStringArray: new string[] { "lblTriangleRightAngle_AngleBUnit", "°" })
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel : false, XamlControlStringArray: new string[] { "lblTriangleRightAngle_AngleBUnit", "°" })
                                 },
                                 TextBox_Object : new MyTextBoxInputOutput(Input_Output_Enum : Input_Output_Enum.Input_Enum,
                                     XamlControlStringArray: new string[] { "txtTriangleRightAngle_AngleB", ConstGeometry.DefaultTextBoxValue })),
@@ -77,7 +77,7 @@ namespace VariabelBegreb.Tools
                                 LabelsArray : new MyLabelWithUnit[]
                                 {
                                     new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblTriangleRightAngle_AngleC", "Vinkel C : " }),
-                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel : true, XamlControlStringArray: new string[] { "lblTriangleRightAngle_AngleBUnit", "°" })
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel : false, XamlControlStringArray: new string[] { "lblTriangleRightAngle_AngleBUnit", "°" })
                                 },
                                 TextBox_Object : new MyTextBoxInputOutput(Input_Output_Enum : Input_Output_Enum.Output_Enum,
                                     XamlControlStringArray: new string[] { "txtTriangleRightAngle_AngleC", "90" }))

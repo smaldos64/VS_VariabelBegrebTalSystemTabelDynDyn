@@ -119,7 +119,10 @@ namespace VariabelBegreb.Tools
 
             for (Counter = 0; Counter < TextBoxes.Count; Counter++)
             {
-                TextBoxes[Counter].Text = ClearString;
+                if (!TextBoxes[Counter].IsReadOnly)
+                {
+                    TextBoxes[Counter].Text = ClearString;
+                }
             }
         }
 

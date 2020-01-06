@@ -80,13 +80,13 @@ namespace VariabelBegreb
 
             InitializeGeometryLabels();
 
-            //InitializeGeometryControls();
+            InitializeGeometryControls();
 
             InitializeTrigonometryLabels();
 
             InitializeTrigonometryControls();
 
-            InitializeGeometryControls();
+            //InitializeGeometryControls();
 
             //InitializeEquationSystemLabels();
 
@@ -2648,10 +2648,6 @@ namespace VariabelBegreb
                 SystemSounds.Beep.Play();
                 e.Handled = true;
             }
-            else
-            {
-                int Test = 10;
-            }
         }
         #endregion
 
@@ -2794,29 +2790,36 @@ namespace VariabelBegreb
             {
                 List<double> NumberList = TextBoxListFigureInput.Select(val => double.Parse(val.Text)).ToList();
 
-                for (RowCounter = 0; RowCounter < CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray.Length; RowCounter++)
+                if (MathTrigonometry.CalculateAnglesAndSidesInRightAngleTriangle(ref NumberList))
                 {
-                    CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControl.Text =
-                        PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(
-                        CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].CalculateOnFigure_Delegate(NumberList),
-                        Const.DefaultNumberOfDecimals);
-                }
-
-                if (ControlTools.CheckTextBoxesForInformation(TextBoxListFigureInput, ConstGeometry.DefaultTextBoxValue))
-                {
-                    List<double> NumberList1 = TextBoxListFigureInput.Select(val => double.Parse(val.Text)).ToList();
-
-                    for (RowCounter = 0; RowCounter < CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray.Length; RowCounter++)
+                    for (RowCounter = 0; RowCounter < TextBoxListFigureInput.Count; RowCounter++)
                     {
-                        CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControl.Text =
+                        CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControl.Text =
                             PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(
-                            CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].CalculateOnFigure_Delegate(NumberList1),
+                            NumberList[RowCounter],
                             Const.DefaultNumberOfDecimals);
+                    }
+
+                    if (ControlTools.CheckTextBoxesForInformation(TextBoxListFigureInput, ConstGeometry.DefaultTextBoxValue))
+                    {
+                        //List<double> NumberList1 = TextBoxListFigureInput.Select(val => double.Parse(val.Text)).ToList();
+
+                        for (RowCounter = 0; RowCounter < CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray.Length; RowCounter++)
+                        {
+                            CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControl.Text =
+                                PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(
+                                CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].CalculateOnFigure_Delegate(NumberList),
+                                Const.DefaultNumberOfDecimals);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Husk at alle input felter skal have en værdi !!!");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Husk at alle input felter skal have en værdi !!!");
+                    MessageBox.Show("Husk at mindst en længde i trekanaten skal have en værdi !!!");
                 }
             }
             else
