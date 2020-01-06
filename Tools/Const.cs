@@ -93,5 +93,9 @@ namespace VariabelBegreb.Tools
             return (DefaultNumberOfDecimals);
         }
         #endregion
+
+        #region Const_Figures
+        public static readonly int NoValue = 0;
+        #endregion
     }
 }

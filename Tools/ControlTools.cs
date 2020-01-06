@@ -70,7 +70,8 @@ namespace VariabelBegreb.Tools
             return (NumberOfTextBoxesWithInfo);
         }
 
-        public static bool CheckTextBoxesForInformation(List<TextBox> TextBoxes, string EmptyString)
+        public static bool CheckTextBoxesForInformation(List<TextBox> TextBoxes, 
+                                                        string EmptyString)
         {
             int Counter;
            
@@ -84,6 +85,32 @@ namespace VariabelBegreb.Tools
             }
 
             return (true);
+        }
+
+        public static bool CheckTextBoxesForInformation(List<TextBox> TextBoxes,
+                                                        string EmptyString,
+                                                        int NumberOfItems)
+        {
+            int Counter;
+            int ValueSetCounter = 0;
+
+            for (Counter = 0; Counter < TextBoxes.Count; Counter++)
+            {
+                if (((TextBoxes[Counter].Text.Length > 0) &&
+                     (TextBoxes[Counter].Text != EmptyString)))
+                {
+                    ValueSetCounter++;
+                }
+            }
+
+            if (NumberOfItems == ValueSetCounter)
+            {
+                return (true);
+            }
+            else
+            {
+                return (false);
+            }
         }
 
         public static void ClearTextBoxes(List<TextBox> TextBoxes, string ClearString = "")

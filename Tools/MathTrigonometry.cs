@@ -59,6 +59,164 @@ namespace VariabelBegreb.Tools
 
             return (DoubleList);
         }
+
+        private static bool NoSidesInTriangleProvided(Triangle Triangle_Object)
+        {
+            if ( (Triangle_Object.a == 0) &&
+                 (Triangle_Object.b == 0) &&
+                 (Triangle_Object.c == 0) )
+            {
+                return (true);
+            }
+            else
+            {
+                return (false);
+            }
+        }
+
+        private static int DetermineNumberOfSidesProvidedInRightAngleTriangle(Triangle Triangle_Object)
+        {
+            int SidesProvidedCounter = 0;
+
+            if (Triangle_Object.a != Const.NoValue)
+            {
+                SidesProvidedCounter++;
+            }
+
+            if (Triangle_Object.b != Const.NoValue)
+            {
+                SidesProvidedCounter++;
+            }
+
+            if (Triangle_Object.c != Const.NoValue)
+            {
+                SidesProvidedCounter++;
+            }
+
+            return (SidesProvidedCounter);
+        }
+        private static bool TwoSidesProvidedInRIghtAngleTriangle(Triangle Triangle_Object)
+        {
+            int SidesProvidedCounter = 0;
+
+            if (Triangle_Object.a != Const.NoValue)
+            {
+                SidesProvidedCounter++;
+            }
+
+            if (Triangle_Object.b != Const.NoValue)
+            {
+                SidesProvidedCounter++;
+            }
+
+            if (Triangle_Object.c != Const.NoValue)
+            {
+                SidesProvidedCounter++;
+            }
+
+            return (2 == SidesProvidedCounter);
+        }
+
+        private static void CalculateMissingSideInRightAngleTriangleUsingPythagoras(Triangle Triangle_Object)
+        {
+            if (0 == Triangle_Object.a)
+            {
+                Triangle_Object.a = Math.Sqrt(Math.Pow(Triangle_Object.c, 2) -
+                                              Math.Pow(Triangle_Object.b, 2));
+            }
+
+            if (0 == Triangle_Object.b)
+            {
+                Triangle_Object.a = Math.Sqrt(Math.Pow(Triangle_Object.c, 2) -
+                                              Math.Pow(Triangle_Object.a, 2));
+            }
+
+            if (0 == Triangle_Object.c)
+            {
+                Triangle_Object.c = Math.Sqrt(Math.Pow(Triangle_Object.a, 2) +
+                                              Math.Pow(Triangle_Object.b, 2));
+            }
+        }
+
+        private static void CalculateMissingAnglesInRightAngleTriangleWith2SidesProvided(Triangle Triangle_Object)
+        {
+            if (0 == Triangle_Object.AngleA)
+            {
+                Triangle_Object.AngleA = Math.Asin(Triangle_Object.a / Triangle_Object.c);
+            }
+
+            if (0 == Triangle_Object.AngleB)
+            {
+                Triangle_Object.AngleB = Math.Asin(Triangle_Object.b / Triangle_Object.c);
+            }
+        }
+
+        private static void CalculateMissingAngleInTriangleUsing180DegreeRule(Triangle Triangle_Object)
+        {
+            if (Const.NoValue == Triangle_Object.AngleA)
+            {
+                Triangle_Object.AngleA = 180 - Triangle_Object.AngleB - Triangle_Object.AngleC;
+            }
+
+            if (Const.NoValue == Triangle_Object.AngleB)
+            {
+                Triangle_Object.AngleB = 180 - Triangle_Object.AngleA - Triangle_Object.AngleC;
+            }
+
+            if (Const.NoValue == Triangle_Object.AngleC)
+            {
+                Triangle_Object.AngleC = 180 - Triangle_Object.AngleA - Triangle_Object.AngleB;
+            }
+        }
+
+        private static void CalculateMissingSidesInRightAngleTriangleUsingTrigonometry(Triangle Triangle_Object)
+        {
+            if (Const.NoValue == Triangle_Object.a)
+            {
+                if (Const.NoValue == Triangle_Object.b)
+                {
+                    Triangle_Object.a = Math.Cos(Triangle_Object.AngleB) * Triangle_Object.c;
+                }
+                else
+                {
+                    Triangle_Object.a = Triangle_Object.b / Math.Tan(Triangle_Object.AngleB);
+                }
+            }
+
+            if (Const.NoValue == Triangle_Object.b)
+            {
+                Triangle_Object.b = Triangle_Object.a / Math.Tan(Triangle_Object.AngleA);
+            }
+
+            if (Const.NoValue == Triangle_Object.c)
+            {
+                CalculateMissingSideInRightAngleTriangleUsingPythagoras(Triangle_Object);
+            }
+        }
+
+        public static bool CalculateAnglesAndSidesInRightAngleTriangle(List<double> NumberList)
+        {
+            Triangle Triangle_Object = PackNumberListToTriangle(NumberList);
+            int SidesProvidedInRightAngleTriangle = DetermineNumberOfSidesProvidedInRightAngleTriangle(Triangle_Object);
+
+            switch (SidesProvidedInRightAngleTriangle)
+            {
+                case 0:
+                    return (false);
+
+                case 1:
+                    CalculateMissingAngleInTriangleUsing180DegreeRule(Triangle_Object);
+                    CalculateMissingSidesInRightAngleTriangleUsingTrigonometry(Triangle_Object);
+                    break;
+
+                case 2:
+                    CalculateMissingSideInRightAngleTriangleUsingPythagoras(Triangle_Object);
+                    CalculateMissingAnglesInRightAngleTriangleWith2SidesProvided(Triangle_Object);
+                    break;
+            }
+            
+            return (true);
+        }
         public static double CalculateAreaOfTriangle(List<double> NumberList)
         {
             Triangle Triangle_Object = PackNumberListToTriangle(NumberList);
