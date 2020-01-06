@@ -57,11 +57,17 @@ namespace VariabelBegreb
         private static List<TextBox> TextBoxListFigureInput = new List<TextBox>();
         private static List<TextBox> TextBoxListFigureOutput = new List<TextBox>();
 
+        private static List<TextBox> TextBoxListGeometryInput = new List<TextBox>();
+        private static List<TextBox> TextBoxListGeometryOutput = new List<TextBox>();
+
         private static string UnitToUse = "";
 
         private static int IndexNumberInTrigonometryArray = 0;
         private static int RowDeleteNumberInTrigonometryGrid;
         private static int FirstControlToBeDeletedInTrigonometryGridCount;
+
+        private static List<TextBox> TextBoxListTrigonometryInput = new List<TextBox>();
+        private static List<TextBox> TextBoxListTrigonometryOutput = new List<TextBox>();
 
 
         public MainWindow()
@@ -2685,7 +2691,9 @@ namespace VariabelBegreb
                                                   ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray,
                                                   Grid_Geometry,
                                                   RowDeleteNumberInGeometryGrid,
-                                                  FirstControlToBeDeletedInGeometryGridCount);
+                                                  FirstControlToBeDeletedInGeometryGridCount,
+                                                  ref TextBoxListGeometryInput,
+                                                  ref TextBoxListGeometryOutput);
         }
         
         private void cmbGeometryUnit_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -2711,7 +2719,9 @@ namespace VariabelBegreb
                                                     ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray,
                                                     Grid_Geometry,
                                                     RowDeleteNumberInGeometryGrid,
-                                                    FirstControlToBeDeletedInGeometryGridCount);
+                                                    FirstControlToBeDeletedInGeometryGridCount,
+                                                    ref TextBoxListGeometryInput,
+                                                    ref TextBoxListGeometryOutput);
             }
         }
 
@@ -2722,7 +2732,7 @@ namespace VariabelBegreb
 
             if (ControlTools.CheckTextBoxesForInformation(TextBoxListFigureInput, ConstGeometry.DefaultTextBoxValue))
             {
-                List<double> NumberList = TextBoxListFigureInput.Select(val => double.Parse(val.Text)).ToList();
+                List<double> NumberList = TextBoxListGeometryInput.Select(val => double.Parse(val.Text)).ToList();
 
                 for (RowCounter = 0; RowCounter < CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray.Length; RowCounter++)
                 {
@@ -2770,7 +2780,9 @@ namespace VariabelBegreb
                                                 ConstTrigonometry.FigureCalculation_Object.CurrentFigureCalculationArray,
                                                 Grid_Trigonometry,
                                                 RowDeleteNumberInTrigonometryGrid,
-                                                FirstControlToBeDeletedInTrigonometryGridCount);
+                                                FirstControlToBeDeletedInTrigonometryGridCount,
+                                                ref TextBoxListTrigonometryInput,
+                                                ref TextBoxListTrigonometryOutput);
         }
 
         private void cmbTrigonometryUnit_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -2950,7 +2962,9 @@ namespace VariabelBegreb
                                                          CurrentFigureCalculation[] CurrentFigureCalculationArray,
                                                          Grid CurrentGrid,
                                                          int RowDeleteNumberInGrid,
-                                                         int FirstControlToBeDeletedInGridCount)
+                                                         int FirstControlToBeDeletedInGridCount,
+                                                         ref List<TextBox> TextBoxListFigureInput,
+                                                         ref List<TextBox> TextBoxListFigureOutput)
         {
             int RowCounter;
             string LabelText;
