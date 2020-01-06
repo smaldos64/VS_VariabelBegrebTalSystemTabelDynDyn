@@ -112,14 +112,50 @@ namespace VariabelBegreb.Tools
                             new ResultTextBoxToCalculationNew(MyLabelTextBoxRow_Object : new MyLabelTextBoxRow(
                                 LabelsArray : new MyLabelWithUnit[]
                                 {
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblTriangleRightAngleCircumScribedCircleRadius", "Radius af omskreven cirkel : " }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  true, UnitDimensionString : ConstGeometry.Dimension1InCalculationString, XamlControlStringArray: new string[] { "lblTriangleRightAngleCircumScribedCircleRadiusUnit", "m" }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblTriangleRightAngleCircumScribedCircleRadiusFormula", "Radius = a * b * c / 4 * Areal Trekant" }),
+                                },
+                                TextBox_Object : new MyTextBoxInputOutput(
+                                Input_Output_Enum : Input_Output_Enum.Output_Enum, XamlControlStringArray: new string[] { "txtlblTriangleRightAngleCircumScribedCircleRadius", ConstGeometry.DefaultTextBoxValue })),
+                                CalculateOnFigure_Delegate : MathTrigonometry.CalculateRadiusOfCircumScribedCircle,
+                                NumberOfDimensionsInCalculationString : ConstGeometry.Dimension1InCalculationString),
+
+                            new ResultTextBoxToCalculationNew(MyLabelTextBoxRow_Object : new MyLabelTextBoxRow(
+                                LabelsArray : new MyLabelWithUnit[]
+                                {
                                     new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblTriangleRightAngleCircumScribedCircleCircumference", "Omkreds af omskreven cirkel : " }),
-                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  true, UnitDimensionString : ConstGeometry.Dimension1InCalculationString, XamlControlStringArray: new string[] { "lblTriangleRightAngleCircumScribedCircleCircumferenceUnit", "m2" }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  true, UnitDimensionString : ConstGeometry.Dimension1InCalculationString, XamlControlStringArray: new string[] { "lblTriangleRightAngleCircumScribedCircleCircumferenceUnit", "m" }),
                                     new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblTriangleRightAngleCircumScribedCircleCircumferenceFormula", "Omkreds = 2 * a * b * c * PI / 4 * Areal Trekant" }),
                                 },
                                 TextBox_Object : new MyTextBoxInputOutput(
                                 Input_Output_Enum : Input_Output_Enum.Output_Enum, XamlControlStringArray: new string[] { "txtTriangleRightAngleCircumScribedCircleCircumference", ConstGeometry.DefaultTextBoxValue })),
                                 CalculateOnFigure_Delegate : MathTrigonometry.CalculateCircumreferenceOfCircumScribedCircle,
-                                NumberOfDimensionsInCalculationString : ConstGeometry.Dimension2InCalculationString)
+                                NumberOfDimensionsInCalculationString : ConstGeometry.Dimension1InCalculationString),
+
+                            new ResultTextBoxToCalculationNew(MyLabelTextBoxRow_Object : new MyLabelTextBoxRow(
+                                LabelsArray : new MyLabelWithUnit[]
+                                {
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblTriangleRightAngleCircumScribedCircleArea", "Areal af omskreven cirkel : " }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  true, UnitDimensionString : ConstGeometry.Dimension2InCalculationString, XamlControlStringArray: new string[] { "lblTriangleRightAngleCircumScribedCircleAreaUnit", "m2" }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblTriangleRightAngleCircumScribedCircleAreaFormula", "Areal = (a * b * c)2 * PI / 4 * Areal Trekant" }),
+                                },
+                                TextBox_Object : new MyTextBoxInputOutput(
+                                Input_Output_Enum : Input_Output_Enum.Output_Enum, XamlControlStringArray: new string[] { "txtTriangleRightAngleCircumScribedCircleArea", ConstGeometry.DefaultTextBoxValue })),
+                                CalculateOnFigure_Delegate : MathTrigonometry.CalculateAreaOfCircumScribedCircle,
+                                NumberOfDimensionsInCalculationString : ConstGeometry.Dimension2InCalculationString),
+
+                             new ResultTextBoxToCalculationNew(MyLabelTextBoxRow_Object : new MyLabelTextBoxRow(
+                                LabelsArray : new MyLabelWithUnit[]
+                                {
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblTriangleRightAngleInScribedCircleRadius", "Radius af indskreven cirkel : " }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  true, UnitDimensionString : ConstGeometry.Dimension1InCalculationString, XamlControlStringArray: new string[] { "lblTriangleRightAngleInScribedCircleRadiusUnit", "m" }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblTriangleRightAngleInScribedCircleRadiusFormula", "Radius = 0.5 * Omkreds Trekant" }),
+                                },
+                                TextBox_Object : new MyTextBoxInputOutput(
+                                Input_Output_Enum : Input_Output_Enum.Output_Enum, XamlControlStringArray: new string[] { "txtlblTriangleRightAngleInScribedCircleRadius", ConstGeometry.DefaultTextBoxValue })),
+                                CalculateOnFigure_Delegate : MathTrigonometry.CalculateRadiusOfInscribedCircle,
+                                NumberOfDimensionsInCalculationString : ConstGeometry.Dimension1InCalculationString),
                         },
                         FigureDimensions : 2,
                         FigureName : "Retvinklet Trekant")
