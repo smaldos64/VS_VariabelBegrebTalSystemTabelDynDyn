@@ -27,6 +27,16 @@ namespace VariabelBegreb
             return m;
         }
 
+        public static double CalculateCircumreferenceOfCircle(double CircleRadius)
+        {
+            return (2 * CircleRadius * Math.PI);
+        }
+
+        public static double CalculateAreaOfCircle(double CircleRadius)
+        {
+            return (Math.Pow(CircleRadius, 2) * Math.PI);
+        }
+
     }
 }
 

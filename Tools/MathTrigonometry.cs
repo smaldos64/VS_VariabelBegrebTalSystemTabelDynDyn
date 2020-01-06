@@ -199,5 +199,60 @@ namespace VariabelBegreb.Tools
 
             return (Triangle_Object.a + Triangle_Object.b + Triangle_Object.c);
         }
+
+        public static double CalculateRadiusOfCircumScribedCircle(List<double> NumberList)
+        {
+            Triangle Triangle_Object = PackNumberListToTriangle(NumberList);
+            double RadiusOfCircumScribedCircle;
+
+            RadiusOfCircumScribedCircle = Triangle_Object.a * Triangle_Object.b * Triangle_Object.c / (4 * CalculateAreaOfTriangle(NumberList));
+
+            return (RadiusOfCircumScribedCircle);
+        }
+
+        public static double CalculateCircumreferenceOfCircumScribedCircle(List<double> NumberList)
+        {
+            double RadiusOfCircumScribedCircle;
+
+            RadiusOfCircumScribedCircle = CalculateRadiusOfCircumScribedCircle(NumberList);
+
+            return (MathTools.CalculateCircumreferenceOfCircle(RadiusOfCircumScribedCircle));
+        }
+
+        public static double CalculateAreaOfCircumScribedCircle(List<double> NumberList)
+        {
+            double RadiusOfCircumScribedCircle;
+
+            RadiusOfCircumScribedCircle = CalculateRadiusOfCircumScribedCircle(NumberList);
+
+            return (MathTools.CalculateAreaOfCircle(RadiusOfCircumScribedCircle));
+        }
+
+        public static double CalculateRadiusOfInscribedCircle(List<double> NumberList)
+        {
+            double RadiusOfInscribedCircle;
+
+            RadiusOfInscribedCircle = CalculateAreaOfTriangle(NumberList) / (0.5 * CalculateCircumferenceOfTriangle(NumberList));
+
+            return (RadiusOfInscribedCircle);
+        }
+
+        public static double CalculateCircumreferenceOfInscribedCircle(List<double> NumberList)
+        {
+            double RadiusOfInscribedCircle;
+
+            RadiusOfInscribedCircle = CalculateRadiusOfInscribedCircle(NumberList);
+
+            return (MathTools.CalculateCircumreferenceOfCircle(RadiusOfInscribedCircle));
+        }
+
+        public static double CalculateAreaOfInscribedCircle(List<double> NumberList)
+        {
+            double RadiusOfInscribedCircle;
+
+            RadiusOfInscribedCircle = CalculateRadiusOfInscribedCircle(NumberList);
+
+            return (MathTools.CalculateAreaOfCircle(RadiusOfInscribedCircle));
+        }
     }
 }

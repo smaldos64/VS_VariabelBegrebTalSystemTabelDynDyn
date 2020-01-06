@@ -113,13 +113,13 @@ namespace VariabelBegreb.Tools
             }
         }
 
-        public static void ClearTextBoxes(List<TextBox> TextBoxes, string ClearString = "")
+        public static void ClearTextBoxes(List<TextBox> TextBoxes, string ClearString = "", bool ClearOnlyWriteFields = false)
         {
             int Counter;
 
             for (Counter = 0; Counter < TextBoxes.Count; Counter++)
             {
-                if (!TextBoxes[Counter].IsReadOnly)
+                if ( (!TextBoxes[Counter].IsReadOnly) || (false == ClearOnlyWriteFields) )
                 {
                     TextBoxes[Counter].Text = ClearString;
                 }

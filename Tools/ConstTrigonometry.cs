@@ -49,7 +49,7 @@ namespace VariabelBegreb.Tools
                             new MyLabelTextBoxRow(
                                 LabelsArray : new MyLabelWithUnit[]
                                 {
-                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblTriangleRightAngleHypotenuseC", "Længde af hypotenuse a : " }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblTriangleRightAngleHypotenuseC", "Længde af hypotenuse c : " }),
                                     new MyLabelWithUnit(IsCurrentLabelAnUnitLabel : true, XamlControlStringArray: new string[] { "lblTriangleRightAngleHypotenuseCUnit", "m" })
                                 },
                                 TextBox_Object : new MyTextBoxInputOutput(Input_Output_Enum : Input_Output_Enum.Input_Enum,
@@ -107,6 +107,18 @@ namespace VariabelBegreb.Tools
                                 TextBox_Object : new MyTextBoxInputOutput(
                                 Input_Output_Enum : Input_Output_Enum.Output_Enum, XamlControlStringArray: new string[] { "txtTriangleRightAngleArea", ConstGeometry.DefaultTextBoxValue })),
                                 CalculateOnFigure_Delegate : MathTrigonometry.CalculateAreaOfTriangle,
+                                NumberOfDimensionsInCalculationString : ConstGeometry.Dimension2InCalculationString),
+
+                            new ResultTextBoxToCalculationNew(MyLabelTextBoxRow_Object : new MyLabelTextBoxRow(
+                                LabelsArray : new MyLabelWithUnit[]
+                                {
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblTriangleRightAngleCircumScribedCircleCircumference", "Omkreds af omskreven cirkel : " }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  true, UnitDimensionString : ConstGeometry.Dimension1InCalculationString, XamlControlStringArray: new string[] { "lblTriangleRightAngleCircumScribedCircleCircumferenceUnit", "m2" }),
+                                    new MyLabelWithUnit(IsCurrentLabelAnUnitLabel :  false, XamlControlStringArray: new string[] { "lblTriangleRightAngleCircumScribedCircleCircumferenceFormula", "Omkreds = 2 * a * b * c * PI / 4 * Areal Trekant" }),
+                                },
+                                TextBox_Object : new MyTextBoxInputOutput(
+                                Input_Output_Enum : Input_Output_Enum.Output_Enum, XamlControlStringArray: new string[] { "txtTriangleRightAngleCircumScribedCircleCircumference", ConstGeometry.DefaultTextBoxValue })),
+                                CalculateOnFigure_Delegate : MathTrigonometry.CalculateCircumreferenceOfCircumScribedCircle,
                                 NumberOfDimensionsInCalculationString : ConstGeometry.Dimension2InCalculationString)
                         },
                         FigureDimensions : 2,

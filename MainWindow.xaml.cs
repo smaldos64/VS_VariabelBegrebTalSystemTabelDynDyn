@@ -54,8 +54,8 @@ namespace VariabelBegreb
         private static int RowDeleteNumberInGeometryGrid;
         private static int FirstControlToBeDeletedInGeometryGridCount;
 
-        private static List<TextBox> TextBoxListFigureInput = new List<TextBox>();
-        private static List<TextBox> TextBoxListFigureOutput = new List<TextBox>();
+        //private static List<TextBox> TextBoxListFigureInput = new List<TextBox>();
+        //private static List<TextBox> TextBoxListFigureOutput = new List<TextBox>();
 
         private static List<TextBox> TextBoxListGeometryInput = new List<TextBox>();
         private static List<TextBox> TextBoxListGeometryOutput = new List<TextBox>();
@@ -2678,7 +2678,7 @@ namespace VariabelBegreb
                                                           ConstGeometry.FigureCalculation_Object.ComboBox_Figure_Object,
                                                           cmbGeometryFigure_SelectionChanged,
                                                           ConstGeometry.FigureCalculation_Object.Button_Clear_Object,
-                                                          btnClearAllFigureTextBoxes,
+                                                          btnClearAllGeometryTextBoxes,
                                                           ConstGeometry.FigureCalculation_Object.Button_Result_Object,
                                                           btnCalculateGeometry,
                                                           ref RowDeleteNumberInGeometryGrid,
@@ -2730,7 +2730,7 @@ namespace VariabelBegreb
             int RowCounter;
             CurrentFigureCalculation CurrentFigureCalculation_Object = ConstGeometry.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInGeometryArray];
 
-            if (ControlTools.CheckTextBoxesForInformation(TextBoxListFigureInput, ConstGeometry.DefaultTextBoxValue))
+            if (ControlTools.CheckTextBoxesForInformation(TextBoxListGeometryInput, ConstGeometry.DefaultTextBoxValue))
             {
                 List<double> NumberList = TextBoxListGeometryInput.Select(val => double.Parse(val.Text)).ToList();
 
@@ -2746,6 +2746,12 @@ namespace VariabelBegreb
             {
                 MessageBox.Show("Husk at alle input felter skal have en værdi !!!");
             }
+        }
+
+        private void btnClearAllGeometryTextBoxes(object sender, RoutedEventArgs e)
+        {
+            ControlTools.ClearTextBoxes(TextBoxListGeometryInput, ConstGeometry.DefaultTextBoxValue, true);
+            ControlTools.ClearTextBoxes(TextBoxListGeometryOutput, ConstGeometry.DefaultTextBoxValue);
         }
         #endregion
 
@@ -2770,7 +2776,7 @@ namespace VariabelBegreb
                                                           ConstTrigonometry.FigureCalculation_Object.ComboBox_Figure_Object,
                                                           cmbTrigonometryUnit_SelectionChanged,
                                                           ConstTrigonometry.FigureCalculation_Object.Button_Clear_Object,
-                                                          btnClearAllFigureTextBoxes,
+                                                          btnClearAllTrigonometryTextBoxes,
                                                           ConstTrigonometry.FigureCalculation_Object.Button_Result_Object,
                                                           btnCalculateTrigonometry,
                                                           ref RowDeleteNumberInTrigonometryGrid,
@@ -2798,13 +2804,13 @@ namespace VariabelBegreb
             int RowCounter;
             CurrentFigureCalculation CurrentFigureCalculation_Object = ConstTrigonometry.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInTrigonometryArray];
 
-            if (ControlTools.CheckTextBoxesForInformation(TextBoxListFigureInput, ConstGeometry.DefaultTextBoxValue, ConstTrigonometry.NumberOfValuesSetInTriangle))
+            if (ControlTools.CheckTextBoxesForInformation(TextBoxListTrigonometryInput, ConstGeometry.DefaultTextBoxValue, ConstTrigonometry.NumberOfValuesSetInTriangle))
             {
-                List<double> NumberList = TextBoxListFigureInput.Select(val => double.Parse(val.Text)).ToList();
+                List<double> NumberList = TextBoxListTrigonometryInput.Select(val => double.Parse(val.Text)).ToList();
 
                 if (MathTrigonometry.CalculateAnglesAndSidesInRightAngleTriangle(ref NumberList))
                 {
-                    for (RowCounter = 0; RowCounter < TextBoxListFigureInput.Count; RowCounter++)
+                    for (RowCounter = 0; RowCounter < TextBoxListTrigonometryInput.Count; RowCounter++)
                     {
                         CurrentFigureCalculation_Object.MyLabelTextBoxRowArray[RowCounter].TextBox_Object.XamlControl.Text =
                             PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(
@@ -2812,10 +2818,8 @@ namespace VariabelBegreb
                             Const.DefaultNumberOfDecimals);
                     }
 
-                    if (ControlTools.CheckTextBoxesForInformation(TextBoxListFigureInput, ConstGeometry.DefaultTextBoxValue))
+                    if (ControlTools.CheckTextBoxesForInformation(TextBoxListTrigonometryInput, ConstGeometry.DefaultTextBoxValue))
                     {
-                        //List<double> NumberList1 = TextBoxListFigureInput.Select(val => double.Parse(val.Text)).ToList();
-
                         for (RowCounter = 0; RowCounter < CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray.Length; RowCounter++)
                         {
                             CurrentFigureCalculation_Object.ResultTextBoxToCalculationNewArray[RowCounter].MyLabelTextBoxRow_Object.TextBox_Object.XamlControl.Text =
@@ -2838,6 +2842,12 @@ namespace VariabelBegreb
             {
                 MessageBox.Show("Husk at " + ConstTrigonometry.NumberOfValuesSetInTriangle + " input felter skal have en værdi !!!");
             }
+        }
+
+        private void btnClearAllTrigonometryTextBoxes(object sender, RoutedEventArgs e)
+        {
+            ControlTools.ClearTextBoxes(TextBoxListTrigonometryInput, ConstGeometry.DefaultTextBoxValue, true);
+            ControlTools.ClearTextBoxes(TextBoxListTrigonometryOutput, ConstGeometry.DefaultTextBoxValue);
         }
         #endregion
         /* General code below. */
@@ -3109,11 +3119,11 @@ namespace VariabelBegreb
             }
         }
 
-        private void btnClearAllFigureTextBoxes(object sender, RoutedEventArgs e)
-        {
-            ControlTools.ClearTextBoxes(TextBoxListFigureInput, ConstGeometry.DefaultTextBoxValue);
-            ControlTools.ClearTextBoxes(TextBoxListFigureOutput, ConstGeometry.DefaultTextBoxValue);
-        }
+        //private void btnClearAllFigureTextBoxes(object sender, RoutedEventArgs e)
+        //{
+        //    ControlTools.ClearTextBoxes(TextBoxListFigureInput, ConstGeometry.DefaultTextBoxValue);
+        //    ControlTools.ClearTextBoxes(TextBoxListFigureOutput, ConstGeometry.DefaultTextBoxValue);
+        //}
 
         private void HandleUnitChanged(CurrentFigureCalculation CurrentFigureCalculation_Object, string UnitToUse)
         {
