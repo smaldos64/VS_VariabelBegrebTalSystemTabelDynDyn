@@ -60,7 +60,7 @@ namespace VariabelBegreb.Tools
             return (DoubleList);
         }
 
-        private static int DetermineNumberOfSidesProvidedInRightAngleTriangle(Triangle Triangle_Object)
+        private static int DetermineNumberOfSidesProvidedInTriangle(Triangle Triangle_Object)
         {
             int SidesProvidedCounter = 0;
 
@@ -161,10 +161,65 @@ namespace VariabelBegreb.Tools
             }
         }
 
-        public static bool CalculateAnglesAndSidesInRightAngleTriangle(ref List<double> NumberList)
+        private static void CalculateMissingSidesInRandomTriangleUsingSinusRelations(Triangle Triangle_Object)
+        {
+            if (Const.NoValue == Triangle_Object.a)
+            {
+                if (Const.NoValue == Triangle_Object.b)
+                {
+                    Triangle_Object.a = Triangle_Object.c *  Math.Sin(Triangle_Object.AngleA * Math.PI / 180) / Math.Sin(Triangle_Object.AngleC * Math.PI / 180);
+                }
+                else
+                {
+                    Triangle_Object.a = Triangle_Object.b * Math.Sin(Triangle_Object.AngleA * Math.PI / 180) / Math.Sin(Triangle_Object.AngleB * Math.PI / 180);
+                }
+            }
+
+            if (Const.NoValue == Triangle_Object.b)
+            {
+                Triangle_Object.b = Triangle_Object.a * Math.Sin(Triangle_Object.AngleB * Math.PI / 180) / Math.Sin(Triangle_Object.AngleA * Math.PI / 180);
+            }
+
+            if (Const.NoValue == Triangle_Object.c)
+            {
+                Triangle_Object.c = Triangle_Object.a * Math.Sin(Triangle_Object.AngleC * Math.PI / 180) / Math.Sin(Triangle_Object.AngleA * Math.PI / 180);
+            }
+        }
+
+        private static void CalculateMissingAnglesUsingCosinusRelations(Triangle Triangle_Object)
+        {
+            if (Const.NoValue == Triangle_Object.AngleA)
+            {
+                Triangle_Object.AngleA = Math.Acos((Math.Pow(Triangle_Object.b, 2) +
+                                         Math.Pow(Triangle_Object.c, 2) -
+                                         Math.Pow(Triangle_Object.a, 2)) /
+                                         (2 * Triangle_Object.b * Triangle_Object.c));
+                Triangle_Object.AngleA = Triangle_Object.AngleA * 180 / Math.PI;
+            }
+
+            if (Const.NoValue == Triangle_Object.AngleB)
+            {
+                Triangle_Object.AngleB = Math.Acos((Math.Pow(Triangle_Object.a, 2) +
+                                         Math.Pow(Triangle_Object.c, 2) -
+                                         Math.Pow(Triangle_Object.b, 2)) /
+                                         (2 * Triangle_Object.a * Triangle_Object.c));
+                Triangle_Object.AngleB = Triangle_Object.AngleB * 180 / Math.PI;
+            }
+
+            if (Const.NoValue == Triangle_Object.AngleC)
+            {
+                Triangle_Object.AngleC = Math.Acos((Math.Pow(Triangle_Object.a, 2) +
+                                         Math.Pow(Triangle_Object.b, 2) -
+                                         Math.Pow(Triangle_Object.c, 2)) /
+                                         (2 * Triangle_Object.a * Triangle_Object.b));
+                Triangle_Object.AngleC = Triangle_Object.AngleC * 180 / Math.PI;
+            }
+        }
+
+        private static bool CalculateAnglesAndSidesInRightAngleTriangle(ref List<double> NumberList)
         {
             Triangle Triangle_Object = PackNumberListToTriangle(NumberList);
-            int SidesProvidedInRightAngleTriangle = DetermineNumberOfSidesProvidedInRightAngleTriangle(Triangle_Object);
+            int SidesProvidedInRightAngleTriangle = DetermineNumberOfSidesProvidedInTriangle(Triangle_Object);
 
             switch (SidesProvidedInRightAngleTriangle)
             {
@@ -186,6 +241,51 @@ namespace VariabelBegreb.Tools
             
             return (true);
         }
+
+        private static bool CalculateAnglesAndSidesInRandomTriangle(ref List<double> NumberList)
+        {
+            Triangle Triangle_Object = PackNumberListToTriangle(NumberList);
+            int SidesProvidedInRandomTriangle = DetermineNumberOfSidesProvidedInTriangle(Triangle_Object);
+
+            switch (SidesProvidedInRandomTriangle)
+            {
+                case 0:
+                    return (false);
+
+                case 1:
+                    CalculateMissingAngleInTriangleUsing180DegreeRule(Triangle_Object);
+                    CalculateMissingSidesInRandomTriangleUsingSinusRelations(Triangle_Object);
+                    break;
+
+                case 2:
+                    return (false);
+                    //CalculateMissingSideInRightAngleTriangleUsingPythagoras(Triangle_Object);
+                    //CalculateMissingAnglesInRightAngleTriangleWith2SidesProvided(Triangle_Object);
+                    //break;
+
+                case 3:
+                    CalculateMissingAnglesUsingCosinusRelations(Triangle_Object);
+                    break;
+            }
+
+            NumberList = PackTriangleToNumberList(Triangle_Object);
+
+            return (true);
+        }
+        public static bool CalculateAnglesAndSidesInTriangle(ref List<double> NumberList)
+        {
+            Triangle Triangle_Object = PackNumberListToTriangle(NumberList);
+
+            if (90 == Triangle_Object.AngleC)
+            {
+                return (CalculateAnglesAndSidesInRightAngleTriangle(ref NumberList));
+            }
+            else
+            {
+                return (CalculateAnglesAndSidesInRandomTriangle(ref NumberList));
+            }
+
+        }
         public static double CalculateAreaOfTriangle(List<double> NumberList)
         {
             Triangle Triangle_Object = PackNumberListToTriangle(NumberList);
@@ -200,7 +300,7 @@ namespace VariabelBegreb.Tools
             return (Triangle_Object.a + Triangle_Object.b + Triangle_Object.c);
         }
 
-        public static double CalculateRadiusOfCircumScribedCircle(List<double> NumberList)
+        public static double CalculateRadiusOfCircumscribedCircle(List<double> NumberList)
         {
             Triangle Triangle_Object = PackNumberListToTriangle(NumberList);
             double RadiusOfCircumScribedCircle;
@@ -210,20 +310,20 @@ namespace VariabelBegreb.Tools
             return (RadiusOfCircumScribedCircle);
         }
 
-        public static double CalculateCircumreferenceOfCircumScribedCircle(List<double> NumberList)
+        public static double CalculateCircumreferenceOfCircumscribedCircle(List<double> NumberList)
         {
             double RadiusOfCircumScribedCircle;
 
-            RadiusOfCircumScribedCircle = CalculateRadiusOfCircumScribedCircle(NumberList);
+            RadiusOfCircumScribedCircle = CalculateRadiusOfCircumscribedCircle(NumberList);
 
             return (MathTools.CalculateCircumreferenceOfCircle(RadiusOfCircumScribedCircle));
         }
 
-        public static double CalculateAreaOfCircumScribedCircle(List<double> NumberList)
+        public static double CalculateAreaOfCircumscribedCircle(List<double> NumberList)
         {
             double RadiusOfCircumScribedCircle;
 
-            RadiusOfCircumScribedCircle = CalculateRadiusOfCircumScribedCircle(NumberList);
+            RadiusOfCircumScribedCircle = CalculateRadiusOfCircumscribedCircle(NumberList);
 
             return (MathTools.CalculateAreaOfCircle(RadiusOfCircumScribedCircle));
         }

@@ -2774,7 +2774,7 @@ namespace VariabelBegreb
                                                           ConstTrigonometry.FigureCalculation_Object.ComboBox_Unit_Object,
                                                           cmbTrigonometryUnit_SelectionChanged,
                                                           ConstTrigonometry.FigureCalculation_Object.ComboBox_Figure_Object,
-                                                          cmbTrigonometryUnit_SelectionChanged,
+                                                          cmbTrigonometryFigure_SelectionChanged,
                                                           ConstTrigonometry.FigureCalculation_Object.Button_Clear_Object,
                                                           btnClearAllTrigonometryTextBoxes,
                                                           ConstTrigonometry.FigureCalculation_Object.Button_Result_Object,
@@ -2793,12 +2793,30 @@ namespace VariabelBegreb
 
         private void cmbTrigonometryUnit_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CurrentFigureCalculation CurrentFigureCalculation_Object = ConstTrigonometry.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInGeometryArray];
+            CurrentFigureCalculation CurrentFigureCalculation_Object = ConstTrigonometry.FigureCalculation_Object.CurrentFigureCalculationArray[IndexNumberInTrigonometryArray];
             string UnitToUse = (string)ConstTrigonometry.FigureCalculation_Object.ComboBox_Unit_Object.XamlControl.SelectedValue;
 
             HandleUnitChanged(CurrentFigureCalculation_Object, UnitToUse);
         }
 
+        private void cmbTrigonometryFigure_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string ComboBoxName = ((System.Windows.FrameworkElement)sender).Name;
+            string SelectedValue = (string)((ComboBox)(System.Windows.FrameworkElement)sender).SelectedValue;
+            IndexNumberInTrigonometryArray = GetIndexNumberInFigureArray(ConstTrigonometry.FigureCalculation_Object.CurrentFigureCalculationArray,
+                                                                     SelectedValue);
+
+            if (IndexNumberInTrigonometryArray >= 0)
+            {
+                SetupFigureLabels_TextBoxes_Buttons(IndexNumberInTrigonometryArray,
+                                                    ConstTrigonometry.FigureCalculation_Object.CurrentFigureCalculationArray,
+                                                    Grid_Trigonometry,
+                                                    RowDeleteNumberInTrigonometryGrid,
+                                                    FirstControlToBeDeletedInTrigonometryGridCount,
+                                                    ref TextBoxListTrigonometryInput,
+                                                    ref TextBoxListTrigonometryOutput);
+            }
+        }
         private void btnCalculateTrigonometry(object sender, RoutedEventArgs e)
         {
             int RowCounter;
@@ -2808,7 +2826,7 @@ namespace VariabelBegreb
             {
                 List<double> NumberList = TextBoxListTrigonometryInput.Select(val => double.Parse(val.Text)).ToList();
 
-                if (MathTrigonometry.CalculateAnglesAndSidesInRightAngleTriangle(ref NumberList))
+                if (MathTrigonometry.CalculateAnglesAndSidesInTriangle(ref NumberList))
                 {
                     for (RowCounter = 0; RowCounter < TextBoxListTrigonometryInput.Count; RowCounter++)
                     {
