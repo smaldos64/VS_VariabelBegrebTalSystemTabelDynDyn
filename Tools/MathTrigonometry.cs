@@ -7,6 +7,20 @@ using System.Threading.Tasks;
 namespace VariabelBegreb.Tools
 {
 
+    public enum Triangle_Angles_Enum
+    {
+        AngleA,
+        AngleB,
+        AngleC
+    }
+
+    public enum Triangle_Sides_Enum
+    {
+        SideA,
+        SideB,
+        SideC
+    }
+
     public class Triangle
     {
         public double a { get; set; }
@@ -81,7 +95,8 @@ namespace VariabelBegreb.Tools
 
             return (SidesProvidedCounter);
         }
-        
+
+        #region RightAngleTriangle
         private static void CalculateMissingSideInRightAngleTriangleUsingPythagoras(Triangle Triangle_Object)
         {
             if (0 == Triangle_Object.a)
@@ -118,6 +133,7 @@ namespace VariabelBegreb.Tools
             }
         }
 
+        // This function is used when we have 1 side and 2 angles.
         private static void CalculateMissingAngleInTriangleUsing180DegreeRule(Triangle Triangle_Object)
         {
             if (Const.NoValue == Triangle_Object.AngleA)
@@ -136,6 +152,7 @@ namespace VariabelBegreb.Tools
             }
         }
 
+        // This function is used when we have 1 side and 3 angles.
         private static void CalculateMissingSidesInRightAngleTriangleUsingTrigonometry(Triangle Triangle_Object)
         {
             if (Const.NoValue == Triangle_Object.a)
@@ -161,6 +178,141 @@ namespace VariabelBegreb.Tools
             }
         }
 
+        private static bool CalculateAnglesAndSidesInRightAngleTriangle(ref List<double> NumberList)
+        {
+            Triangle Triangle_Object = PackNumberListToTriangle(NumberList);
+            int SidesProvidedInRightAngleTriangle = DetermineNumberOfSidesProvidedInTriangle(Triangle_Object);
+
+            switch (SidesProvidedInRightAngleTriangle)
+            {
+                case 0:
+                    return (false);
+
+                case 1:
+                    CalculateMissingAngleInTriangleUsing180DegreeRule(Triangle_Object);
+                    CalculateMissingSidesInRightAngleTriangleUsingTrigonometry(Triangle_Object);
+                    break;
+
+                case 2:
+                    CalculateMissingSideInRightAngleTriangleUsingPythagoras(Triangle_Object);
+                    CalculateMissingAnglesInRightAngleTriangleWith2SidesProvided(Triangle_Object);
+                    break;
+            }
+
+            NumberList = PackTriangleToNumberList(Triangle_Object);
+
+            return (true);
+        }
+        #endregion
+
+        #region RandomTriangle
+        private static void CalculateAngleUsingSinusRelation(Triangle Triangle_Object,
+                                                             Triangle_Angles_Enum Current_Angle,
+                                                             Triangle_Angles_Enum AngleToUse)
+        {
+            switch (Current_Angle)
+            {
+                case Triangle_Angles_Enum.AngleA:
+                    if (Triangle_Angles_Enum.AngleB == AngleToUse)
+                    {
+                        Triangle_Object.AngleA = Math.Asin(Math.Sin(Triangle_Object.AngleB * Math.PI / 180) * Triangle_Object.a / Triangle_Object.b);
+                        Triangle_Object.AngleA = Triangle_Object.AngleA * 180 / Math.PI;
+                    }
+
+                    if (Triangle_Angles_Enum.AngleC == AngleToUse)
+                    {
+                        Triangle_Object.AngleA = Math.Asin(Math.Sin(Triangle_Object.AngleC * Math.PI / 180) * Triangle_Object.a / Triangle_Object.c);
+                        Triangle_Object.AngleA = Triangle_Object.AngleA * 180 / Math.PI;
+                    }
+                    break;
+
+                case Triangle_Angles_Enum.AngleB:
+                    if (Triangle_Angles_Enum.AngleA == AngleToUse)
+                    {
+                        Triangle_Object.AngleB = Math.Asin(Math.Sin(Triangle_Object.AngleA * Math.PI / 180) * Triangle_Object.b / Triangle_Object.a);
+                        Triangle_Object.AngleB = Triangle_Object.AngleB * 180 / Math.PI;
+                    }
+
+                    if (Triangle_Angles_Enum.AngleC == AngleToUse)
+                    {
+                        Triangle_Object.AngleB = Math.Asin(Math.Sin(Triangle_Object.AngleC * Math.PI / 180) * Triangle_Object.b / Triangle_Object.c);
+                        Triangle_Object.AngleB = Triangle_Object.AngleB * 180 / Math.PI;
+                    }
+                    break;
+
+                case Triangle_Angles_Enum.AngleC:
+                    if (Triangle_Angles_Enum.AngleA == AngleToUse)
+                    {
+                        Triangle_Object.AngleC = Math.Asin(Math.Sin(Triangle_Object.AngleA * Math.PI / 180) * Triangle_Object.c / Triangle_Object.a);
+                        Triangle_Object.AngleC = Triangle_Object.AngleC * 180 / Math.PI;
+                    }
+
+                    if (Triangle_Angles_Enum.AngleB == AngleToUse)
+                    {
+                        Triangle_Object.AngleC = Math.Asin(Math.Sin(Triangle_Object.AngleB * Math.PI / 180) * Triangle_Object.c / Triangle_Object.b);
+                        Triangle_Object.AngleC = Triangle_Object.AngleC * 180 / Math.PI;
+                    }
+                    break;
+            }
+        }
+
+        private static void CalculateSideUsingSinusRelation(Triangle Triangle_Object,
+                                                            Triangle_Sides_Enum Current_Side,
+                                                            Triangle_Angles_Enum AngleToUse)
+        {
+            switch (Current_Side)
+            {
+                case Triangle_Sides_Enum.SideA:
+                    if (Triangle_Angles_Enum.AngleB == AngleToUse)
+                    {
+                        Triangle_Object.a = Math.Sin(Triangle_Object.AngleA * Math.PI / 180) *
+                                            Triangle_Object.b /
+                                            Math.Sin(Triangle_Object.AngleB * Math.PI / 180);
+                    }
+
+                    if (Triangle_Angles_Enum.AngleC == AngleToUse)
+                    {
+                        Triangle_Object.a = Math.Sin(Triangle_Object.AngleA * Math.PI / 180) *
+                                            Triangle_Object.c /
+                                            Math.Sin(Triangle_Object.AngleC * Math.PI / 180);
+                    }
+                    break;
+
+                case Triangle_Sides_Enum.SideB:
+                    if (Triangle_Angles_Enum.AngleA == AngleToUse)
+                    {
+                        Triangle_Object.b = Math.Sin(Triangle_Object.AngleB * Math.PI / 180) *
+                                            Triangle_Object.a /
+                                            Math.Sin(Triangle_Object.AngleA * Math.PI / 180);
+                    }
+
+                    if (Triangle_Angles_Enum.AngleC == AngleToUse)
+                    {
+                        Triangle_Object.b = Math.Sin(Triangle_Object.AngleB * Math.PI / 180) *
+                                            Triangle_Object.c /
+                                            Math.Sin(Triangle_Object.AngleC * Math.PI / 180);
+                    }
+                    break;
+
+                case Triangle_Sides_Enum.SideC:
+                    if (Triangle_Angles_Enum.AngleA == AngleToUse)
+                    {
+                        Triangle_Object.c = Math.Sin(Triangle_Object.AngleC * Math.PI / 180) *
+                                            Triangle_Object.a /
+                                            Math.Sin(Triangle_Object.AngleA * Math.PI / 180);
+                    }
+
+                    if (Triangle_Angles_Enum.AngleB == AngleToUse)
+                    {
+                        Triangle_Object.c = Math.Sin(Triangle_Object.AngleC * Math.PI / 180) *
+                                            Triangle_Object.b /
+                                            Math.Sin(Triangle_Object.AngleB * Math.PI / 180);
+                    }
+                    break;
+            }
+        }
+
+        // This function is used when we have 1 side and 3 angles.
         private static void CalculateMissingSidesInRandomTriangleUsingSinusRelations(Triangle Triangle_Object)
         {
             if (Const.NoValue == Triangle_Object.a)
@@ -186,60 +338,179 @@ namespace VariabelBegreb.Tools
             }
         }
 
+        private static void CalculateAngleUsingCosinusRelation(Triangle Triangle_Object,
+                                                               Triangle_Angles_Enum Current_Angle)
+        {
+            switch (Current_Angle)
+            {
+                case Triangle_Angles_Enum.AngleA:
+                    Triangle_Object.AngleA = Math.Acos((Math.Pow(Triangle_Object.b, 2) +
+                                         Math.Pow(Triangle_Object.c, 2) -
+                                         Math.Pow(Triangle_Object.a, 2)) /
+                                         (2 * Triangle_Object.b * Triangle_Object.c));
+                    Triangle_Object.AngleA = Triangle_Object.AngleA * 180 / Math.PI;
+                    break;
+
+                case Triangle_Angles_Enum.AngleB:
+                    Triangle_Object.AngleB = Math.Acos((Math.Pow(Triangle_Object.a, 2) +
+                                         Math.Pow(Triangle_Object.c, 2) -
+                                         Math.Pow(Triangle_Object.b, 2)) /
+                                         (2 * Triangle_Object.a * Triangle_Object.c));
+                    Triangle_Object.AngleB = Triangle_Object.AngleB * 180 / Math.PI;
+                    break;
+
+                case Triangle_Angles_Enum.AngleC:
+                    Triangle_Object.AngleC = Math.Acos((Math.Pow(Triangle_Object.a, 2) +
+                                         Math.Pow(Triangle_Object.b, 2) -
+                                         Math.Pow(Triangle_Object.c, 2)) /
+                                         (2 * Triangle_Object.a * Triangle_Object.b));
+                    Triangle_Object.AngleC = Triangle_Object.AngleC * 180 / Math.PI;
+                    break;
+            }
+        }
+
+        private static void CalculateSideUsingCosinusRelation(Triangle Triangle_Object,
+                                                              Triangle_Sides_Enum Current_Side)
+        {
+            switch (Current_Side)
+            {
+                case Triangle_Sides_Enum.SideA:
+                    Triangle_Object.a = Math.Sqrt(Math.Pow(Triangle_Object.b, 2) +
+                                                  Math.Pow(Triangle_Object.c, 2) -
+                                                  2 * Triangle_Object.b * Triangle_Object.c *
+                                                  Math.Cos(Triangle_Object.AngleA * Math.PI / 180));
+                    break;
+
+                case Triangle_Sides_Enum.SideB:
+                    Triangle_Object.b = Math.Sqrt(Math.Pow(Triangle_Object.a, 2) +
+                                                  Math.Pow(Triangle_Object.c, 2) -
+                                                  2 * Triangle_Object.a * Triangle_Object.c *
+                                                  Math.Cos(Triangle_Object.AngleB * Math.PI / 180));
+                    break;
+
+                case Triangle_Sides_Enum.SideC:
+                    Triangle_Object.c = Math.Sqrt(Math.Pow(Triangle_Object.a, 2) +
+                                                  Math.Pow(Triangle_Object.b, 2) -
+                                                  2 * Triangle_Object.a * Triangle_Object.b *
+                                                  Math.Cos(Triangle_Object.AngleC * Math.PI / 180));
+                    break;
+            }
+        }
+
+        // This function is used when we have 3 sides and 0 angles.
         private static void CalculateMissingAnglesUsingCosinusRelations(Triangle Triangle_Object)
         {
             if (Const.NoValue == Triangle_Object.AngleA)
             {
-                Triangle_Object.AngleA = Math.Acos((Math.Pow(Triangle_Object.b, 2) +
-                                         Math.Pow(Triangle_Object.c, 2) -
-                                         Math.Pow(Triangle_Object.a, 2)) /
-                                         (2 * Triangle_Object.b * Triangle_Object.c));
-                Triangle_Object.AngleA = Triangle_Object.AngleA * 180 / Math.PI;
+                CalculateAngleUsingCosinusRelation(Triangle_Object, Triangle_Angles_Enum.AngleA);
+                //Triangle_Object.AngleA = Math.Acos((Math.Pow(Triangle_Object.b, 2) +
+                //                         Math.Pow(Triangle_Object.c, 2) -
+                //                         Math.Pow(Triangle_Object.a, 2)) /
+                //                         (2 * Triangle_Object.b * Triangle_Object.c));
+                //Triangle_Object.AngleA = Triangle_Object.AngleA * 180 / Math.PI;
             }
 
             if (Const.NoValue == Triangle_Object.AngleB)
             {
-                Triangle_Object.AngleB = Math.Acos((Math.Pow(Triangle_Object.a, 2) +
-                                         Math.Pow(Triangle_Object.c, 2) -
-                                         Math.Pow(Triangle_Object.b, 2)) /
-                                         (2 * Triangle_Object.a * Triangle_Object.c));
-                Triangle_Object.AngleB = Triangle_Object.AngleB * 180 / Math.PI;
+                CalculateAngleUsingCosinusRelation(Triangle_Object, Triangle_Angles_Enum.AngleB);
+                //Triangle_Object.AngleB = Math.Acos((Math.Pow(Triangle_Object.a, 2) +
+                //                         Math.Pow(Triangle_Object.c, 2) -
+                //                         Math.Pow(Triangle_Object.b, 2)) /
+                //                         (2 * Triangle_Object.a * Triangle_Object.c));
+                //Triangle_Object.AngleB = Triangle_Object.AngleB * 180 / Math.PI;
             }
 
             if (Const.NoValue == Triangle_Object.AngleC)
             {
-                Triangle_Object.AngleC = Math.Acos((Math.Pow(Triangle_Object.a, 2) +
-                                         Math.Pow(Triangle_Object.b, 2) -
-                                         Math.Pow(Triangle_Object.c, 2)) /
-                                         (2 * Triangle_Object.a * Triangle_Object.b));
-                Triangle_Object.AngleC = Triangle_Object.AngleC * 180 / Math.PI;
+                CalculateAngleUsingCosinusRelation(Triangle_Object, Triangle_Angles_Enum.AngleC);
+                //Triangle_Object.AngleC = Math.Acos((Math.Pow(Triangle_Object.a, 2) +
+                //                         Math.Pow(Triangle_Object.b, 2) -
+                //                         Math.Pow(Triangle_Object.c, 2)) /
+                //                         (2 * Triangle_Object.a * Triangle_Object.b));
+                //Triangle_Object.AngleC = Triangle_Object.AngleC * 180 / Math.PI;
             }
         }
 
-        private static bool CalculateAnglesAndSidesInRightAngleTriangle(ref List<double> NumberList)
+        // This function is used when we have 2 sides and 1 angle.
+        private static void CalculateMissingAnglesAndSidesUsingCosinusOrSinusRelations(Triangle Triangle_Object)
         {
-            Triangle Triangle_Object = PackNumberListToTriangle(NumberList);
-            int SidesProvidedInRightAngleTriangle = DetermineNumberOfSidesProvidedInTriangle(Triangle_Object);
-
-            switch (SidesProvidedInRightAngleTriangle)
+            if (Const.NoValue == Triangle_Object.a)
             {
-                case 0:
-                    return (false);
-
-                case 1:
+                if (Const.NoValue != Triangle_Object.AngleA)
+                {
+                    CalculateSideUsingCosinusRelation(Triangle_Object, Triangle_Sides_Enum.SideA);
+                    CalculateMissingAnglesUsingCosinusRelations(Triangle_Object);
+                }
+                else
+                {
+                    if (Const.NoValue != Triangle_Object.AngleB)
+                    {
+                        CalculateAngleUsingSinusRelation(Triangle_Object,
+                                                         Triangle_Angles_Enum.AngleC,
+                                                         Triangle_Angles_Enum.AngleB);
+                    }
+                    else
+                    {
+                        CalculateAngleUsingSinusRelation(Triangle_Object,
+                                                         Triangle_Angles_Enum.AngleB,
+                                                         Triangle_Angles_Enum.AngleC);
+                    }
                     CalculateMissingAngleInTriangleUsing180DegreeRule(Triangle_Object);
-                    CalculateMissingSidesInRightAngleTriangleUsingTrigonometry(Triangle_Object);
-                    break;
-
-                case 2:
-                    CalculateMissingSideInRightAngleTriangleUsingPythagoras(Triangle_Object);
-                    CalculateMissingAnglesInRightAngleTriangleWith2SidesProvided(Triangle_Object);
-                    break;
+                    CalculateMissingSidesInRandomTriangleUsingSinusRelations(Triangle_Object);
+                }
             }
 
-            NumberList = PackTriangleToNumberList(Triangle_Object);
-            
-            return (true);
+            if (Const.NoValue == Triangle_Object.b)
+            {
+                if (Const.NoValue != Triangle_Object.AngleB)
+                {
+                    CalculateSideUsingCosinusRelation(Triangle_Object, Triangle_Sides_Enum.SideB);
+                    CalculateMissingAnglesUsingCosinusRelations(Triangle_Object);
+                }
+                else
+                {
+                    if (Const.NoValue != Triangle_Object.AngleA)
+                    {
+                        CalculateAngleUsingSinusRelation(Triangle_Object,
+                                                         Triangle_Angles_Enum.AngleC,
+                                                         Triangle_Angles_Enum.AngleA);
+                    }
+                    else
+                    {
+                        CalculateAngleUsingSinusRelation(Triangle_Object,
+                                                         Triangle_Angles_Enum.AngleA,
+                                                         Triangle_Angles_Enum.AngleC);
+                    }
+                    CalculateMissingAngleInTriangleUsing180DegreeRule(Triangle_Object);
+                    CalculateMissingSidesInRandomTriangleUsingSinusRelations(Triangle_Object);
+                }
+            }
+
+            if (Const.NoValue == Triangle_Object.c)
+            {
+                if (Const.NoValue != Triangle_Object.AngleC)
+                {
+                    CalculateSideUsingCosinusRelation(Triangle_Object, Triangle_Sides_Enum.SideC);
+                    CalculateMissingAnglesUsingCosinusRelations(Triangle_Object);
+                }
+                else
+                {
+                    if (Const.NoValue != Triangle_Object.AngleA)
+                    {
+                        CalculateAngleUsingSinusRelation(Triangle_Object,
+                                                         Triangle_Angles_Enum.AngleB,
+                                                         Triangle_Angles_Enum.AngleA);
+                    }
+                    else
+                    {
+                        CalculateAngleUsingSinusRelation(Triangle_Object,
+                                                         Triangle_Angles_Enum.AngleA,
+                                                         Triangle_Angles_Enum.AngleB);
+                    }
+                    CalculateMissingAngleInTriangleUsing180DegreeRule(Triangle_Object);
+                    CalculateMissingSidesInRandomTriangleUsingSinusRelations(Triangle_Object);
+                }
+            }
         }
 
         private static bool CalculateAnglesAndSidesInRandomTriangle(ref List<double> NumberList)
@@ -258,10 +529,8 @@ namespace VariabelBegreb.Tools
                     break;
 
                 case 2:
-                    return (false);
-                    //CalculateMissingSideInRightAngleTriangleUsingPythagoras(Triangle_Object);
-                    //CalculateMissingAnglesInRightAngleTriangleWith2SidesProvided(Triangle_Object);
-                    //break;
+                    CalculateMissingAnglesAndSidesUsingCosinusOrSinusRelations(Triangle_Object);
+                    break;
 
                 case 3:
                     CalculateMissingAnglesUsingCosinusRelations(Triangle_Object);
@@ -272,6 +541,9 @@ namespace VariabelBegreb.Tools
 
             return (true);
         }
+        #endregion
+
+        #region Triangle_Common
         public static bool CalculateAnglesAndSidesInTriangle(ref List<double> NumberList)
         {
             Triangle Triangle_Object = PackNumberListToTriangle(NumberList);
@@ -354,5 +626,6 @@ namespace VariabelBegreb.Tools
 
             return (MathTools.CalculateAreaOfCircle(RadiusOfInscribedCircle));
         }
+        #endregion
     }
 }
