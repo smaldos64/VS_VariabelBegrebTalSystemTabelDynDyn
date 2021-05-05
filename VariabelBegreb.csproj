@@ -59,10 +59,16 @@
     <Compile Include="Models\EquationSystemRow.cs" />
     <Compile Include="Models\MatrixCalculationCoefficients.cs" />
     <Compile Include="Models\MoreXAMLProps.cs" />
+    <Compile Include="Models\Point2Dimensions.cs" />
+    <Compile Include="Models\SecondOrderFunction.cs" />
+    <Compile Include="Models\SecondOrderFunctionRoots.cs" />
     <Compile Include="NumberSystems\NumberSystem.cs" />
     <Compile Include="NumberSystems\NumberSystemHelper.cs" />
     <Compile Include="NumberSystems\RadixNumber.cs" />
     <Compile Include="NumberSystems\RomerNumber.cs" />
+    <Compile Include="SecondOrderEquation.xaml.cs">
+      <DependentUpon>SecondOrderEquation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tools\Const.cs" />
     <Compile Include="Tools\ConstGeometry.cs" />
     <Compile Include="Tools\ConstNumberSystems.cs" />
@@ -89,6 +95,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SecondOrderEquation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tools\MathTools.cs" />

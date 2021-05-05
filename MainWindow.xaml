@@ -198,6 +198,7 @@
                             <Label Content="Beregninger på Parablen. 2 . Grads Polynomiet" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblParabel"  Grid.ColumnSpan="3" RenderTransformOrigin="0.548,1.692" />
                             <Button Content="Beregn" VerticalAlignment="Top" Name="btnCalculateParabelEquation" Grid.Column="2" Margin="438,335,0,0" HorizontalAlignment="Left" Width="75" RenderTransformOrigin="0.48,3.85" Click="btnCalculateParabelEquation_Click" />
                             <Button Content="Clear" VerticalAlignment="Top" Name="btnCalculateParabelEquationClear" Grid.Column="2" Margin="538,335,0,0" HorizontalAlignment="Left" Width="75" RenderTransformOrigin="0.48,3.85" Click="btnCalculateParabelEquationClear_Click" />
+                            <Button Content="Se Graf/Punkter" VerticalAlignment="Top" Name="btnShowGraphAndCalculatePointsForCalculatedParabel" Grid.Column="2" Margin="638,335,0,0" HorizontalAlignment="Left" Width="100" RenderTransformOrigin="0.48,3.85" Click="btnShowGraphAndCalculatePointsForCalculatedParabel_Click" IsEnabled="False" />
                             <Label Content="X og Y koordinat for 1. Punkt : " HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" Name="lblXAndYCoordinatesPoint1Parabel" />
                             <Label Content="X og Y koordinat for 2. Punkt : " HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.355,3.077" Grid.ColumnSpan="3" Name="lblXAndYCoordinatesPoint2Parabel"/>
                             <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="119,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="121" Name="txtParabelXCoordinatePoint1" KeyDown="txtCheckForValidKeyPressed"/>
@@ -217,7 +218,8 @@
                             <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="124,442,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="33" Name="txtCCoefficientInParabel" RenderTransformOrigin="2.045,0.63" KeyDown="txtCheckForValidKeyPressed"/>
                             <Button Content="Beregn" Grid.Column="2" HorizontalAlignment="Left" Margin="438,484,0,0" VerticalAlignment="Top" Width="75" Name="btnCalculateParabelRoots" Click="btnCalculateParabelRoots_Click"/>
                             <Button Content="Clear" Grid.Column="2" HorizontalAlignment="Left" Margin="538,484,0,0" VerticalAlignment="Top" Width="75" Name="btnCalculateParabelRootsClear" Click="btnCalculateParabelRootsClear_Click"/>
-                            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,484,0,0" TextWrapping="Wrap" Text="Her kommer rødder og toppunkt for parablen beskrevet herover" VerticalAlignment="Top" Grid.ColumnSpan="2" Name="txtParametersForParabelByCoefficients"/>
+                            <Button Content="Se Graf/Punkter" VerticalAlignment="Top" Name="btnShowGraphAndCalculatePointsForParabel" Grid.Column="2" Margin="638,484,0,0" HorizontalAlignment="Left" Width="100" RenderTransformOrigin="0.48,3.85" Click="btnShowGraphAndCalculatePointsForParabel_Click" IsEnabled="False" />
+                            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,484,0,0" TextWrapping="Wrap" Text="Her kommer rødder, toppunkt og skæring med y-aksen for parablen beskrevet herover" VerticalAlignment="Top" Grid.ColumnSpan="2" Name="txtParametersForParabelByCoefficients"/>
                         </Grid>
                     </TabItem>
 

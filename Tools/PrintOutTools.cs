@@ -32,5 +32,24 @@ namespace VariabelBegreb.Tools
                 return (OutputString);
             }
         }
+
+        public static string WriteNumberWithParanthesis(double Number)
+        {
+            string OutputString = "";
+
+            if (Number < 0)
+            {
+                OutputString += "(";
+            }
+
+            OutputString += Number.ToString();
+
+            if (Number < 0)
+            {
+                OutputString += ")";
+            }
+
+            return (OutputString);
+        }
     }
 }

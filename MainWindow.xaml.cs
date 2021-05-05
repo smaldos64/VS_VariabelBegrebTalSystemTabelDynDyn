@@ -69,6 +69,10 @@ namespace VariabelBegreb
         private static List<TextBox> TextBoxListTrigonometryInput = new List<TextBox>();
         private static List<TextBox> TextBoxListTrigonometryOutput = new List<TextBox>();
 
+        private double APart;
+        private double BPart;
+        private double CPart;
+
 
         public MainWindow()
         {
@@ -1030,9 +1034,9 @@ namespace VariabelBegreb
                 double Nominator3_X = (-(Point1XCoordinate) - (Point2XCoordinate)) * Part3Multiplier;
                 double Nominator3 = ((-1 * Point1XCoordinate) * (-1 * Point2XCoordinate)) * Part3Multiplier;
 
-                double APart = Nominator1_X_Square + Nominator2_X_Square + Nominator3_X_Square;
-                double BPart = Nominator1_X + Nominator2_X + Nominator3_X;
-                double CPart = Nominator1 + Nominator2 + Nominator3;
+                APart = Nominator1_X_Square + Nominator2_X_Square + Nominator3_X_Square;
+                BPart = Nominator1_X + Nominator2_X + Nominator3_X;
+                CPart = Nominator1 + Nominator2 + Nominator3;
 
                 txtParametersForParabel.Text = "Parablen der går gennem punkterne : ";
                 txtParametersForParabel.Text += Environment.NewLine;
@@ -1135,7 +1139,14 @@ namespace VariabelBegreb
 
                 txtParametersForParabel.Text += "Parablen har Toppunkt : (x ; y) = (" + PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(PointExtremumXCoordinate, Const.DefaultNumberOfDecimals) + " ; " +
                    PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(PointExtremumYCoordinate, Const.DefaultNumberOfDecimals) + ")";
+
+                btnShowGraphAndCalculatePointsForCalculatedParabel.IsEnabled = true;
             }
+        }
+
+        private void btnShowGraphAndCalculatePointsForCalculatedParabel_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void btnCalculateParabelEquationClear_Click(object sender, RoutedEventArgs e)
@@ -1162,52 +1173,60 @@ namespace VariabelBegreb
             }
             else
             {
-                double ACoefficient;
-                double BCoefficient;
-                double CCoefficient;
+                SecondOrderFunction SecondOrderFunction_Object = new SecondOrderFunction(txtParametersForParabelByCoefficients);
 
-                ACoefficient = Convert.ToDouble(txtACoefficientInParabel.Text);
-                BCoefficient = Convert.ToDouble(txtBCoefficientInParabel.Text);
-                CCoefficient = Convert.ToDouble(txtCCoefficientInParabel.Text);
+                SecondOrderFunction_Object.ACoefficient = Convert.ToDouble(txtACoefficientInParabel.Text);
+                SecondOrderFunction_Object.BCoefficient = Convert.ToDouble(txtBCoefficientInParabel.Text);
+                SecondOrderFunction_Object.CCoefficient = Convert.ToDouble(txtCCoefficientInParabel.Text);
 
-                double Diskriminant;
-                double XParameterRoot1;
-                double XParameterRoot2;
+                SecondOrderFunction_Object.CalculateAndShowAllPoints();
 
-                Diskriminant = Math.Pow(BCoefficient, 2) - 4 * ACoefficient * CCoefficient;
+                //double ACoefficient;
+                //double BCoefficient;
+                //double CCoefficient;
 
-                txtParametersForParabelByCoefficients.Text = "Diskriminanten er : " + PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(Diskriminant, Const.DefaultNumberOfDecimals);
-                txtParametersForParabelByCoefficients.Text += Environment.NewLine;
+                //ACoefficient = Convert.ToDouble(txtACoefficientInParabel.Text);
+                //BCoefficient = Convert.ToDouble(txtBCoefficientInParabel.Text);
+                //CCoefficient = Convert.ToDouble(txtCCoefficientInParabel.Text);
 
-                if (Diskriminant < 0)
-                {
-                    txtParametersForParabelByCoefficients.Text += "Parablen har ingen rødder => den skærer ikke x-aksen i nogle punkter.";
-                }
-                else
-                {
-                    if (0 == Diskriminant)
-                    {
-                        XParameterRoot1 = -BCoefficient / (2 * ACoefficient);
-                        txtParametersForParabelByCoefficients.Text += "Parablen har dobbelt roden : (x ; y) = (" + PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(XParameterRoot1, Const.DefaultNumberOfDecimals) + " ; 0)";
-                    }
-                    else
-                    {
-                        XParameterRoot1 = (-BCoefficient - Math.Sqrt(Diskriminant)) / (2 * ACoefficient);
-                        XParameterRoot2 = (-BCoefficient + Math.Sqrt(Diskriminant)) / (2 * ACoefficient);
-                        txtParametersForParabelByCoefficients.Text += "Parablen har rødderne : (x ; y) = (" + PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(XParameterRoot1, Const.DefaultNumberOfDecimals) + " ; 0) og (" +
-                            PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(XParameterRoot2, Const.DefaultNumberOfDecimals) + " ; 0)";
-                    }
-                }
-                txtParametersForParabelByCoefficients.Text += Environment.NewLine;
+                //double Diskriminant;
+                //double XParameterRoot1;
+                //double XParameterRoot2;
 
-                double PointExtremumXCoordinate;
-                double PointExtremumYCoordinate;
+                //Diskriminant = Math.Pow(BCoefficient, 2) - 4 * ACoefficient * CCoefficient;
 
-                PointExtremumXCoordinate = -BCoefficient / (2 * ACoefficient);
-                PointExtremumYCoordinate = -Diskriminant / (4 * ACoefficient);
+                //txtParametersForParabelByCoefficients.Text = "Diskriminanten er : " + PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(Diskriminant, Const.DefaultNumberOfDecimals);
+                //txtParametersForParabelByCoefficients.Text += Environment.NewLine;
 
-                txtParametersForParabelByCoefficients.Text += "Parablen har Toppunkt : (x ; y) = (" + PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(PointExtremumXCoordinate, Const.DefaultNumberOfDecimals) + " ; " +
-                   PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(PointExtremumYCoordinate, Const.DefaultNumberOfDecimals) + ")";
+                //if (Diskriminant < 0)
+                //{
+                //    txtParametersForParabelByCoefficients.Text += "Parablen har ingen rødder => den skærer ikke x-aksen i nogle punkter.";
+                //}
+                //else
+                //{
+                //    if (0 == Diskriminant)
+                //    {
+                //        XParameterRoot1 = -BCoefficient / (2 * ACoefficient);
+                //        txtParametersForParabelByCoefficients.Text += "Parablen har dobbelt roden : (x ; y) = (" + PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(XParameterRoot1, Const.DefaultNumberOfDecimals) + " ; 0)";
+                //    }
+                //    else
+                //    {
+                //        XParameterRoot1 = (-BCoefficient - Math.Sqrt(Diskriminant)) / (2 * ACoefficient);
+                //        XParameterRoot2 = (-BCoefficient + Math.Sqrt(Diskriminant)) / (2 * ACoefficient);
+                //        txtParametersForParabelByCoefficients.Text += "Parablen har rødderne : (x ; y) = (" + PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(XParameterRoot1, Const.DefaultNumberOfDecimals) + " ; 0) og (" +
+                //            PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(XParameterRoot2, Const.DefaultNumberOfDecimals) + " ; 0)";
+                //    }
+                //}
+                //txtParametersForParabelByCoefficients.Text += Environment.NewLine;
+
+                //double PointExtremumXCoordinate;
+                //double PointExtremumYCoordinate;
+
+                //PointExtremumXCoordinate = -BCoefficient / (2 * ACoefficient);
+                //PointExtremumYCoordinate = -Diskriminant / (4 * ACoefficient);
+
+                //txtParametersForParabelByCoefficients.Text += "Parablen har Toppunkt : (x ; y) = (" + PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(PointExtremumXCoordinate, Const.DefaultNumberOfDecimals) + " ; " +
+                //   PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(PointExtremumYCoordinate, Const.DefaultNumberOfDecimals) + ")";
             }
         }
 
@@ -1220,6 +1239,11 @@ namespace VariabelBegreb
             TextBoxList.Add(txtBCoefficientInParabel);
             TextBoxList.Add(txtCCoefficientInParabel);
             ControlTools.ClearTextBoxes(TextBoxList);
+        }
+
+        private void btnShowGraphAndCalculatePointsForParabel_Click(object sender, RoutedEventArgs e)
+        {
+
         }
         #endregion
 
@@ -3310,5 +3334,6 @@ namespace VariabelBegreb
         }
 
         #endregion
+                
     }
 }
