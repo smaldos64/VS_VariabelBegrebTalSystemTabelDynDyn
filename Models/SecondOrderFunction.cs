@@ -54,9 +54,6 @@ namespace VariabelBegreb.Models
                 this.TextBlock_Object.Text += " - 4 * " + PrintOutTools.WriteNumberWithParanthesis(this.ACoefficient);
                 this.TextBlock_Object.Text += " * " + PrintOutTools.WriteNumberWithParanthesis(this.CCoefficient);
                 this.TextBlock_Object.Text += " = " + PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(this.Diskriminant, Const.DefaultNumberOfDecimals);
-                //this.TextBlock_Object.Text += Environment.NewLine;
-                //this.TextBlock_Object.Text += "Diskriminanten er : " + PrintOutTools.WritDecimalStringWithSpecifiedNumberOfDecimals(this.Diskriminant, Const.DefaultNumberOfDecimals);
-                //this.TextBlock_Object.Text += Environment.NewLine;
             }
 
             return (this.Diskriminant);
@@ -72,7 +69,6 @@ namespace VariabelBegreb.Models
                     this.TextBlock_Object.Text += Environment.NewLine;
                     this.TextBlock_Object.Text += Environment.NewLine;
                     this.TextBlock_Object.Text += "Parablen har ingen rødder => den skærer ikke x-aksen i nogle punkter.";
-                    //this.TextBlock_Object.Text += Environment.NewLine;
                 }
 
                 this.SecondOrderFunctionRoots_Object.NumberOFRoots = 0;
@@ -169,15 +165,26 @@ namespace VariabelBegreb.Models
             return (this.PointYAxisCross);
         }
 
-        public void CalculateAndShowAllPoints()
+        public void CalculateAndShowAllPoints(string TextBloxkText = "Her kommer rødder, toppunkt og skæring med y-aksen for parablen beskrevet herover")
         {
-            this.TextBlock_Object.Text = "Her kommer rødder, toppunkt og skæring med y-aksen for parablen beskrevet herover";
+            this.TextBlock_Object.Text = TextBloxkText;
             CalculateDiskriminant();
             ShowDiskriminantCalculations = false;
             CalculateRoots();
             CalculateExtremumPoint();
             CalculatePointYAxisCross();
-            ShowDiskriminantCalculations = false;
+            ShowDiskriminantCalculations = true;
+        }
+
+        public string MakeFunctionFormulaToPrint()
+        {
+            string OutputString = "Beregninger på funktionen med forskriften : f(x) = ";
+
+            OutputString += PrintOutTools.WriteNumberWithParanthesis(this.ACoefficient) + "x^2 + ";
+            OutputString += PrintOutTools.WriteNumberWithParanthesis(this.BCoefficient) + "x + ";
+            OutputString += PrintOutTools.WriteNumberWithParanthesis(this.CCoefficient);
+
+            return (OutputString);
         }
     }
 }

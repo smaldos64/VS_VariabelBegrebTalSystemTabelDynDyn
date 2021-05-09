@@ -5,8 +5,49 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VariabelBegreb"
         mc:Ignorable="d"
-        Title="SecondOrderEquation" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="SecondOrderEquation" Height="1080" Width="1280" SizeToContent="WidthAndHeight">
+    <StackPanel Background="#FFE5E5E5">
+        <Grid Background="#FFE5E5E5" Height="1080" Width="1280">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100*"/>
+                <!--<ColumnDefinition Width="100*"/>-->
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="300"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="30*"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="lbl1" HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblCoefficients"  Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3" />
+            <TextBlock Grid.Row="2"  Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Her kommer rødder, toppunkt og skæring med y-aksen for parablen beskrevet herover" VerticalAlignment="Top" Name="txtParametersForParabel"/>
+
+            <Label Content="X Værdi : " HorizontalAlignment="Left" VerticalAlignment="Top" Name="lblXValue"  Grid.Column="4" Grid.Row="0" />
+            <TextBox Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Name="txtXValue" />
+            <Button Content="Beregn" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Name="btnCalculateYvalue" Click="btnCalculateYvalue_Click" />
+            
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Row="2" Grid.Column="4">
+                <StackPanel>
+                    <DataGrid x:Name="DataGrid2OrderFunctionCalculations" AutoGenerateColumns="False" ItemsSource="{Binding}" VerticalScrollBarVisibility="Auto">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Index" Binding="{Binding CalculationIndex}" Width="40"></DataGridTextColumn>
+                            <DataGridTextColumn Header="x" Binding="{Binding XValue}" Width="60"></DataGridTextColumn>
+                            <DataGridTextColumn Header="y = f(x)" Binding="{Binding YValue}" Width="60"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Value Calculation" Binding="{Binding CalculationText}" Width="350"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+        <Button Content="Luk Vindue" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Name="btnSecondOrderClose" Click="btnSecondOrderClose_Click" />
+    </StackPanel>
 </Window>

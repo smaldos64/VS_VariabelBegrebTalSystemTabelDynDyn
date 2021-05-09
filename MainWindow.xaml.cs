@@ -1243,7 +1243,26 @@ namespace VariabelBegreb
 
         private void btnShowGraphAndCalculatePointsForParabel_Click(object sender, RoutedEventArgs e)
         {
+            TextBoxList.Clear();
+            TextBoxList.Add(txtACoefficientInParabel);
+            TextBoxList.Add(txtBCoefficientInParabel);
+            TextBoxList.Add(txtCCoefficientInParabel);
 
+            if (3 != ControlTools.CheckTextBoxesForInformation(TextBoxList))
+            {
+                MessageBox.Show("Husk at indtast alle koefficienter A, B og C (ogsp selvom de er 0)");
+            }
+            else
+            {
+                SecondOrderFunction SecondOrderFunction_Object = new SecondOrderFunction(txtParametersForParabelByCoefficients);
+
+                SecondOrderFunction_Object.ACoefficient = Convert.ToDouble(txtACoefficientInParabel.Text);
+                SecondOrderFunction_Object.BCoefficient = Convert.ToDouble(txtBCoefficientInParabel.Text);
+                SecondOrderFunction_Object.CCoefficient = Convert.ToDouble(txtCCoefficientInParabel.Text);
+                
+                SecondOrderEquation SecondOrderEquation_Object = new SecondOrderEquation(SecondOrderFunction_Object);
+                SecondOrderEquation_Object.Show();
+            }
         }
         #endregion
 

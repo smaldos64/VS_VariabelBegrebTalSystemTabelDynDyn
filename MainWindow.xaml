@@ -218,7 +218,7 @@
                             <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="124,442,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="33" Name="txtCCoefficientInParabel" RenderTransformOrigin="2.045,0.63" KeyDown="txtCheckForValidKeyPressed"/>
                             <Button Content="Beregn" Grid.Column="2" HorizontalAlignment="Left" Margin="438,484,0,0" VerticalAlignment="Top" Width="75" Name="btnCalculateParabelRoots" Click="btnCalculateParabelRoots_Click"/>
                             <Button Content="Clear" Grid.Column="2" HorizontalAlignment="Left" Margin="538,484,0,0" VerticalAlignment="Top" Width="75" Name="btnCalculateParabelRootsClear" Click="btnCalculateParabelRootsClear_Click"/>
-                            <Button Content="Se Graf/Punkter" VerticalAlignment="Top" Name="btnShowGraphAndCalculatePointsForParabel" Grid.Column="2" Margin="638,484,0,0" HorizontalAlignment="Left" Width="100" RenderTransformOrigin="0.48,3.85" Click="btnShowGraphAndCalculatePointsForParabel_Click" IsEnabled="False" />
+                            <Button Content="Se Graf/Punkter" VerticalAlignment="Top" Name="btnShowGraphAndCalculatePointsForParabel" Grid.Column="2" Margin="638,484,0,0" HorizontalAlignment="Left" Width="100" RenderTransformOrigin="0.48,3.85" Click="btnShowGraphAndCalculatePointsForParabel_Click" IsEnabled="True" />
                             <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,484,0,0" TextWrapping="Wrap" Text="Her kommer rødder, toppunkt og skæring med y-aksen for parablen beskrevet herover" VerticalAlignment="Top" Grid.ColumnSpan="2" Name="txtParametersForParabelByCoefficients"/>
                         </Grid>
                     </TabItem>
@@ -260,7 +260,6 @@
                                                 </Grid.ColumnDefinitions>
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition/>
-                                                    <!--<RowDefinition/>-->
                                                 </Grid.RowDefinitions>
                                                 <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding txtEquationText}" Tag="{Binding txtEquationName}" IsEnabled="False" FontWeight="Bold" />
                                             </Grid>
@@ -278,7 +277,7 @@
                                                                 <RowDefinition/>
                                                             </Grid.RowDefinitions>
                                                             <TextBox Grid.Row="0" Grid.Column="0" Tag="{Binding txtEquationColumnName}" Text="{Binding txtEquationColumnName_Text, Mode=TwoWay}" KeyDown="txtCheckForValidKeyPressed" Width="60" TextChanged="TextBox_TextChanged" />
-                                                            <TextBox Grid.Row="0" Grid.Column="1" Tag="{Binding txtEquationColumnName_lbl}" Text="{Binding txtEquationColumnName_lblText}" IsEnabled="False"  FontWeight="Bold" />
+                                                            <TextBox Grid.Row="0" Grid.Column="1" Tag="{Binding txtEquationColumnName_lbl}" Text="{Binding txtEquationColumnName_lblText}" IsEnabled="False" FontWeight="Bold" />
                                                         </Grid>
                                                     </DataTemplate>
                                                 </ItemsControl.ItemTemplate>

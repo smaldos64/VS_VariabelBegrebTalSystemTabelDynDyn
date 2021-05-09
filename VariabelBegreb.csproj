@@ -57,6 +57,7 @@
     <Compile Include="Models\EquationSystemColumn.cs" />
     <Compile Include="Models\EquationSystemColumnConstant.cs" />
     <Compile Include="Models\EquationSystemRow.cs" />
+    <Compile Include="Models\FunctionValueCalculation.cs" />
     <Compile Include="Models\MatrixCalculationCoefficients.cs" />
     <Compile Include="Models\MoreXAMLProps.cs" />
     <Compile Include="Models\Point2Dimensions.cs" />
