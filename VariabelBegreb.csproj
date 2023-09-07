@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ScottPlot, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\ScottPlot.3.0.2\lib\net45\ScottPlot.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -70,6 +73,9 @@
     <Compile Include="SecondOrderEquation.xaml.cs">
       <DependentUpon>SecondOrderEquation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SecondOrderEquationGraph.xaml.cs">
+      <DependentUpon>SecondOrderEquationGraph.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tools\Const.cs" />
     <Compile Include="Tools\ConstGeometry.cs" />
     <Compile Include="Tools\ConstNumberSystems.cs" />
@@ -100,6 +106,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SecondOrderEquationGraph.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tools\MathTools.cs" />
@@ -120,6 +130,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Images\GeometryFigures\Kvadrat.ashx" />
+    <None Include="Images\GeometryFigures\Kvadrat.ggb" />
+    <None Include="Images\GeometryFigures\Rektangel.ggb" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -131,7 +145,22 @@
   <ItemGroup>
     <Folder Include="Images\Geometry2Dimensionel\" />
     <Folder Include="Images\Geometry3Dimensionel\" />
-    <Folder Include="Images\GeometryFigures\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\TrigonometryImages\Ikke_Retvinklet_Trekant.png" />
+    <Resource Include="Images\TrigonometryImages\Retvinklet_Trekant.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\GeometryFigures\kugle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\GeometryFigures\Kvadrat.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\GeometryFigures\Rektangel.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\GeometryFigures\Rektangel1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

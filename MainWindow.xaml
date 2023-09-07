@@ -7,7 +7,7 @@
         xmlns:ap="clr-namespace:VariabelBegreb.Models"
         mc:Ignorable="d"
         Title="Matematik Program" Height="Auto" Width="1280" SizeToContent="WidthAndHeight" MaxHeight="2000">
-    <ScrollViewer VerticalScrollBarVisibility="Auto" Height="Auto" >
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Height="Auto">
         <StackPanel Name="ThisStack">
             <Grid Height="Auto">
                 <TabControl HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="1276" Name="MainTabControl" SelectionChanged="MainTabControl_SelectionChanged" MinHeight="1020">

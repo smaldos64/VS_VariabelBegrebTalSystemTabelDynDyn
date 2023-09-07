@@ -90,11 +90,11 @@ namespace VariabelBegreb
 
             InitializeGeometryLabels();
 
-            InitializeGeometryControls();
+            InitializeGeometryControls(); 
 
-            InitializeTrigonometryLabels();
+            InitializeTrigonometryLabels(); 
 
-            InitializeTrigonometryControls();
+            InitializeTrigonometryControls(); 
 
             //InitializeGeometryControls();
 

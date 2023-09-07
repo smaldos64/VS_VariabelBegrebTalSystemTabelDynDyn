@@ -10,7 +10,9 @@ namespace VariabelBegreb.Tools
     public class ConstTrigonometry
     {
         public static readonly int NumberOfValuesSetInTriangle = 3;
-        private const string TrigonometryImages = "d:\\lars\\WpfMathTrigonometryImages\\";
+        //LTPE 2023
+        //private const string TrigonometryImages = "c:\\lars\\WpfMathTrigonometryImages\\";
+        private const string TrigonometryImages = "Images/TrigonometryImages/";
 
         public static readonly FigureCalculation FigureCalculation_Object =
             new FigureCalculation

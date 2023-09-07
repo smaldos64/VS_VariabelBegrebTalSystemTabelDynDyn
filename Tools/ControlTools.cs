@@ -9,6 +9,7 @@ using System.Windows.Documents;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using System.Reflection;
 
 namespace VariabelBegreb.Tools
 {
@@ -303,7 +304,10 @@ namespace VariabelBegreb.Tools
             BitmapImage BitmapImage_Object = new BitmapImage();
 
             BitmapImage_Object.BeginInit();
-            BitmapImage_Object.UriSource = new Uri(@ImageFileName);
+            //BitmapImage_Object.UriSource = new Uri(@ImageFileName); // LTPE 2023
+            // LTPE 2023 3 lines below !!!
+            BitmapImage_Object.UriSource = new Uri(ImageFileName, UriKind.Relative);
+
             BitmapImage_Object.DecodePixelWidth = Width;
             BitmapImage_Object.EndInit();
 

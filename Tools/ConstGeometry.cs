@@ -129,7 +129,10 @@ namespace VariabelBegreb.Tools
 
     public class ConstGeometry
     {
-        private const string GeometryImages = "d:\\lars\\WpfMathGeometryImages\\";
+        // LTPE 2023
+        //private const string GeometryImages = "c:\\lars\\WpfMathGeometryImages\\";
+        //private static string GeometryImages = new Uri("pack://application:,,,/Images/GeometryFigures/").ToString();
+        private const string GeometryImages = "Images/GeometryFigures/";
 
         public const string Dimension1InCalculationString = "";
         public const string Dimension2InCalculationString = "2";
