@@ -491,7 +491,7 @@
                             <Button Content="Opret Nyt Talsystem" VerticalAlignment="Top" Name="btnMakeDynamicRadixSystem" Grid.Column="8" Grid.Row="9" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="150" Click="btnMakeDynamicRadixSystem_Click" />
 
                             <Button Content="Clear" VerticalAlignment="Top" Name="btnCalculateNumberSystemsClear" Grid.Column="6" Grid.Row="11" HorizontalAlignment="Left" Width="75" Click="btnCalculateNumberSystemsClear_Click" />
-                            <Label Content="Statisk Oprettetde Talsystemer herunder" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblTalsystemer7" Grid.Column="0" Grid.Row="12" Grid.ColumnSpan="10" />
+                            <Label Content="Statisk Oprettede Talsystemer herunder" HorizontalAlignment="Left" VerticalAlignment="Bottom" Name="lblTalsystemer7" Grid.Column="0" Grid.Row="12" Grid.ColumnSpan="10" />
                         </Grid>
                     </TabItem>
 
